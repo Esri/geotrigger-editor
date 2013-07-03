@@ -22,7 +22,7 @@
 
   function mapTest() {
 
-    var map = L.map('map');
+    var map = L.map('gt-map');
 
     map.zoomControl.setPosition('topright');
 
