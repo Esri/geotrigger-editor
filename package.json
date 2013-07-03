@@ -1,0 +1,34 @@
+{
+  "name": "geotrigger-editor",
+  "version": "0.0.0",
+  "description": "ArcGIS Geotrigger Editor",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "git@github.com:geoloqi/geotrigger-editor.git"
+  },
+  "author": "Esri Portland R&D Center <portland@esri.com>",
+  "contributors": [
+    {
+      "name": "Patrick Arlt",
+      "email": "parlt@esri.com"
+    },
+    {
+      "name": "Nate Goldman",
+      "email": "ngoldman@esri.com"
+    },
+    {
+      "name": "Paul C. Pederson",
+      "email": "ppederson@esri.com"
+    },
+    {
+      "name": "Nikolas Wise",
+      "email": "nwise@esri.com"
+    }
+  ],
+  "license": "BSD"
+}
