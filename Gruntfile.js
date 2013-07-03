@@ -28,14 +28,14 @@ module.exports = function(grunt) {
       dist: {                   // Production
         options: {
           sassDir: 'src/scss',
-          cssDir: 'src/css',
+          cssDir: 'dist/css',
           environment: 'production'
         }
       },
       dev: {                    // Another target
         options: {
           sassDir: 'src/scss',
-          cssDir: 'src/css'
+          cssDir: 'dist/css'
         }
       }
     }
