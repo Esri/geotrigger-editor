@@ -3,18 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <title>ArcGIS Geotrigger Editor</title>
-  <link rel="stylesheet" href="src/css/normalize.css">
+  <link rel="stylesheet" href="dist/css/normalize.css">
   <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="vendor/css/esri-leaflet.min.css">
-  <link rel="stylesheet" href="src/css/index.css">
+  <link rel="stylesheet" href="dist/css/index.css">
 </head>
 <body>
-  <nav class="navbar"></nav>
-
-  <div class="controls"></div>
-  <div class="sidebar"></div>
-
-  <div id="map"></div>
+  <!-- <nav class="gt-navbar"></nav> -->
+  <div class="gt-container">
+    <nav class="gt-controls">
+      <a href="#" class="gt-control gt-control-search"></a>
+      <a href="#" class="gt-control gt-control-new"></a>
+      <a href="#" class="gt-tool gt-tool-polygon"></a>
+      <a href="#" class="gt-tool gt-tool-distance"></a>
+      <a href="#" class="gt-tool gt-tool-drivetime"></a>
+    </nav>
+    <div class="gt-sidebar">
+      <h2>Current Process<span class="gt-close"></span></h2>
+      <div class="gt-search">
+        <input type="search"></input>
+      </div>
+      <div class='gt-results'>
+        <ul>
+          <li class="gt-result">
+            <span class="gt-icon gt-icon-enter"></span>
+            <h5>Trigger Title</h5>
+            <ul class="gt-tags">
+              <li>tag1</li>
+              <li>tag2</li>
+            </ul>
+          </li>
+          <li class="gt-result">
+            <span class="gt-icon gt-icon-enter"></span>
+            <h5>Trigger Title</h5>
+            <ul class="gt-tags">
+              <li>tag1</li>
+              <li>tag2</li>
+            </ul>
+          </li>
+          <li class="gt-result">
+            <span class="gt-icon gt-icon-enter"></span>
+            <h5>Trigger Title</h5>
+            <ul class="gt-tags">
+              <li>tag1</li>
+              <li>tag2</li>
+            </ul>
+          </li>
+          <li class="gt-result">
+            <span class="gt-icon gt-icon-enter"></span>
+            <h5>Trigger Title</h5>
+            <ul class="gt-tags">
+              <li>tag1</li>
+              <li>tag2</li>
+            </ul>
+          </li>
+          <li class="gt-result">
+            <span class="gt-icon gt-icon-enter"></span>
+            <h5>Trigger Title</h5>
+            <ul class="gt-tags">
+              <li>tag1</li>
+              <li>tag2</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="gt-map"></div>
 
   <script src="vendor/json2.js"></script>
   <script src="vendor/jquery-1.10.2.js"></script>
