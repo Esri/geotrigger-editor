@@ -6,6 +6,9 @@
   left: 0;
 }
 .gt-container{
+  .this-thing {
+    z-index: 4;
+  }
   position: absolute;
   z-index: 2;
   width: 40%;
@@ -13,4 +16,7 @@
   bottom: 0;
   left: 0;
   background-color:#efefef;
+}
+.gt-controls {
+
 }
