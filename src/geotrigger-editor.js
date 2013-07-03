@@ -21,7 +21,7 @@
   }
 
   function mapTest() {
-    var map = L.map('map');
+    var map = L.map('gt-map');
 
     // ArcGIS Online Basemaps - Streets, Topographic, Gray, Gray Labels, Ocean, NationalGeographic, Imagery, ImageryLabels
     L.esri.basemapLayer("Streets").addTo(map);

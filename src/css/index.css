@@ -1,7 +1,15 @@
-#map {
+#gt-map {
   position: absolute;
   top: 0;
   right: 0;
+  bottom: 0;
+  left: 0;
+}
+.gt-container{
+  position: absolute;
+  z-index: 2;
+  width: 40%;
+  top: 0;
   bottom: 0;
   left: 0;
 }
