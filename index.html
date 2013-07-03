@@ -3,19 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>ArcGIS Geotrigger Editor</title>
-  <link rel="stylesheet" href="src/css/normalize.css">
-  <link rel="stylesheet" href="src/css/index.css">
+  <link rel="stylesheet" href="dist/css/index.css">
 </head>
 <body>
   <nav class="navbar">
-  	<h1>Team Quoin</h1>
+    <div class="controls">
+      <ul>
+        <li>List Geotriggers</li>
+        <li>New Geotrigger</li>
+        <li>New Point</li>
+        <li>New Circle</li>
+        <li>New Polygon</li>
+      </ul>
+    </div>
+    <div class="sidebar">
+      <h3>Good Stuff Goes Here</h3>
+      <a href="#">x</a>
+    </div> 
   </nav>
 
-  <div class="controls"></div>
-  <div class="sidebar"></div>
+  <main>
+    <div id="map"></div>
+  </main>
 
-  <div id="map"></div>
-
-  <script src="src/geotrigger-editor.js"></script>
+  <script src="dist/js/geotrigger-editor.min.js"></script>
 </body>
 </html>
