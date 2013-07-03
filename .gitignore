@@ -22,11 +22,8 @@ Icon
 # SASS
 .sass-cache
 
-#Node
+# Node
 /node_modules
-
-#anvil
-/index.html
 
 # Ruby
 *.gem
