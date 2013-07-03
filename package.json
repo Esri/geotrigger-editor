@@ -3,13 +3,18 @@
   "version": "0.0.0",
   "description": "ArcGIS Geotrigger Editor",
   "private": true,
-  "main": "index.js",
+  "main": "src/geotrigger-editor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "git@github.com:geoloqi/geotrigger-editor.git"
+    "url": "git@github.com:geoloqi/geotrigger-editor.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-uglify": "~0.2.2"
   },
   "author": "Esri Portland R&D Center <portland@esri.com>",
   "contributors": [
