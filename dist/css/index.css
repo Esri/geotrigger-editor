@@ -1,1 +1,1 @@
-#gt-map{position:absolute;top:0;right:0;bottom:0;left:0}.gt-container{position:absolute;z-index:2;width:40%;top:0;bottom:0;left:0;background-color:#efefef}.gt-container .this-thing{z-index:4}
+#gt-map{position:absolute;top:0;right:0;bottom:0;left:0}.gt-container{box-sizing:border-box;position:absolute;z-index:2;width:40%;top:0;bottom:0;left:0;background-color:#efefef}.gt-controls{position:absolute;z-index:3;width:80px;top:0;bottom:0;background:#000;color:white;right:0}
