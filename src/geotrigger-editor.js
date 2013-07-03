@@ -13,7 +13,7 @@
       [L.esri,'Esri-leaflet']
     ];
 
-    console.log('Roll Call:');
+    console.log('Dependency Check:');
 
     for (var i=0; i<deps.length; i++) {
       console.log(typeof deps[i][0] !== 'undefined' ? '√' : 'x', deps[i][1]);
@@ -21,7 +21,10 @@
   }
 
   function mapTest() {
+
     var map = L.map('gt-map');
+
+    map.zoomControl.setPosition('topright');
 
     // ArcGIS Online Basemaps - Streets, Topographic, Gray, Gray Labels, Ocean, NationalGeographic, Imagery, ImageryLabels
     L.esri.basemapLayer("Streets").addTo(map);
