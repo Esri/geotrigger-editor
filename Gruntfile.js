@@ -13,6 +13,30 @@ module.exports = function(grunt) {
         dest: 'dist/<%= pkg.name %>.min.js'
       }
     },
+    watch: {
+      scripts: {
+        files: ['src/*.js','src/scss/*'],
+        tasks: ['compass'],
+        options: {
+          nospawn: true
+        }
+      }
+    },
+    compass: {
+      dist: {                   // Production
+        options: {
+          sassDir: 'src/scss',
+          cssDir: 'dist/css',
+          environment: 'production'
+        }
+      },
+      dev: {                    // Another target
+        options: {
+          sassDir: 'src/scss',
+          cssDir: 'dist/css'
+        }
+      }
+    },
     jshint: {
       files: ['src/*.js']
     },
@@ -34,6 +58,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-compass');
 
   // Default task(s).
   grunt.registerTask('default', ['jshint','concat','uglify']);
