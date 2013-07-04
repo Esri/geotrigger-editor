@@ -20,7 +20,7 @@ module.exports = function(grunt) {
         files: ['src/js/*.js', 'src/scss/*.scss'],
         tasks: ['compass', 'uglify'],
         options: {
-          //livereload: true
+          livereload: true,
           nospawn: true
         }
       }
