@@ -15,8 +15,8 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['src/*.js','src/scss/*'],
-        tasks: ['compass'],
+        files: ['src/**/*.js','src/scss/*.scss'],
+        tasks: ['compass','jshint','concat','uglify'],
         options: {
           nospawn: true
         }
