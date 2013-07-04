@@ -27,7 +27,14 @@
     map.zoomControl.setPosition('topright');
 
     // ArcGIS Online Basemaps - Streets, Topographic, Gray, Gray Labels, Ocean, NationalGeographic, Imagery, ImageryLabels
-    L.esri.basemapLayer("Streets").addTo(map);
+    L.esri.basemapLayer("Imagery", {
+      zIndex: 1,
+      detectRetina: true
+    }).addTo(map);
+
+    L.esri.basemapLayer("ImageryLabels", {
+      zIndex: 3
+    }).addTo(map);
 
     function onLocationFound(e) {
       var radius = e.accuracy / 2;
