@@ -23,14 +23,16 @@ module.exports = function(grunt) {
       }
     },
     compass: {
-      dist: {                   // Production
+      // Production
+      dist: {
         options: {
           sassDir: 'src/scss',
           cssDir: 'dist/css',
           environment: 'production'
         }
       },
-      dev: {                    // Another target
+      // Development
+      dev: {
         options: {
           sassDir: 'src/scss',
           cssDir: 'dist/css'

@@ -1,33 +1,26 @@
 (function(){
 
-  function dependencyTest() {
-    var deps = [
-      [JSON, 'JSON'],
-      [$,'jQuery'],
-      [_,'underscore'],
-      [Backbone,'Backbone'],
-      [Backbone.Marionette,'Backbone.Marionette'],
-      [Geoservices,'Geoservices'],
-      [Geotriggers,'Geotriggers'],
-      [L,'Leaflet'],
-      [L.esri,'Esri-leaflet']
-    ];
-
-    console.log('Dependency Check:');
-
-    for (var i=0; i<deps.length; i++) {
-      console.log(typeof deps[i][0] !== 'undefined' ? '√' : 'x', deps[i][1]);
-    }
+  function GeotriggerEditor(options) {
+    this.el = options.el || '#gt-editor';
+    this.map = null;
   }
 
-  function mapTest() {
+  GeotriggerEditor.prototype.addMap = function() {
+    $(this.el).append('<div id="gt-map"/>');
 
-    var map = L.map('gt-map');
+    var map = this.map = L.map('gt-map');
 
     map.zoomControl.setPosition('topright');
 
     // ArcGIS Online Basemaps - Streets, Topographic, Gray, Gray Labels, Ocean, NationalGeographic, Imagery, ImageryLabels
-    L.esri.basemapLayer("Streets").addTo(map);
+    L.esri.basemapLayer("Imagery", {
+      zIndex: 1,
+      detectRetina: true
+    }).addTo(map);
+
+    L.esri.basemapLayer("ImageryLabels", {
+      zIndex: 3
+    }).addTo(map);
 
     function onLocationFound(e) {
       var radius = e.accuracy / 2;
@@ -43,17 +36,10 @@
     map.on('locationerror', onLocationError);
 
     map.locate({setView: true, maxZoom: 16});
-  }
 
-  function init() {
-    dependencyTest();
-    mapTest();
-  }
+    return this;
+  };
 
-  if (typeof window === 'object') {
-    window.onload = init;
-  } else {
-    console.log('hello console');
-  }
+  window.GeotriggerEditor = GeotriggerEditor;
 
 })();
