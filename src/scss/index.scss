@@ -33,14 +33,13 @@ $dark-gray:      #232323;
   width:80px;
   top:0;
   bottom:0;
-  background:transparent;
-  right: -80px;
+  background:$dark-gray;
+  left: 0;
   .gt-control {
     width: 80px;
     padding:0;
     height:80px;
     color:white;
-    background-color:grey;
     display:block;
     border-bottom:1px solid black;
   }
@@ -52,8 +51,15 @@ $dark-gray:      #232323;
     display:block;
     padding:0;
     margin-top:2px;
+    &.gt-tool-list {background:url('/dist/img/icons/list.png') no-repeat center center transparent;}
+    &.gt-tool-polygon {background:url('/dist/img/icons/polygon.png') no-repeat center center transparent;}
+    &.gt-tool-distance {background:url('/dist/img/icons/radius.png') no-repeat center center transparent;}
+    &.gt-tool-drivetime {background:url('/dist/img/icons/drivetime.png') no-repeat center center transparent;}
   }
 }
+
+
+
 .gt-sidebar {
   position:absolute;
   right:0;
