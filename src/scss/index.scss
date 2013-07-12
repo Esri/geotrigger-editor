@@ -1,5 +1,10 @@
 @import "compass";
 
+$white:          #fff;
+$off-white:      #fefefe;
+$lightest-gray:  #fbfbfb;
+$dark-gray:      #232323;
+
 #gt-map {
   position: absolute;
   top: 0;
@@ -18,7 +23,7 @@
   background-color:transparent;
   @include transition(transform 300ms ease-in);
   &.closed {
-    @include transform(translate3D(-100%,0,0))
+    @include transform(translate3D(-100%,0,0));
     @include transition(transform 300ms ease-in);
   }
 }
@@ -42,8 +47,8 @@
   .gt-tool {
     width:40px;
     height:40px;
-    background-color:#232323;
-    color:#fff;
+    background-color:$dark-gray;
+    color:$white;
     display:block;
     padding:0;
     margin-top:2px;
@@ -55,9 +60,11 @@
   top:0;
   bottom:0;
   @include box-sizing(border-box);
+  @include box-shadow(0 0 20px rgba(0,0,0,0.5));
   overflow-y:scroll;
   -webkit-overflow-scrolling: touch;
   left:0;
   z-index:2;
-  background:#fefefe;
+  background:$off-white;
+  border-right:$lightest-gray;
 }
