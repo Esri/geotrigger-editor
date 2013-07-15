@@ -4,26 +4,21 @@
 @import "typography";
 
 #gt-map {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
 }
 .gt-container{
   box-sizing:border-box;
-  position: absolute;
-  z-index: 2;
-  width: 40%;
-  top: 0;
-  bottom: 0;
-  left: 0;
+  position:absolute;
+  z-index:2;
+  width:40%;
+  top:0;
+  bottom:0;
+  left:0;
   background-color:transparent;
-  @include transition(transform 300ms ease-in);
-  &.closed {
-    @include transform(translate3D(-100%,0,0));
-    @include transition(transform 300ms ease-in);
-  }
 }
 .gt-controls {
   position:absolute;
@@ -32,10 +27,10 @@
   top:0;
   bottom:0;
   background:$darker-gray;
-  left: 0;
+  left:0;
   border-right:1px solid $darkest-gray;
   .gt-control {
-    width: 70px;
+    width:70px;
     padding:0;
     height:60px;
     color:white;
@@ -57,7 +52,7 @@
     &.gt-tool-distance {background:url('/dist/img/icons/radius.png') no-repeat center center transparent; background-size:24px;}
     &.gt-tool-drivetime {background:url('/dist/img/icons/drivetime.png') no-repeat center center transparent; background-size:24px;}
     &:before{
-      content: "";
+      content:"";
       width:70px;
       height:60px;
       display:block;
@@ -65,14 +60,14 @@
       opacity:0;
     }
     &:hover {
-      opacity: 1;
+      opacity:1;
       @include transition(opacity 200ms linear);
       &:before{
         opacity:0.3;
       }
     }
     &.active {
-      opacity: 1;
+      opacity:1;
       @include transition(opacity 200ms linear);
       background:url('/dist/img/icons/list.png') no-repeat center center transparent; background-size:24px;
       &:before {
@@ -81,18 +76,50 @@
     }
   }
 }
-
-.gt-sidebar {
+.gt-drawer {
+  box-sizing:border-box;
   position:absolute;
-  right:0;
+  z-index:2;
+  width:40%;
+  overflow:hidden;
   top:0;
   bottom:0;
-  @include box-sizing(border-box);
-  @include box-shadow(0 0 20px rgba(0,0,0,0.5));
-  overflow-y:scroll;
-  -webkit-overflow-scrolling: touch;
+  left:70px;
+  background-color:white;
+  @include transition(transform 300ms ease-in);
+  &.closed {
+    @include transform(translate3D(-100%,0,0));
+    @include transition(transform 300ms ease-in);
+  }
+}
+.gt-panel-wrap {
+  width:200%;
+  position:absolute;
+  top:0;
   left:0;
-  z-index:2;
-  background:$off-white;
-  border-right:$lightest-gray;
+  bottom:0;
+  background:#efefef;
+  @include transition(transform 300ms ease-in);
+  &.gt-panel-active {
+    @include transform(translate3D(-50%,0,0));
+    @include transition(transform 300ms ease-in);
+  }
+}
+.gt-panel {
+  width:50%;
+  position:absolute;
+  top:0;
+  bottom:0;
+  -webkit-overflow-scrolling: touch;
+  overflow-y:scroll;
+  background-color:#999;
+}
+.gt-panel-1 {
+  left:0;
+  position:absolute;
+}
+.gt-panel-2 {
+  left:50%;
+  position:absolute;
+  background-color: #ddd;
 }
