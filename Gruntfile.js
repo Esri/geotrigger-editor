@@ -56,7 +56,7 @@ module.exports = function(grunt) {
     },
     complexity: {
       generic: {
-        src: ['src/geotrigger-editor.js', 'tasks/grunt-complexity.js'],
+        src: ['src/**/*.js', 'tasks/grunt-complexity.js'],
         options: {
           jsLintXML: 'report.xml', // create XML JSLint-like report
           checkstyleXML: 'checkstyle.xml', // create checkstyle report
