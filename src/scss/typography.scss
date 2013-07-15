@@ -1,0 +1,17 @@
+@import "compass";
+
+/* - - - - - - - - - Basic Typography - - - - - - - */
+body {
+  font-family: $body-font;
+  color: $body-color;
+  font-weight: $body-weight;
+  font-size: $body-size;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $header-font;
+  color: $header-color;
+  font-weight: $header-weight;
+  font-size: $header-size;
+  line-height: 1em;
+}
