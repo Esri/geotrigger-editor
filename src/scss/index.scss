@@ -21,6 +21,7 @@
   left:0;
   background-color:transparent;
 }
+/* - - - - - - - - - - Left Toolbar - - - - - - - - - - */
 .gt-controls {
   position:absolute;
   z-index:3;
@@ -77,6 +78,7 @@
     }
   }
 }
+/* - - - - - - - - - - Drawer - - - - - - - - - - */
 .gt-drawer {
   box-sizing:border-box;
   position:absolute;
@@ -93,6 +95,7 @@
     @include transition(transform 300ms ease-in);
   }
 }
+/* - - - - - - - - - - Panels - - - - - - - - - - */
 .gt-panel-wrap {
   width:200%;
   position:absolute;
@@ -162,6 +165,50 @@
   padding:2em;
   background-color:transparent;
 }
-label[name='event']{
-  width:25%;
+
+/* - - - - - - - - - - New Geotrigger Form - - - - - - - - - - */
+.gt-trigger-title-input {
+  width:100%;
+  margin-bottom:1em;
 }
+.gt-tag-label {
+  margin-right: 3%;
+  width: 40%;
+  display: inline-block;
+}
+.gt-tag-input {
+  width:55%;
+}
+.gt-event {
+  width:40%;
+  margin-right:5%;
+}
+.gt-geometry-type {
+  width:55%;
+}
+.gt-action {
+  width:60%;
+  display:inline-block;
+}
+.gt-date-start {
+  width:23%;
+  display:inline-block;
+}
+.gt-date-end {
+  width:30%;
+  display:inline-block;
+}
+
+/* - - - - - - - - - - Trigger List - - - - - - - - - - */
+.gt-search {
+  width: 100%;
+  @include box-sizing(border-box);
+  background-color:#eee;
+  padding: 0.5em 2em 1.5em 2em;
+  input[type="search"]{
+    background: url(/dist/img/icons/search.png) no-repeat left center transparent;
+    background-size:30px;
+    padding-left: 32px;
+  }
+}
+
