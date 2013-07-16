@@ -16,10 +16,14 @@
       <a href="#" class="gt-tool gt-tool-distance"></a>
       <a href="#" class="gt-tool gt-tool-drivetime"></a>
     </nav>
-    <div class="gt-drawer">
-      <div class="gt-panel-wrap gt-panel-active">
+    <div class="gt-drawer"> <!-- add .closed to close the drawer -->
+      <div class="gt-panel-wrap gt-panel-active"> <!-- add .gt-panel-active to use second panel -->
         <div class="gt-panel gt-panel-1">
-          <h2>Current Process<span class="gt-close"></span></h2>
+          <div class="gt-panel-top-bar">
+            <a href="#" class="gt-panel-top-bar-button gt-back-to-list"></a>
+            <h3>Create</h3>
+            <a href="#" class="gt-panel-top-bar-button gt-close-drawer"></a>
+          </div>
           <div class="gt-search">
             <input type="search"></input>
           </div>
@@ -70,13 +74,13 @@
         </div>
         <div class="gt-panel gt-panel-2">
           <div class="gt-panel-top-bar">
-            <a href="#" class="gt-panel-top-bar-button gt-back-to-list">List</a>
+            <a href="#" class="gt-panel-top-bar-button gt-back-to-list"></a>
             <h3>Create</h3>
-            <a href="#" class="gt-panel-top-bar-button gt-close-drawer">Close</a>
-            <label>
+            <a href="#" class="gt-panel-top-bar-button gt-close-drawer"></a>
+          </div>
+          <div class="gt-panel-content">
               Title:
-              <input type="text" name="title">
-            </label>
+            <input type="text" name="title" />
             <label for="tags">
               When a device tagged
               <input type="text" placeholder="enter tags">
