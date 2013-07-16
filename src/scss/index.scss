@@ -3,6 +3,7 @@
 @import "config";
 @import "typography";
 @import "forms";
+@import "buttons";
 
 #gt-map {
   position:absolute;
@@ -211,4 +212,6 @@
     padding-left: 32px;
   }
 }
+.gt-result {
 
+}
