@@ -58,8 +58,8 @@ module.exports = function(grunt) {
       generic: {
         src: ['src/**/*.js', 'tasks/grunt-complexity.js'],
         options: {
-          jsLintXML: 'report.xml', // create XML JSLint-like report
-          checkstyleXML: 'checkstyle.xml', // create checkstyle report
+          //jsLintXML: 'report.xml', // create XML JSLint-like report
+          //checkstyleXML: 'checkstyle.xml', // create checkstyle report
           errorsOnly: false, // show only maintainability errors
           cyclomatic: 3,
           halstead: 8,
