@@ -53,6 +53,26 @@ module.exports = function(grunt) {
         // the location of the resulting JS file
         dest: 'dist/<%= pkg.name %>.js'
       }
+    },
+    complexity: {
+      generic: {
+        src: ['src/**/*.js', 'tasks/grunt-complexity.js'],
+        options: {
+          //jsLintXML: 'report.xml', // create XML JSLint-like report
+          //checkstyleXML: 'checkstyle.xml', // create checkstyle report
+          errorsOnly: false, // show only maintainability errors
+          cyclomatic: 3,
+          halstead: 8,
+          maintainability: 100
+        }
+      }
+    },
+    cucumberjs: {
+      files: 'features',
+      options: {
+        steps: 'features/step_definitions',
+        format: 'pretty'
+      }
     }
   });
 
@@ -62,8 +82,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-complexity');
+  grunt.loadNpmTasks('grunt-cucumber');
 
   // Default task(s).
   grunt.registerTask('default', ['jshint','concat','uglify']);
-
+  // grunt.registerTask('default', 'complexity');
+  // grunt.registerTask('default', ['cucumberjs']);
 };
