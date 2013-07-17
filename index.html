@@ -143,20 +143,26 @@
     </div>
   </div>
 
+  <!-- dependencies -->
   <script src="vendor/json2.js"></script>
   <script src="vendor/jquery-1.10.2.js"></script>
   <script src="vendor/underscore.js"></script>
   <script src="vendor/backbone.js"></script>
   <script src="vendor/backbone.marionette.js"></script>
+  <script src="vendor/handlebars.js"></script>
+  <script src="vendor/marionette.handlebars.js"></script>
   <script src="vendor/geoservices.js"></script>
   <script src="vendor/geotriggers.js"></script>
   <script src="vendor/leaflet/leaflet.js"></script>
   <script src="vendor/esri-leaflet.min.js"></script>
+
+  <!-- editor app -->
   <script src="dist/geotrigger-editor.js"></script>
+
+  <!-- initializer -->
   <script>
   $(function(){
-    window.editor = new GeotriggerEditor({ el: '#gt-editor' });
-    editor.addMap();
+    GTEditor.start();
   });
   </script>
 </body>
