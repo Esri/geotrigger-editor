@@ -17,7 +17,10 @@
     "grunt-contrib-uglify": "~0.2.2",
     "grunt-contrib-compass": "~0.3.0",
     "grunt-contrib-watch": "~0.4.4",
-    "grunt-contrib-concat": "~0.3.0"
+    "grunt-contrib-concat": "~0.3.0",
+    "wd": "0.0.32",
+    "cucumber": "latest",
+    "grunt-cucumber": "~0.2.1"
   },
   "author": "Esri Portland R&D Center <portland@esri.com>",
   "contributors": [
