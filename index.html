@@ -162,7 +162,9 @@
   <!-- initializer -->
   <script>
   $(function(){
-    GTEditor.start();
+    // GTEditor.start();
+    var editor = new GeotriggerEditor({el: '#gt-editor'});
+    editor.addMap();
   });
   </script>
 </body>
