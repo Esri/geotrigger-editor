@@ -1,0 +1,31 @@
+@import "compass";
+
+// UI Colors
+$white:          #ffffff !default;
+$off-white:      #fefefe !default;
+$lightest-gray:  #fbfbfb !default;
+$lighter-gray:   #efefef !default;
+$light-gray:     #dddddd !default;
+$gray:           #666666 !default;
+$dark-gray:      #3b3b3b !default;
+$darker-gray:    #333333 !default;
+$darkest-gray:   #2b2b2b !default;
+
+$green:          #58D0C9 !default;
+$red:            #D53D21 !default;
+
+// Font Families
+$body-font:      "Open Sans", Arial, Helvetica, sans !default;
+$header-font:    "Open Sans", Arial, Helvetica, sans !default;
+
+// Font Weights
+$body-weight:    400 !default;
+$header-weight:  600 !default;
+
+// Font Colors
+$body-color:     $gray;
+$header-color:   $dark-gray;
+
+// Font Sizes
+$body-size:      14px;
+$header-size:    24px;
