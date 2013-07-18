@@ -3,6 +3,7 @@
   function GeotriggerEditor(options) {
     this.el = options.el || '#gt-editor';
     this.map = null;
+    this.addMap();
   }
 
   GeotriggerEditor.prototype.addMap = function() {

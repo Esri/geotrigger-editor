@@ -3,25 +3,32 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         report: 'gzip'
       },
-      build: {
-        src: ['src/leaflet/*.js','src/js/*.js','src/geotrigger-editor.js'],
-        dest: 'dist/<%= pkg.name %>.min.js'
+      dist: {
+        src: [
+          'src/js/GTEdit.js',
+          'src/js/GTEdit.Layout.js',
+          'src/geotrigger-editor.js'
+        ],
+        dest: 'dist/js/<%= pkg.name %>.min.js'
       }
     },
+
     watch: {
       scripts: {
-        files: ['src/**/*.js','src/scss/*.scss'],
-        tasks: ['compass','jshint','concat','uglify'],
-        options: {
-          nospawn: true
-        }
+        files: ['src/**/*.js','src/scss/*.scss','src/img/**/*.jpg','src/img/**/*.png'],
+        tasks: ['compass:dev','jshint','copy:dev']
+        // options: {
+        //   nospawn: true
+        // }
       }
     },
+
     compass: {
       // Production
       dist: {
@@ -35,25 +42,33 @@ module.exports = function(grunt) {
       dev: {
         options: {
           sassDir: 'src/scss',
-          cssDir: 'dist/css'
+          cssDir: 'dev/css'
         }
       }
     },
+
     jshint: {
-      files: ['src/*.js']
+      files: ['src/**/*.js']
     },
+
     concat: {
       options: {
         // define a string to put between each file in the concatenated output
         separator: ';'
       },
+      // production
       dist: {
         // the files to concatenate
-        src: ['src/leaflet/*.js','src/js/*.js','src/geotrigger-editor.js'],
+        src: [
+          'src/js/GTEdit.js',
+          'src/js/GTEdit.Layout.js',
+          'src/js/geotrigger-editor.js'
+        ],
         // the location of the resulting JS file
-        dest: 'dist/<%= pkg.name %>.js'
+        dest: 'dist/js/<%= pkg.name %>.js'
       }
     },
+
     complexity: {
       generic: {
         src: ['src/**/*.js', 'tasks/grunt-complexity.js'],
@@ -67,26 +82,71 @@ module.exports = function(grunt) {
         }
       }
     },
+
     cucumberjs: {
       files: 'features',
       options: {
         steps: 'features/step_definitions',
         format: 'pretty'
       }
+    },
+
+    copy: {
+      dev: {
+        files: [{
+          expand: true,
+          cwd: 'src/',
+          src: ['img/**','js/**'],
+          dest: 'dev/'
+        }]
+      }
+    },
+
+    clean: {
+      dist: {
+        src: 'dist/'
+      },
+      dev: {
+        src: ['dev/img/','dev/css/','dev/js/']
+      }
+    },
+
+    smushit: {
+      // filter by filetype
+      dist: {
+        src: ['src/img/**/*.png','src/img/**/*.jpg'],
+        dest: 'dist/img'
+      }
     }
   });
 
-  // Load the plugin that provides the "uglify" task.
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-compass');
-  grunt.loadNpmTasks('grunt-complexity');
-  grunt.loadNpmTasks('grunt-cucumber');
+  // load npm tasks
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  // Default task(s).
-  grunt.registerTask('default', ['jshint','concat','uglify']);
-  // grunt.registerTask('default', 'complexity');
-  // grunt.registerTask('default', ['cucumberjs']);
+  // Tasks
+  grunt.registerTask('test', [
+    'jshint',
+    'complexity',
+    'cucumberjs'
+  ]);
+
+  grunt.registerTask('dev', [
+    'clean:dev',
+    'compass:dev',
+    'copy:dev',
+    'watch'
+  ]);
+
+  grunt.registerTask('build', [
+    'clean:dist',
+    'compass:dist',
+    'concat:dist',
+    'uglify:dist',
+    'smushit'
+  ]);
+
+  grunt.registerTask('default', [
+    'test',
+    'build'
+  ]);
 };
