@@ -13,7 +13,7 @@ var World = function World(callback) {
     console.log(' > \x1b[33m%s\x1b[0m: %s', meth, path, data || '');
   });
 
-  // run the callback when we are done do cucumber knows we are ready
+  // run the callback when we are done so cucumber knows we are ready
   this.browser.init(function() {
     callback();
   });
