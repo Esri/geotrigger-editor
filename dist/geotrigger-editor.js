@@ -10,8 +10,6 @@
 
     var map = this.map = L.map('gt-map');
 
-    console.log('what');
-
     map.zoomControl.setPosition('topright');
 
     // ArcGIS Online Basemaps - Streets, Topographic, Gray, Gray Labels, Ocean, NationalGeographic, Imagery, ImageryLabels
