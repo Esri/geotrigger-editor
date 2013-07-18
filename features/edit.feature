@@ -6,9 +6,9 @@ Feature: Edit Geotrigger
   And be able to modify its properties
 
   Background:
+    Given I am viewing the editor
     Given an application named "Editor Test"
 
   Scenario: edit geotrigger form
-    Given I am viewing the editor
     When I edit a geotrigger
     Then the geotrigger has been modified
