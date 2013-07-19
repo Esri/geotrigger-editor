@@ -49,4 +49,14 @@
     return Handlebars.compile(rawTemplate);
   };
 
+  Marionette.TemplateCache.prototype.preloadAll = function(arr, cb) {
+    for (var i=0;i<arr.length;i++) {
+      Marionette.TemplateCache.loadTemplate(arr[i]).then(function(){
+        if (i == arr.length) {
+          cb();
+        }
+      })
+    }
+  };
+
 }(Handlebars, Marionette));
