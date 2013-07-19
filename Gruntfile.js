@@ -107,7 +107,7 @@ module.exports = function(grunt) {
         src: 'dist/'
       },
       dev: {
-        src: ['dev/img/','dev/css/','dev/js/','dev/templates']
+        src: ['dev/img/','dev/css/','dev/js/','dev/templates/']
       }
     },
 
