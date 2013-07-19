@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/**/*.js','src/scss/*.scss','src/img/**/*.jpg','src/img/**/*.png'],
+        files: ['src/**/*.js','src/scss/*.scss','src/img/**/*.jpg','src/img/**/*.png','src/templates/*.hbs'],
         tasks: ['compass:dev','jshint','copy:dev']
         // options: {
         //   nospawn: true
@@ -96,7 +96,7 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'src/',
-          src: ['img/**','js/**'],
+          src: ['img/**','js/**','templates/**'],
           dest: 'dev/'
         }]
       }
@@ -107,7 +107,7 @@ module.exports = function(grunt) {
         src: 'dist/'
       },
       dev: {
-        src: ['dev/img/','dev/css/','dev/js/']
+        src: ['dev/img/','dev/css/','dev/js/','dev/templates/']
       }
     },
 
