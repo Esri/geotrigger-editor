@@ -7,8 +7,6 @@
   }
 
   GeotriggerEditor.prototype.addMap = function() {
-    $(this.el).append('<div id="gt-map"/>');
-
     var map = this.map = L.map('gt-map');
 
     map.zoomControl.setPosition('topright');

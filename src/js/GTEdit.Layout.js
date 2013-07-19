@@ -4,13 +4,13 @@ GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
   // ---------------
 
   Layout.Map = Backbone.Marionette.Layout.extend({
-    template: '#template-gt-map',
+    template: 'map',
 
     ui: {},
 
     events: {},
 
-    initialize : function() {
+    initialize: function() {
       console.log('Layout.Map initialize');
     },
 
@@ -23,17 +23,17 @@ GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
   // --------------------
 
   Layout.Controls = Backbone.Marionette.Layout.extend({
-    template: '#template-gt-controls',
+    template: 'controls',
 
     ui: {
       tools: '.gt-draw-tool'
     },
 
     events: {
-      'click .gt-draw-tool': 'switchDrawTool'
+      'click .gt-tool-list': 'toggleList'
     },
 
-    initialize : function() {
+    initialize: function() {
       console.log('Layout.Controls initialize');
     },
 
@@ -41,45 +41,34 @@ GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
       console.log('Layout.Controls onRender');
     },
 
-    switchDrawlTool: function(e) {
+    toggleList: function(e) {
       // switch active draw tool based on click target
-      console.log(e.target);
+      App.drawer.$el.toggleClass('closed');
+      App.controls.$el.find('.gt-tool-list').toggleClass('active');
     }
   });
 
-  // Layout Panel View
-  // -----------------
+  // Layout Drawer View
+  // ------------------
 
-  Layout.Panel = Backbone.Marionette.ItemView.extend({
-    template: '#template-gt-panel',
+  Layout.Drawer = Backbone.Marionette.ItemView.extend({
+    template: 'list-panel',
 
-    // UI bindings create cached attributes that
-    // point to jQuery selected objects
-    ui: {
-      input: '#gt-new',
-      search: '#gt-search'
+    events: {
+      'click .gt-close-drawer': 'onCloseClick'
     },
 
-    events : {
-      'click #gt-new': 'showNewTriggerForm',
-      'keypress #gt-search': 'onSearchKeypress'
+    initialize: function() {
+      console.log('Layout.Drawer initialize');
     },
 
-    showNewTriggerForm: function(e) {
-      // show new trigger form
+    onRender: function() {
+      console.log('Layout.Drawer onRender');
     },
 
-    onSearchKeypress: function(e) {
-      var ENTER_KEY = 13;
-      var text = this.ui.search.val().trim();
-
-      if ( e.which === ENTER_KEY && text ) {
-        this.searchTriggers(text);
-      }
-    },
-
-    searchTriggers: function(text) {
-      // perform search using text as query parameter for tags or locations
+    onCloseClick: function(e) {
+      e.preventDefault();
+      App.drawer.$el.addClass('closed');
     }
   });
 
