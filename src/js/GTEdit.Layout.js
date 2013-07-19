@@ -55,20 +55,13 @@ GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
     template: 'list-panel',
 
     events: {
-      'click .gt-close-drawer': 'onCloseClick'
+      'click .gt-close-drawer': 'close'
     },
 
-    initialize: function() {
-      console.log('Layout.Drawer initialize');
-    },
-
-    onRender: function() {
-      console.log('Layout.Drawer onRender');
-    },
-
-    onCloseClick: function(e) {
+    close: function(e) {
       e.preventDefault();
       App.drawer.$el.addClass('closed');
+      App.controls.$el.find('.gt-tool-list').removeClass('active');
     }
   });
 
