@@ -7,7 +7,7 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
 
   Editor.Router = Marionette.AppRouter.extend({
     appRoutes: {
-      '*filter': 'filterItems'
+      // '*filter': 'filterItems'
     }
   });
 
@@ -24,35 +24,34 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
   _.extend(Editor.Controller.prototype, {
 
     // Start the app by showing the appropriate views
-    // and fetching the list of todo items, if there are any
+    // and fetching the list of items, if there are any
     start: function(){
-      this.showControls(this.triggerList);
-      this.showDrawer(this.triggerList);
       this.showMap();
+      this.showControls();
+      this.showDrawer(this.triggerList);
 
       // App.bindTo(this.triggerList, 'reset add remove', this.toggleFooter, this);
       // this.triggerList.fetch();
     },
 
+    showMap: function(triggerList) {
+      var map = new Editor.Views.MapView();
+      App.map.show(map);
+    },
+
     showControls: function() {
-      var controls = new App.Layout.Controls();
+      var controls = new Editor.Views.ControlsView();
       App.controls.show(controls);
     },
 
     showDrawer: function(triggerList) {
-      var drawer = new App.Layout.Drawer({
-        collection: triggerList
-      });
+      var drawer = new App.Layout.Drawer();
+      var list = new App.Editor.Views.ListView();
+      var edit = new App.Editor.Views.EditView();
+
       App.drawer.show(drawer);
-    },
-
-    showMap: function(triggerList) {
-      console.log(App.map);
-      App.map.show(new Editor.Views.MapView());
-    },
-
-    toggleDrawer: function() {
-      App.drawer.$el.toggle(this.triggerList.length);
+      drawer.list.show(list);
+      drawer.edit.show(edit);
     },
 
     // Set the filter to show complete or all items
