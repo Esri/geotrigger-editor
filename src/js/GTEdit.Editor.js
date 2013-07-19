@@ -47,6 +47,7 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
     },
 
     showMap: function(triggerList) {
+      console.log(App.map);
       App.map.show(new Editor.Views.MapView());
     },
 

@@ -129,49 +129,25 @@ GTEdit.module('Editor.Views', function(Views, App, Backbone, Marionette, $, _) {
 
   Views.MapView = Marionette.ItemView.extend({
     initialize: function() {
+      console.log('init', this);
       // this.listenTo(this.model, 'change', this.render, this);
     },
 
     render: function() {
-      var map = this.map = L.map('gt-map');
-
-      map.zoomControl.setPosition('topright');
-
-      // ArcGIS Online Basemaps - Streets, Topographic, Gray, Gray Labels, Ocean, NationalGeographic, Imagery, ImageryLabels
-      L.esri.basemapLayer("Imagery", {
-        zIndex: 1,
-        detectRetina: true
-      }).addTo(map);
-
-      L.esri.basemapLayer("ImageryLabels", {
-        zIndex: 3
-      }).addTo(map);
-
-      function onLocationFound(e) {
-        var radius = e.accuracy / 2;
-        L.marker(e.latlng).addTo(map).bindPopup("You are within " + radius + " meters from this point").openPopup();
-        L.circle(e.latlng, radius).addTo(map);
-      }
-
-      function onLocationError(e) {
-        alert(e.message);
-      }
-
-      map.on('locationfound', onLocationFound);
-      map.on('locationerror', onLocationError);
-
-      map.locate({setView: true, maxZoom: 16});
-    },
-
-    onRender: function() {
-      this.$el.removeClass('active completed');
-
-      if (this.model.get('completed')) {
-        this.$el.addClass('completed');
-      } else {
-        this.$el.addClass('active');
-      }
+      var map = L.map('gt-map').setView([45.52963623111275,-122.67389774322508], 12);
+      L.esri.basemapLayer("Topographic").addTo(map);
+      L.esri.featureLayer('http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/stops/FeatureServer/0/');
     }
+
+    // onRender: function() {
+    //   this.$el.removeClass('active completed');
+
+    //   if (this.model.get('completed')) {
+    //     this.$el.addClass('completed');
+    //   } else {
+    //     this.$el.addClass('active');
+    //   }
+    // }
   });
 
   // Application Event Handlers
