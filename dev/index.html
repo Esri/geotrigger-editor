@@ -9,17 +9,19 @@
 </head>
 <body>
   <div id="gt-editor">
-    <nav class="gt-controls">
+    <nav id="gt-controls">
       <!-- templates/control.hbs -->
     </nav>
 
-    <div class="gt-drawer"> <!-- add .closed to close the drawer -->
+    <div id="gt-drawer"> <!-- add .closed to close the drawer -->
       <!-- templates/edit-drawer.hbs -->
     </div>
 
-    <div class="gt-create-drawer">
+    <div id="gt-create-drawer">
       <!-- templates/create-drawer.hbs -->
     </div>
+
+    <div id="gt-map"></div>
   </div>
 
   <!-- dependencies -->
@@ -38,13 +40,15 @@
   <!-- editor app -->
   <script src="js/GTEdit.js"></script>
   <script src="js/GTEdit.Layout.js"></script>
-  <script src="js/geotrigger-editor.js"></script>
+  <script src="js/GTEdit.Triggers.js"></script>
+  <script src="js/GTEdit.Editor.js"></script>
+  <script src="js/GTEdit.Editor.Views.js"></script>
 
   <!-- initializer -->
   <script>
   $(function(){
-    // GTEditor.start();
-    var editor = new GeotriggerEditor({el: '#gt-editor'});
+    GTEdit.start();
+    // var editor = new GeotriggerEditor({el: '#gt-editor'});
   });
   </script>
 </body>

@@ -5,8 +5,8 @@
 (function(Handlebars, Marionette) {
 
   Marionette.Handlebars = {
-    path: '/templates/',
-    extension: '.handlebars'
+    path: 'templates/',
+    extension: '.hbs'
   };
 
   Marionette.TemplateCache.prototype.load = function() {
