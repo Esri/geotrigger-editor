@@ -1,82 +1,60 @@
 GTEdit.module('Editor.Views', function(Views, App, Backbone, Marionette, $, _) {
 
-  // Todo List Item View
-  // -------------------
+  // Controls View
+  // -------------
+
+  Views.ControlsView = Marionette.ItemView.extend({
+    template: 'controls',
+    className: 'gt-control-group',
+
+    ui: {
+      tools: '.gt-draw-tool'
+    },
+
+    events: {
+      'click .gt-tool-list'       : 'toggleList',
+      'click .gt-tool-create'     : 'toggleNew',
+      'click .gt-tool-polygon'    : 'togglePolygon',
+      'click .gt-tool-distance'   : 'toggleDistance',
+      'click .gt-tool-drivetime'  : 'toggleDrivetime'
+    },
+
+    toggleList: function(e) {
+      e.preventDefault();
+      App.drawer.$el.toggleClass('closed');
+      App.controls.$el.find('.gt-tool-list').toggleClass('active');
+    },
+
+    toggleNew: function(e) {
+      e.preventDefault();
+      console.log('toggle new trigger form');
+    },
+
+    togglePolygon: function(e) {
+      e.preventDefault();
+      console.log('toggle polygon tool');
+    },
+
+    toggleDistance: function(e) {
+      e.preventDefault();
+      console.log('toggle distance tool');
+    },
+
+    toggleDrivetime: function(e) {
+      e.preventDefault();
+      console.log('toggle drivetime tool');
+    },
+  });
+
+  // Trigger Item View
+  // -----------------
   //
   // Display an individual trigger item, and respond to changes that are made to the trigger.
 
   Views.ItemView = Marionette.ItemView.extend({
+    template: 'item',
     tagName: 'li',
-    template: '#template-todoItemView',
-
-    ui: {
-      edit: '.edit'
-    },
-
-    events : {
-      'click .destroy': 'destroy',
-      'dblclick label': 'onEditClick',
-      'keypress .edit': 'onEditKeypress',
-      'blur .edit': 'onEditBlur',
-      'click .toggle' : 'toggle'
-    },
-
-    initialize: function() {
-      console.log(this);
-      this.listenTo(this.model, 'change', this.render, this);
-    },
-
-    onRender: function() {
-      this.$el.removeClass('active completed');
-
-      if (this.model.get('completed')) {
-        this.$el.addClass('completed');
-      } else {
-        this.$el.addClass('active');
-      }
-    },
-
-    destroy: function() {
-      this.model.destroy();
-    },
-
-    toggle: function() {
-      this.model.toggle().save();
-    },
-
-    onEditClick: function() {
-      this.$el.addClass('editing');
-      this.ui.edit.focus();
-    },
-
-    updateTodo : function() {
-      var todoText = this.ui.edit.val();
-      if (todoText === '') {
-        return this.destroy();
-      }
-      this.setTodoText(todoText);
-      this.completeEdit();
-    },
-
-    onEditBlur: function(e){
-      this.updateTodo();
-    },
-
-    onEditKeypress: function(e) {
-      var ENTER_KEY = 13;
-      if (e.which === ENTER_KEY) {
-        this.updateTodo();
-      }
-    },
-
-    setTodoText: function(todoText){
-      if (todoText.trim() === ""){ return; }
-      this.model.set('title', todoText).save();
-    },
-
-    completeEdit: function(){
-      this.$el.removeClass('editing');
-    }
+    className: 'gt-result'
   });
 
   // Item List View
@@ -86,68 +64,37 @@ GTEdit.module('Editor.Views', function(Views, App, Backbone, Marionette, $, _) {
   // filtering of activs vs completed items for display.
 
   Views.ListView = Backbone.Marionette.CompositeView.extend({
-    template: 'list-panel',
+    template: 'list',
+    className: 'gt-list',
     itemView: Views.ItemView,
-    itemViewContainer: '#todo-list',
-
-    ui: {
-      toggle: '#toggle-all'
-    },
-
-    events : {
-      'click #toggle-all': 'onToggleAllClick'
-    },
-
-    initialize: function() {
-      console.log(this);
-      this.listenTo(this.collection, 'all', this.update, this);
-    },
-
-    onRender: function() {
-      this.update();
-    },
-
-    update: function() {
-      function reduceCompleted(left, right) {
-        return left && right.get('completed');
-      }
-
-      var allCompleted = this.collection.reduce(reduceCompleted,true);
-
-      this.ui.toggle.prop('checked', allCompleted);
-      this.$el.parent().toggle(!!this.collection.length);
-    },
-
-    onToggleAllClick: function(e) {
-      var isChecked = e.currentTarget.checked;
-
-      this.collection.each(function(todo){
-        todo.save({'completed': isChecked});
-      });
-    }
+    itemViewContainer: '.gt-result'
   });
 
+
+  // Trigger Item View
+  // -----------------
+  //
+  // Display an individual trigger item, and respond to changes that are made to the trigger.
+
+  Views.EditView = Marionette.ItemView.extend({
+    template: 'edit',
+    className: 'gt-edit'
+  });
+
+  // Map Item View
+  // -------------
+  //
+  // Manages the esri-leaflet map.
+
   Views.MapView = Marionette.ItemView.extend({
-    initialize: function() {
-      console.log('init', this);
-      // this.listenTo(this.model, 'change', this.render, this);
-    },
+    template: 'map',
+    id: 'gt-map',
 
-    render: function() {
-      var map = L.map('gt-map').setView([45.52963623111275,-122.67389774322508], 12);
+    onShow: function() {
+      var map = L.map(this.el).setView([37.75,-122.45], 12);
+      map.zoomControl.setPosition('topright');
       L.esri.basemapLayer("Topographic").addTo(map);
-      L.esri.featureLayer('http://services.arcgis.com/rOo16HdIMeOBI4Mb/arcgis/rest/services/stops/FeatureServer/0/');
     }
-
-    // onRender: function() {
-    //   this.$el.removeClass('active completed');
-
-    //   if (this.model.get('completed')) {
-    //     this.$el.addClass('completed');
-    //   } else {
-    //     this.$el.addClass('active');
-    //   }
-    // }
   });
 
   // Application Event Handlers
