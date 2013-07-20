@@ -1,52 +1,44 @@
 GTEdit.module('Triggers', function(Triggers, App, Backbone, Marionette, $, _) {
 
   // Trigger Model
-  // ----------
+  // -------------
 
   Triggers.Trigger = Backbone.Model.extend({
 
     defaults: {
-      title: '',
-      completed: false,
-      created: 0
+      'triggerId': null,
+      'condition': {
+        'direction': 'enter',
+        'geo': {
+          'geocode': '920 SW 3rd Ave, Portland, OR',
+          'driveTime': 600,
+          'context': {
+            'locality': 'Portland',
+            'region': 'Oregon',
+            'country': 'USA',
+            'zipcode': '97204'
+          }
+        }
+      },
+      'action': {
+        'message': 'Welcome to Portland - The Mayor',
+        'callback': 'http://pdx.gov/welcome'
+      },
+      'tags': ['foodcarts', 'citygreetings']
     },
 
-    initialize: function() {
-      if (this.isNew()) {
-        this.set('created', Date.now());
-      }
-    },
-
-    toggle: function() {
-      return this.set('completed', !this.isCompleted());
-    },
-
-    isCompleted: function() {
-      return this.get('completed');
-    }
+    // inherit sync method from collection
+    sync: this.collection.sync
   });
 
   // Trigger Collection
-  // ---------------
+  // ------------------
 
   Triggers.TriggerList = Backbone.Collection.extend({
-    model: Triggers.Trigger,
+    model: Triggers.Trigger
 
-    getCompleted: function() {
-      return this.filter(this._isCompleted);
-    },
-
-    getActive: function() {
-      return this.reject(this._isCompleted);
-    },
-
-    comparator: function(trigger) {
-      return trigger.get('created');
-    },
-
-    _isCompleted: function(trigger){
-      return trigger.isCompleted();
-    }
+    // override sync method to use geotrigger API
+    // sync: function(method, model, options) {}
   });
 
 });

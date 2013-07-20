@@ -6,9 +6,7 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
   // Handle routes to show the active vs complete todo items
 
   Editor.Router = Marionette.AppRouter.extend({
-    appRoutes: {
-      // '*filter': 'filterItems'
-    }
+    appRoutes: {}
   });
 
   // Editor Controller (Mediator)
@@ -28,13 +26,12 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
     start: function(){
       this.showMap();
       this.showControls();
-      this.showDrawer(this.triggerList);
+      this.showDrawer();
 
-      // App.bindTo(this.triggerList, 'reset add remove', this.toggleFooter, this);
       // this.triggerList.fetch();
     },
 
-    showMap: function(triggerList) {
+    showMap: function() {
       var map = new Editor.Views.MapView();
       App.map.show(map);
     },
@@ -44,7 +41,7 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
       App.controls.show(controls);
     },
 
-    showDrawer: function(triggerList) {
+    showDrawer: function() {
       var drawer = new App.Layout.Drawer();
       var list = new App.Editor.Views.ListView();
       var edit = new App.Editor.Views.EditView();
@@ -52,20 +49,15 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
       App.drawer.show(drawer);
       drawer.list.show(list);
       drawer.edit.show(edit);
-    },
-
-    // Set the filter to show complete or all items
-    filterItems: function(filter) {
-      // App.vent.trigger('triggerList:filter', filter.trim() || '');
     }
   });
 
-  // TodoList Initializer
-  // --------------------
+  // Editor Initializer
+  // ------------------
   //
-  // Get the TodoList up and running by initializing the mediator
+  // Get the Editor up and running by initializing the mediator
   // when the the application is started, pulling in all of the
-  // existing Todo items and displaying them.
+  // existing geotriggers and displaying them.
 
   Editor.addInitializer(function() {
     var controller = new Editor.Controller();
