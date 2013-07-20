@@ -2,14 +2,12 @@ GTEdit.module('Editor.Views', function(Views, App, Backbone, Marionette, $, _) {
 
   // Controls View
   // -------------
+  //
+  // Display controls and handle state of drawer and tools.
 
   Views.ControlsView = Marionette.ItemView.extend({
     template: 'controls',
     className: 'gt-control-group',
-
-    ui: {
-      tools: '.gt-draw-tool'
-    },
 
     events: {
       'click .gt-tool-list'       : 'toggleList',
@@ -49,7 +47,7 @@ GTEdit.module('Editor.Views', function(Views, App, Backbone, Marionette, $, _) {
   // Trigger Item View
   // -----------------
   //
-  // Display an individual trigger item, and respond to changes that are made to the trigger.
+  // Display an individual trigger list item, and respond to changes that are made to the trigger.
 
   Views.ItemView = Marionette.ItemView.extend({
     template: 'item',
@@ -103,10 +101,8 @@ GTEdit.module('Editor.Views', function(Views, App, Backbone, Marionette, $, _) {
   // Handler for filtering the list of items by showing and
   // hiding through the use of various CSS classes
 
-  App.vent.on('triggerList:filter', function(filter) {
-    filter = filter || 'all';
-    console.log('filter by:', filter);
-    // $('#todoapp').attr('class', 'filter-' + filter);
-  });
+  // App.vent.on('item:event', function(eventData) {
+  //   // event handler logic
+  // });
 
 });
