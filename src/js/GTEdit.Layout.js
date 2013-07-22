@@ -14,8 +14,8 @@ GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
     },
 
     regions: {
-      list: '.gt-panel-1',
-      edit: '.gt-panel-2'
+      listRegion: '.gt-panel-1',
+      editRegion: '.gt-panel-2'
     },
 
     editItem: function(e) {
@@ -30,8 +30,8 @@ GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
 
     closeDrawer: function(e) {
       e.preventDefault();
-      App.drawer.$el.addClass('closed');
-      App.controls.$el.find('.gt-tool-list').removeClass('active');
+      App.drawerRegion.$el.addClass('closed');
+      App.controlsRegion.$el.find('.gt-tool-list').removeClass('active');
     }
   });
 

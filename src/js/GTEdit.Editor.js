@@ -16,39 +16,39 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
   // level, above the implementation detail of views and models
 
   Editor.Controller = function() {
-    this.triggerList = new App.Triggers.TriggerList();
+    this.triggerCollection = new App.Triggers.Collection();
   };
 
   _.extend(Editor.Controller.prototype, {
 
     // Start the app by showing the appropriate views
     // and fetching the list of items, if there are any
-    start: function(){
+    start: function() {
       this.showMap();
       this.showControls();
       this.showDrawer();
 
-      // this.triggerList.fetch();
+      // this.triggerCollection.fetch();
     },
 
     showMap: function() {
-      var map = new Editor.Views.MapView();
-      App.map.show(map);
+      var map = new App.Views.Map();
+      App.mapRegion.show(map);
     },
 
     showControls: function() {
-      var controls = new Editor.Views.ControlsView();
-      App.controls.show(controls);
+      var controlsView = new App.Views.Controls();
+      App.controlsRegion.show(controlsView);
     },
 
     showDrawer: function() {
-      var drawer = new App.Layout.Drawer();
-      var list = new App.Editor.Views.ListView();
-      var edit = new App.Editor.Views.EditView();
+      var drawerLayout = new App.Layout.Drawer();
+      var listView = new App.Views.List();
+      var editView = new App.Views.Edit();
 
-      App.drawer.show(drawer);
-      drawer.list.show(list);
-      drawer.edit.show(edit);
+      App.drawerRegion.show(drawerLayout);
+      drawerLayout.listRegion.show(listView);
+      drawerLayout.editRegion.show(editView);
     }
   });
 
