@@ -70,7 +70,7 @@ Next, `cd` into the `geotrigger-editor` working directory and run `npm install` 
 
 ### Working locally
 
-You need a http server at `localhost:8080` serving files from the root of the repository. `/` uses files from `dist`, and `/dev/` uses files from `dev`.
+You need a HTTP server at `localhost:8080` serving files from the root of the repository. `/` uses files from `dist`, and `/dev/` uses files from `dev`. The `grunt dev` task takes care of this for you (see `Grunt Tasks` below).
 
 ### Testing locally
 
@@ -84,7 +84,7 @@ Testing requires PhantomJS to be running. You can get it started by running `pha
 
 2. `grunt dev`
 
-  This task will clean out the dev folder and build out all the necessary files for development, then continuously watch for changes in the `src` directory until you end the process.
+  This task will clean out the dev folder and build out all the necessary files for development, run a server at `localhost:8080`, then continuously watch for changes in the `src` directory until you end the process.
 
 3. `grunt build`
 
