@@ -37,18 +37,18 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
     },
 
     showControls: function() {
-      var controls = new App.Views.Controls();
-      App.controlsRegion.show(controls);
+      var controlsView = new App.Views.Controls();
+      App.controlsRegion.show(controlsView);
     },
 
     showDrawer: function() {
-      var drawer = new App.Layout.Drawer();
-      var list = new App.Views.List();
-      var edit = new App.Views.Edit();
+      var drawerLayout = new App.Layout.Drawer();
+      var listView = new App.Views.List();
+      var editView = new App.Views.Edit();
 
-      App.drawerRegion.show(drawer);
-      drawer.list.show(list);
-      drawer.edit.show(edit);
+      App.drawerRegion.show(drawerLayout);
+      drawerLayout.listRegion.show(listView);
+      drawerLayout.editRegion.show(editView);
     }
   });
 
