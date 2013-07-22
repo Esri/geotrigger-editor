@@ -1,0 +1,17 @@
+/* - - - - - - - - - - Drawer - - - - - - - - - - */
+#gt-drawer {
+  box-sizing:border-box;
+  position:absolute;
+  z-index:2;
+  width:40%;
+  overflow:hidden;
+  top:0;
+  bottom:0;
+  left:70px;
+  background-color:white;
+  @include transition(transform 300ms ease-in);
+  &.closed {
+    @include transform(translate3D(-100%,0,0));
+    @include transition(transform 300ms ease-in);
+  }
+}
