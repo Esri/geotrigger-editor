@@ -1,0 +1,47 @@
+<div class="gt-panel-top-bar">
+  <a href="#" class="gt-panel-top-bar-button gt-back-to-list"></a>
+  <h3>Edit</h3>
+  <a href="#" class="gt-panel-top-bar-button gt-close-drawer"></a>
+</div>
+<div class="gt-panel-content">
+  <form>
+    <input type="text" name="title" placeholder="Title" class="gt-trigger-title-input">
+    <span class="gt-tag-label">When a device tagged</span>
+    <input type="text" placeholder="enter tags" class="gt-tag-input">
+    <select name="event" class="gt-event">
+      <option value="enter" selected>enters inside</option>
+      <option value="exit">exits</option>
+    </select>
+    <select name="geometry-type" class="gt-geometry-type">
+      <option value="polygon" selected>a polygon</option>
+      <option value="radius">a distance of</option>
+      <option value="drivetime">a drivetime of</option>
+    </select>
+    <select name="action" class="gt-action">
+      <option value="message" selected>send the device a message</option>
+      <option value="server">post to a server</option>
+      <option value="log">log the event</option>
+      <option value="profile">change tracking profile</option>
+    </select>
+    <span>:</span>
+    <label for="message">
+      <input type="text" name="message" placeholder="message">
+    </label>
+    <label for="url">
+      <input type="text" placeholder="url (optional)">
+    </label>
+    <label for="date">
+      This will start
+      <select name="date-start" class="gt-date-start">
+        <option value="now">now</option>
+        <option value="future">in the future</option>
+      </select>
+      and persist
+      <select name="date-end" class="gt-date-end">
+        <option value="never">indefinitely</option>
+        <option value="future">until a future date</option>
+      </select>
+    </label>
+    <a href="#" class="gt-button gt-button-green">Submit</a>
+  </form>
+</div>

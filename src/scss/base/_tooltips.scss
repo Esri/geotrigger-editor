@@ -1,0 +1,42 @@
+a.gt-tooltip {
+  span {
+    z-index:10;
+    visibility: hidden;
+    opacity:0;
+    padding:14px 20px;
+    margin-top:-30px;
+    margin-left:28px;
+    color:$white;
+    @include border-radius(4px);
+    @include box-shadow(0 0 12px rgba(0,0,0,0.2));
+    padding: 14px 20px;
+    margin-top: -50px;
+    margin-left: 100%;
+    width: auto;
+    white-space: nowrap;
+    background-color: $green;
+    position:absolute;
+    @include transform(translate3d(-12px,0,0));
+    @include transition(all 200ms linear);
+    &:before {
+      content: "";
+      display:block;
+      width:0;
+      height:0;
+      border-right:8px solid $green;
+      border-bottom:8px solid transparent;
+      border-top:8px solid transparent;
+      position:absolute;
+      left: -8px;
+      top: 50%;
+      margin-top: -8px;
+    }
+  }
+  &:hover span {
+    display:inline;
+    opacity: 1;
+    visibility: visible;
+    @include transform(translate3d(0,0,0));
+    @include transition(all 200ms linear);
+  }
+}

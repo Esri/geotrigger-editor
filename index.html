@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ArcGIS Geotrigger Editor</title>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="vendor/css/esri-leaflet.min.css">
+  <link rel="stylesheet" href="dist/css/geotrigger-editor.css">
+</head>
+<body>
+  <div id="gt-editor">
+    <nav class="gt-controls">
+      <a href="#" class="gt-tool gt-tool-list active gt-tooltip"><span>List</span></a>
+      <a href="#" class="gt-tool gt-tool-polygon gt-tooltip"><span>Polygon</span></a>
+      <a href="#" class="gt-tool gt-tool-distance gt-tooltip"><span>Radius</span></a>
+      <a href="#" class="gt-tool gt-tool-drivetime gt-tooltip"><span>Drivetime</span></a>
+    </nav>
+    <div class="gt-drawer"> <!-- add .closed to close the drawer -->
+      <div class="gt-panel-wrap"> <!-- add .gt-panel-active to use second panel -->
+        <div class="gt-panel gt-panel-1">
+          <div class="gt-panel-top-bar">
+            <a href="#" class="gt-panel-top-bar-button gt-new-trigger"></a>
+            <h3>List</h3>
+            <a href="#" class="gt-panel-top-bar-button gt-close-drawer"></a>
+          </div>
+          <div class="gt-search">
+            <input type="search"></input>
+          </div>
+          <div class='gt-results'>
+            <ul>
+              <li class="gt-result">
+                <span class="gt-icon gt-icon-enter gt-icon-polygon"></span>
+                <h5><a href="#">Enter Polygon 442 SE 42nd</a></h5>
+                <ul class="gt-tags">
+                  <li>tag1</li>
+                  <li>tag2</li>
+                </ul>
+              </li>
+              <li class="gt-result">
+                <span class="gt-icon gt-icon-enter gt-icon-radius"></span>
+                <h5><a href="#">Enter Radius of 4555 SW Morrison</a></h5>
+                <ul class="gt-tags">
+                  <li>tag1</li>
+                  <li>tag2</li>
+                </ul>
+              </li>
+              <li class="gt-result">
+                <span class="gt-icon gt-icon-enter gt-icon-drivetime"></span>
+                <h5><a href="#">Enter 5 Minutes Drivetime of 266 Harrison Drive</a></h5>
+                <ul class="gt-tags">
+                  <li>tag1</li>
+                  <li>tag2</li>
+                  <li>tag1</li>
+                  <li>tag2</li>
+                  <li>tag1</li>
+                  <li>tag2</li>
+                  <li>tag1</li>
+                  <li>tag2</li>
+                  <li>tag1</li>
+                  <li>tag2</li>
+                  <li>tag1</li>
+                  <li>tag2</li>
+                </ul>
+              </li>
+              <li class="gt-result">
+                <span class="gt-icon gt-icon-exit gt-icon-radius"></span>
+                <h5><a href="#">Exit 10 Mile Radius of 544 Killingsworth St.</a></h5>
+                <ul class="gt-tags">
+                  <li>tag1</li>
+                  <li>tag2</li>
+                </ul>
+              </li>
+              <li class="gt-result">
+                <span class="gt-icon gt-icon-exit gt-icon-polygon"></span>
+                <h5><a href="#">Exit 5 Point Polygon </a></h5>
+                <ul class="gt-tags">
+                  <li>tag1</li>
+                  <li>tag2</li>
+                </ul>
+              </li>
+              <li class="gt-result">
+                <span class="gt-icon gt-icon-exit gt-icon-drivetime"></span>
+                <h5><a href="#">Exit Drivetime of Target</a></h5>
+                <ul class="gt-tags">
+                  <li>tag1</li>
+                  <li>tag2</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="gt-panel gt-panel-2">
+          <div class="gt-panel-top-bar">
+            <a href="#" class="gt-panel-top-bar-button gt-back-to-list"></a>
+            <h3>Create</h3>
+            <a href="#" class="gt-panel-top-bar-button gt-close-drawer"></a>
+          </div>
+          <div class="gt-panel-content">
+            <form>
+              <input type="text" name="title" placeholder="Title" class="gt-trigger-title-input">
+              <span class="gt-tag-label">When a device tagged</span>
+              <input type="text" placeholder="enter tags" class="gt-tag-input">
+              <select name="event" class="gt-event">
+                <option value="enter" selected>enters inside</option>
+                <option value="exit">exits</option>
+              </select>
+              <select name="geometry-type" class="gt-geometry-type">
+                <option value="polygon" selected>a polygon</option>
+                <option value="radius">a distance of</option>
+                <option value="drivetime">a drivetime of</option>
+              </select>
+              <select name="action" class="gt-action">
+                <option value="message" selected>send the device a message</option>
+                <option value="server">post to a server</option>
+                <option value="log">log the event</option>
+                <option value="profile">change tracking profile</option>
+              </select>
+              <span>:</span>
+              <label for="message">
+                <input type="text" name="message" placeholder="message">
+              </label>
+              <label for="url">
+                <input type="text" placeholder="url (optional)">
+              </label>
+              <label for="date">
+                This will start
+                <select name="date-start" class="gt-date-start">
+                  <option value="now">now</option>
+                  <option value="future">in the future</option>
+                </select>
+                and persist
+                <select name="date-end" class="gt-date-end">
+                  <option value="never">indefinitely</option>
+                  <option value="future">until a future date</option>
+                </select>
+              </label>
+              <a href="#" class="gt-button gt-button-green">Submit</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- dependencies -->
+  <script src="vendor/json2.js"></script>
+  <script src="vendor/jquery-1.10.2.js"></script>
+  <script src="vendor/underscore.js"></script>
+  <script src="vendor/backbone.js"></script>
+  <script src="vendor/backbone.marionette.js"></script>
+  <script src="vendor/handlebars.js"></script>
+  <script src="vendor/marionette.handlebars.js"></script>
+  <script src="vendor/geoservices.js"></script>
+  <script src="vendor/geotriggers.js"></script>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script src="vendor/esri-leaflet.min.js"></script>
+
+  <!-- editor app -->
+  <script src="dist/js/geotrigger-editor.js"></script>
+
+  <!-- initializer -->
+  <script>
+  $(function(){
+    // GTEditor.start();
+    var editor = new GeotriggerEditor({el: '#gt-editor'});
+  });
+  </script>
+</body>
+</html>
