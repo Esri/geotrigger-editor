@@ -1,11 +1,11 @@
-GTEdit.module('Editor.Views', function(Views, App, Backbone, Marionette, $, _) {
+GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
   // Controls View
   // -------------
   //
-  // Display controls and handle state of drawer and tools.
+  // Displays controls and handles state of drawer and tools.
 
-  Views.ControlsView = Marionette.ItemView.extend({
+  Views.Controls = Marionette.ItemView.extend({
     template: 'controls',
     className: 'gt-control-group',
 
@@ -19,8 +19,8 @@ GTEdit.module('Editor.Views', function(Views, App, Backbone, Marionette, $, _) {
 
     toggleList: function(e) {
       e.preventDefault();
-      App.drawer.$el.toggleClass('closed');
-      App.controls.$el.find('.gt-tool-list').toggleClass('active');
+      App.drawerRegion.$el.toggleClass('closed');
+      App.controlsRegion.$el.find('.gt-tool-list').toggleClass('active');
     },
 
     toggleNew: function(e) {
@@ -44,37 +44,36 @@ GTEdit.module('Editor.Views', function(Views, App, Backbone, Marionette, $, _) {
     },
   });
 
-  // Trigger Item View
+  // Trigger List View
   // -----------------
   //
-  // Display an individual trigger list item, and respond to changes that are made to the trigger.
+  // Controls the rendering of the list of items, including the
+  // filtering of activs vs completed items for display.
 
-  Views.ItemView = Marionette.ItemView.extend({
+  Views.List = Backbone.Marionette.CompositeView.extend({
+    template: 'list',
+    className: 'gt-list',
+    itemView: Views.ListItem,
+    itemViewContainer: '.gt-result'
+  });
+
+  // Trigger List Item View
+  // ----------------------
+  //
+  // Displays an individual trigger list item, and responds to changes that are made to the trigger.
+
+  Views.ListItem = Marionette.ItemView.extend({
     template: 'item',
     tagName: 'li',
     className: 'gt-result'
   });
 
-  // Item List View
-  // --------------
-  //
-  // Controls the rendering of the list of items, including the
-  // filtering of activs vs completed items for display.
-
-  Views.ListView = Backbone.Marionette.CompositeView.extend({
-    template: 'list',
-    className: 'gt-list',
-    itemView: Views.ItemView,
-    itemViewContainer: '.gt-result'
-  });
-
-
-  // Trigger Item View
+  // Trigger Edit View
   // -----------------
   //
-  // Display an individual trigger item, and respond to changes that are made to the trigger.
+  // Populates the edit trigger form with a preexisting trigger and handles updates.
 
-  Views.EditView = Marionette.ItemView.extend({
+  Views.Edit = Marionette.ItemView.extend({
     template: 'edit',
     className: 'gt-edit'
   });
@@ -84,7 +83,7 @@ GTEdit.module('Editor.Views', function(Views, App, Backbone, Marionette, $, _) {
   //
   // Manages the esri-leaflet map.
 
-  Views.MapView = Marionette.ItemView.extend({
+  Views.Map = Marionette.ItemView.extend({
     template: 'map',
     id: 'gt-map',
 
