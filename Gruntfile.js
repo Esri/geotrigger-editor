@@ -134,6 +134,7 @@ module.exports = function(grunt) {
 
   // Tasks
   grunt.registerTask('test', [
+    'connect',
     'jshint',
     'complexity',
     'cucumberjs'
