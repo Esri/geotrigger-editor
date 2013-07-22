@@ -30,8 +30,8 @@ GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
 
     closeDrawer: function(e) {
       e.preventDefault();
-      App.drawer.$el.addClass('closed');
-      App.controls.$el.find('.gt-tool-list').removeClass('active');
+      App.drawerRegion.$el.addClass('closed');
+      App.controlsRegion.$el.find('.gt-tool-list').removeClass('active');
     }
   });
 
