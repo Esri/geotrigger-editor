@@ -34,7 +34,7 @@ Config options to change:
 
 ## Teams
 
-* Team Leaflet
+* Team Mod Squad
 * Team Quoin
 
 ## Winning Criteria

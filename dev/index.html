@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ArcGIS Geotrigger Editor</title>
+  <link rel="stylesheet" href="../vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="../vendor/css/esri-leaflet.min.css">
+  <link rel="stylesheet" href="css/geotrigger-editor.css">
+</head>
+<body>
+  <div id="gt-editor">
+    <nav id="gt-controls">
+      <!-- templates/control.hbs -->
+    </nav>
+
+    <div id="gt-drawer"> <!-- add .closed to close the drawer -->
+      <!-- templates/edit-drawer.hbs -->
+    </div>
+
+    <div id="gt-create-drawer">
+      <!-- templates/create-drawer.hbs -->
+    </div>
+
+    <div id="gt-map-wrap"></div>
+  </div>
+
+  <!-- dependencies -->
+  <script src="../vendor/json2.js"></script>
+  <script src="../vendor/jquery-1.10.2.js"></script>
+  <script src="../vendor/underscore.js"></script>
+  <script src="../vendor/backbone.js"></script>
+  <script src="../vendor/backbone.marionette.js"></script>
+  <script src="../vendor/handlebars.js"></script>
+  <script src="../vendor/marionette.handlebars.js"></script>
+  <script src="../vendor/geoservices.js"></script>
+  <script src="../vendor/geotriggers.js"></script>
+  <script src="../vendor/leaflet/leaflet.js"></script>
+  <script src="../vendor/esri-leaflet.min.js"></script>
+
+  <!-- editor app -->
+  <script src="js/GTEdit.js"></script>
+  <script src="js/GTEdit.Layout.js"></script>
+  <script src="js/GTEdit.Triggers.js"></script>
+  <script src="js/GTEdit.Editor.js"></script>
+  <script src="js/GTEdit.Editor.Views.js"></script>
+
+  <!-- initializer -->
+  <script>
+  $(function(){
+    GTEdit.start();
+    // var editor = new GeotriggerEditor({el: '#gt-editor'});
+  });
+  </script>
+</body>
+</html>
