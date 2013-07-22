@@ -4,6 +4,15 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    connect: {
+      server: {
+        options: {
+          port: 8080,
+          base: '.'
+        }
+      }
+    },
+
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
@@ -125,6 +134,7 @@ module.exports = function(grunt) {
 
   // Tasks
   grunt.registerTask('test', [
+    'connect',
     'jshint',
     'complexity',
     'cucumberjs'
@@ -134,6 +144,7 @@ module.exports = function(grunt) {
     'clean:dev',
     'compass:dev',
     'copy:dev',
+    'connect',
     'watch'
   ]);
 
