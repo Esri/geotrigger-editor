@@ -49,7 +49,6 @@
     &.active {
       opacity:1;
       @include transition(opacity 200ms linear);
-      background:url('/dist/img/icons/list.png') no-repeat center center transparent; background-size:24px;
       &:before {
         opacity:1;
       }
