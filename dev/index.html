@@ -6,7 +6,10 @@
   <link rel="stylesheet" href="../vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="../vendor/css/esri-leaflet.min.css">
   <link rel="stylesheet" href="../vendor/css/leaflet.draw.css">
-  <link rel="stylesheet" href="../vendor/css/leaflet.draw.ie.css">
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../vendor/leaflet/leaflet.ie.css">
+    <link rel="stylesheet" href="../vendor/css/leaflet.draw.ie.css">
+  <![endif]-->
   <link rel="stylesheet" href="css/geotrigger-editor.css">
 </head>
 <body>
@@ -15,12 +18,12 @@
       <!-- templates/control.hbs -->
     </nav>
 
-    <div id="gt-drawer"> <!-- add .closed to close the drawer -->
-      <!-- templates/edit-drawer.hbs -->
+    <div class="gt-drawer gt-drawer-list open">
+      <!-- templates/drawer-list.hbs -->
     </div>
 
-    <div id="gt-create-drawer">
-      <!-- templates/create-drawer.hbs -->
+    <div class="gt-drawer gt-drawer-new">
+      <!-- templates/drawer-new.hbs -->
     </div>
 
     <div id="gt-map-wrap"></div>
