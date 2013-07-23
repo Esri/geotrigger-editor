@@ -5,11 +5,14 @@
   top:0;
   left:0;
   bottom:0;
-  background:#efefef;
+  background:$white;
   @include transition(transform 300ms ease-in);
   &.gt-panel-editing {
     @include transform(translate3D(-50%,0,0));
     @include transition(transform 300ms ease-in);
+  }
+  &.gt-new {
+    width: 100%;
   }
 }
 .gt-panel {
