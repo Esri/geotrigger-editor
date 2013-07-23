@@ -31,7 +31,7 @@
     &.gt-tool-polygon {background:url('/dist/img/icons/polygon.png') no-repeat center center transparent; background-size:24px;}
     &.gt-tool-distance {background:url('/dist/img/icons/radius.png') no-repeat center center transparent; background-size:24px;}
     &.gt-tool-drivetime {background:url('/dist/img/icons/drivetime.png') no-repeat center center transparent; background-size:24px;}
-    &:before{
+    &:before {
       content:"";
       width:70px;
       height:60px;
@@ -49,7 +49,6 @@
     &.active {
       opacity:1;
       @include transition(opacity 200ms linear);
-      background:url('/dist/img/icons/list.png') no-repeat center center transparent; background-size:24px;
       &:before {
         opacity:1;
       }
