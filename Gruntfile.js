@@ -5,9 +5,15 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     connect: {
-      server: {
+      dev: {
         options: {
           port: 8080,
+          base: '.'
+        }
+      },
+      test: {
+        options: {
+          port: 8081,
           base: '.'
         }
       }
@@ -134,7 +140,7 @@ module.exports = function(grunt) {
 
   // Tasks
   grunt.registerTask('test', [
-    'connect',
+    'connect:test',
     'jshint',
     'complexity',
     'cucumberjs'
@@ -144,7 +150,7 @@ module.exports = function(grunt) {
     'clean:dev',
     'compass:dev',
     'copy:dev',
-    'connect',
+    'connect:dev',
     'watch'
   ]);
 
