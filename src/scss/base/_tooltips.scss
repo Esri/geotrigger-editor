@@ -4,14 +4,12 @@ a.gt-tooltip {
     visibility: hidden;
     opacity:0;
     padding:14px 20px;
-    margin-top:-30px;
-    margin-left:28px;
     color:$white;
     @include border-radius(4px);
     @include box-shadow(0 0 12px rgba(0,0,0,0.2));
     padding: 14px 20px;
     margin-top: -50px;
-    margin-left: 100%;
+    margin-left: 114%;
     width: auto;
     white-space: nowrap;
     background-color: $green;
