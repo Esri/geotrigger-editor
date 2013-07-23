@@ -1,5 +1,5 @@
 /* - - - - - - - - - - Drawer - - - - - - - - - - */
-#gt-drawer {
+.gt-drawer {
   box-sizing:border-box;
   position:absolute;
   z-index:2;
@@ -9,9 +9,10 @@
   bottom:0;
   left:70px;
   background-color:white;
+  @include transform(translate3D(-100%,0,0));
   @include transition(transform 300ms ease-in);
-  &.closed {
-    @include transform(translate3D(-100%,0,0));
+  &.open {
+    @include transform(translate3D(0,0,0));
     @include transition(transform 300ms ease-in);
   }
 }

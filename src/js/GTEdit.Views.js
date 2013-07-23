@@ -19,13 +19,24 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
     toggleList: function(e) {
       e.preventDefault();
-      App.drawerRegion.$el.toggleClass('closed');
+
+      // make sure new drawer is closed
+      App.newDrawerRegion.currentView.closeDrawer();
+
+      // toggle active state of list drawer
+      App.listDrawerRegion.$el.toggleClass('open');
       App.controlsRegion.$el.find('.gt-tool-list').toggleClass('active');
     },
 
     toggleNew: function(e) {
       e.preventDefault();
-      console.log('toggle new trigger form');
+
+      // make sure list drawer is closed
+      App.listDrawerRegion.currentView.closeDrawer();
+
+      // toggle active state of new drawer
+      App.newDrawerRegion.$el.toggleClass('open');
+      App.controlsRegion.$el.find('.gt-tool-create').toggleClass('active');
     },
 
     togglePolygon: function(e) {
@@ -76,6 +87,29 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
   Views.Edit = Marionette.ItemView.extend({
     template: 'edit',
     className: 'gt-edit'
+  });
+
+  // Trigger New View
+  // ----------------
+  //
+  // Handles the new trigger form.
+
+  Views.New = Marionette.ItemView.extend({
+    template: 'new',
+    className: 'gt-new',
+
+    events: {
+      'click .gt-close-drawer': 'closeDrawer'
+    },
+
+    closeDrawer: function(e) {
+      if (typeof e !== 'undefined' && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      App.newDrawerRegion.$el.removeClass('open');
+      App.controlsRegion.$el.find('.gt-tool-create').removeClass('active');
+    }
   });
 
   // Map Item View
