@@ -52,7 +52,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     toggleDrivetime: function(e) {
       e.preventDefault();
       console.log('toggle drivetime tool');
-    },
+    }
   });
 
   // Trigger List View
