@@ -4,7 +4,8 @@ var GTEdit = new Backbone.Marionette.Application();
 
 GTEdit.addRegions({
   controlsRegion: '#gt-controls',
-  drawerRegion: '#gt-drawer',
+  listDrawerRegion: '.gt-drawer-list',
+  newDrawerRegion: '.gt-drawer-new',
   mapRegion: '#gt-map-wrap'
 });
 
