@@ -36,7 +36,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/**/*.js','src/scss/*.scss','src/img/**/*.jpg','src/img/**/*.png','src/templates/*.hbs'],
+        files: ['src/**/*.js','src/scss/**/*.scss','src/img/**/*.jpg','src/img/**/*.png','src/templates/*.hbs'],
         tasks: ['jshint','clean:dev','compass:dev','copy:dev']
         // options: {
         //   nospawn: true
