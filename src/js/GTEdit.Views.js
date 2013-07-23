@@ -96,7 +96,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
   Views.New = Marionette.ItemView.extend({
     template: 'new',
-    className: 'gt-panel gt-new',
+    className: 'gt-new',
 
     events: {
       'click .gt-close-drawer': 'closeDrawer'

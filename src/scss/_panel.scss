@@ -1,27 +1,25 @@
 /* - - - - - - - - - - Panels - - - - - - - - - - */
 .gt-panel-wrap {
-  background: #efefef;
-  width: 200%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
+  width:200%;
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  background:#efefef;
   @include transition(transform 300ms ease-in);
   &.gt-panel-editing {
     @include transform(translate3D(-50%,0,0));
     @include transition(transform 300ms ease-in);
   }
-  .gt-panel {
-    width: 50%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-  }
 }
 .gt-panel {
-  background-color: $lightest-gray;
-  overflow-y: scroll;
+  width:50%;
+  position:absolute;
+  top:0;
+  bottom:0;
   -webkit-overflow-scrolling: touch;
+  overflow-y:scroll;
+  background-color:$lightest-gray;
 }
 .gt-panel-list { left: 0; }
 .gt-panel-edit { left: 50%; }
