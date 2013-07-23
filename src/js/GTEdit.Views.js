@@ -91,6 +91,19 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       var map = L.map(this.el).setView([37.75,-122.45], 12);
       map.zoomControl.setPosition('topright');
       L.esri.basemapLayer("Topographic").addTo(map);
+
+
+      // Initialize the FeatureGroup to store editable layers
+      var drawnItems = new L.FeatureGroup();
+      map.addLayer(drawnItems);
+
+      // Initialize the draw control and pass it the FeatureGroup of editable layers
+      var drawControl = new L.Control.Draw({
+          edit: {
+              featureGroup: drawnItems
+          }
+      });
+      map.addControl(drawControl);
     }
   });
 
