@@ -126,17 +126,36 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       map.zoomControl.setPosition('topright');
       L.esri.basemapLayer("Topographic").addTo(map);
 
-
       // Initialize the FeatureGroup to store editable layers
       var drawnItems = new L.FeatureGroup();
       map.addLayer(drawnItems);
 
-      // Initialize the draw control and pass it the FeatureGroup of editable layers
-      var drawControl = new L.Control.Draw({
+      // Control Options
+      var controlOptions = {
+          position: 'topright',
+          draw: {
+              polyline: false,
+              polygon: {
+                  allowIntersection: false, // Restricts shapes to simple polygons
+                  drawError: {
+                      //color: '#e1e100', // Color the shape will turn when intersects
+                      //message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+                  },
+                  shapeOptions: {
+                      color: '#bada55'
+                  }
+              },
+              //circle: false, // Turns off this drawing tool
+              rectangle: false
+          },
           edit: {
-              featureGroup: drawnItems
+              featureGroup: drawnItems //REQUIRED!!
+              //remove: false
           }
-      });
+      };
+
+      // Initialize the draw control and pass it the FeatureGroup of editable layers
+      var drawControl = new L.Control.Draw(controlOptions);
       map.addControl(drawControl);
     }
   });
