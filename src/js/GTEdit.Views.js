@@ -12,9 +12,9 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     events: {
       'click .gt-tool-list'       : 'toggleList',
       'click .gt-tool-create'     : 'toggleNew',
-      'click .gt-tool-polygon'    : 'togglePolygon',
-      'click .gt-tool-distance'   : 'toggleDistance',
-      'click .gt-tool-drivetime'  : 'toggleDrivetime'
+      'click .gt-tool-polygon'    : 'polygon',
+      'click .gt-tool-radius'     : 'radius',
+      'click .gt-tool-drivetime'  : 'drivetime'
     },
 
     toggleList: function(e) {
@@ -39,19 +39,25 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       App.controlsRegion.$el.find('.gt-tool-create').toggleClass('active');
     },
 
-    togglePolygon: function(e) {
+    polygon: function(e) {
       e.preventDefault();
-      console.log('toggle polygon tool');
+      this._activateDrawTool('polygon');
     },
 
-    toggleDistance: function(e) {
+    radius: function(e) {
       e.preventDefault();
-      console.log('toggle distance tool');
+      this._activateDrawTool('radius');
     },
 
-    toggleDrivetime: function(e) {
+    drivetime: function(e) {
       e.preventDefault();
-      console.log('toggle drivetime tool');
+      this._activateDrawTool('drivetime');
+    },
+
+    _activateDrawTool: function(str) {
+      App.Draw[str]();
+      App.controlsRegion.$el.find('.gt-draw-tools .gt-tool').removeClass('active');
+      App.controlsRegion.$el.find('.gt-tool-' + str).addClass('active');
     }
   });
 
@@ -132,26 +138,26 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
       // Control Options
       var controlOptions = {
-          position: 'topright',
-          draw: {
-              polyline: false,
-              polygon: {
-                  allowIntersection: false, // Restricts shapes to simple polygons
-                  drawError: {
-                      //color: '#e1e100', // Color the shape will turn when intersects
-                      //message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
-                  },
-                  shapeOptions: {
-                      color: '#bada55'
-                  }
-              },
-              //circle: false, // Turns off this drawing tool
-              rectangle: false
+        position: 'topright',
+        draw: {
+          polyline: false,
+          polygon: {
+            allowIntersection: false, // Restricts shapes to simple polygons
+            drawError: {
+              //color: '#e1e100', // Color the shape will turn when intersects
+              //message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+            },
+            shapeOptions: {
+              color: '#bada55'
+            }
           },
-          edit: {
-              featureGroup: drawnItems //REQUIRED!!
-              //remove: false
-          }
+          //circle: false, // Turns off this drawing tool
+          rectangle: false
+        },
+        edit: {
+          featureGroup: drawnItems //REQUIRED!!
+          //remove: false
+        }
       };
 
       // Initialize the draw control and pass it the FeatureGroup of editable layers
