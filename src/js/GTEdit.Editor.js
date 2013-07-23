@@ -26,7 +26,7 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
     start: function() {
       this.showMap();
       this.showControls();
-      this.showDrawer();
+      this.setupDrawers();
 
       // this.triggerCollection.fetch();
     },
@@ -41,14 +41,19 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
       App.controlsRegion.show(controlsView);
     },
 
-    showDrawer: function() {
+    setupDrawers: function() {
       var drawerLayout = new App.Layout.Drawer();
       var listView = new App.Views.List();
       var editView = new App.Views.Edit();
+      var newView = new App.Views.New();
 
-      App.drawerRegion.show(drawerLayout);
+      // populate list drawer
+      App.listDrawerRegion.show(drawerLayout);
       drawerLayout.listRegion.show(listView);
       drawerLayout.editRegion.show(editView);
+
+      // populate new drawer
+      App.newDrawerRegion.show(newView);
     }
   });
 

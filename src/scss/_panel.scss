@@ -7,7 +7,7 @@
   bottom:0;
   background:#efefef;
   @include transition(transform 300ms ease-in);
-  &.gt-panel-active {
+  &.gt-panel-editing {
     @include transform(translate3D(-50%,0,0));
     @include transition(transform 300ms ease-in);
   }
@@ -21,8 +21,8 @@
   overflow-y:scroll;
   background-color:$lightest-gray;
 }
-.gt-panel-1 { left:0; }
-.gt-panel-2 { left:50%; }
+.gt-panel-list { left: 0; }
+.gt-panel-edit { left: 50%; }
 
 /* - - - - - - - - - - Panel Top Bar - - - - - - - - - - */
 .gt-panel-top-bar {
