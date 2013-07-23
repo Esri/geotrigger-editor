@@ -1,5 +1,6 @@
 /* - - - - - - - - - - Drawer - - - - - - - - - - */
 .gt-drawer {
+  @include box-shadow(1px 0 5px rgba(0,0,0,0.15));
   box-sizing:border-box;
   position:absolute;
   z-index:2;
@@ -8,7 +9,6 @@
   top:0;
   bottom:0;
   left:70px;
-  background-color:white;
   @include transform(translate3D(-100%,0,0));
   @include transition(transform 300ms ease-in);
   &.open {
