@@ -61,11 +61,16 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
           layer.editing.enable();
         }
 
+        Map.Draw.clear();
         Map.Draw.editLayer.addLayer(layer);
 
         App.controlsRegion.currentView.disableDrawTool();
-        App.controlsRegion.currentView.toggleNew();
+        App.controlsRegion.currentView.showNew();
       });
+    },
+
+    clear: function() {
+      Map.Draw.editLayer.clearLayers();
     },
 
     enableTool: function(str) {
