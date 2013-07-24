@@ -26,7 +26,7 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
           rectangle: false
         },
         edit: {
-          featureGroup: this.drawnItems //REQUIRED!!
+          featureGroup: this.drawnItems // REQUIRED!!
           // remove: false
         }
       };
@@ -60,9 +60,10 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
   _.extend(Map, {
     init: function(el) {
-      this.instance = L.map(el).setView([37.75,-122.45], 12);
+      // L.Icon.Default.imagePath = App.Config.imagePath;
+      this.instance = L.map(el).setView(App.Config.Map.center, App.Config.Map.zoom);
       this.instance.zoomControl.setPosition('topright');
-      L.esri.basemapLayer("Topographic").addTo(this.instance);
+      L.esri.basemapLayer(App.Config.Map.basemap).addTo(this.instance);
 
       this.Draw.init();
     },

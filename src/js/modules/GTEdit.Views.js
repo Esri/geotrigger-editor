@@ -24,8 +24,8 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       App.newDrawerRegion.currentView.closeDrawer();
 
       // toggle active state of list drawer
-      App.listDrawerRegion.$el.toggleClass('open');
-      App.controlsRegion.$el.find('.gt-tool-list').toggleClass('active');
+      App.listDrawerRegion.$el.toggleClass('gt-open');
+      App.controlsRegion.$el.find('.gt-tool-list').toggleClass('gt-active');
     },
 
     toggleNew: function(e) {
@@ -35,8 +35,8 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       App.listDrawerRegion.currentView.closeDrawer();
 
       // toggle active state of new drawer
-      App.newDrawerRegion.$el.toggleClass('open');
-      App.controlsRegion.$el.find('.gt-tool-create').toggleClass('active');
+      App.newDrawerRegion.$el.toggleClass('gt-open');
+      App.controlsRegion.$el.find('.gt-tool-create').toggleClass('gt-active');
     },
 
     polygon: function(e) {
@@ -56,8 +56,8 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
     _activateDrawTool: function(str) {
       App.Map.Draw[str]();
-      App.controlsRegion.$el.find('.gt-draw-tools .gt-tool').removeClass('active');
-      App.controlsRegion.$el.find('.gt-tool-' + str).addClass('active');
+      App.controlsRegion.$el.find('.gt-draw-tools .gt-tool').removeClass('gt-active');
+      App.controlsRegion.$el.find('.gt-tool-' + str).addClass('gt-active');
     }
   });
 
@@ -113,8 +113,8 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
         e.preventDefault();
       }
 
-      App.newDrawerRegion.$el.removeClass('open');
-      App.controlsRegion.$el.find('.gt-tool-create').removeClass('active');
+      App.newDrawerRegion.$el.removeClass('gt-open');
+      App.controlsRegion.$el.find('.gt-tool-create').removeClass('gt-active');
     }
   });
 
