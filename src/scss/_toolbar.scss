@@ -1,5 +1,5 @@
 /* - - - - - - - - - - Left Toolbar - - - - - - - - - - */
-#gt-controls {
+#gt-controls-region {
   position:absolute;
   z-index:3;
   width:70px;
@@ -46,7 +46,7 @@
         opacity:0.3;
       }
     }
-    &.active {
+    &.gt-active {
       opacity:1;
       @include transition(opacity 200ms linear);
       &:before {

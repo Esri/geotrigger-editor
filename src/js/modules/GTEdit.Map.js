@@ -63,7 +63,7 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       // L.Icon.Default.imagePath = App.Config.imagePath;
       this.instance = L.map(el).setView(App.Config.Map.center, App.Config.Map.zoom);
       this.instance.zoomControl.setPosition('topright');
-      L.esri.basemapLayer("Topographic").addTo(this.instance);
+      L.esri.basemapLayer(App.Config.Map.basemap).addTo(this.instance);
 
       this.Draw.init();
     },
