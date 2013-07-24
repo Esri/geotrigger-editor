@@ -27,11 +27,7 @@ module.exports = function(grunt) {
       dist: {
         src: [
           'js/GTEdit.js',
-          'js/GTEdit.Models.js',
-          'js/GTEdit.Views.js',
-          'js/GTEdit.Layout.js',
-          'js/GTEdit.Editor.js',
-          'js/GTEdit.Map.js'
+          'js/modules/*.js'
         ],
         dest: 'dist/js/<%= pkg.name %>.min.js'
       }

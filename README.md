@@ -80,7 +80,7 @@ Testing requires PhantomJS to be running. You can get it started by running `pha
 
 1. `grunt test`
 
-  This task will start a test server at `localhost:8080`, then run the jshint, complexity, and cucumber tasks to see if the code does not smell.
+  This task will start a test server at `localhost:8081`, then run the jshint, complexity, and cucumber tasks to see if the code does not smell.
 
 2. `grunt dev`
 
