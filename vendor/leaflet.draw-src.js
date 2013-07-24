@@ -2005,6 +2005,8 @@ L.Tooltip = L.Class.extend({
 		var pos = this._map.latLngToLayerPoint(latlng);
 
 		L.DomUtil.setPosition(this._container, pos);
+		// this._container.style.display="inline-block";
+		//console.log(this._container);
 
 		return this;
 	},
