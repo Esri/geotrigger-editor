@@ -43,6 +43,15 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       App.controlsRegion.$el.find('.gt-tool-create').toggleClass('gt-active');
     },
 
+    showNew: function(e) {
+      // make sure list drawer is closed
+      App.listDrawerRegion.currentView.closeDrawer();
+
+      // toggle active state of new drawer
+      App.newDrawerRegion.$el.addClass('gt-open');
+      App.controlsRegion.$el.find('.gt-tool-create').addClass('gt-active');
+    },
+
     polygon: function(e) {
       e.preventDefault();
       this.enableDrawTool('polygon');
@@ -124,6 +133,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
         e.preventDefault();
       }
 
+      App.Map.Draw.clear();
       App.newDrawerRegion.$el.removeClass('gt-open');
       App.controlsRegion.$el.find('.gt-tool-create').removeClass('gt-active');
     }
