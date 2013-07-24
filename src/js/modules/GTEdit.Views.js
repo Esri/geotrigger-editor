@@ -18,7 +18,9 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     },
 
     toggleList: function(e) {
-      e.preventDefault();
+      if (typeof e !== 'undefined' && e.preventDefault) {
+        e.preventDefault();
+      }
 
       // make sure new drawer is closed
       App.newDrawerRegion.currentView.closeDrawer();
@@ -29,7 +31,9 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     },
 
     toggleNew: function(e) {
-      e.preventDefault();
+      if (typeof e !== 'undefined' && e.preventDefault) {
+        e.preventDefault();
+      }
 
       // make sure list drawer is closed
       App.listDrawerRegion.currentView.closeDrawer();
@@ -39,25 +43,41 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       App.controlsRegion.$el.find('.gt-tool-create').toggleClass('gt-active');
     },
 
+    showNew: function(e) {
+      // make sure list drawer is closed
+      App.listDrawerRegion.currentView.closeDrawer();
+
+      // toggle active state of new drawer
+      App.newDrawerRegion.$el.addClass('gt-open');
+      App.controlsRegion.$el.find('.gt-tool-create').addClass('gt-active');
+    },
+
     polygon: function(e) {
       e.preventDefault();
-      this._activateDrawTool('polygon');
+      this.enableDrawTool('polygon');
     },
 
     radius: function(e) {
       e.preventDefault();
-      this._activateDrawTool('radius');
+      this.enableDrawTool('radius');
     },
 
     drivetime: function(e) {
       e.preventDefault();
-      this._activateDrawTool('drivetime');
+      this.enableDrawTool('drivetime');
     },
 
-    _activateDrawTool: function(str) {
-      App.Map.Draw[str]();
-      App.controlsRegion.$el.find('.gt-draw-tools .gt-tool').removeClass('gt-active');
+    enableDrawTool: function(str) {
+      App.Map.Draw.enableTool(str);
+      this.disableDrawTool();
       App.controlsRegion.$el.find('.gt-tool-' + str).addClass('gt-active');
+    },
+
+    disableDrawTool: function(str) {
+      if (str) {
+        App.Map.Draw.disableTool(str);
+      }
+      App.controlsRegion.$el.find('.gt-draw-tools .gt-tool').removeClass('gt-active');
     }
   });
 
@@ -113,6 +133,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
         e.preventDefault();
       }
 
+      App.Map.Draw.clear();
       App.newDrawerRegion.$el.removeClass('gt-open');
       App.controlsRegion.$el.find('.gt-tool-create').removeClass('gt-active');
     }
