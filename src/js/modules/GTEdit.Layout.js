@@ -32,8 +32,8 @@ GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
       if (typeof e !== 'undefined' && e.preventDefault) {
         e.preventDefault();
       }
-      App.listDrawerRegion.$el.removeClass('open');
-      App.controlsRegion.$el.find('.gt-tool-list').removeClass('active');
+      App.listDrawerRegion.$el.removeClass('gt-open');
+      App.controlsRegion.$el.find('.gt-tool-list').removeClass('gt-active');
     }
   });
 
