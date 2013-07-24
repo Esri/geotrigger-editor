@@ -1,12 +1,18 @@
 GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
   var Draw = {
-    drawnItems: null,
+    editLayer: null,
+
+    tools: {
+      polygon: null,
+      radius: null,
+      drivetime: null
+    },
 
     init: function() {
       // Initialize the FeatureGroup to store editable layers
-      this.drawnItems = new L.FeatureGroup();
-      Map.instance.addLayer(this.drawnItems);
+      this.editLayer = new L.FeatureGroup();
+      Map.instance.addLayer(this.editLayer);
 
       var controlOptions = {
         position: 'topright',
@@ -26,7 +32,7 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
           rectangle: false
         },
         edit: {
-          featureGroup: this.drawnItems // REQUIRED!!
+          featureGroup: this.editLayer // REQUIRED!!
           // remove: false
         }
       };
@@ -35,45 +41,59 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       // var drawControl = new L.Control.Draw(controlOptions);
       // Map.instance.addControl(drawControl);
 
-      this._polygon = new L.Draw.Polygon(Map.instance);
-      this._radius = new L.Draw.Circle(Map.instance);
-      this._drivetime = new L.Draw.Marker(Map.instance);
+      this.tools.polygon = new L.Draw.Polygon(Map.instance);
+      this.tools.radius = new L.Draw.Circle(Map.instance);
+      this.tools.drivetime = new L.Draw.Marker(Map.instance);
 
       Map.instance.on('draw:created', function(e) {
         var type = e.layerType;
         var layer = e.layer;
 
         console.log(e);
+        // layer.bindPopup(type);
 
-        layer.bindPopup(type);
+        if (type === 'marker') {
+          layer.options.draggable = true;
+          layer.on('dragend', function(){
+            console.log('recalculate drivetime', [this._latlng.lat, this._latlng.lng]);
+          });
+        } else {
+          layer.editing.enable();
+        }
 
-        Map.Draw.drawnItems.addLayer(layer);
+        Map.Draw.clear();
+        Map.Draw.editLayer.addLayer(layer);
+
+        App.controlsRegion.currentView.disableDrawTool();
+        App.controlsRegion.currentView.showNew();
       });
     },
 
-    polygon: function() {
-      this._radius.disable();
-      this._drivetime.disable();
-      this._polygon.enable();
+    clear: function() {
+      Map.Draw.editLayer.clearLayers();
     },
 
-    _polygon: null,
-
-    radius: function() {
-      this._polygon.disable();
-      this._drivetime.disable();
-      this._radius.enable();
+    enableTool: function(str) {
+      for (var prop in this.tools) {
+        if (this.tools.hasOwnProperty(prop)) {
+          if (prop === str) {
+            this.tools[prop].enable();
+          } else {
+            this.tools[prop].disable();
+          }
+        }
+      }
     },
 
-    _radius: null,
-
-    drivetime: function() {
-      this._radius.disable();
-      this._polygon.disable();
-      this._drivetime.enable();
-    },
-
-    _drivetime: null
+    disableTool: function(str) {
+      for (var prop in this.tools) {
+        if (this.tools.hasOwnProperty(prop)) {
+          if (typeof str === 'undefined' || prop === str) {
+            this.tools[prop].disable();
+          }
+        }
+      }
+    }
   };
 
   _.extend(Map, {
