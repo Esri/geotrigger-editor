@@ -68,8 +68,8 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     },
 
     enableDrawTool: function(str) {
-      App.Map.Draw.enableTool(str);
       this.disableDrawTool();
+      App.Map.Draw.enableTool(str);
       App.controlsRegion.$el.find('.gt-tool-' + str).addClass('gt-active');
     },
 
