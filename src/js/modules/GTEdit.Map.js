@@ -32,12 +32,18 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       };
 
       // Initialize the draw control and pass it the FeatureGroup of editable layers
-      var drawControl = new L.Control.Draw(controlOptions);
-      Map.instance.addControl(drawControl);
+      // var drawControl = new L.Control.Draw(controlOptions);
+      // Map.instance.addControl(drawControl);
+
+      this._polygon = new L.Draw.Polygon(Map.instance);
+      this._radius = new L.Draw.Circle(Map.instance);
+      this._drivetime = new L.Draw.Marker(Map.instance);
 
       Map.instance.on('draw:created', function(e) {
         var type = e.layerType;
         var layer = e.layer;
+
+        console.log(e);
 
         layer.bindPopup(type);
 
@@ -46,16 +52,28 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
     },
 
     polygon: function() {
-      console.log("give me the polygon tool for a second");
+      this._radius.disable();
+      this._drivetime.disable();
+      this._polygon.enable();
     },
+
+    _polygon: null,
 
     radius: function() {
-      console.log("give me the radius tool for a second");
+      this._polygon.disable();
+      this._drivetime.disable();
+      this._radius.enable();
     },
 
+    _radius: null,
+
     drivetime: function() {
-      console.log("give me the drivetime tool for a second");
-    }
+      this._radius.disable();
+      this._polygon.disable();
+      this._drivetime.enable();
+    },
+
+    _drivetime: null
   };
 
   _.extend(Map, {
