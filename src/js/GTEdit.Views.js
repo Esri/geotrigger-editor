@@ -55,7 +55,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     },
 
     _activateDrawTool: function(str) {
-      App.Draw[str]();
+      App.Map.Draw[str]();
       App.controlsRegion.$el.find('.gt-draw-tools .gt-tool').removeClass('active');
       App.controlsRegion.$el.find('.gt-tool-' + str).addClass('active');
     }
@@ -124,45 +124,22 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
   // Manages the esri-leaflet map.
 
   Views.Map = Marionette.ItemView.extend({
-    template: 'map',
     id: 'gt-map',
 
+    render: function() {
+      this.isClosed = false;
+
+      this.triggerMethod("before:render", this);
+      this.triggerMethod("item:before:render", this);
+
+      this.triggerMethod("render", this);
+      this.triggerMethod("item:rendered", this);
+
+      return this;
+    },
+
     onShow: function() {
-      var map = L.map(this.el).setView([37.75,-122.45], 12);
-      map.zoomControl.setPosition('topright');
-      L.esri.basemapLayer("Topographic").addTo(map);
-
-      // Initialize the FeatureGroup to store editable layers
-      var drawnItems = new L.FeatureGroup();
-      map.addLayer(drawnItems);
-
-      // Control Options
-      var controlOptions = {
-        position: 'topright',
-        draw: {
-          polyline: false,
-          polygon: {
-            allowIntersection: false, // Restricts shapes to simple polygons
-            drawError: {
-              //color: '#e1e100', // Color the shape will turn when intersects
-              //message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
-            },
-            shapeOptions: {
-              color: '#bada55'
-            }
-          },
-          //circle: false, // Turns off this drawing tool
-          rectangle: false
-        },
-        edit: {
-          featureGroup: drawnItems //REQUIRED!!
-          //remove: false
-        }
-      };
-
-      // Initialize the draw control and pass it the FeatureGroup of editable layers
-      var drawControl = new L.Control.Draw(controlOptions);
-      map.addControl(drawControl);
+      App.Map.init(this.el);
     }
   });
 
