@@ -17,6 +17,7 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
 
   Editor.Controller = function() {
     this.triggerCollection = new App.Triggers.Collection();
+    this.triggerCollection.add(new App.Triggers.Model());
   };
 
   _.extend(Editor.Controller.prototype, {
@@ -26,7 +27,7 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
     start: function() {
       this.showMap();
       this.showControls();
-      this.setupDrawers();
+      this.setupDrawers(this.triggerCollection);
 
       // this.triggerCollection.fetch();
     },
@@ -41,9 +42,9 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
       App.controlsRegion.show(controlsView);
     },
 
-    setupDrawers: function() {
+    setupDrawers: function(triggers) {
       var drawerLayout = new App.Layout.Drawer();
-      var listView = new App.Views.List();
+      var listView = new App.Views.List({ collection: triggers });
       var editView = new App.Views.Edit();
       var newView = new App.Views.New();
 

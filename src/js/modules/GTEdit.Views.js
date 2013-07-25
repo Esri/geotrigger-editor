@@ -68,8 +68,8 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     },
 
     enableDrawTool: function(str) {
-      App.Map.Draw.enableTool(str);
       this.disableDrawTool();
+      App.Map.Draw.enableTool(str);
       App.controlsRegion.$el.find('.gt-tool-' + str).addClass('gt-active');
     },
 
@@ -81,19 +81,6 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     }
   });
 
-  // Trigger List View
-  // -----------------
-  //
-  // Controls the rendering of the list of items, including the
-  // filtering of activs vs completed items for display.
-
-  Views.List = Backbone.Marionette.CompositeView.extend({
-    template: 'list',
-    className: 'gt-list',
-    itemView: Views.ListItem,
-    itemViewContainer: '.gt-result'
-  });
-
   // Trigger List Item View
   // ----------------------
   //
@@ -103,6 +90,28 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     template: 'item',
     tagName: 'li',
     className: 'gt-result'
+  });
+
+  // Trigger List Empty View
+  // ----------------------
+  //
+  // Displays some helpful information when no triggers are found.
+
+  Views.Empty = Marionette.ItemView.extend({
+    template: 'empty'
+  });
+
+  // Trigger List View
+  // -----------------
+  //
+  // Controls the rendering of the list of items, including the
+  // filtering of activs vs completed items for display.
+
+  Views.List = Marionette.CompositeView.extend({
+    template: 'list',
+    className: 'gt-list',
+    itemView: Views.ListItem,
+    itemViewContainer: '.gt-results'
   });
 
   // Trigger Edit View
