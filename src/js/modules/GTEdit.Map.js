@@ -20,15 +20,31 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
           polyline: false,
           polygon: {
             allowIntersection: false, // Restricts shapes to simple polygons
-            // drawError: {
-            //   color: '#e1e100', // Color the shape will turn when intersects
-            //   message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
-            // },
+            drawError: {
+              color: '#e1e100', // Color the shape will turn when intersects
+              message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
+            },
             shapeOptions: {
-              color: '#bada55'
+              stroke: true,
+              color: '#000000',
+              weight: 4,
+              opacity: 0.5,
+              fill: true,
+              fillColor: null, //same as color by default
+              fillOpacity: 0.2,
+              clickable: true
             }
           },
-          // circle: false, // Turns off this drawing tool
+          circle: {
+              stroke: true,
+              color: '#000000',
+              weight: 4,
+              opacity: 0.5,
+              fill: true,
+              fillColor: null, //same as color by default
+              fillOpacity: 0.2,
+              clickable: true
+          },
           rectangle: false
         },
         edit: {

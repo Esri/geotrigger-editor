@@ -7,7 +7,10 @@ GTEdit.module('Config', function(Config, App, Backbone, Marionette, $, _) {
       center: [45.516484,-122.676339],
       zoom: 12
     },
-
+    // shape properties
+    symbolStroke: '',
+    symbolFill: '',
+    markerUrl: '',
     imagePath: '/images'
 
   });
