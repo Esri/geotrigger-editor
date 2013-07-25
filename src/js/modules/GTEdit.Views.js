@@ -92,7 +92,6 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     className: 'gt-result',
 
     onShow: function() {
-      console.log('hi item');
       App.listDrawerRegion.$el.find('.gt-list-header').removeClass('gt-hide');
     }
   });
@@ -107,8 +106,6 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     className: 'gt-list-empty',
 
     onShow: function() {
-      console.log('hi empty');
-      console.log(App.listDrawerRegion.$el.find('.gt-list-header'));
       App.listDrawerRegion.$el.find('.gt-list-header').addClass('gt-hide');
     }
   });
@@ -124,11 +121,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     className: 'gt-list',
     itemView: Views.ListItem,
     itemViewContainer: '.gt-results',
-    emptyView: Views.Empty,
-
-    onRender: function() {
-      console.log(this.collection.length);
-    }
+    emptyView: Views.Empty
   });
 
   // Trigger Edit View
