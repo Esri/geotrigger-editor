@@ -9,16 +9,16 @@ a.gt-tooltip {
     @include box-shadow(0 0 12px rgba(0,0,0,0.2));
     padding: 14px 20px;
     margin-top: -50px;
-    margin-left: 114%;
+    margin-left: 100%;
     width: auto;
     white-space: nowrap;
     background-color: $green;
     position:absolute;
-    @include transform(translate3d(-12px,0,0));
+    @include transform(translate3d(8px,0,0));
     @include transition(all 200ms linear);
     &:before {
       content: "";
-      display:block;
+      display:inline-block;
       width:0;
       height:0;
       border-right:8px solid $green;
@@ -34,12 +34,12 @@ a.gt-tooltip {
     display:inline;
     opacity: 1;
     visibility: visible;
-    @include transform(translate3d(0,0,0));
+    @include transform(translate3d(16px,0,0));
     @include transition(all 200ms linear);
     &:hover {
       visibility: hidden;
       opacity:0;
-      @include transform(translate3d(-12px,0,0));
+      @include transform(translate3d(8px,0,0));
       @include transition(all 200ms linear);
     }
   }
