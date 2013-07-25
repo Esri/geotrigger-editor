@@ -8,7 +8,6 @@ GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
     className: 'gt-panel-wrap',
 
     events: {
-      'click .gt-result'       : 'editItem',
       'click .gt-back-to-list' : 'backToList',
       'click .gt-close-drawer' : 'closeDrawer'
     },
@@ -16,11 +15,6 @@ GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
     regions: {
       listRegion : '.gt-panel-list',
       editRegion : '.gt-panel-edit'
-    },
-
-    editItem: function(e) {
-      e.preventDefault();
-      this.$el.addClass('gt-panel-editing');
     },
 
     backToList: function(e) {
