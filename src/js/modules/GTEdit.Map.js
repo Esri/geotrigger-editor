@@ -14,58 +14,16 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       this.editLayer = new L.FeatureGroup();
       Map.instance.addLayer(this.editLayer);
 
-      var controlOptions = {
-        position: 'topright',
-        draw: {
-          polyline: false,
-          polygon: {
-            allowIntersection: false, // Restricts shapes to simple polygons
-            drawError: {
-              color: '#e1e100', // Color the shape will turn when intersects
-              message: '<strong>Oh snap!<strong> you can\'t draw that!' // Message that will show when intersect
-            },
-            shapeOptions: {
-              stroke: true,
-              color: '#000000',
-              weight: 4,
-              opacity: 0.5,
-              fill: true,
-              fillColor: null, //same as color by default
-              fillOpacity: 0.2,
-              clickable: true
-            }
-          },
-          circle: {
-              stroke: true,
-              color: '#000000',
-              weight: 4,
-              opacity: 0.5,
-              fill: true,
-              fillColor: null, //same as color by default
-              fillOpacity: 0.2,
-              clickable: true
-          },
-          rectangle: false
-        },
-        edit: {
-          featureGroup: this.editLayer // REQUIRED!!
-          // remove: false
-        }
-      };
+      //Initialize new Draw Handlers
+      this.tools.polygon = new L.Draw.Polygon(Map.instance, App.Config.polygonOptions);
+      this.tools.radius = new L.Draw.Circle(Map.instance, App.Config.circleOptions);
+      this.tools.drivetime = new L.Draw.Marker(Map.instance, App.Config.drivetimeOptions);
 
-      // Initialize the draw control and pass it the FeatureGroup of editable layers
-      // var drawControl = new L.Control.Draw(controlOptions);
-      // Map.instance.addControl(drawControl);
-
-      this.tools.polygon = new L.Draw.Polygon(Map.instance);
-      this.tools.radius = new L.Draw.Circle(Map.instance);
-      this.tools.drivetime = new L.Draw.Marker(Map.instance);
-
+      //Draw Created Event, fires once at the end of draw
       Map.instance.on('draw:created', function(e) {
         var type = e.layerType;
         var layer = e.layer;
 
-        console.log(e);
         // layer.bindPopup(type);
 
         if (type === 'marker') {
