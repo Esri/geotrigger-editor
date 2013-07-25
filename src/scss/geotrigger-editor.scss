@@ -8,6 +8,7 @@
 @import "base/tooltips";
 
 //STRUCTURE
+@import "helpers";
 @import "toolbar";
 @import "drawer";
 @import "panel";
@@ -20,7 +21,7 @@
   bottom:0;
   left:0;
 }
-.gt-container{
+.gt-container {
   box-sizing:border-box;
   position:absolute;
   z-index:2;

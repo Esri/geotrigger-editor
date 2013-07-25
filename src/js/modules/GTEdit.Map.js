@@ -1,5 +1,8 @@
 GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
+  // Draw Submodule
+  // --------------
+
   var Draw = {
     editLayer: null,
 
@@ -8,6 +11,9 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       radius: null,
       drivetime: null
     },
+
+    // Draw Layer initializer
+    // ----------------------
 
     init: function() {
       // Initialize the FeatureGroup to store editable layers
@@ -49,7 +55,6 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
         var type = e.layerType;
         var layer = e.layer;
 
-        console.log(e);
         // layer.bindPopup(type);
 
         if (type === 'marker') {
@@ -87,7 +92,14 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
     }
   };
 
+  // Map Module
+  // ----------
+
   _.extend(Map, {
+
+    // Map Initializer
+    // ---------------
+
     init: function(el) {
       // L.Icon.Default.imagePath = App.Config.imagePath;
       this.instance = L.map(el).setView(App.Config.Map.center, App.Config.Map.zoom);
