@@ -1,5 +1,5 @@
 {
-  triggers: [
+  "triggers": [
     {
       "triggerId":"6fd01180fa1a012f27f1705681b27197",
       "condition": {
@@ -17,10 +17,10 @@
         }
       },
       "action": {
-        message: "Welcome to Portland - The Mayor",
-        callback: "http://pdx.gov/welcome"
+        "message": "Welcome to Portland - The Mayor",
+        "callback": "http://pdx.gov/welcome"
       },
-      tags: ["portland", "citygreetings", "enter", "distance"],
+      "tags": ["portland", "citygreetings", "enter", "distance"]
     },
     {
       "triggerId":"6fd01180fa1a012f27f1705681b27197",
@@ -42,9 +42,9 @@
         }
       },
       "action": {
-        message: "You left a polygon in portland"
+        "message": "You left a polygon in portland"
       },
-      tags: ["portland", "byebye", "leaving"],
+      "tags": ["portland", "byebye", "leaving"]
     },
     {
       "triggerId":"6fd01180fa1a012f27f1705681b27197",
@@ -62,9 +62,9 @@
         }
       },
       "action": {
-        message: "In Portland Again"
+        "message": "In Portland Again"
       },
-      tags: ["foodcarts", "citygreetings"],
+      "tags": ["foodcarts", "citygreetings"]
     }
 
   ],

@@ -89,7 +89,12 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
   Views.ListItem = Marionette.ItemView.extend({
     template: 'item',
     tagName: 'li',
-    className: 'gt-result'
+    className: 'gt-result',
+
+    onShow: function() {
+      console.log('hi item');
+      App.listDrawerRegion.$el.find('.gt-list-header').removeClass('gt-hide');
+    }
   });
 
   // Trigger List Empty View
@@ -98,7 +103,14 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
   // Displays some helpful information when no triggers are found.
 
   Views.Empty = Marionette.ItemView.extend({
-    template: 'empty'
+    template: 'empty',
+    className: 'gt-list-empty',
+
+    onShow: function() {
+      console.log('hi empty');
+      console.log(App.listDrawerRegion.$el.find('.gt-list-header'));
+      App.listDrawerRegion.$el.find('.gt-list-header').addClass('gt-hide');
+    }
   });
 
   // Trigger List View
@@ -111,7 +123,12 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     template: 'list',
     className: 'gt-list',
     itemView: Views.ListItem,
-    itemViewContainer: '.gt-results'
+    itemViewContainer: '.gt-results',
+    emptyView: Views.Empty,
+
+    onRender: function() {
+      console.log(this.collection.length);
+    }
   });
 
   // Trigger Edit View
