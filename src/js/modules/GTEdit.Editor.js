@@ -30,13 +30,13 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
 
       this.triggerCollection.fetch({
         success: function(collection, response, options) {
-          console.log('success', arguments);
+          // console.log('success', arguments);
         },
         error: function(collection, response, options) {
-          console.log('error', arguments);
+          // console.log('error', arguments);
         },
         complete: function(xhr, textStatus) {
-          console.log(textStatus);
+          // console.log(textStatus);
         }
       });
     },
