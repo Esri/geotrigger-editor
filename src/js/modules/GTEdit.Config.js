@@ -49,16 +49,6 @@ GTEdit.module('Config', function(Config, App, Backbone, Marionette, $, _) {
         shadowSize: [0, 0],
         shadowAnchor: [0, 0]
       })
-    },
-    editModeOptions: {
-      moveIcon: new L.DivIcon({
-        iconSize: new L.Point(4, 4),
-        className: 'leaflet-div-icon leaflet-editing-icon leaflet-edit-move'
-      }),
-      resizeIcon: new L.DivIcon({
-        iconSize: new L.Point(4, 4),
-        className: 'leaflet-div-icon leaflet-editing-icon leaflet-edit-resize'
-      })
     }
 
   });
