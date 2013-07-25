@@ -16,4 +16,11 @@ button, .gt-button {
       @include transition(background-color 200ms linear);
     }
   }
+  &.gt-button-red {
+    background-color:$red;
+    &:hover {
+      background-color: darken($red, 10%);
+      @include transition(background-color 200ms linear);
+    }
+  }
 }
