@@ -49,6 +49,31 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       });
     },
 
+    addSymbol: function(model) {
+    },
+
+    _polygon: function(geo) {
+      var polygon = L.polygon([[45.526484, -122.666339],[45.516484, -122.676339],[45.526484, -122.696339]], {
+        stroke: true,
+        color: 'red',
+        weight: 2,
+        fillColor: '#f03',
+        fillOpacity: 0.5
+      }).addTo(Map.instance);
+    },
+
+    _drivetime: function(geo){
+      //draw the drivetime shape
+    },
+
+    _radius: function(geo){
+      var circle = L.circle([45.516484,-122.676339], 500, {
+          color: 'red',
+          fillColor: '#f03',
+          fillOpacity: 0.5
+      }).addTo(Map.instance);
+    },
+
     clear: function() {
       Map.Draw.editLayer.clearLayers();
     },
@@ -65,6 +90,7 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
         }
       }
     }
+
   };
 
   // Map Module

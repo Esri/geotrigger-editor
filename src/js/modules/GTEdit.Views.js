@@ -93,6 +93,8 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
     onShow: function() {
       App.listDrawerRegion.$el.find('.gt-list-header').removeClass('gt-hide');
+      App.Map.Draw._radius();
+      App.Map.Draw._polygon();
     }
   });
 
