@@ -81,19 +81,6 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     }
   });
 
-  // Trigger List View
-  // -----------------
-  //
-  // Controls the rendering of the list of items, including the
-  // filtering of activs vs completed items for display.
-
-  Views.List = Marionette.CompositeView.extend({
-    template: 'list',
-    className: 'gt-list',
-    itemView: Views.ListItem,
-    itemViewContainer: '.gt-results'
-  });
-
   // Trigger List Item View
   // ----------------------
   //
@@ -112,6 +99,19 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
   Views.Empty = Marionette.ItemView.extend({
     template: 'empty'
+  });
+
+  // Trigger List View
+  // -----------------
+  //
+  // Controls the rendering of the list of items, including the
+  // filtering of activs vs completed items for display.
+
+  Views.List = Marionette.CompositeView.extend({
+    template: 'list',
+    className: 'gt-list',
+    itemView: Views.ListItem,
+    itemViewContainer: '.gt-results'
   });
 
   // Trigger Edit View

@@ -74,23 +74,14 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
     },
 
     enableTool: function(str) {
-      for (var prop in this.tools) {
-        if (this.tools.hasOwnProperty(prop)) {
-          if (prop === str) {
-            this.tools[prop].enable();
-          } else {
-            this.tools[prop].disable();
-          }
-        }
-      }
+      this.disableTool();
+      this.tools[str].enable();
     },
 
     disableTool: function(str) {
-      for (var prop in this.tools) {
-        if (this.tools.hasOwnProperty(prop)) {
-          if (typeof str === 'undefined' || prop === str) {
-            this.tools[prop].disable();
-          }
+      for (var i in this.tools) {
+        if (typeof str === 'undefined' || i === str) {
+          this.tools[i].disable();
         }
       }
     }
