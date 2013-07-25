@@ -131,3 +131,54 @@
     overflow-x: scroll;
   }
 }
+
+/* - - - - - - - - - - No Triggers - Getting Started - - - - - - - - - - */
+.gt-panel-no-triggers {
+  width:100%;
+  padding:1em 2em 1em 2em;
+  border-bottom:1px solid $light-gray;
+  @include box-sizing(border-box);
+  overflow:hidden;
+  position:relative;
+  text-align: center;
+}
+.gt-tool-description {
+  width:100%;
+  padding:1em 2em 1em 60px;
+  border-bottom:1px solid $light-gray;
+  @include box-sizing(border-box);
+  overflow:hidden;
+  position:relative;
+  h5 {
+    line-height: 1.5em;
+    vertical-align: top;
+    margin-bottom: 0.5em;
+    a {
+      color: $dark-gray;
+      text-decoration: none;
+      @include transition(color 100ms linear);
+      &:hover {
+        @include transition(color 100ms linear);
+        color: $green;
+      }
+    }
+  }
+  p {
+    line-height: 1.25em;
+  }
+  .gt-icon {
+    width:40px;
+    height:40px;
+    display:inline-block;
+    // background: url('/dist/img/icons/enter-polygon.png') no-repeat center center transparent;
+    // background-size: 40px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    margin-top: -20px;
+  }
+  .gt-icon-create {background:url('/dist/img/icons/create-dark.png') no-repeat center center; background-size:36px;}
+  .gt-icon-polygon {background:url('/dist/img/icons/polygon-dark.png') no-repeat center center; background-size:24px;}
+  .gt-icon-radius {background:url('/dist/img/icons/radius-dark.png') no-repeat center center; background-size:24px;}
+  .gt-icon-drivetime {background:url('/dist/img/icons/drivetime-dark.png') no-repeat center center; background-size:24px;}
+}
