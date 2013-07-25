@@ -1,0 +1,77 @@
+{
+  triggers: [
+    {
+      "triggerId":"6fd01180fa1a012f27f1705681b27197",
+      "condition": {
+        "direction": "enter",
+        "geo": {
+          "latitude": 45.5165,
+          "longitude": -122.6764,
+          "distance": 120,
+          "context": {
+            "locality": "Portland",
+            "region": "Oregon",
+            "country": "USA",
+            "zipcode": "97204"
+          }
+        }
+      },
+      "action": {
+        message: "Welcome to Portland - The Mayor",
+        callback: "http://pdx.gov/welcome"
+      },
+      tags: ["portland", "citygreetings", "enter", "distance"],
+    },
+    {
+      "triggerId":"6fd01180fa1a012f27f1705681b27197",
+      "condition": {
+        "direction": "exit",
+        "geo": {
+          "geometry": {
+            "type": "Polygon",
+            "coordinates": [
+                [ [-122.65, 45.55], [-122.65, 45.50], [-122.62, 45.50], [-122.62, 45.55], [-122.65, 45.55] ]
+            ]
+          },
+          "context": {
+            "locality": "Portland",
+            "region": "Oregon",
+            "country": "USA",
+            "zipcode": "97201"
+          }
+        }
+      },
+      "action": {
+        message: "You left a polygon in portland"
+      },
+      tags: ["portland", "byebye", "leaving"],
+    },
+    {
+      "triggerId":"6fd01180fa1a012f27f1705681b27197",
+      "condition": {
+        "direction": "enter",
+        "geo": {
+          "geocode": "222 SW Clay St, Portland, OR",
+          "driveTime": 600,
+          "context": {
+            "locality": "Portland",
+            "region": "Oregon",
+            "country": "USA",
+            "zipcode": "97201"
+          }
+        }
+      },
+      "action": {
+        message: "In Portland Again"
+      },
+      tags: ["foodcarts", "citygreetings"],
+    }
+
+  ],
+  "boundingBox":{
+    "xmin": -122.68,
+    "ymin": 45.53,
+    "xmax": -122.45,
+    "ymax": 45.6
+  }
+}
