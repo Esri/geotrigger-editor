@@ -15,12 +15,11 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
   // Control the workflow and logic that exists at the application
   // level, above the implementation detail of views and models
 
-  Editor.Controller = function() {
+  var Controller = function() {
     this.triggerCollection = new App.Triggers.Collection();
-    this.triggerCollection.add(new App.Triggers.Model());
   };
 
-  _.extend(Editor.Controller.prototype, {
+  _.extend(Controller.prototype, {
 
     // Start the app by showing the appropriate views
     // and fetching the list of items, if there are any
@@ -29,7 +28,17 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
       this.showControls();
       this.setupDrawers(this.triggerCollection);
 
-      // this.triggerCollection.fetch();
+      this.triggerCollection.fetch({
+        success: function(collection, response, options) {
+          // console.log('success', arguments);
+        },
+        error: function(collection, response, options) {
+          // console.log('error', arguments);
+        },
+        complete: function(xhr, textStatus) {
+          // console.log(textStatus);
+        }
+      });
     },
 
     showMap: function() {
@@ -45,6 +54,7 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
     setupDrawers: function(triggers) {
       var drawerLayout = new App.Layout.Drawer();
       var listView = new App.Views.List({ collection: triggers });
+      var emptyView = new App.Views.Empty();
       var editView = new App.Views.Edit();
       var newView = new App.Views.New();
 
@@ -55,6 +65,9 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
 
       // populate new drawer
       App.newDrawerRegion.show(newView);
+
+      // open list drawer
+      App.listDrawerRegion.$el.addClass('gt-open');
     }
   });
 
@@ -66,12 +79,12 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
   // existing geotriggers and displaying them.
 
   Editor.addInitializer(function() {
-    var controller = new Editor.Controller();
+    Editor.Controller = new Controller();
     new Editor.Router({
-      controller: controller
+      controller: Editor.Controller
     });
 
-    controller.start();
+    Editor.Controller.start();
   });
 
 });

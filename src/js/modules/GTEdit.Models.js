@@ -38,7 +38,12 @@ GTEdit.module('Triggers', function(Triggers, App, Backbone, Marionette, $, _) {
   // ------------------
 
   Triggers.Collection = Backbone.Collection.extend({
-    model: Triggers.Model
+    model: Triggers.Model,
+    url: '/dev/js/response.json',
+
+    parse: function(response) {
+      return response.triggers;
+    }
 
     // override sync method to use geotrigger API
     // sync: function(method, model, options) {}
