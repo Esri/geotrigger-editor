@@ -28,6 +28,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       // toggle active state of list drawer
       App.listDrawerRegion.$el.toggleClass('gt-open');
       App.controlsRegion.$el.find('.gt-tool-list').toggleClass('gt-active');
+      this.resetAllDelete();
     },
 
     toggleNew: function(e) {
@@ -41,6 +42,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       // toggle active state of new drawer
       App.newDrawerRegion.$el.toggleClass('gt-open');
       App.controlsRegion.$el.find('.gt-tool-create').toggleClass('gt-active');
+      this.resetAllDelete();
     },
 
     showNew: function(e) {
@@ -50,6 +52,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       // toggle active state of new drawer
       App.newDrawerRegion.$el.addClass('gt-open');
       App.controlsRegion.$el.find('.gt-tool-create').addClass('gt-active');
+      this.resetAllDelete();
     },
 
     polygon: function(e) {
@@ -71,6 +74,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       this.disableDrawTool();
       App.Map.Draw.enableTool(str);
       App.controlsRegion.$el.find('.gt-tool-' + str).addClass('gt-active');
+      this.resetAllDelete();
     },
 
     disableDrawTool: function(str) {
@@ -78,6 +82,11 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
         App.Map.Draw.disableTool(str);
       }
       App.controlsRegion.$el.find('.gt-draw-tools .gt-tool').removeClass('gt-active');
+    },
+
+    resetAllDelete: function(e) {
+      App.Editor.Controller.drawerLayout.$el.find('.gt-item-confirm-delete').removeClass("gt-item-confirm-delete");
+      App.Editor.Controller.drawerLayout.$el.find('.gt-reset-delete').removeClass('gt-reset-flyout');
     }
   });
 
@@ -123,6 +132,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       var editView = new App.Views.Edit({ model: this.model });
       App.Editor.Controller.drawerLayout.editRegion.show(editView);
       App.Editor.Controller.drawerLayout.$el.addClass('gt-panel-editing');
+      App.Editor.Controller.controlsView.resetAllDelete();
     },
 
     confirmDelete: function(e) {
