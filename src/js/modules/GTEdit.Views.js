@@ -119,7 +119,11 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     },
 
     renderShape: function() {
-      var geo = this.model.attributes.condition.geo;
+      if (this.shape) {
+        App.Map.Draw.clearShape(this.shape);
+        this.shape = null;
+      }
+      var geo = this.model.get('condition').geo;
       if (geo.geojson){
         this.shape = App.Map.Draw.polygon(geo.geojson);
       } else {
@@ -153,6 +157,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
     destroyModel: function(e) {
       e.preventDefault();
+      App.Map.Draw.clearShape(this.shape);
       this.model.destroy();
     }
   });
