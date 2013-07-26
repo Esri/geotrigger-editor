@@ -129,6 +129,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
     destroyModel: function(e) {
       e.preventDefault();
+      App.Map.Draw.clearShape(this.shape);
       this.model.destroy();
     }
   });
