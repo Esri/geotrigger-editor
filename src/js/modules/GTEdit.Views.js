@@ -96,6 +96,12 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       'click .gt-item-delete' : 'destroyModel'
     },
 
+    initialize: function() {
+      // THIS
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'change', this.renderShape);
+    },
+
     onShow: function() {
       App.listDrawerRegion.$el.find('.gt-list-header').removeClass('gt-hide');
       this.renderShape();
