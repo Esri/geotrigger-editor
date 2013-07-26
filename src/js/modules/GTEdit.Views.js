@@ -96,8 +96,24 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       'click .gt-item-delete' : 'destroyModel'
     },
 
+    initialize: function() {
+      // THIS
+      this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'change', this.renderShape);
+    },
+
     onShow: function() {
       App.listDrawerRegion.$el.find('.gt-list-header').removeClass('gt-hide');
+      this.renderShape();
+    },
+
+    renderShape: function() {
+      var geo = this.model.attributes.condition.geo;
+      if (geo.geojson){
+        this.shape = App.Map.Draw.polygon(geo.geojson);
+      } else {
+        this.shape = App.Map.Draw.radius(geo);
+      }
     },
 
     editItem: function(e) {

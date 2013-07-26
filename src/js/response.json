@@ -5,7 +5,7 @@
       "condition": {
         "direction": "enter",
         "geo": {
-          "latitude": 45.9165,
+          "latitude": 45.5265,
           "longitude": -122.6764,
           "distance": 80
         }

@@ -28,7 +28,7 @@ GTEdit.module('Triggers', function(Triggers, App, Backbone, Marionette, $, _) {
         // 'callback': 'http://pdx.gov/welcome'
       },
       'tags': ['foodcarts', 'citygreetings']
-    },
+    }
 
     // inherit sync method from collection
     //sync: this.collection.sync
