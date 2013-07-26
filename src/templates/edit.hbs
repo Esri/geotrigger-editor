@@ -7,10 +7,12 @@
   <form>
     <input type="text" name="title" placeholder="Title" class="gt-trigger-title-input">
     <span class="gt-tag-label">When a device tagged</span>
-    <input type="text" placeholder="enter tags" class="gt-tag-input">
+    <input type="text" placeholder="enter tags" class="gt-tag-input" value="{{#each tags}}{{this}}, {{/each}}">
     <select name="event" class="gt-event">
-      <option value="enter" selected>enters inside</option>
+      {{#select condition.direction}}
+      <option value="enter">enters inside</option>
       <option value="exit">exits</option>
+      {{/select}}
     </select>
     <select name="geometry-type" class="gt-geometry-type">
       <option value="polygon" selected>a polygon</option>
