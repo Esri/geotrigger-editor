@@ -94,6 +94,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     events: {
       'click .gt-item-edit'           : 'editItem',
       'click .gt-item-delete'         : 'confirmDelete',
+      'click .gt-reset-delete'        : 'resetDelete',
       'click .gt-item-confirm-delete' : 'destroyModel'
     },
 
@@ -112,7 +113,16 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       e.preventDefault();
       console.log("confirm delete");
       console.log(e.currentTarget);
-      $(e.currentTarget).toggleClass("gt-item-delete gt-item-confirm-delete");
+      this.$el.find('.gt-item-delete').addClass("gt-item-confirm-delete");
+      this.$el.find('.gt-reset-delete').addClass('gt-reset-flyout');
+    },
+    // use conrim delete to flyout reset delete button
+
+    resetDelete: function(e) {
+      e.preventDefault();
+      console.log("reset delete");
+      this.$el.find('.gt-item-confirm-delete').removeClass("gt-item-confirm-delete");
+      this.$el.find('.gt-reset-delete').removeClass('gt-reset-flyout');
     },
 
     destroyModel: function(e) {
