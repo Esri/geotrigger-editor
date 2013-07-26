@@ -61,21 +61,23 @@
 }
 .gt-result {
   width:100%;
-  padding:1em 1em 1em 60px;
+  padding:1em 1em 1em 1em;
   border-bottom:1px solid $light-gray;
   @include box-sizing(border-box);
   overflow:hidden;
-  position:relative;
+  // position:relative;
   .gt-icon-enter {
     width:40px;
     height:40px;
     display:inline-block;
     background: url('/dist/img/icons/enter-polygon.png') no-repeat center center transparent;
     background-size: 40px;
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    margin-top: -20px;
+    float: left;
+    cursor: pointer;
+    // position: absolute;
+    // left: 10px;
+    // top: 50%;
+    margin-top: 6px;
     &.gt-icon-polygon {
       background: url('/dist/img/icons/enter-polygon.png') no-repeat center center transparent; background-size: 40px;
     }
@@ -99,7 +101,8 @@
     }
   }
   h5 {
-    width: 100%;
+    // width: 100%;
+    padding-left: 1rem;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -122,6 +125,7 @@
   overflow-x: scroll;
   white-space: nowrap;
   padding-bottom:12px;
+  padding-left: 1rem;
   // width: 100%-4.2rem;
   float: left;
   li {
@@ -183,7 +187,7 @@
     color: $gray;
     visibility: visible;
     @include transform(translate3D(0,0,0));
-    @include transition(transform 10ms ease-in);
+    @include transition(transform 100ms ease-in);
     &:hover {
       color: $red;
       @include transition(background-color 20ms linear);
