@@ -92,8 +92,10 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     className: 'gt-result',
 
     events: {
-      'click .gt-item-edit'   : 'editItem',
-      'click .gt-item-delete' : 'destroyModel'
+      'click .gt-item-edit'           : 'editItem',
+      'click .gt-item-delete'         : 'confirmDelete',
+      'click .gt-reset-delete'        : 'resetDelete',
+      'click .gt-item-confirm-delete' : 'destroyModel'
     },
 
     initialize: function() {
@@ -121,6 +123,22 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       var editView = new App.Views.Edit({ model: this.model });
       App.Editor.Controller.drawerLayout.editRegion.show(editView);
       App.Editor.Controller.drawerLayout.$el.addClass('gt-panel-editing');
+    },
+
+    confirmDelete: function(e) {
+      e.preventDefault();
+      console.log("confirm delete");
+      console.log(e.currentTarget);
+      this.$el.find('.gt-item-delete').addClass("gt-item-confirm-delete");
+      this.$el.find('.gt-reset-delete').addClass('gt-reset-flyout');
+    },
+    // use conrim delete to flyout reset delete button
+
+    resetDelete: function(e) {
+      e.preventDefault();
+      console.log("reset delete");
+      this.$el.find('.gt-item-confirm-delete').removeClass("gt-item-confirm-delete");
+      this.$el.find('.gt-reset-delete').removeClass('gt-reset-flyout');
     },
 
     destroyModel: function(e) {
