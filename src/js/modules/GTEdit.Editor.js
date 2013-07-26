@@ -47,8 +47,8 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
     },
 
     showControls: function() {
-      var controlsView = new App.Views.Controls();
-      App.controlsRegion.show(controlsView);
+      App.Editor.Controller.controlsView = new App.Views.Controls();
+      App.controlsRegion.show(App.Editor.Controller.controlsView);
     },
 
     setupDrawers: function(triggers) {
