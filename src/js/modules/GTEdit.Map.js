@@ -67,6 +67,10 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       return circle;
     },
 
+    clearShape: function(shape) {
+      Map.instance.removeLayer(shape);
+    },
+
     clear: function() {
       Map.Draw.editLayer.clearLayers();
     },
