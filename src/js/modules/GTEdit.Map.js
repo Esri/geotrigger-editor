@@ -49,6 +49,24 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       });
     },
 
+    polygon: function(geo) {
+      polygon = new L.GeoJSON(geo, {
+        style: function(feature) {
+            return App.Config.polygonOptions.shapeOptions;
+        }
+      }).addTo(Map.instance);
+      return polygon;
+    },
+
+    radius: function(geo){
+      var circle = L.circle(
+        [geo.latitude,geo.longitude],
+        geo.distance,
+        App.Config.circleOptions.shapeOptions
+      ).addTo(Map.instance);
+      return circle;
+    },
+
     clear: function() {
       Map.Draw.editLayer.clearLayers();
     },
@@ -65,6 +83,7 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
         }
       }
     }
+
   };
 
   // Map Module
