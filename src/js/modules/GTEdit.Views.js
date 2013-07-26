@@ -91,8 +91,25 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     tagName: 'li',
     className: 'gt-result',
 
+    events: {
+      'click .gt-item-edit'   : 'editItem',
+      'click .gt-item-delete' : 'destroyModel'
+    },
+
     onShow: function() {
       App.listDrawerRegion.$el.find('.gt-list-header').removeClass('gt-hide');
+    },
+
+    editItem: function(e) {
+      e.preventDefault();
+      var editView = new App.Views.Edit({ model: this.model });
+      App.Editor.Controller.drawerLayout.editRegion.show(editView);
+      App.Editor.Controller.drawerLayout.$el.addClass('gt-panel-editing');
+    },
+
+    destroyModel: function(e) {
+      e.preventDefault();
+      this.model.destroy();
     }
   });
 
