@@ -99,6 +99,7 @@
     }
   }
   h5 {
+    width: 100%;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -115,13 +116,14 @@
       }
     }
   }
-
 }
 .gt-tags {
   display:block;
   overflow-x: scroll;
   white-space: nowrap;
   padding-bottom:12px;
+  // width: 100%-4.2rem;
+  float: left;
   li {
     list-style-type: none;
     border: none;
@@ -129,6 +131,63 @@
     margin-right: 3px;
     display: inline;
     overflow-x: scroll;
+  }
+}
+.gt-item-controls {
+  width: 5.2em;
+  float: right;
+  text-align: right;
+  li {
+    float: right;
+    list-style-type: none;
+    margin-right: 3px;
+    .gt-button-small {
+      width: 2.5rem;
+    }
+    &:first-child {
+      float: left;
+      padding-top: 0.45rem;
+    }
+  }
+}
+
+/* - - - - - - - - - - Delete - Confirm Delete - - - - - - - - - - */
+.gt-item-delete {
+  margin-top: 0;
+  &:before {
+    content: "delete";
+  }
+}
+
+.gt-item-confirm-delete {
+  margin-top: 0;
+  background-color:$red;
+  @include transition(background-color 20ms linear);
+  &:hover {
+    background-color: darken($red, 10%);
+    @include transition(background-color 20ms linear);
+  }
+  &:before {
+    content: "sure?";
+  }
+}
+
+.gt-reset-delete {
+  @include transform(translate3D(18px,0,0));
+  // margin-top: 0.4rem;
+  position: absolute;
+  text-decoration: none;
+  color: $gray;
+  visibility: hidden;
+  &.gt-reset-flyout {
+    color: $gray;
+    visibility: visible;
+    @include transform(translate3D(0,0,0));
+    @include transition(transform 10ms ease-in);
+    &:hover {
+      color: $red;
+      @include transition(background-color 20ms linear);
+    }
   }
 }
 
