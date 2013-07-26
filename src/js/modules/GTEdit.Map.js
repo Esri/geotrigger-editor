@@ -50,13 +50,12 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
     },
 
     polygon: function(geo) {
-      console.log(geo);
-      new L.GeoJSON(geo, {
+      polygon = new L.GeoJSON(geo, {
         style: function(feature) {
             return App.Config.polygonOptions.shapeOptions;
         }
       }).addTo(Map.instance);
-
+      return polygon;
     },
 
     radius: function(geo){
@@ -65,6 +64,7 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
         geo.distance,
         App.Config.circleOptions.shapeOptions
       ).addTo(Map.instance);
+      return circle;
     },
 
     clear: function() {

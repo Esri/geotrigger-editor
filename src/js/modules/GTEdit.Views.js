@@ -104,9 +104,9 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     renderShape: function() {
       var geo = this.model.attributes.condition.geo;
       if (geo.geojson){
-        App.Map.Draw.polygon(geo.geojson);
+        this.shape = App.Map.Draw.polygon(geo.geojson);
       } else {
-        App.Map.Draw.radius(geo);
+        this.shape = App.Map.Draw.radius(geo);
       }
     },
 
