@@ -102,16 +102,11 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     },
 
     renderShape: function() {
-      switch (type) {
-        case "Polygon":
-          //Map.Draw._polygon(this);
-          break;
-        case "Radius":
-          //Map.Draw._radius();
-          break;
-        case "Drivetime":
-          //Map.Draw._drivetime();
-          break;
+      var geo = this.model.attributes.condition.geo;
+      if (geo.geojson){
+        App.Map.Draw.polygon(geo.geojson);
+      } else {
+        App.Map.Draw.radius(geo);
       }
     },
 
