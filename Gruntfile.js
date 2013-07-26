@@ -36,8 +36,20 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/**/*.js','src/scss/**/*.scss','src/img/**/*.jpg','src/img/**/*.png','src/templates/*.hbs'],
-        tasks: ['jshint','clean:dev','compass:dev','copy:dev']
+        files: [
+          'src/**/*.js',
+          'src/scss/**/*.scss',
+          'src/img/**/*.jpg',
+          'src/img/**/*.png',
+          'src/templates/*.hbs',
+          'src/**/*.json'
+        ],
+        tasks: [
+          'jshint',
+          'clean:dev',
+          'compass:dev',
+          'copy:dev'
+        ]
         // options: {
         //   nospawn: true
         // }
@@ -86,14 +98,17 @@ module.exports = function(grunt) {
 
     complexity: {
       generic: {
-        src: ['src/**/*.js', 'tasks/grunt-complexity.js'],
+        src: [
+          'src/**/*.js',
+          'tasks/grunt-complexity.js'
+        ],
         options: {
-          //jsLintXML: 'report.xml', // create XML JSLint-like report
-          //checkstyleXML: 'checkstyle.xml', // create checkstyle report
+          // jsLintXML: 'report.xml', // create XML JSLint-like report
+          // checkstyleXML: 'checkstyle.xml', // create checkstyle report
           errorsOnly: false, // show only maintainability errors
-          cyclomatic: 3,
-          halstead: 8,
-          maintainability: 100
+          cyclomatic: 5,
+          halstead: 15,
+          maintainability: 85
         }
       }
     },
@@ -111,7 +126,11 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           cwd: 'src/',
-          src: ['img/**','js/**','templates/**'],
+          src: [
+            'img/**',
+            'js/**',
+            'templates/**'
+          ],
           dest: 'dev/'
         }]
       }
@@ -122,14 +141,22 @@ module.exports = function(grunt) {
         src: 'dist/'
       },
       dev: {
-        src: ['dev/img/','dev/css/','dev/js/','dev/templates/']
+        src: [
+          'dev/img/',
+          'dev/css/',
+          'dev/js/',
+          'dev/templates/'
+        ]
       }
     },
 
     smushit: {
       // filter by filetype
       dist: {
-        src: ['src/img/**/*.png','src/img/**/*.jpg'],
+        src: [
+          'src/img/**/*.png',
+          'src/img/**/*.jpg'
+        ],
         dest: 'dist/img'
       }
     }
