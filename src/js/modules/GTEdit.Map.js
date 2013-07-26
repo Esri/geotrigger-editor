@@ -50,23 +50,19 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
     },
 
     polygon: function(geo) {
-      var polygon = L.polygon(
-        [[45.526484, -122.666339],[45.516484, -122.676339],[45.526484, -122.696339]],
-        App.Config.polygonOptions.shapeOptions
-      ).addTo(Map.instance);
-    },
+      console.log(geo);
+      new L.GeoJSON(geo, {
+        style: function(feature) {
+            return App.Config.polygonOptions.shapeOptions;
+        }
+      }).addTo(Map.instance);
 
-    drivetime: function(geo){
-      L.marker(
-        [45.52, -122.67],
-        App.Config.drivetimeOptions
-      ).addTo(Map.instance);
     },
 
     radius: function(geo){
       var circle = L.circle(
-        [45.516484,-122.676339],
-        500,
+        [geo.latitude,geo.longitude],
+        geo.distance,
         App.Config.circleOptions.shapeOptions
       ).addTo(Map.instance);
     },
