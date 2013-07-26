@@ -92,8 +92,9 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     className: 'gt-result',
 
     events: {
-      'click .gt-item-edit'   : 'editItem',
-      'click .gt-item-delete' : 'destroyModel'
+      'click .gt-item-edit'           : 'editItem',
+      'click .gt-item-delete'         : 'confirmDelete',
+      'click .gt-item-confirm-delete' : 'destroyModel'
     },
 
     onShow: function() {
@@ -105,6 +106,13 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       var editView = new App.Views.Edit({ model: this.model });
       App.Editor.Controller.drawerLayout.editRegion.show(editView);
       App.Editor.Controller.drawerLayout.$el.addClass('gt-panel-editing');
+    },
+
+    confirmDelete: function(e) {
+      e.preventDefault();
+      console.log("confirm delete");
+      console.log(e.currentTarget);
+      $(e.currentTarget).toggleClass("gt-item-delete gt-item-confirm-delete");
     },
 
     destroyModel: function(e) {
