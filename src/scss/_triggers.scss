@@ -134,26 +134,33 @@
   }
 }
 .gt-item-controls {
-  width: 4.2em;
+  width: 5.2em;
   float: right;
   text-align: right;
   li {
+    float: right;
     list-style-type: none;
     margin-right: 3px;
     .gt-button-small {
       width: 2.5rem;
+    }
+    &:first-child {
+      float: left;
+      padding-top: 0.45rem;
     }
   }
 }
 
 /* - - - - - - - - - - Delete - Confirm Delete - - - - - - - - - - */
 .gt-item-delete {
+  margin-top: 0;
   &:before {
     content: "delete";
   }
 }
 
 .gt-item-confirm-delete {
+  margin-top: 0;
   background-color:$red;
   @include transition(background-color 20ms linear);
   &:hover {
@@ -165,6 +172,24 @@
   }
 }
 
+.gt-reset-delete {
+  @include transform(translate3D(18px,0,0));
+  // margin-top: 0.4rem;
+  position: absolute;
+  text-decoration: none;
+  color: $gray;
+  visibility: hidden;
+  &.gt-reset-flyout {
+    color: $gray;
+    visibility: visible;
+    @include transform(translate3D(0,0,0));
+    @include transition(transform 10ms ease-in);
+    &:hover {
+      color: $red;
+      @include transition(background-color 20ms linear);
+    }
+  }
+}
 
 /* - - - - - - - - - - No Triggers - Getting Started - - - - - - - - - - */
 .gt-panel-no-triggers {
