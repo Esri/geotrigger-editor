@@ -49,29 +49,26 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       });
     },
 
-    addSymbol: function(model) {
+    polygon: function(geo) {
+      var polygon = L.polygon(
+        [[45.526484, -122.666339],[45.516484, -122.676339],[45.526484, -122.696339]],
+        App.Config.polygonOptions.shapeOptions
+      ).addTo(Map.instance);
     },
 
-    _polygon: function(geo) {
-      var polygon = L.polygon([[45.526484, -122.666339],[45.516484, -122.676339],[45.526484, -122.696339]], {
-        stroke: true,
-        color: 'red',
-        weight: 2,
-        fillColor: '#f03',
-        fillOpacity: 0.5
-      }).addTo(Map.instance);
+    drivetime: function(geo){
+      L.marker(
+        [45.52, -122.67],
+        App.Config.drivetimeOptions
+      ).addTo(Map.instance);
     },
 
-    _drivetime: function(geo){
-      //draw the drivetime shape
-    },
-
-    _radius: function(geo){
-      var circle = L.circle([45.516484,-122.676339], 500, {
-          color: 'red',
-          fillColor: '#f03',
-          fillOpacity: 0.5
-      }).addTo(Map.instance);
+    radius: function(geo){
+      var circle = L.circle(
+        [45.516484,-122.676339],
+        500,
+        App.Config.circleOptions.shapeOptions
+      ).addTo(Map.instance);
     },
 
     clear: function() {
