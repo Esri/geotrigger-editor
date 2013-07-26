@@ -13,8 +13,8 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       'click .gt-tool-list'       : 'toggleList',
       'click .gt-tool-create'     : 'toggleNew',
       'click .gt-tool-polygon'    : 'polygon',
-      'click .gt-tool-radius'     : 'radius',
-      'click .gt-tool-drivetime'  : 'drivetime'
+      'click .gt-tool-radius'     : 'radius'
+      // 'click .gt-tool-drivetime'  : 'drivetime'
     },
 
     toggleList: function(e) {
