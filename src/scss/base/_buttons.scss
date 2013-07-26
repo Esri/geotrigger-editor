@@ -24,3 +24,8 @@ button, .gt-button {
     }
   }
 }
+
+.gt-button-small {
+  @extend .gt-button;
+  padding: 0.5em;
+}
