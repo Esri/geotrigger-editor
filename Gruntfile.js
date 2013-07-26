@@ -26,6 +26,7 @@ module.exports = function(grunt) {
       },
       dist: {
         src: [
+          'js/lib/*.js',
           'js/GTEdit.js',
           'js/modules/*.js'
         ],

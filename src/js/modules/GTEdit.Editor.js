@@ -52,16 +52,14 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
     },
 
     setupDrawers: function(triggers) {
-      var drawerLayout = new App.Layout.Drawer();
+      this.drawerLayout = new App.Layout.Drawer();
       var listView = new App.Views.List({ collection: triggers });
       var emptyView = new App.Views.Empty();
-      var editView = new App.Views.Edit();
       var newView = new App.Views.New();
 
       // populate list drawer
-      App.listDrawerRegion.show(drawerLayout);
-      drawerLayout.listRegion.show(listView);
-      drawerLayout.editRegion.show(editView);
+      App.listDrawerRegion.show(this.drawerLayout);
+      this.drawerLayout.listRegion.show(listView);
 
       // populate new drawer
       App.newDrawerRegion.show(newView);
