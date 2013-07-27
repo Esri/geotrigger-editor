@@ -7,7 +7,6 @@ Feature: Edit Geotrigger
 
   Background:
     Given I am viewing the editor
-    Given an application named "Editor Test"
 
   Scenario: edit geotrigger form
     When I edit a geotrigger
