@@ -55,7 +55,6 @@
   position:relative;
   width:100%;
   &:hover {
-    @include transition(background-color 200ms linear);
     background-color: $lighter-gray;
   }
 }
@@ -117,7 +116,6 @@
       text-decoration: none;
       @include transition(color 100ms linear);
       &:hover {
-        @include transition(color 100ms linear);
         color: $green;
       }
     }
@@ -172,7 +170,6 @@
   @include transition(background-color 20ms linear);
   &:hover {
     background-color: darken($red, 10%);
-    @include transition(background-color 20ms linear);
   }
   &:before {
     content: "sure?";
@@ -193,7 +190,6 @@
     @include transition(transform 100ms ease-in);
     &:hover {
       color: $red;
-      @include transition(background-color 20ms linear);
     }
   }
 }
@@ -224,7 +220,6 @@
       text-decoration: none;
       @include transition(color 100ms linear);
       &:hover {
-        @include transition(color 100ms linear);
         color: $green;
       }
     }
