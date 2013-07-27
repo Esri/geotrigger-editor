@@ -26,6 +26,7 @@ GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
       if (typeof e !== 'undefined' && e.preventDefault) {
         e.preventDefault();
       }
+      App.Editor.Controller.controlsView.restoreShape();
       App.listDrawerRegion.$el.removeClass('gt-open');
       App.controlsRegion.$el.find('.gt-tool-list').removeClass('gt-active');
     }
