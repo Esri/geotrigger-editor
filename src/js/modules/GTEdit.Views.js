@@ -29,6 +29,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       App.listDrawerRegion.$el.toggleClass('gt-open');
       App.controlsRegion.$el.find('.gt-tool-list').toggleClass('gt-active');
       this.resetAllDelete();
+      this.restoreShape();
     },
 
     toggleNew: function(e) {
@@ -43,6 +44,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       App.newDrawerRegion.$el.toggleClass('gt-open');
       App.controlsRegion.$el.find('.gt-tool-create').toggleClass('gt-active');
       this.resetAllDelete();
+      this.restoreShape();
     },
 
     showNew: function(e) {
@@ -53,6 +55,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       App.newDrawerRegion.$el.addClass('gt-open');
       App.controlsRegion.$el.find('.gt-tool-create').addClass('gt-active');
       this.resetAllDelete();
+      this.restoreShape();
     },
 
     polygon: function(e) {
@@ -65,10 +68,10 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       this.enableDrawTool('radius');
     },
 
-    drivetime: function(e) {
-      e.preventDefault();
-      this.enableDrawTool('drivetime');
-    },
+    // drivetime: function(e) {
+    //   e.preventDefault();
+    //   this.enableDrawTool('drivetime');
+    // },
 
     enableDrawTool: function(str) {
       this.disableDrawTool();
@@ -87,6 +90,12 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     resetAllDelete: function(e) {
       App.Editor.Controller.drawerLayout.$el.find('.gt-item-confirm-delete').removeClass("gt-item-confirm-delete");
       App.Editor.Controller.drawerLayout.$el.find('.gt-reset-delete').removeClass('gt-reset-flyout');
+    },
+
+    restoreShape: function() {
+      if (App.Editor.Controller.drawerLayout.editRegion.currentView) {
+        App.Editor.Controller.drawerLayout.editRegion.currentView.restoreShape();
+      }
     }
   });
 
@@ -133,7 +142,7 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
     editItem: function(e) {
       e.preventDefault();
-      var editView = new App.Views.Edit({ model: this.model });
+      var editView = new App.Views.Edit({ model: this.model, item: this });
       App.Editor.Controller.drawerLayout.editRegion.show(editView);
       App.Editor.Controller.drawerLayout.$el.addClass('gt-panel-editing');
       App.Editor.Controller.controlsView.resetAllDelete();
@@ -141,8 +150,6 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
     confirmDelete: function(e) {
       e.preventDefault();
-      console.log("confirm delete");
-      console.log(e.currentTarget);
       this.$el.find('.gt-item-delete').addClass("gt-item-confirm-delete");
       this.$el.find('.gt-reset-delete').addClass('gt-reset-flyout');
     },
@@ -150,7 +157,6 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
     resetDelete: function(e) {
       e.preventDefault();
-      console.log("reset delete");
       this.$el.find('.gt-item-confirm-delete').removeClass("gt-item-confirm-delete");
       this.$el.find('.gt-reset-delete').removeClass('gt-reset-flyout');
     },
@@ -171,9 +177,19 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     template: 'empty',
     className: 'gt-list-empty',
 
+    events: {
+      'click .gt-tool-create': 'newTrigger'
+    },
+
     onShow: function() {
       App.listDrawerRegion.$el.find('.gt-list-header').addClass('gt-hide');
+    },
+
+    newTrigger: function(e) {
+      e.preventDefault();
+      App.Editor.Controller.controlsView.toggleNew();
     }
+
   });
 
   // Trigger List View
@@ -197,7 +213,29 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
   Views.Edit = Marionette.ItemView.extend({
     template: 'edit',
-    className: 'gt-edit'
+    className: 'gt-edit',
+
+    onShow: function() {
+      var item = this.options.item;
+      var layer;
+      if (item.shape.getLayers) {
+        layer = item.shape.getLayers()[0];
+      } else if (item.shape.editing) {
+        layer = item.shape;
+      } else {
+        throw new Error('Unknown Layer Error');
+      }
+
+      App.Map.Draw.clearShape(layer);
+      layer.editing.enable();
+      App.Map.Draw.editLayer.addLayer(layer);
+      window.shape = item.shape;
+    },
+
+    restoreShape: function() {
+      App.Map.Draw.clear();
+      this.options.item.renderShape();
+    }
   });
 
   // Trigger New View
@@ -210,7 +248,8 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
     className: 'gt-new gt-panel-wrap',
 
     events: {
-      'click .gt-close-drawer': 'closeDrawer'
+      'click .gt-close-drawer': 'closeDrawer',
+      'click .gt-submit': 'parseForm'
     },
 
     closeDrawer: function(e) {
@@ -221,6 +260,37 @@ GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
       App.Map.Draw.clear();
       App.newDrawerRegion.$el.removeClass('gt-open');
       App.controlsRegion.$el.find('.gt-tool-create').removeClass('gt-active');
+    },
+
+    parseForm: function(e) {
+      e.preventDefault();
+      var data = this.$el.find('form').serializeObject();
+      // console.log(data);
+      if (data) {
+        this.createTrigger(data);
+        App.Editor.Controller.controlsView.toggleList();
+      }
+    },
+
+    createTrigger: function(data) {
+      var newLayer = App.Map.Draw.editLayer.getLayers()[0];
+      App.Map.Draw.clear();
+      console.log(newLayer);
+      console.log();
+      var dummydata = {
+        "condition": {
+          "direction": "enter",
+          "geo": {
+            "geojson": newLayer.toGeoJSON()
+          }
+        },
+        "action": {
+          "message": "Welcome to Portland - The Mayor",
+          "callback": "http://pdx.gov/welcome"
+        },
+        "tags": ["newtags"]
+      };
+      App.Editor.Controller.triggerCollection.add(new App.Triggers.Model(dummydata));
     }
   });
 

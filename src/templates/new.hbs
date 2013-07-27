@@ -7,7 +7,7 @@
   <form>
     <input type="text" name="title" placeholder="Title" class="gt-trigger-title-input">
     <span class="gt-tag-label">When a device tagged</span>
-    <input type="text" placeholder="enter tags" class="gt-tag-input">
+    <input type="text" name="tags" placeholder="enter tags" class="gt-tag-input">
     <select name="event" class="gt-event">
       <option value="enter" selected>enters inside</option>
       <option value="exit">exits</option>
@@ -28,7 +28,7 @@
       <input type="text" name="message" placeholder="message">
     </label>
     <label for="url">
-      <input type="text" placeholder="url (optional)">
+      <input type="text" name="callback_url" placeholder="url (optional)">
     </label>
     <label for="date">
       This will start
@@ -42,6 +42,6 @@
         <option value="future">until a future date</option>
       </select>
     </label>
-    <a href="#" class="gt-button gt-button-green">Submit</a>
+    <a href="#" class="gt-button gt-button-green gt-submit">Submit</a>
   </form>
 </div>
