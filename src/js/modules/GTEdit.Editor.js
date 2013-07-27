@@ -65,7 +65,7 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
       App.newDrawerRegion.show(newView);
 
       // open list drawer
-      App.listDrawerRegion.$el.addClass('gt-open');
+      App.Editor.Controller.controlsView.toggleList();
     }
   });
 

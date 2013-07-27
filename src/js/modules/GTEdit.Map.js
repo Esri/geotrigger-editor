@@ -58,7 +58,9 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
         style: function(feature) {
             return App.Config.polygonOptions.shapeOptions;
         }
-      }).addTo(Map.instance);
+      });
+      polygon.addTo(Map.instance);
+      console.log(polygon);
       return polygon;
     },
 
@@ -67,7 +69,9 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
         [geo.latitude,geo.longitude],
         geo.distance,
         App.Config.circleOptions.shapeOptions
-      ).addTo(Map.instance);
+      );
+      circle.addTo(Map.instance);
+      console.log(circle);
       return circle;
     },
 
