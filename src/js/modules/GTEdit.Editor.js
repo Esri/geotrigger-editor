@@ -36,7 +36,7 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
           // console.log('error', arguments);
         },
         complete: function(xhr, textStatus) {
-          // console.log(textStatus);
+          // console.log('complete', arguments);
         }
       });
     },
@@ -55,14 +55,14 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
       this.drawerLayout = new App.Layout.Drawer();
       var listView = new App.Views.List({ collection: triggers });
       var emptyView = new App.Views.Empty();
-      var newView = new App.Views.New();
+      // var newView = new App.Views.New();
 
       // populate list drawer
       App.listDrawerRegion.show(this.drawerLayout);
       this.drawerLayout.listRegion.show(listView);
 
       // populate new drawer
-      App.newDrawerRegion.show(newView);
+      // App.newDrawerRegion.show(newView);
 
       // open list drawer
       App.Editor.Controller.controlsView.toggleList();
