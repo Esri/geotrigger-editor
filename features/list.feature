@@ -5,7 +5,6 @@ Feature: Geotrigger List
 
   Background:
     Given I am viewing the editor
-    Given an application named "Editor Test"
 
   Scenario: empty list
     And my application has no geotriggers
