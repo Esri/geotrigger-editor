@@ -9,7 +9,6 @@
   @include transition(transform 300ms ease-in);
   &.gt-panel-editing {
     @include transform(translate3D(-50%,0,0));
-    @include transition(transform 300ms ease-in);
   }
   &.gt-new {
     width: 100%;
@@ -70,7 +69,6 @@
   }
   &:hover {
     background-color:$off-white;
-    @include transition(background-color 100ms linear);
   }
 }
 .gt-panel-content{
