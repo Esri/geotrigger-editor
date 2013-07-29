@@ -15,7 +15,6 @@
   @include box-shadow(0 0 12px rgba(0,0,0,0.2));
   &.gt-open {
     @include transform(translate3D(0,0,0));
-    @include transition(transform 300ms ease-in, opacity 300ms ease-in);
     opacity:1;
   }
 }

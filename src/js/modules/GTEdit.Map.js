@@ -60,18 +60,16 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
         }
       });
       polygon.addTo(Map.instance);
-      console.log(polygon);
       return polygon;
     },
 
-    radius: function(geo){
+    radius: function(geo) {
       var circle = L.circle(
         [geo.latitude,geo.longitude],
         geo.distance,
         App.Config.circleOptions.shapeOptions
       );
       circle.addTo(Map.instance);
-      console.log(circle);
       return circle;
     },
 
@@ -113,6 +111,12 @@ GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       L.esri.basemapLayer(App.Config.Map.basemap).addTo(this.instance);
 
       this.Draw.init();
+    },
+
+    zoomToLayer: function(layer) {
+      this.instance.fitBounds(layer.getBounds(), {
+        paddingTopLeft: [App.listDrawerRegion.$el.width(), 0]
+      });
     },
 
     Draw: Draw
