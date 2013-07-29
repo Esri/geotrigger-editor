@@ -41,14 +41,12 @@
     }
     &:hover {
       opacity:1;
-      @include transition(opacity 200ms linear);
       &:before{
         opacity:0.3;
       }
     }
     &.gt-active {
       opacity:1;
-      @include transition(opacity 200ms linear);
       &:before {
         opacity:1;
       }

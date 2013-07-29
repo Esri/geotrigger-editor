@@ -1,6 +1,9 @@
 module.exports = function () {
   this.World = require('../support/world.js').World;
 
+  // New Geotrigger Form
+  // -------------------
+
   this.When(/^I click the new trigger button in the sidebar$/, function(callback) {
     // express the regexp above with the code you wish you had
     callback.pending();
@@ -21,6 +24,9 @@ module.exports = function () {
     callback.pending();
   });
 
+  // Polygon Tool
+  // ------------
+
   this.When(/^I click the polygon tool$/, function(callback) {
     // express the regexp above with the code you wish you had
     callback.pending();
@@ -36,6 +42,9 @@ module.exports = function () {
     callback.pending();
   });
 
+  // Radius Tool
+  // -----------
+
   this.When(/^I click the radius tool$/, function(callback) {
     // express the regexp above with the code you wish you had
     callback.pending();
@@ -50,6 +59,9 @@ module.exports = function () {
     // express the regexp above with the code you wish you had
     callback.pending();
   });
+
+  // Drivetime Tool
+  // --------------
 
   this.When(/^I click the drivetime tool$/, function(callback) {
     // express the regexp above with the code you wish you had

@@ -1,4 +1,4 @@
-button, .gt-button {
+.gt-button {
   display: inline-block;
   padding:1em;
   margin-top:1em;
@@ -13,14 +13,12 @@ button, .gt-button {
     background-color:$green;
     &:hover {
       background-color: darken($green, 10%);
-      @include transition(background-color 200ms linear);
     }
   }
   &.gt-button-red {
     background-color:$red;
     &:hover {
       background-color: darken($red, 10%);
-      @include transition(background-color 200ms linear);
     }
   }
 }
@@ -29,8 +27,8 @@ button, .gt-button {
   @extend .gt-button;
   padding: 0.5em;
   background-color: $light-gray;
+  @include transition(background-color 200ms linear);
   &:hover {
     background-color: darken($light-gray, 10%);
-    @include transition(background-color 200ms linear);
   }
 }

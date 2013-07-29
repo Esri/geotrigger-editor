@@ -40,7 +40,6 @@ a.gt-tooltip {
       visibility: hidden;
       opacity:0;
       @include transform(translate3d(8px,0,0));
-      @include transition(all 200ms linear);
     }
   }
 }

@@ -5,7 +5,6 @@ Feature: New Geotrigger
 
   Background:
     Given I am viewing the editor
-    Given an application named "Editor Test"
 
   Scenario: new geotrigger form
     When I click the new trigger button in the sidebar
@@ -23,7 +22,7 @@ Feature: New Geotrigger
     And I draw a circle on the map
     Then I see the new geotrigger form with the circle's location
 
-  Scenario: drivetime tool
-    When I click the drivetime tool
-    And I draw a point on the map
-    Then I see the new geotrigger form with the drivetime's location
+  # Scenario: drivetime tool
+  #   When I click the drivetime tool
+  #   And I draw a point on the map
+  #   Then I see the new geotrigger form with the drivetime's location
