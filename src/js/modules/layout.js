@@ -1,4 +1,4 @@
-GTEdit.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
 
   // Layout Drawer View
   // ------------------

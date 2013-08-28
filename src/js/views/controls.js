@@ -1,4 +1,4 @@
-GTEdit.module('Views', function(Views, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
   // Controls View
   // -------------
