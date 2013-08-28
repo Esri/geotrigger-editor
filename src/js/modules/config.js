@@ -1,4 +1,4 @@
-GTEdit.module('Config', function(Config, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $, _) {
 
   var sharedOptions = {
     showArea: false,

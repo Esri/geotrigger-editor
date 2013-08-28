@@ -1,4 +1,4 @@
-GTEdit.module('Map', function(Map, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
   // Draw Submodule
   // --------------

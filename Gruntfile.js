@@ -48,7 +48,8 @@ module.exports = function(grunt) {
           'jshint',
           'clean:dev',
           'compass:dev',
-          'copy:dev'
+          'copy:dev',
+          'concat:dev'
         ]
         // options: {
         //   nospawn: true
@@ -83,6 +84,17 @@ module.exports = function(grunt) {
         // define a string to put between each file in the concatenated output
         separator: ';'
       },
+      dev: {
+        src: [
+          'src/js/app.js',
+          'src/js/lib/*.js',
+          'src/js/modules/*.js',
+          'src/js/models/*.js',
+          'src/js/collections/*.js',
+          'src/js/views/*.js'
+        ],
+        dest: 'dev/js/<%= pkg.name %>.js'
+      },
       // production
       dist: {
         // the files to concatenate
@@ -92,7 +104,7 @@ module.exports = function(grunt) {
           'src/js/geotrigger-editor.js'
         ],
         // the location of the resulting JS file
-        dest: 'dist/js/<%= pkg.name %>.js'
+        dest: 'dev/js/<%= pkg.name %>.js'
       }
     },
 
@@ -128,7 +140,7 @@ module.exports = function(grunt) {
           cwd: 'src/',
           src: [
             'img/**',
-            'js/**',
+            'js/response.json',
             'templates/**'
           ],
           dest: 'dev/'
@@ -177,6 +189,7 @@ module.exports = function(grunt) {
     'clean:dev',
     'compass:dev',
     'copy:dev',
+    'concat:dev',
     'connect:dev',
     'watch'
   ]);
