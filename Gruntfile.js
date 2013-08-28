@@ -27,8 +27,11 @@ module.exports = function(grunt) {
       dist: {
         src: [
           'js/lib/*.js',
-          'js/GTEdit.js',
-          'js/modules/*.js'
+          'js/app.js',
+          'src/js/modules/*.js',
+          'src/js/models/*.js',
+          'src/js/collections/*.js',
+          'src/js/views/*.js'
         ],
         dest: 'dist/js/<%= pkg.name %>.min.js'
       }
@@ -86,8 +89,8 @@ module.exports = function(grunt) {
       },
       dev: {
         src: [
-          'src/js/app.js',
           'src/js/lib/*.js',
+          'src/js/app.js',
           'src/js/modules/*.js',
           'src/js/models/*.js',
           'src/js/collections/*.js',
@@ -99,12 +102,15 @@ module.exports = function(grunt) {
       dist: {
         // the files to concatenate
         src: [
-          'src/js/GTEdit.js',
-          'src/js/GTEdit.Layout.js',
-          'src/js/geotrigger-editor.js'
+          'src/js/lib/*.js',
+          'src/js/app.js',
+          'src/js/modules/*.js',
+          'src/js/models/*.js',
+          'src/js/collections/*.js',
+          'src/js/views/*.js'
         ],
         // the location of the resulting JS file
-        dest: 'dev/js/<%= pkg.name %>.js'
+        dest: 'dist/js/<%= pkg.name %>.js'
       }
     },
 
