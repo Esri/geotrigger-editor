@@ -1,4 +1,4 @@
-GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
 
   // Editor Router
   // ---------------
@@ -16,7 +16,7 @@ GTEdit.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
   // level, above the implementation detail of views and models
 
   var Controller = function() {
-    this.triggerCollection = new App.Triggers.Collection();
+    this.triggerCollection = new App.Collections.Triggers();
   };
 
   _.extend(Controller.prototype, {

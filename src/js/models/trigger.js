@@ -1,9 +1,9 @@
-GTEdit.module('Triggers', function(Triggers, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $, _) {
 
   // Trigger Model
   // -------------
 
-  Triggers.Model = Backbone.Model.extend({
+  Models.Trigger = Backbone.Model.extend({
 
     defaults: {
       // 'triggerId': null,
@@ -32,21 +32,6 @@ GTEdit.module('Triggers', function(Triggers, App, Backbone, Marionette, $, _) {
 
     // inherit sync method from collection
     //sync: this.collection.sync
-  });
-
-  // Trigger Collection
-  // ------------------
-
-  Triggers.Collection = Backbone.Collection.extend({
-    model: Triggers.Model,
-    url: '/dev/js/response.json',
-
-    parse: function(response) {
-      return response.triggers;
-    }
-
-    // override sync method to use geotrigger API
-    // sync: function(method, model, options) {}
   });
 
 });
