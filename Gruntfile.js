@@ -195,6 +195,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
+    'test',
     'clean:dist',
     'compass:dist',
     'concat:dist',
@@ -203,7 +204,6 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('default', [
-    'test',
-    'build'
+    'dev'
   ]);
 };
