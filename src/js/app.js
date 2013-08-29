@@ -6,7 +6,8 @@ GeotriggerEditor.addRegions({
   controlsRegion: '#gt-controls-region',
   listDrawerRegion: '.gt-drawer-list',
   newDrawerRegion: '.gt-drawer-new',
-  mapRegion: '#gt-map-region'
+  mapRegion: '#gt-map-region',
+  notificationsRegion: '#gt-notifications'
 });
 
 GeotriggerEditor.on('initialize:after', function() {

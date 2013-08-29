@@ -31,6 +31,7 @@ module.exports = function(grunt) {
           'src/js/modules/*.js',
           'src/js/models/*.js',
           'src/js/collections/*.js',
+          'src/js/layouts/*.js',
           'src/js/views/*.js'
         ],
         dest: 'dist/js/<%= pkg.name %>.min.js'
@@ -94,6 +95,7 @@ module.exports = function(grunt) {
           'src/js/modules/*.js',
           'src/js/models/*.js',
           'src/js/collections/*.js',
+          'src/js/layouts/*.js',
           'src/js/views/*.js'
         ],
         dest: 'dev/js/<%= pkg.name %>.js'
@@ -107,6 +109,7 @@ module.exports = function(grunt) {
           'src/js/modules/*.js',
           'src/js/models/*.js',
           'src/js/collections/*.js',
+          'src/js/layouts/*.js',
           'src/js/views/*.js'
         ],
         // the location of the resulting JS file
