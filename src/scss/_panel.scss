@@ -11,6 +11,7 @@
     @include transform(translate3D(-50%,0,0));
   }
   &.gt-new {
+    overflow-y: scroll;
     width: 100%;
   }
 }
