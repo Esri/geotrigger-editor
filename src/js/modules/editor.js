@@ -27,6 +27,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       this.showMap();
       this.showControls();
       this.setupDrawers(this.triggerCollection);
+      this.setupNotifications();
 
       this.triggerCollection.fetch({
         success: function(collection, response, options) {
@@ -66,6 +67,11 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
       // open list drawer
       App.Editor.Controller.controlsView.toggleList();
+    },
+
+    setupNotifications: function() {
+      var notificationList = new App.Views.NotificationList();
+      App.notificationsRegion.show(notificationList);
     }
   });
 
