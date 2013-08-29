@@ -9,12 +9,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     template: 'notification',
     className: 'gt-notification',
     tagName: 'li',
-
-    showFeedback: function(){
-      var newFeedback = new App.Views.Feedback();
-      App.feedbackRegion.show(feedback);
-      console.log("pow");
-    }
   });
 
   Views.NotificationList = Marionette.CollectionView.extend({
