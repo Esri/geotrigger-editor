@@ -71,8 +71,12 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     },
 
     setupNotifications: function() {
-      var noteList = new App.Views.NotificationList({ collection: this.notificationCollection });
+      var noteList = new App.Views.NotificationList({
+        collection: this.notificationCollection
+      });
+
       App.notificationsRegion.show(noteList);
+
       App.vent.on('notifications:new', function(attributes){
         var note = new App.Models.Notification(attributes);
         this.notificationCollection.add(note);

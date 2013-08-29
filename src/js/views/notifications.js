@@ -10,10 +10,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-notification',
     tagName: 'li',
 
-    showFeedback: function(){
-      var newFeedback = new App.Views.Feedback();
-      App.feedbackRegion.show(feedback);
-      console.log("pow");
+    events: {
+      'click .gt-close': 'destroyNotification'
+    },
+
+    destroyNotification: function() {
+      this.model.destroy();
     }
   });
 
