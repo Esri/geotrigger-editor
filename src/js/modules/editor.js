@@ -75,6 +75,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     }
   });
 
+
   // Editor Initializer
   // ------------------
   //
