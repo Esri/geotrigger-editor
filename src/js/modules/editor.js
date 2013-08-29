@@ -17,6 +17,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
   var Controller = function() {
     this.triggerCollection = new App.Collections.Triggers();
+    this.notificationCollection = new App.Collections.Notifications();
   };
 
   _.extend(Controller.prototype, {
@@ -27,6 +28,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       this.showMap();
       this.showControls();
       this.setupDrawers(this.triggerCollection);
+      this.setupNotifications();
 
       this.triggerCollection.fetch({
         success: function(collection, response, options) {
@@ -66,8 +68,22 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
       // open list drawer
       App.Editor.Controller.controlsView.toggleList();
+    },
+
+    setupNotifications: function() {
+      var noteList = new App.Views.NotificationList({
+        collection: this.notificationCollection
+      });
+
+      App.notificationsRegion.show(noteList);
+
+      App.vent.on('notifications:new', function(attributes){
+        var note = new App.Models.Notification(attributes);
+        this.notificationCollection.add(note);
+      }, this);
     }
   });
+
 
   // Editor Initializer
   // ------------------
