@@ -15,10 +15,15 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     initialize: function(options) {
+      App.vent.on('new:toggle', this.toggle, this);
       if (typeof options !== 'undefined' && options.layer) {
         App.Map.zoomToLayer(options.layer);
         // then convert layer information into something the form can display
       }
+    },
+
+    toggle: function() {
+      this.$el.parent().toggleClass('gt-open');
     },
 
     closeDrawer: function(e) {
