@@ -5,14 +5,21 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   //
   // Creates panel for delivering success, failure, and contextual messages.
 
-  Views.NotificationList = Marionette.ItemView.extend({
-    template: 'notifications',
-    className: 'gt-notifications',
+  Views.Notification = Marionette.ItemView.extend({
+    template: 'notification',
+    className: 'gt-notification',
+    tagName: 'li',
 
     showFeedback: function(){
       var newFeedback = new App.Views.Feedback();
       App.feedbackRegion.show(feedback);
       console.log("pow");
     }
+  });
+
+  Views.NotificationList = Marionette.CollectionView.extend({
+    itemView: Views.Notification,
+    className: 'gt-notification-list',
+    tagName: 'ul'
   });
 });
