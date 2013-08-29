@@ -53,13 +53,22 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       });
     },
 
-    polygon: function(geo) {
+    polygon: function(geo, id) {
+
       polygon = new L.GeoJSON(geo, {
         style: function(feature) {
             return App.Config.polygonOptions.shapeOptions;
         }
       });
+
       polygon.addTo(Map.instance);
+
+      polygon.triggerId = id;
+
+      polygon.on("click", function(e){
+        console.log(e.target.triggerId);
+      });
+
       return polygon;
     },
 

@@ -33,9 +33,10 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         App.Map.Draw.clearShape(this.shape);
         this.shape = null;
       }
+      var id = this.model.get('triggerId');
       var geo = this.model.get('condition').geo;
       if (geo.geojson){
-        this.shape = App.Map.Draw.polygon(geo.geojson);
+        this.shape = App.Map.Draw.polygon(geo.geojson, id);
       } else {
         this.shape = App.Map.Draw.radius(geo);
       }
