@@ -52,9 +52,9 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     },
 
     setupDrawers: function(triggers) {
-      this.drawerLayout = new App.Layout.Drawer();
+      this.drawerLayout = new App.Layouts.Drawer();
       var listView = new App.Views.List({ collection: triggers });
-      var emptyView = new App.Views.Empty();
+      // var emptyView = new App.Views.Empty();
       // var newView = new App.Views.New();
 
       // populate list drawer

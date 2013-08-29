@@ -17,6 +17,23 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // 'click .gt-tool-drivetime'  : 'drivetime'
     },
 
+    initialize: function() {
+      App.vent.on('controls:deactivate', this.hideControl, this);
+      App.vent.on('controls:restore-shape', this.restoreShape, this);
+    },
+
+    hideControl: function(name) {
+      this.$el.find('.gt-tool-' + name).removeClass('gt-active');
+    },
+
+    showControl: function(name) {
+      this.$el.find('.gt-tool-' + name).addClass('gt-active');
+    },
+
+    toggleControl: function(name) {
+      this.$el.find('.gt-tool-' + name).toggleClass('gt-active');
+    },
+
     toggleList: function(e) {
       if (typeof e !== 'undefined' && e.preventDefault) {
         e.preventDefault();
@@ -28,9 +45,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
 
       // toggle active state of list drawer
-      App.listDrawerRegion.$el.toggleClass('gt-open');
-      App.controlsRegion.$el.find('.gt-tool-list').toggleClass('gt-active');
-      this.resetDeleteButtons();
+      App.vent.trigger('list:toggle');
+      this.toggleControl('list');
+      App.vent.trigger('list:buttons:reset');
       this.restoreShape();
     },
 
@@ -47,9 +64,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         App.newDrawerRegion.show(newView);
       }
       // toggle active state of new drawer
-      App.newDrawerRegion.$el.toggleClass('gt-open');
-      App.controlsRegion.$el.find('.gt-tool-create').toggleClass('gt-active');
-      this.resetDeleteButtons();
+      App.vent.trigger('new:toggle');
+      this.toggleControl('create');
+      App.vent.trigger('list:buttons:reset');
       this.restoreShape();
     },
 
@@ -63,7 +80,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // toggle active state of new drawer
       App.newDrawerRegion.$el.addClass('gt-open');
       App.controlsRegion.$el.find('.gt-tool-create').addClass('gt-active');
-      this.resetDeleteButtons();
+      App.vent.trigger('list:buttons:reset');
       this.restoreShape();
     },
 
@@ -86,7 +103,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.disableDrawTool();
       App.Map.Draw.enableTool(str);
       App.controlsRegion.$el.find('.gt-tool-' + str).addClass('gt-active');
-      this.resetDeleteButtons();
+      App.vent.trigger('list:buttons:reset');
     },
 
     disableDrawTool: function(str) {
@@ -94,11 +111,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         App.Map.Draw.disableTool(str);
       }
       App.controlsRegion.$el.find('.gt-draw-tools .gt-tool').removeClass('gt-active');
-    },
-
-    resetDeleteButtons: function(e) {
-      App.Editor.Controller.drawerLayout.$el.find('.gt-item-confirm-delete').removeClass("gt-item-confirm-delete");
-      App.Editor.Controller.drawerLayout.$el.find('.gt-reset-delete').removeClass('gt-reset-flyout');
     },
 
     restoreShape: function() {
