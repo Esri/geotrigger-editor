@@ -1,9 +1,9 @@
-GeotriggerEditor.module('Layout', function(Layout, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, $, _) {
 
   // Layout Drawer View
   // ------------------
 
-  Layout.Drawer = Backbone.Marionette.Layout.extend({
+  Layouts.Drawer = Backbone.Marionette.Layout.extend({
     template: 'drawer-list',
     className: 'gt-panel-wrap',
 
@@ -17,18 +17,42 @@ GeotriggerEditor.module('Layout', function(Layout, App, Backbone, Marionette, $,
       editRegion : '.gt-panel-edit'
     },
 
+    initialize: function() {
+      App.vent.on('list:empty', this.hideListHeader, this);
+      App.vent.on('list:item:added', this.showListHeader, this);
+      App.vent.on('list:toggle', this.toggleDrawer, this);
+      App.vent.on('list:buttons:reset', this.resetButtons, this);
+    },
+
+    hideListHeader: function() {
+      this.$el.find('.gt-list-header').addClass('gt-hide');
+    },
+
+    showListHeader: function() {
+      this.$el.find('.gt-list-header').removeClass('gt-hide');
+    },
+
+    toggleDrawer: function() {
+      this.$el.parent().toggleClass('gt-open');
+    },
+
     backToList: function(e) {
       e.preventDefault();
       this.$el.removeClass('gt-panel-editing');
+    },
+
+    resetButtons: function() {
+      this.$el.find('.gt-item-confirm-delete').removeClass('gt-item-confirm-delete');
+      this.$el.find('.gt-reset-delete').removeClass('gt-reset-flyout');
     },
 
     closeDrawer: function(e) {
       if (typeof e !== 'undefined' && e.preventDefault) {
         e.preventDefault();
       }
-      App.Editor.Controller.controlsView.restoreShape();
-      App.listDrawerRegion.$el.removeClass('gt-open');
-      App.controlsRegion.$el.find('.gt-tool-list').removeClass('gt-active');
+      App.vent.trigger('controls:restore-shape');
+      this.$el.removeClass('gt-open');
+      App.vent.trigger('controls:deactivate', 'list');
     }
   });
 
