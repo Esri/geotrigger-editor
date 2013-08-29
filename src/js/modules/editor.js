@@ -17,6 +17,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
   var Controller = function() {
     this.triggerCollection = new App.Collections.Triggers();
+    this.notificationCollection = new App.Collections.Notifications();
   };
 
   _.extend(Controller.prototype, {
@@ -70,8 +71,12 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     },
 
     setupNotifications: function() {
-      var notificationList = new App.Views.NotificationList();
-      App.notificationsRegion.show(notificationList);
+      var noteList = new App.Views.NotificationList({ collection: this.notificationCollection });
+      App.notificationsRegion.show(noteList);
+      App.vent.on('notifications:new', function(attributes){
+        var note = new App.Models.Notification(attributes);
+        this.notificationCollection.add(note);
+      }, this);
     }
   });
 

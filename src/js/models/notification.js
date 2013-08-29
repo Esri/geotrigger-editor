@@ -3,7 +3,7 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
   // Notification Model
   // ------------------
 
-  Models.Notifications = Backbone.Model.extend({
+  Models.Notification = Backbone.Model.extend({
 
     defaults: {
       'type': 'info',
