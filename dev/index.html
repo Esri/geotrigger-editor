@@ -11,12 +11,15 @@
     <link rel="stylesheet" href="../vendor/css/leaflet.draw.ie.css">
   <![endif]-->
   <link rel="stylesheet" href="css/geotrigger-editor.css">
+  <!--[if lte IE 8]>
+    <script src="../vendor/html5shiv.js"></script>
+  <![endif]-->
 </head>
 <body>
   <div id="gt-editor">
-    <nav id="gt-controls-region">
+    <div id="gt-controls-region">
       <!-- templates/control.hbs -->
-    </nav>
+    </div>
 
     <div class="gt-drawer gt-drawer-list">
       <!-- templates/drawer-list.hbs -->
@@ -42,7 +45,7 @@
   <script src="../vendor/geoservices.js"></script>
   <script src="../vendor/geotriggers.js"></script>
   <script src="../vendor/leaflet/leaflet.js"></script>
-  <script src="../vendor/esri-leaflet.min.js"></script>
+  <script src="../vendor/esri-leaflet.js"></script>
 
   <!-- leaflet draw custom build -->
   <script src="../vendor/leaflet/leaflet.draw-custom-src.js"></script>
