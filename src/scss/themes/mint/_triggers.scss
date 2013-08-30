@@ -1,0 +1,245 @@
+/* - - - - - - - - - - New Geotrigger Form - - - - - - - - - - */
+.gt-trigger-title-input {
+  width:100%;
+  margin-bottom:1em;
+}
+.gt-tag-label {
+  margin-right: 3%;
+  width: 40%;
+  display: inline-block;
+}
+.gt-tag-input {
+  width:55%;
+}
+.gt-event {
+  width:40%;
+  margin-right:5%;
+}
+.gt-geometry-type {
+  width:55%;
+}
+.gt-action {
+  width:60%;
+}
+.gt-date-start {
+  width:23%;
+}
+.gt-date-end {
+  width:30%;
+}
+
+/* - - - - - - - - - - Trigger List - - - - - - - - - - */
+.gt-search {
+  width: 100%;
+  @include box-sizing(border-box);
+  background-color:#eee;
+  padding: 0.5em 2em 1.5em 2em;
+  input[type="search"]{
+    background: url(/dist/img/icons/search.png) no-repeat left center transparent;
+    background-size: 28px;
+    padding: 0 0 0.2em 31px;
+    border: none;
+    color: $darkest-gray;
+    font-weight: 600;
+    font-size: 1.5em;
+    &:focus {
+      color:$darkest-gray;
+    }
+  }
+}
+.gt-result-link {
+  background-color: $white;
+  text-decoration: none;
+  @include transition(background-color 200ms linear);
+  height:auto;
+  position:relative;
+  width:100%;
+  &:hover {
+    background-color: $lighter-gray;
+  }
+}
+.gt-result {
+  width:100%;
+  padding:1em 1em 1em 1em;
+  border-bottom:1px solid $light-gray;
+  @include box-sizing(border-box);
+  overflow:hidden;
+  // position:relative;
+  .gt-item-edit {
+    cursor: pointer;
+  }
+  .gt-icon-enter {
+    width:40px;
+    height:40px;
+    display:inline-block;
+    background: url('/dist/img/icons/enter-polygon.png') no-repeat center center transparent;
+    background-size: 40px;
+    float: left;
+    cursor: pointer;
+    // position: absolute;
+    // left: 10px;
+    // top: 50%;
+    margin-top: 6px;
+    &.gt-icon-polygon {
+      background: url('/dist/img/icons/enter-polygon.png') no-repeat center center transparent; background-size: 40px;
+    }
+    &.gt-icon-radius {
+      background: url('/dist/img/icons/enter-radius.png') no-repeat center center transparent; background-size: 40px;
+    }
+    &.gt-icon-drivetime{
+      background: url('/dist/img/icons/enter-drivetime.png') no-repeat center center transparent; background-size: 40px;
+    }
+  }
+  .gt-icon-exit {
+    @extend .gt-icon-enter;
+    &.gt-icon-polygon {
+      background: url('/dist/img/icons/exit-polygon.png') no-repeat center center transparent; background-size: 40px;
+    }
+    &.gt-icon-radius {
+      background: url('/dist/img/icons/exit-radius.png') no-repeat center center transparent; background-size: 40px;
+    }
+    &.gt-icon-drivetime{
+      background: url('/dist/img/icons/exit-drivetime.png') no-repeat center center transparent; background-size: 40px;
+    }
+  }
+  h5 {
+    // width: 100%;
+    padding-left: 1rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 1.5em;
+    vertical-align: top;
+    margin-bottom: 0.5em;
+    a {
+      color: $dark-gray;
+      text-decoration: none;
+      @include transition(color 100ms linear);
+      &:hover {
+        color: $green;
+      }
+    }
+  }
+}
+.gt-tags {
+  display:block;
+  overflow-x: scroll;
+  white-space: nowrap;
+  padding-bottom:12px;
+  padding-left: 1rem;
+  // width: 100%-4.2rem;
+  float: left;
+  li {
+    list-style-type: none;
+    border: none;
+    color: $gray;
+    margin-right: 3px;
+    display: inline;
+    overflow-x: scroll;
+  }
+}
+.gt-item-controls {
+  width: 5.2em;
+  float: right;
+  text-align: right;
+  li {
+    float: right;
+    list-style-type: none;
+    margin-right: 3px;
+    .gt-button-small {
+      width: 2.5rem;
+    }
+    &:first-child {
+      float: left;
+      padding-top: 0.45rem;
+    }
+  }
+}
+
+/* - - - - - - - - - - Delete - Confirm Delete - - - - - - - - - - */
+.gt-item-delete {
+  margin-top: 0;
+  &:before {
+    content: "delete";
+  }
+}
+
+.gt-item-confirm-delete {
+  margin-top: 0;
+  background-color:$red;
+  @include transition(background-color 20ms linear);
+  &:hover {
+    background-color: darken($red, 10%);
+  }
+  &:before {
+    content: "sure?";
+  }
+}
+
+.gt-reset-delete {
+  @include transform(translate3D(18px,0,0));
+  // margin-top: 0.4rem;
+  position: absolute;
+  text-decoration: none;
+  color: $gray;
+  visibility: hidden;
+  &.gt-reset-flyout {
+    color: $gray;
+    visibility: visible;
+    @include transform(translate3D(0,0,0));
+    @include transition(transform 100ms ease-in);
+    &:hover {
+      color: $red;
+    }
+  }
+}
+
+/* - - - - - - - - - - No Triggers - Getting Started - - - - - - - - - - */
+.gt-panel-no-triggers {
+  width:100%;
+  padding:1em 2em 1em 2em;
+  border-bottom:1px solid $light-gray;
+  @include box-sizing(border-box);
+  overflow:hidden;
+  position:relative;
+  text-align: center;
+}
+.gt-tool-description {
+  width:100%;
+  padding:1em 2em 1em 60px;
+  border-bottom:1px solid $light-gray;
+  @include box-sizing(border-box);
+  overflow:hidden;
+  position:relative;
+  h5 {
+    line-height: 1.5em;
+    vertical-align: top;
+    margin-bottom: 0.5em;
+    a {
+      color: $dark-gray;
+      text-decoration: none;
+      @include transition(color 100ms linear);
+      &:hover {
+        color: $green;
+      }
+    }
+  }
+  p {
+    line-height: 1.25em;
+  }
+  .gt-icon {
+    width:40px;
+    height:40px;
+    display:inline-block;
+    // background: url('/dist/img/icons/enter-polygon.png') no-repeat center center transparent;
+    // background-size: 40px;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    margin-top: -20px;
+  }
+  .gt-icon-create {background:url('/dist/img/icons/create-dark.png') no-repeat center center; background-size:36px;}
+  .gt-icon-polygon {background:url('/dist/img/icons/polygon-dark.png') no-repeat center center; background-size:24px;}
+  .gt-icon-radius {background:url('/dist/img/icons/radius-dark.png') no-repeat center center; background-size:24px;}
+  .gt-icon-drivetime {background:url('/dist/img/icons/drivetime-dark.png') no-repeat center center; background-size:24px;}
+}

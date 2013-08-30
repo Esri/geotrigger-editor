@@ -1,0 +1,34 @@
+.gt-button {
+  display: inline-block;
+  padding:1em;
+  margin-top:1em;
+  background-color:$dark-gray;
+  color:white;
+  @include border-radius(3px);
+  border:none;
+  text-decoration: none;
+  font-family:$body-font;
+  @include transition(background-color 200ms linear);
+  &.gt-button-green {
+    background-color:$green;
+    &:hover {
+      background-color: darken($green, 10%);
+    }
+  }
+  &.gt-button-red {
+    background-color:$red;
+    &:hover {
+      background-color: darken($red, 10%);
+    }
+  }
+}
+
+.gt-button-small {
+  @extend .gt-button;
+  padding: 0.5em;
+  background-color: $light-gray;
+  @include transition(background-color 200ms linear);
+  &:hover {
+    background-color: darken($light-gray, 10%);
+  }
+}
