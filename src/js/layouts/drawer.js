@@ -18,11 +18,11 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
     },
 
     initialize: function() {
-      App.vent.on('drawer:list:empty', this.hideListHeader, this);
-      App.vent.on('drawer:list:item:added', this.showListHeader, this);
-      App.vent.on('drawer:list:toggle', this.toggleDrawer, this);
-      App.vent.on('drawer:list:reset-buttons', this.resetButtons, this);
-      App.vent.on('drawer:close', this.closeDrawer, this);
+      this.listenTo(App.vent, 'drawer:list:empty', this.hideListHeader);
+      this.listenTo(App.vent, 'drawer:list:item:added', this.showListHeader);
+      this.listenTo(App.vent, 'drawer:list:toggle', this.toggleDrawer);
+      this.listenTo(App.vent, 'drawer:list:reset-buttons', this.resetButtons);
+      this.listenTo(App.vent, 'drawer:close', this.closeDrawer);
     },
 
     hideListHeader: function() {
