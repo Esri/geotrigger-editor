@@ -8,6 +8,7 @@
   border:1px solid darken($dark-gray, 10%);
   text-decoration: none;
   font-family:$body-font;
+  font-size: 0.85rem;
   @include transition(background-color 200ms linear);
   &.gt-button-green {
     background-color:$green;
