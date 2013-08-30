@@ -14,11 +14,13 @@
     }
     .gt-panel-list {
       display: none;
+      background-color: $white;
     }
   }
   &.gt-new {
     overflow-y: scroll;
     width: 100%;
+    background-color: $lightest-gray;
   }
 }
 .gt-panel {
@@ -26,9 +28,9 @@
   position:absolute;
   top:0;
   bottom:0;
+  background: $lightest-gray;
   -webkit-overflow-scrolling: touch;
   overflow-y:scroll;
-  background-color:$lightest-gray;
 }
 .gt-panel-list { left: 0; display:block; }
 .gt-panel-edit { left: 0; display: none;}

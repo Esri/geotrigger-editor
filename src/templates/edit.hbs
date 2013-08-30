@@ -8,17 +8,19 @@
     <input type="text" name="title" placeholder="Title" class="gt-trigger-title-input">
     <span class="gt-tag-label">When a device tagged</span>
     <input type="text" placeholder="enter tags" class="gt-tag-input" value="{{#each tags}}{{this}}, {{/each}}">
-    <select name="event" class="gt-event">
-      {{#select condition.direction}}
-      <option value="enter">enters inside</option>
-      <option value="exit">exits</option>
-      {{/select}}
-    </select>
-    <select name="geometry-type" class="gt-geometry-type">
-      <option value="polygon" selected>a polygon</option>
-      <option value="radius">a distance of</option>
-      <!-- <option value="drivetime">a drivetime of</option> -->
-    </select>
+    <label for="event" class="left">
+      <select name="event" class="gt-event">
+        {{#select condition.direction}}
+        <option value="enter">enters inside</option>
+        <option value="exit">exits</option>
+        {{/select}}
+      </select>
+      <select name="geometry-type" class="gt-geometry-type">
+        <option value="polygon" selected>a polygon</option>
+        <option value="radius">a distance of</option>
+        <!-- <option value="drivetime">a drivetime of</option> -->
+      </select>
+    </label>
     <select name="action" class="gt-action">
       <option value="message" selected>send the device a message</option>
       <option value="server">post to a server</option>
@@ -44,6 +46,6 @@
         <option value="future">until a future date</option>
       </select>
     </label>
-    <a href="#" class="gt-button gt-button-green">Submit</a>
+    <a href="#" class="gt-button gt-button-blue">Update</a>
   </form>
 </div>
