@@ -49,6 +49,9 @@
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
+    &.gt-panel-top-bar-left {
+      padding-left:32px;
+    }
   }
 }
 .gt-panel-top-bar-button {
