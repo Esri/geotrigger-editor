@@ -7,9 +7,9 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
     editLayer: null,
 
     tools: {
+      // drivetime: null,
       polygon: null,
       radius: null
-      // drivetime: null
     },
 
     // Draw Layer initializer
@@ -27,12 +27,16 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       // drivetime tool will be enabled in later version
       // this.tools.drivetime = new L.Draw.Marker(Map.instance, App.Config.drivetimeOptions);
 
-      //Draw Created Event, fires once at the end of draw
+      App.vent.on('map:draw:clear', this.clear, this);
+      App.vent.on('map:draw:tool:enable', this.enableTool, this);
+      App.vent.on('map:draw:edit:add-layer', function(layer) {
+        this.editLayer.addLayer(layer);
+      }, this);
+
+      // Draw Created Event, fires once at the end of draw
       Map.instance.on('draw:created', function(e) {
         var type = e.layerType;
         var layer = e.layer;
-
-        // layer.bindPopup(type);
 
         // if (type === 'marker') {
         //   layer.options.draggable = true;
@@ -45,11 +49,10 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
         layer.editing.enable();
 
-        Map.Draw.clear();
-        Map.Draw.editLayer.addLayer(layer);
-
-        App.controlsRegion.currentView.disableDrawTool();
-        App.controlsRegion.currentView.showNew();
+        App.vent.trigger('map:draw:clear');
+        App.vent.trigger('map:draw:edit:add-layer', layer);
+        App.vent.trigger('controls:tools:disable-draw');
+        App.vent.trigger('trigger:new');
       });
     },
 
@@ -57,7 +60,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
       polygon = new L.GeoJSON(geo, {
         style: function(feature) {
-            return App.Config.polygonOptions.shapeOptions;
+          return App.Config.polygonOptions.shapeOptions;
         }
       });
 
@@ -74,7 +77,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
     radius: function(geo) {
       var circle = L.circle(
-        [geo.latitude,geo.longitude],
+        [geo.latitude, geo.longitude],
         geo.distance,
         App.Config.circleOptions.shapeOptions
       );
@@ -87,7 +90,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
     },
 
     clear: function() {
-      Map.Draw.editLayer.clearLayers();
+      this.editLayer.clearLayers();
     },
 
     enableTool: function(str) {
