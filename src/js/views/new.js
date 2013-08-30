@@ -23,6 +23,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     toggle: function() {
+      console.log("pow");
       this.$el.parent().toggleClass('gt-open');
     },
 
