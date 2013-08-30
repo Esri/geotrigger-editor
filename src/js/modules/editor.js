@@ -41,6 +41,8 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
           // console.log('complete', arguments);
         }
       });
+
+      App.vent.on('trigger:create', this.createTrigger, this);
     },
 
     showMap: function() {
@@ -67,7 +69,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       // App.newDrawerRegion.show(newView);
 
       // open list drawer
-      App.Editor.Controller.controlsView.toggleList();
+      App.vent.trigger('controls:list:toggle');
     },
 
     setupNotifications: function() {
@@ -81,6 +83,11 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
         var note = new App.Models.Notification(attributes);
         this.notificationCollection.add(note);
       }, this);
+    },
+
+    createTrigger: function(data) {
+      var trigger = new App.Models.Trigger(data);
+      this.triggerCollection.add(trigger);
     }
   });
 

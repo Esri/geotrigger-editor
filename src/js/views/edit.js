@@ -31,14 +31,4 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     }
   });
 
-  // Application Event Handlers
-  // --------------------------
-  //
-  // Handler for filtering the list of items by showing and
-  // hiding through the use of various CSS classes
-
-  // App.vent.on('item:event', function(eventData) {
-  //   // event handler logic
-  // });
-
 });
