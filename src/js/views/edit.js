@@ -20,10 +20,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         throw new Error('Unknown Layer Error');
       }
 
-      App.Map.Draw.clearShape(layer);
-      layer.editing.enable();
-      App.Map.Draw.editLayer.addLayer(layer);
-      App.Map.zoomToLayer(layer);
+      App.vent.trigger('trigger:edit', layer);
     },
 
     restoreShape: function() {

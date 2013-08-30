@@ -15,7 +15,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
     // Draw Layer initializer
     // ----------------------
 
-    init: function() {
+    initialize: function() {
       // Initialize the FeatureGroup to store editable layers
       this.editLayer = new L.FeatureGroup();
       Map.instance.addLayer(this.editLayer);
@@ -27,10 +27,28 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       // drivetime tool will be enabled in later version
       // this.tools.drivetime = new L.Draw.Marker(Map.instance, App.Config.drivetimeOptions);
 
-      App.vent.on('map:draw:clear', this.clear, this);
+      this._eventBindings();
+    },
+
+    _eventBindings: function() {
       App.vent.on('map:draw:tool:enable', this.enableTool, this);
-      App.vent.on('map:draw:edit:add-layer', function(layer) {
+
+      App.vent.on('trigger:new', function(layer) {
+        if (layer) {
+          this.editTrigger(layer);
+          App.vent.trigger('controls:tools:disable-draw');
+        }
+      }, this);
+
+      App.vent.on('trigger:create trigger:new:cancel', function(){
+        this.clear();
+      }, this);
+
+      App.vent.on('trigger:edit', function(layer) {
+        this.clearShape(layer);
+        layer.editing.enable();
         this.editLayer.addLayer(layer);
+        App.Map.zoomToLayer(layer);
       }, this);
 
       // Draw Created Event, fires once at the end of draw
@@ -48,12 +66,13 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
         // }
 
         layer.editing.enable();
-
-        App.vent.trigger('map:draw:clear');
-        App.vent.trigger('map:draw:edit:add-layer', layer);
-        App.vent.trigger('controls:tools:disable-draw');
-        App.vent.trigger('trigger:new');
+        App.vent.trigger('trigger:new', layer);
       });
+    },
+
+    editTrigger: function(layer) {
+      this.clear();
+      this.editLayer.addLayer(layer);
     },
 
     polygon: function(geo, id) {
@@ -68,7 +87,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
       polygon.triggerId = id;
 
-      polygon.on("click", function(e){
+      polygon.on('click', function(e){
         console.log(e.target.triggerId);
       });
 
@@ -116,13 +135,15 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
     // Map Initializer
     // ---------------
 
-    init: function(el) {
+    initialize: function(options) {
+      var el = options.el;
+
       // L.Icon.Default.imagePath = App.Config.imagePath;
       this.instance = L.map(el).setView(App.Config.Map.center, App.Config.Map.zoom);
       this.instance.zoomControl.setPosition('topright');
       L.esri.basemapLayer(App.Config.Map.basemap).addTo(this.instance);
 
-      this.Draw.init();
+      this.Draw.initialize();
     },
 
     zoomToLayer: function(layer) {
