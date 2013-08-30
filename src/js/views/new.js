@@ -20,9 +20,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         // then convert layer information into something the form can display
       }
 
-      App.vent.on('drawer:new:open', this.openDrawer, this);
-      App.vent.on('drawer:new:close', this.closeDrawer, this);
-      App.vent.on('drawer:new:toggle', this.toggle, this);
+      this.listenTo(App.vent, 'drawer:new:open', this.openDrawer);
+      this.listenTo(App.vent, 'drawer:new:close', this.closeDrawer);
+      this.listenTo(App.vent, 'drawer:new:toggle', this.toggle);
     },
 
     openDrawer: function() {
