@@ -18,11 +18,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     initialize: function() {
-      App.vent.on('controls:deactivate', this.hideControl, this);
-      App.vent.on('controls:restore-shape', this.restoreShape, this);
-      App.vent.on('controls:tools:disable-draw', this.disableDrawTool, this);
-      App.vent.on('trigger:new', this.showNew, this);
-      App.vent.on('controls:list:toggle', this.toggleList, this);
+      this.listenTo(App.vent, 'controls:deactivate', this.hideControl);
+      this.listenTo(App.vent, 'controls:restore-shape', this.restoreShape);
+      this.listenTo(App.vent, 'controls:tools:disable-draw', this.disableDrawTool);
+      this.listenTo(App.vent, 'trigger:new', this.showNew);
+      this.listenTo(App.vent, 'controls:list:toggle', this.toggleList);
     },
 
     hideControl: function(name) {
