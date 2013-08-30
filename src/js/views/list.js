@@ -18,13 +18,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     initialize: function() {
-      // THIS
       this.listenTo(this.model, 'change', this.render);
       this.listenTo(this.model, 'change', this.renderShape);
     },
 
     onShow: function() {
-      App.vent.trigger('drawer:list:item:added');
       this.renderShape();
     },
 
@@ -35,7 +33,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
       var id = this.model.get('triggerId');
       var geo = this.model.get('condition').geo;
-      if (geo.geojson){
+      if (geo.geojson) {
         this.shape = App.Map.Draw.polygon(geo.geojson, id);
       } else {
         this.shape = App.Map.Draw.radius(geo);
@@ -90,10 +88,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'click .gt-tool-create': 'newTrigger'
     },
 
-    onShow: function() {
-      App.vent.trigger('drawer:list:empty');
-    },
-
     newTrigger: function(e) {
       e.preventDefault();
       App.Editor.Controller.controlsView.toggleNew();
@@ -112,7 +106,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-list',
     itemView: Views.ListItem,
     itemViewContainer: '.gt-results',
-    emptyView: Views.Empty
+    emptyView: Views.Empty,
+
+    initialize: function() {
+      var list = this;
+      this.collection.on('change reset add remove', function(){
+        if (!list.collection.length) {
+          list.$el.find('.gt-list-header').addClass('gt-hide');
+        } else {
+          list.$el.find('.gt-list-header').removeClass('gt-hide');
+        }
+      });
+    }
   });
 
 });
