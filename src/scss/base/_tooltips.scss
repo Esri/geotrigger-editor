@@ -1,27 +1,24 @@
 a.gt-tooltip {
   span {
+    display:none;
     z-index:10;
-    visibility: hidden;
-    opacity:0;
     padding:14px 20px;
     color:$white;
     @include border-radius(4px);
     @include box-shadow(0 0 12px rgba(0,0,0,0.2));
     padding: 14px 20px;
     margin-top: -50px;
-    margin-left: 100%;
+    margin-left: 120%;
     width: auto;
     white-space: nowrap;
-    background-color: $green;
+    background-color: rgba(0,0,0,.8);
     position:absolute;
-    @include transform(translate3d(8px,0,0));
-    @include transition(all 200ms linear);
     &:before {
       content: "";
       display:inline-block;
       width:0;
       height:0;
-      border-right:8px solid $green;
+      border-right:8px solid rgba(0,0,0,.8);
       border-bottom:8px solid transparent;
       border-top:8px solid transparent;
       position:absolute;
@@ -32,14 +29,8 @@ a.gt-tooltip {
   }
   &:hover span {
     display:inline;
-    opacity: 1;
-    visibility: visible;
-    @include transform(translate3d(16px,0,0));
-    @include transition(all 200ms linear);
     &:hover {
-      visibility: hidden;
-      opacity:0;
-      @include transform(translate3d(8px,0,0));
+      display:none;
     }
   }
 }
