@@ -24,7 +24,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     onShow: function() {
-      App.vent.trigger('list:item:added');
+      App.vent.trigger('drawer:list:item:added');
       this.renderShape();
     },
 
@@ -55,7 +55,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var editView = new App.Views.Edit({ model: this.model, item: this });
       App.Editor.Controller.drawerLayout.editRegion.show(editView);
       App.Editor.Controller.drawerLayout.$el.addClass('gt-panel-editing');
-      App.vent.trigger('list:buttons:reset');
+      App.vent.trigger('drawer:list:reset-buttons');
     },
 
     confirmDelete: function(e) {
@@ -91,7 +91,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     onShow: function() {
-      App.vent.trigger('list:empty');
+      App.vent.trigger('drawer:list:empty');
     },
 
     newTrigger: function(e) {

@@ -18,10 +18,11 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
     },
 
     initialize: function() {
-      App.vent.on('list:empty', this.hideListHeader, this);
-      App.vent.on('list:item:added', this.showListHeader, this);
-      App.vent.on('list:toggle', this.toggleDrawer, this);
-      App.vent.on('list:buttons:reset', this.resetButtons, this);
+      App.vent.on('drawer:list:empty', this.hideListHeader, this);
+      App.vent.on('drawer:list:item:added', this.showListHeader, this);
+      App.vent.on('drawer:list:toggle', this.toggleDrawer, this);
+      App.vent.on('drawer:list:reset-buttons', this.resetButtons, this);
+      App.vent.on('drawer:close', this.closeDrawer, this);
     },
 
     hideListHeader: function() {
@@ -33,6 +34,7 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
     },
 
     toggleDrawer: function() {
+      this.resetButtons();
       this.$el.parent().toggleClass('gt-open');
     },
 
@@ -50,8 +52,10 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
       if (typeof e !== 'undefined' && e.preventDefault) {
         e.preventDefault();
       }
+
+      this.$el.parent().removeClass('gt-open');
+
       App.vent.trigger('controls:restore-shape');
-      this.$el.removeClass('gt-open');
       App.vent.trigger('controls:deactivate', 'list');
     }
   });
