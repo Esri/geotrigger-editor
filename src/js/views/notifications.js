@@ -7,10 +7,16 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
   Views.Notification = Marionette.ItemView.extend({
     template: 'notification',
-    // className: 'gt-notification',
+    className: 'gt-notification',
+    tagName: 'li',
 
     events: {
       'click .gt-close': 'destroyNotification'
+    },
+
+    render: function() {
+      Marionette.ItemView.prototype.render.apply(this, arguments);
+      this.$el.addClass(this.model.get('type'));
     },
 
     destroyNotification: function() {
