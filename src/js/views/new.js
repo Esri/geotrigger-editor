@@ -15,16 +15,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     initialize: function(options) {
-      App.vent.on('new:toggle', this.toggle, this);
       if (typeof options !== 'undefined' && options.layer) {
         App.Map.zoomToLayer(options.layer);
         // then convert layer information into something the form can display
       }
+
+      App.vent.on('drawer:new:open', this.openDrawer, this);
+      App.vent.on('drawer:new:close', this.closeDrawer, this);
+      App.vent.on('drawer:new:toggle', this.toggle, this);
     },
 
-    toggle: function() {
-      console.log("pow");
-      this.$el.parent().toggleClass('gt-open');
+    openDrawer: function() {
+      this.$el.parent().addClass('gt-open');
     },
 
     closeDrawer: function(e) {
@@ -32,9 +34,13 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         e.preventDefault();
       }
 
-      App.Map.Draw.clear();
-      App.newDrawerRegion.$el.removeClass('gt-open');
-      App.controlsRegion.$el.find('.gt-tool-create').removeClass('gt-active');
+      this.$el.parent().removeClass('gt-open');
+      App.vent.trigger('controls:deactivate', 'create');
+      App.vent.trigger('map:draw:clear');
+    },
+
+    toggle: function() {
+      this.$el.parent().toggleClass('gt-open');
     },
 
     parseForm: function(e) {
@@ -43,7 +49,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // console.log(data);
       if (data) {
         this.createTrigger(data);
-        App.Editor.Controller.controlsView.toggleList();
+        App.vent.trigger('controls:list:toggle');
       }
     },
 
@@ -63,8 +69,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         "tags": ["newtags"]
       };
 
-      App.Map.Draw.clear();
-      App.Editor.Controller.triggerCollection.add(new App.Models.Trigger(dummydata));
+      App.vent.trigger('map:draw:clear');
+      App.vent.trigger('trigger:create', dummydata);
     }
   });
 
