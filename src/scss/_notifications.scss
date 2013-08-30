@@ -1,33 +1,39 @@
 #gt-notifications {
-  width: 40%;
   height: auto;
   position: absolute;
   z-index: 1;
-  left: 47%;
+  left: 40%;
   top: 10px;
 }
 
+.gt-notification-list {
+  list-style-type: none;
+}
+
 .gt-notification {
-  display: inline-block;
-  background: rgba(255,255,245,.95);
-  font-size: 12px;
-  padding: 6px 7px 7px 12px;
+  width: 18em;
+  z-index:9;
+  margin: 0 0 4px 100px;
+  padding:14px 20px;
+  color:$white;
+  background-color: rgba(0,0,0, 0.8);
+  @include border-radius(4px);
   @include box-shadow(0 0 12px rgba(0,0,0,0.2));
-  .gt-type {
-    font-weight: bold;
+  &.error {
+    background-color: rgba(180, 20, 20, 0.8);
   }
+
+
   .gt-close {
-    padding: 0 0 0 4px;
+    float: right;
+    margin-top: -3px;
+    margin-right: -12px;
     cursor: pointer;
     background: transparent;
     border: 0;
     -webkit-appearance: none;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 1;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
-    opacity: 0.4;
+    color: #fafafa;
+    opacity: 0.75;
     &:hover {
       opacity: 1;
     }
