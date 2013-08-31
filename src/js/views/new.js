@@ -20,9 +20,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         // then convert layer information into something the form can display
       }
 
-      App.vent.on('drawer:new:open', this.openDrawer, this);
-      App.vent.on('drawer:new:close', this.closeDrawer, this);
-      App.vent.on('drawer:new:toggle', this.toggle, this);
+      this.listenTo(App.vent, 'drawer:new:open', this.openDrawer);
+      this.listenTo(App.vent, 'drawer:new:close', this.closeDrawer);
+      this.listenTo(App.vent, 'drawer:new:toggle', this.toggle);
     },
 
     openDrawer: function() {
@@ -36,7 +36,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       this.$el.parent().removeClass('gt-open');
       App.vent.trigger('controls:deactivate', 'create');
-      App.vent.trigger('map:draw:clear');
+      App.vent.trigger('trigger:new:cancel');
     },
 
     toggle: function() {
@@ -56,20 +56,20 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     createTrigger: function(data) {
       var newLayer = App.Map.Draw.editLayer.getLayers()[0];
       var dummydata = {
-        "condition": {
-          "direction": "enter",
-          "geo": {
-            "geojson": newLayer.toGeoJSON()
+        'triggerId': 'fake-trigger-id',
+        'condition': {
+          'direction': 'enter',
+          'geo': {
+            'geojson': newLayer.toGeoJSON()
           }
         },
-        "action": {
-          "message": "Welcome to Portland - The Mayor",
-          "callback": "http://pdx.gov/welcome"
+        'action': {
+          'message': 'Welcome to Portland - The Mayor',
+          'callback': 'http://pdx.gov/welcome'
         },
-        "tags": ["newtags"]
+        'tags': ['newtags']
       };
 
-      App.vent.trigger('map:draw:clear');
       App.vent.trigger('trigger:create', dummydata);
     }
   });
