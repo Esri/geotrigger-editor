@@ -18,19 +18,9 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
     },
 
     initialize: function() {
-      App.vent.on('drawer:list:empty', this.hideListHeader, this);
-      App.vent.on('drawer:list:item:added', this.showListHeader, this);
-      App.vent.on('drawer:list:toggle', this.toggleDrawer, this);
-      App.vent.on('drawer:list:reset-buttons', this.resetButtons, this);
-      App.vent.on('drawer:close', this.closeDrawer, this);
-    },
-
-    hideListHeader: function() {
-      this.$el.find('.gt-list-header').addClass('gt-hide');
-    },
-
-    showListHeader: function() {
-      this.$el.find('.gt-list-header').removeClass('gt-hide');
+      this.listenTo(App.vent, 'drawer:list:toggle', this.toggleDrawer);
+      this.listenTo(App.vent, 'drawer:list:reset-buttons', this.resetButtons);
+      this.listenTo(App.vent, 'drawer:close', this.closeDrawer);
     },
 
     toggleDrawer: function() {
