@@ -30,17 +30,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       this.setupDrawers(this.triggerCollection);
       this.setupNotifications();
 
-      this.triggerCollection.fetch({
-        success: function(collection, response, options) {
-          // console.log('success', arguments);
-        },
-        error: function(collection, response, options) {
-          // console.log('error', arguments);
-        },
-        complete: function(xhr, textStatus) {
-          // console.log('complete', arguments);
-        }
-      });
+      this.triggerCollection.fetch({ reset: true });
 
       App.vent.on('trigger:create', this.createTrigger, this);
     },
