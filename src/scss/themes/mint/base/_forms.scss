@@ -53,18 +53,16 @@ legend {
 }
 
 label {
-  margin:0;
+  margin:1em 0;
   width:100%;
   display: block;
   white-space: nowrap;
   input, select, textarea {
+    margin: 5px 0 2px;
     width: 100%;
   }
   &.no-margin {
     margin: 0;
-  }
-  &.left{
-    float:left;
   }
 }
 
@@ -97,22 +95,24 @@ input[type='datetime-local'],
 input[type='month'],
 input[type='time'],
 input[type='week'],
+select,
 textarea{
   @include box-sizing(border-box);
   @include transition(all 100ms linear);
-  @include border-radius(3px);
   font-size: 1em;
-  border: 1px solid $light-gray;
+  border: none;
+  border-bottom: 2px dashed $light-gray;
   display: inline-block;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top:1em;
   outline: none;
   outline-offset: 0;
-  padding: 0.5rem 0.25rem;
-  background-color: $off-white;
+  padding: 0 0 0.5em 0;
+  background-color: rgba(0, 0, 0, 0);
   color: $darkest-gray;
   &:focus {
-    border: 1px solid $blue;
+    border:none;
+    color: $green;
+    border-bottom: 2px dashed $green;
   }
 }
 
@@ -133,16 +133,18 @@ textarea {
 
 select {
   @include box-sizing(border-box);
-  border-width: 1px;
-  border-color: #aaa;
-  -webkit-appearance: menulist-button;
+  border-width: 2px;
+  border-color: $light-gray;
+  padding:0 20px 0 4px;
+  -webkit-appearance: none;
   line-height:33px;
   height: 33px;
-  margin: 1rem 0;
-  display: inline;
-  &:focus {
-    border: 1px solid $blue;
-  }
+  background:url('/dist/img/icons/select-toggle.png') no-repeat right center transparent;
+  background-size:24px;
+  margin-top:1em;
+  margin-left:-4px;
+  //color: $green;
+  color:$darkest-gray;
 }
 
 input[type="submit"] {
