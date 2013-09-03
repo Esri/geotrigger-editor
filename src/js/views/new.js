@@ -54,6 +54,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     createTrigger: function(data) {
+      console.log(data);
       var geo;
       var layer = App.Map.Draw.editLayer.getLayers()[0];
 
@@ -70,7 +71,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         };
       }
 
-      var dummydata = {
+      var trigger = {
         'triggerId': 'fake-trigger-id',
         'condition': {
           'direction': 'enter',
@@ -83,7 +84,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         'tags': ['newtags']
       };
 
-      App.vent.trigger('trigger:create', dummydata);
+      App.vent.trigger('trigger:create', trigger);
     }
   });
 
