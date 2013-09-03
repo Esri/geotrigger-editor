@@ -1,39 +1,31 @@
 /* - - - - - - - - - - Panels - - - - - - - - - - */
 .gt-panel-wrap {
-  width:100%;
+  width:200%;
   position:absolute;
   top:0;
   left:0;
   bottom:0;
   background:$white;
-  //@include transition(transform 300ms ease-in);
+  @include transition(transform 300ms ease-in);
   &.gt-panel-editing {
-    //@include transform(translate3D(-50%,0,0));
-    .gt-panel-edit {
-      display: block;
-    }
-    .gt-panel-list {
-      display: none;
-      background-color: $white;
-    }
+    @include transform(translate3D(-50%,0,0));
   }
   &.gt-new {
     overflow-y: scroll;
     width: 100%;
-    background-color: $lightest-gray;
   }
 }
 .gt-panel {
-  width:100%;
+  width:50%;
   position:absolute;
   top:0;
   bottom:0;
-  background: $lightest-gray;
   -webkit-overflow-scrolling: touch;
   overflow-y:scroll;
+  background-color:$lightest-gray;
 }
-.gt-panel-list { left: 0; display:block; }
-.gt-panel-edit { left: 0; display: none;}
+.gt-panel-list { left: 0; }
+.gt-panel-edit { left: 50%; }
 
 /* - - - - - - - - - - Panel Top Bar - - - - - - - - - - */
 .gt-panel-top-bar {
@@ -49,9 +41,6 @@
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
-    &.gt-panel-top-bar-left {
-      padding-left:32px;
-    }
   }
 }
 .gt-panel-top-bar-button {

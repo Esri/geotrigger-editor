@@ -7,31 +7,25 @@
   margin-right: 3%;
   width: 40%;
   display: inline-block;
-  margin-top: 1.25rem;
 }
 .gt-tag-input {
   width:55%;
-  float:right;
 }
 .gt-event {
-  width:39%;
+  width:40%;
   margin-right:5%;
 }
 .gt-geometry-type {
   width:55%;
-  float:right;
 }
 .gt-action {
   width:60%;
 }
 .gt-date-start {
   width:23%;
-  margin-left:3%;
-  margin-right:3%;
 }
 .gt-date-end {
   width:30%;
-  margin-left: 3%;
 }
 
 /* - - - - - - - - - - Trigger List - - - - - - - - - - */
@@ -68,7 +62,6 @@
   width:100%;
   padding:1em 1em 1em 1em;
   border-bottom:1px solid $light-gray;
-  position:relative;
   @include box-sizing(border-box);
   overflow:hidden;
   // position:relative;
@@ -118,13 +111,12 @@
     line-height: 1.5em;
     vertical-align: top;
     margin-bottom: 0.5em;
-    margin-right: 93px;
     a {
       color: $dark-gray;
       text-decoration: none;
       @include transition(color 100ms linear);
       &:hover {
-        color: $blue;
+        color: $green;
       }
     }
   }
@@ -148,11 +140,8 @@
 }
 .gt-item-controls {
   width: 5.2em;
+  float: right;
   text-align: right;
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  margin-top: -12px;
   li {
     float: right;
     list-style-type: none;
@@ -178,7 +167,6 @@
 .gt-item-confirm-delete {
   margin-top: 0;
   background-color:$red;
-  border: 1px solid darken($red, 10%);
   @include transition(background-color 20ms linear);
   &:hover {
     background-color: darken($red, 10%);
@@ -189,7 +177,7 @@
 }
 
 .gt-reset-delete {
-  //@include transform(translate3D(18px,0,0));
+  @include transform(translate3D(18px,0,0));
   // margin-top: 0.4rem;
   position: absolute;
   text-decoration: none;
@@ -198,7 +186,7 @@
   &.gt-reset-flyout {
     color: $gray;
     visibility: visible;
-    display:block;
+    @include transform(translate3D(0,0,0));
     @include transition(transform 100ms ease-in);
     &:hover {
       color: $red;
