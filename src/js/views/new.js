@@ -54,14 +54,27 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     createTrigger: function(data) {
-      var newLayer = App.Map.Draw.editLayer.getLayers()[0];
+      var geo;
+      var layer = App.Map.Draw.editLayer.getLayers()[0];
+
+      if (layer instanceof L.Circle) {
+        var latlng = layer.getLatLng();
+        geo = {
+          'latitude': latlng.lat,
+          'longitude': latlng.lng,
+          'distance': layer.getRadius()
+        };
+      } else {
+        geo = {
+          'geojson': layer.toGeoJSON()
+        };
+      }
+
       var dummydata = {
         'triggerId': 'fake-trigger-id',
         'condition': {
           'direction': 'enter',
-          'geo': {
-            'geojson': newLayer.toGeoJSON()
-          }
+          'geo': geo
         },
         'action': {
           'message': 'Welcome to Portland - The Mayor',
