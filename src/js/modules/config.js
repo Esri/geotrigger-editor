@@ -42,6 +42,11 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
 
     drivetimeOptions: {
       icon: icon
+    },
+
+    session: {
+      clientId: 'rcMNAPBoIn2M1JoI',
+      clientSecret: '77edd9c16dde46ad9a93b79c83229887'
     }
 
   });

@@ -36,7 +36,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       if (geo.geojson) {
         this.shape = App.Map.Draw.polygon(geo.geojson, id);
       } else {
-        this.shape = App.Map.Draw.radius(geo);
+        this.shape = App.Map.Draw.radius(geo, id);
       }
     },
 
@@ -69,6 +69,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     destroyModel: function(e) {
+      window.test = this.model;
       e.preventDefault();
       App.Map.Draw.clearShape(this.shape);
       this.model.destroy();
