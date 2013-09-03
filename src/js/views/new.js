@@ -46,7 +46,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     parseForm: function(e) {
       e.preventDefault();
       var data = this.$el.find('form').serializeObject();
-      // console.log(data);
+      //console.log(data);
       if (data) {
         this.createTrigger(data);
         App.vent.trigger('controls:list:toggle');
