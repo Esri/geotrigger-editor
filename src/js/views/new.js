@@ -72,16 +72,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
 
       var trigger = {
-        'triggerId': 'fake-trigger-id',
+        // 'triggerId': 'fake-trigger-id',
         'condition': {
           'direction': 'enter',
           'geo': geo
         },
         'action': {
-          'message': 'Welcome to Portland - The Mayor',
-          'callback': 'http://pdx.gov/welcome'
+          'notification': {
+            'text': 'Welcome to Portland'
+          },
+          'callbackUrl': 'http://pdx.gov/welcome'
         },
-        'tags': ['newtags']
+        'setTags': ['newtags']
       };
 
       App.vent.trigger('trigger:create', trigger);

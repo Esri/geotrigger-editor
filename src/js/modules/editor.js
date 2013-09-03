@@ -75,9 +75,8 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       }, this);
     },
 
-    createTrigger: function(data) {
-      var trigger = new App.Models.Trigger(data);
-      this.triggerCollection.add(trigger);
+    createTrigger: function(triggerData) {
+      this.triggerCollection.create(triggerData);
     }
   });
 

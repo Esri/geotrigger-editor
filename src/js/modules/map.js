@@ -76,7 +76,6 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
     },
 
     polygon: function(geo, id) {
-
       polygon = new L.GeoJSON(geo, {
         style: function(feature) {
           return App.Config.polygonOptions.shapeOptions;
@@ -94,13 +93,21 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       return polygon;
     },
 
-    radius: function(geo) {
+    radius: function(geo, id) {
       var circle = L.circle(
         [geo.latitude, geo.longitude],
         geo.distance,
         App.Config.circleOptions.shapeOptions
       );
+
       circle.addTo(Map.instance);
+
+      circle.triggerId = id;
+
+      circle.on('click', function(e){
+        console.log(e.target.triggerId);
+      });
+
       return circle;
     },
 
