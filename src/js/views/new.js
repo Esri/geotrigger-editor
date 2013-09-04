@@ -6,7 +6,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   // Handles the new trigger form.
 
   Views.New = Marionette.ItemView.extend({
-    template: 'new',
+    template: App.Templates['new'],
     className: 'gt-new gt-panel-wrap',
 
     events: {
@@ -46,7 +46,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     parseForm: function(e) {
       e.preventDefault();
       var data = this.$el.find('form').serializeObject();
-      //console.log(data);
+
       if (data) {
         this.createTrigger(data);
         App.vent.trigger('controls:list:toggle');
