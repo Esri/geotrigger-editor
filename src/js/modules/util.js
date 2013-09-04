@@ -31,7 +31,6 @@ GeotriggerEditor.module('util', function(util, App, Backbone, Marionette, $, _) 
         // value is object with only empty strings or arrays of empty strings
         if (typeof obj[key] === "object") {
            obj[key] = util.removeEmptyStrings(obj[key]);
-
            var hasKeys = false;
            for (var objKey in obj[key]) {
               hasKeys = true;
