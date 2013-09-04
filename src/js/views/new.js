@@ -75,33 +75,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       if (layer instanceof L.Circle) {
         var latlng = layer.getLatLng();
-        geo = {
+        data.condition.geo = {
           'latitude': latlng.lat,
           'longitude': latlng.lng,
           'distance': layer.getRadius()
         };
       } else {
-        geo = {
+        data.condition.geo = {
           'geojson': layer.toGeoJSON()
         };
       }
 
-      var trigger = {
-        // 'triggerId': 'fake-trigger-id',
-        'condition': {
-          'direction': 'enter',
-          'geo': geo
-        },
-        'action': {
-          'notification': {
-            'text': 'Welcome to Portland'
-          },
-          'callbackUrl': 'http://pdx.gov/welcome'
-        },
-        'setTags': ['newtags']
-      };
-
-      App.vent.trigger('trigger:create', trigger);
+      App.vent.trigger('trigger:create', data);
     }
   });
 
