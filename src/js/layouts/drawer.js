@@ -3,7 +3,7 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
   // Layout Drawer View
   // ------------------
 
-  Layouts.Drawer = Backbone.Marionette.Layout.extend({
+  Layouts.Drawers = Backbone.Marionette.Layout.extend({
     template: App.Templates['drawer-list'],
     className: 'gt-panel-wrap',
 
@@ -25,6 +25,7 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
 
     toggleDrawer: function() {
       this.resetButtons();
+      this.$el.removeClass('gt-panel-editing');
       this.$el.parent().toggleClass('gt-open');
       $('#gt-map-region').toggleClass('gt-open-drawer');
       App.map.invalidateSize();

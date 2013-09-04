@@ -1,40 +1,47 @@
-//
-// Use internal $.serializeArray to get list of form elements which is
-// consistent with $.serialize
-//
-// From version 2.0.0, $.serializeObject will stop converting [name] values
-// to camelCase format. This is *consistent* with other serialize methods:
-//
-//   - $.serialize
-//   - $.serializeArray
-//
-// If you require camel casing, you can either download version 1.0.4 or map
-// them yourself.
-//
-
-(function($){
-  $.fn.serializeObject = function () {
-    "use strict";
-
-    var result = {};
-    var extend = function (i, element) {
-      var node = result[element.name];
-
-  // If node with same name exists already, need to convert it to an array as it
-  // is a multi-value field (i.e., checkboxes)
-
-      if ('undefined' !== typeof node && node !== null) {
-        if ($.isArray(node)) {
-          node.push(element.value);
-        } else {
-          result[element.name] = [node, element.value];
-        }
-      } else {
-        result[element.name] = element.value;
-      }
+(function($) {
+  return $.fn.serializeObject = function() {
+    var json, patterns, push_counters,
+      _this = this;
+    json = {};
+    push_counters = {};
+    patterns = {
+      validate: /^[a-zA-Z][a-zA-Z0-9_]*(?:\[(?:\d*|[a-zA-Z0-9_]+)\])*$/,
+      key: /[a-zA-Z0-9_]+|(?=\[\])/g,
+      push: /^$/,
+      fixed: /^\d+$/,
+      named: /^[a-zA-Z0-9_]+$/
     };
-
-    $.each(this.serializeArray(), extend);
-    return result;
+    this.build = function(base, key, value) {
+      base[key] = value;
+      return base;
+    };
+    this.push_counter = function(key) {
+      if (push_counters[key] === void 0) {
+        push_counters[key] = 0;
+      }
+      return push_counters[key]++;
+    };
+    $.each($(this).serializeArray(), function(i, elem) {
+      var k, keys, merge, re, reverse_key;
+      if (!patterns.validate.test(elem.name)) {
+        return;
+      }
+      keys = elem.name.match(patterns.key);
+      merge = elem.value;
+      reverse_key = elem.name;
+      while ((k = keys.pop()) !== void 0) {
+        if (patterns.push.test(k)) {
+          re = new RegExp("\\[" + k + "\\]$");
+          reverse_key = reverse_key.replace(re, '');
+          merge = _this.build([], _this.push_counter(reverse_key), merge);
+        } else if (patterns.fixed.test(k)) {
+          merge = _this.build([], k, merge);
+        } else if (patterns.named.test(k)) {
+          merge = _this.build({}, k, merge);
+        }
+      }
+      return json = $.extend(true, json, merge);
+    });
+    return json;
   };
 })(jQuery);
