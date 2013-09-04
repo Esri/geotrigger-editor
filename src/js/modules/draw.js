@@ -66,7 +66,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
         }
       });
 
-      polygon.addTo(App.map);
+      this.mainLayer.addLayer(polygon);
 
       polygon.triggerId = id;
 
@@ -84,7 +84,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
         App.Config.circleOptions.shapeOptions
       );
 
-      circle.addTo(App.map);
+      this.mainLayer.addLayer(circle);
 
       circle.triggerId = id;
 
@@ -122,9 +122,11 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
   // ----------------------
 
   Draw.addInitializer(function() {
-    // Initialize the FeatureGroup to store editable layers
+    // Initialize the FeatureGroup to store existing and editable layers
     this.editLayer = new L.FeatureGroup();
+    this.mainLayer = new L.FeatureGroup();
     App.map.addLayer(this.editLayer);
+    App.map.addLayer(this.mainLayer);
 
     // Initialize new Draw Handlers
     this.tools.polygon = new L.Draw.Polygon(App.map, App.Config.polygonOptions);

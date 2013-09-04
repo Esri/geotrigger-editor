@@ -53,9 +53,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     toggle: function() {
-      this.$el.parent().toggleClass('gt-open');
-      $('#gt-map-region').toggleClass('gt-open-drawer');
-      App.map.invalidateSize();
+      if (this.$el.parent().hasClass('gt-open')) {
+        this.closeDrawer();
+      } else {
+        this.openDrawer();
+      }
     },
 
     /* end: to be deleted */

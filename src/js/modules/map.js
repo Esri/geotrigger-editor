@@ -9,7 +9,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
     zoomToLayer: function(layer) {
       App.map.fitBounds(layer.getBounds(), {
-        paddingTopLeft: [App.listDrawerRegion.$el.width(), 0]
+        padding: [100, 100]
       });
     }
   });
