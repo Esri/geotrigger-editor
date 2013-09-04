@@ -11,7 +11,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     events: {
       'click .gt-close-drawer': 'closeDrawer',
-      'click .gt-submit': 'parseForm'
+      'click .gt-submit': 'parseForm',
+      'change .gt-action-selector': 'toggleActions',
+      'change .gt-geometry-type': 'startDrawing'
     },
 
     initialize: function(options) {
@@ -44,6 +46,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.$el.parent().toggleClass('gt-open');
     },
 
+    toggleActions: function(e) {
+      var action = $(e.target).val();
+      this.$el.find('.gt-action').hide();
+      this.$el.find('.gt-action-'+action).show();
+    },
+
+    startDrawing: function (e) {
+      var tool = $(e.target).val();
+      App.Map.Draw.clear();
+      App.Map.Draw.enableTool(tool);
+    },
+
     parseForm: function(e) {
       e.preventDefault();
       var data = this.$el.find('form').serializeObject();
@@ -62,33 +76,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       if (layer instanceof L.Circle) {
         var latlng = layer.getLatLng();
-        geo = {
+        data.condition.geo = {
           'latitude': latlng.lat,
           'longitude': latlng.lng,
           'distance': layer.getRadius()
         };
       } else {
-        geo = {
+        data.condition.geo = {
           'geojson': layer.toGeoJSON()
         };
       }
 
-      var trigger = {
-        // 'triggerId': 'fake-trigger-id',
-        'condition': {
-          'direction': 'enter',
-          'geo': geo
-        },
-        'action': {
-          'notification': {
-            'text': 'Welcome to Portland'
-          },
-          'callbackUrl': 'http://pdx.gov/welcome'
-        },
-        'setTags': ['newtags']
-      };
-
-      App.vent.trigger('trigger:create', trigger);
+      App.vent.trigger('trigger:create', data);
     }
   });
 
