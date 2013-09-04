@@ -71,7 +71,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     showNew: function() {
-      var newView = new App.Views.New({ layer: App.Map.Draw.editLayer });
+      var newView = new App.Views.New();
       App.newDrawerRegion.show(newView);
 
       // make sure list drawer is closed
@@ -114,8 +114,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     restoreShape: function() {
-      if (App.Editor.Controller.drawerLayout.editRegion.currentView) {
-        App.Editor.Controller.drawerLayout.editRegion.currentView.restoreShape();
+      if (App.Editor.Controller.drawers.editRegion.currentView) {
+        App.Editor.Controller.drawers.editRegion.currentView.restoreShape();
       }
     }
   });
