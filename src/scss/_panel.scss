@@ -65,19 +65,19 @@
   &.gt-close-drawer {
     float:right;
     background:url('/dist/img/icons/x.png') no-repeat center center transparent;
-    background-size:40px;
+    @include retina-display(){background:url('/dist/img/icons/x2x.png') no-repeat center center transparent;}
     border-left: 1px solid $lighter-gray;
   }
   &.gt-back-to-list {
     float:left;
     background:url('/dist/img/icons/left-arrow.png') no-repeat center center transparent;
-    background-size:36px;
+    @include retina-display(){background:url('/dist/img/icons/left-arrow2x.png') no-repeat center center transparent;}
     border-right:1px solid $lighter-gray;
   }
   &.gt-new-trigger {
     @extend .gt-back-to-list;
-    background:url('/dist/img/icons/new.png') no-repeat center center transparent;
-    background-size:36px;
+    // background:url('/dist/img/icons/new.png') no-repeat center center transparent;
+    // @include retina-display(){}
   }
   &:hover {
     background-color:$off-white;
