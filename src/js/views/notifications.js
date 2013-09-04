@@ -1,12 +1,12 @@
 GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
-  // Modal Feedback View
+  // Notification View
   // -----------------
   //
   // Creates panel for delivering success, failure, and contextual messages.
 
   Views.Notification = Marionette.ItemView.extend({
-    template: 'notification',
+    template: App.Templates['notification'],
     className: 'gt-notification',
     tagName: 'li',
 

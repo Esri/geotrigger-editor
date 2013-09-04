@@ -6,7 +6,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   // Populates the edit trigger form with a preexisting trigger and handles updates.
 
   Views.Edit = Marionette.ItemView.extend({
-    template: 'edit',
+    template: App.Templates['edit'],
     className: 'gt-edit',
 
     events: {
