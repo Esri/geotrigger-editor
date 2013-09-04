@@ -40,7 +40,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
         }
       }, this);
 
-      App.vent.on('trigger:create trigger:new:cancel', function(){
+      App.vent.on('trigger:create trigger:update trigger:new:cancel', function(){
         this.clear();
       }, this);
 

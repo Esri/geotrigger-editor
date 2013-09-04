@@ -68,7 +68,15 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
             });
             break;
           case 'update':
-            // response = store.update(model);
+            App.API.session.request('trigger/update', {
+              params: {
+                'triggerIds': triggerId,
+                'condition': this.get('condition'),
+                'action': this.get('action'),
+                'setTags': this.get('tags')
+              },
+              callback: callback
+            });
             break;
           case 'delete':
             App.API.session.request('trigger/delete', {
