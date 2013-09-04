@@ -1,49 +1,64 @@
-<div class="gt-panel-top-bar">
-  <h3 class="gt-panel-top-bar-left">Create</h3>
-  <a href="#" class="gt-panel-top-bar-button gt-close-drawer"></a>
+<div class='gt-panel-top-bar'>
+  <h3 class='gt-panel-top-bar-left'>Create</h3>
+  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>
 </div>
-<div class="gt-panel-content">
+<div class='gt-panel-content'>
   <form>
-    <input type="text" name="title" placeholder="Title" class="gt-trigger-title-input">
-    <span class="gt-tag-label">When a device tagged</span>
-    <input type="text" name="tags" placeholder="enter tags" class="gt-tag-input">
-    <label for="event" class="left">
-      <select name="event" class="gt-event">
-        <option value="enter" selected>enters inside</option>
-        <option value="exit">exits</option>
+    <input type='text' name='properties[title]' placeholder='Title' class='gt-trigger-title-input'>
+    <span class='gt-tag-label'>When a device tagged</span>
+    <input type='text' name='setTags' placeholder='enter tags' class='gt-tag-input'>
+    <label for='event' class='left'>
+      <select name='condition[direction]' class='gt-event'>
+        <option disabled='disabled' selected>select a condition</option>
+        <option value='enter'>enters inside</option>
+        <option value='exit'>exits</option>
       </select>
-      <select name="geometry-type" class="gt-geometry-type">
-        <option value="default" disabled="disabled" selected>select a geometry --</option>
-        <option value="polygon">a polygon</option>
-        <option value="radius">a distance of</option>
-        <!-- <option value="drivetime">a drivetime of</option> -->
+      <select name='geometry-type' class='gt-geometry-type'>
+        <option value='default' disabled='disabled' selected>select a geometry</option>
+        <option value='polygon'>a polygon</option>
+        <option value='radius'>a distance of</option>
+        <!-- <option value='drivetime'>a drivetime of</option> -->
       </select>
     </label>
-    <select name="action" class="gt-action">
-      <option value="message" selected>send the device a message</option>
-      <option value="server">post to a server</option>
-      <option value="log">log the event</option>
-      <option value="profile">change tracking profile</option>
+    <select class='gt-action-selector'>
+      <option disabled='disabled' selected>choose an action</option>
+      <option value='message' selected>send the device a message</option>
+      <option value='callback'>post to a server</option>
+      <option value='profile'>change tracking profile</option>
     </select>
     <span>:</span>
-    <label for="message">
-      <textarea name="message" placeholder="message"></textarea>
+
+    <label class='gt-action gt-action-message' for='message'>
+      <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'></textarea>
     </label>
-    <label for="url">
-      <input type="text" name="callback_url" placeholder="url (optional)">
+
+    <label class='gt-action gt-action-callback gt-hide' for='url'>
+      <input type='text' name='action[callbackUrl]' placeholder='url (optional)'>
     </label>
-    <label for="date">
+
+    <label class='gt-action gt-action-profile gt-hide' for='url'>
+      to <select class='gt-action-profile-selector' name='action[trackingProfile]'>
+      <option value='fine' selected>fine</option>
+      <option value='adaptive'>adaptive</option>
+      <option value='rough'>rough</option>
+      <option value='off'>off</option>
+    </select>
+    </label>
+
+    <!--
+    <label for='date'>
       This will start
-      <select name="date-start" class="gt-date-start">
-        <option value="now">now</option>
-        <option value="future">in the future</option>
+      <select class='gt-date-start'>
+        <option value='now'>now</option>
+        <option value='future'>in the future</option>
       </select>
       and persist
-      <select name="date-end" class="gt-date-end">
-        <option value="never">indefinitely</option>
-        <option value="future">until a future date</option>
+      <select class='gt-date-end'>
+        <option value='never'>indefinitely</option>
+        <option value='future'>until a future date</option>
       </select>
     </label>
-    <a href="#" class="gt-button gt-button-blue gt-submit">Submit</a>
+    -->
+    <a href='#' class='gt-button gt-button-blue gt-submit'>Submit</a>
   </form>
 </div>
