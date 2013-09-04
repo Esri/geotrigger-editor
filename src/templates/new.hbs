@@ -10,8 +10,8 @@
     <label for='event' class='left'>
       <select name='condition[direction]' class='gt-event'>
         <option disabled='disabled' selected>select a condition</option>
-        <option value='enter'>enters inside</option>
-        <option value='exit'>exits</option>
+        <option value='enter'>enters</option>
+        <option value='leave'>leaves</option>
       </select>
       <select name='geometry-type' class='gt-geometry-type'>
         <option value='default' disabled='disabled' selected>select a geometry</option>
@@ -22,7 +22,7 @@
     </label>
     <select class='gt-action-selector'>
       <option disabled='disabled' selected>choose an action</option>
-      <option value='message' selected>send the device a message</option>
+      <option value='message'>send the device a message</option>
       <option value='callback'>post to a server</option>
       <option value='profile'>change tracking profile</option>
     </select>
@@ -38,7 +38,8 @@
 
     <label class='gt-action gt-action-profile gt-hide' for='url'>
       to <select class='gt-action-profile-selector' name='action[trackingProfile]'>
-      <option value='fine' selected>fine</option>
+      <option disabled='disabled' selected>choose an profile</option>
+      <option value='fine'>fine</option>
       <option value='adaptive'>adaptive</option>
       <option value='rough'>rough</option>
       <option value='off'>off</option>
