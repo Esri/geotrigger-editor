@@ -6,7 +6,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   // Displays controls and handles state of drawer and tools.
 
   Views.Controls = Marionette.ItemView.extend({
-    template: 'controls',
+    template: App.Templates['controls'],
     className: 'gt-control-group',
 
     events: {

@@ -26,7 +26,8 @@
     "grunt-smushit": "~1.1.2",
     "cucumber": "latest",
     "matchdep": "~0.1.2",
-    "wd": "0.0.32"
+    "wd": "0.0.32",
+    "grunt-contrib-handlebars": "~0.5.10"
   },
   "author": "Esri Portland R&D Center <portland@esri.com>",
   "contributors": [
