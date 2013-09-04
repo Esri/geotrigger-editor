@@ -33,7 +33,18 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       this.setupDrawers(this.triggerCollection);
       this.setupNotifications();
 
-      this.triggerCollection.fetch({ reset: true });
+      App.vent.trigger('notify', {
+        type: 'info',
+        message: 'Triggers loading'
+      });
+
+      this.triggerCollection.fetch({
+        reset: true,
+        success: function() {
+          App.vent.trigger('notify:clear');
+          App.vent.trigger('controls:list:toggle');
+        }
+      });
 
       App.vent.on('trigger:create', this.createTrigger, this);
       App.vent.on('trigger:update', this.updateTrigger, this);
@@ -57,9 +68,6 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       // populate list drawer
       App.listDrawerRegion.show(this.drawers);
       this.drawers.listRegion.show(listView);
-
-      // open list drawer
-      App.vent.trigger('controls:list:toggle');
     },
 
     setupNotifications: function() {
@@ -69,7 +77,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
       App.notificationsRegion.show(noteList);
 
-      App.vent.on('notifications:new', function(attributes){
+      App.vent.on('notify', function(attributes){
         var note = new App.Models.Notification(attributes);
         this.notificationCollection.add(note);
       }, this);

@@ -21,6 +21,7 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
       this.listenTo(App.vent, 'drawer:list:toggle', this.toggleDrawer);
       this.listenTo(App.vent, 'drawer:list:reset-buttons', this.resetButtons);
       this.listenTo(App.vent, 'drawer:close', this.closeDrawer);
+      this.listenTo(App.vent, 'trigger:update', this.backToList);
     },
 
     toggleDrawer: function() {
@@ -30,7 +31,9 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
     },
 
     backToList: function(e) {
-      e.preventDefault();
+      if (typeof e !== 'undefined' && e.preventDefault) {
+        e.preventDefault();
+      }
       this.$el.removeClass('gt-panel-editing');
     },
 
