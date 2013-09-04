@@ -156,8 +156,8 @@ module.exports = function(grunt) {
           // jsLintXML: 'report.xml', // create XML JSLint-like report
           // checkstyleXML: 'checkstyle.xml', // create checkstyle report
           errorsOnly: false, // show only maintainability errors
-          cyclomatic: 5,
-          halstead: 15,
+          cyclomatic: 10,
+          halstead: 30,
           maintainability: 80
         }
       }
