@@ -136,7 +136,7 @@ module.exports = function(grunt) {
     complexity: {
       generic: {
         src: [
-          'src/js/*.js',
+          'src/js/**/*.js',
           'tasks/grunt-complexity.js'
         ],
         options: {
@@ -145,7 +145,7 @@ module.exports = function(grunt) {
           errorsOnly: false, // show only maintainability errors
           cyclomatic: 5,
           halstead: 15,
-          maintainability: 85
+          maintainability: 80
         }
       }
     },
