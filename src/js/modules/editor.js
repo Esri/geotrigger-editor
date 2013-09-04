@@ -43,6 +43,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
         success: function() {
           App.vent.trigger('notify:clear');
           App.vent.trigger('controls:list:toggle');
+          App.map.fitBounds(App.Map.Draw.mainLayer.getBounds());
         }
       });
 
