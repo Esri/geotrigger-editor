@@ -40,6 +40,7 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
         case 'update':
           App.API.session.request('trigger/update', {
             params: {
+              // 'properties': this.get('properties'), // getting a 500
               'triggerIds': triggerId,
               'condition': this.get('condition'),
               'action': this.get('action'),
