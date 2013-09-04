@@ -6,7 +6,11 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
   // Handle routes to show the active vs complete todo items
 
   Editor.Router = Marionette.AppRouter.extend({
-    appRoutes: {}
+    appRoutes: {
+      ':id/edit': 'edit',
+      'new': 'new',
+      '': 'list'
+    }
   });
 
   // Editor Controller (Mediator)
@@ -22,11 +26,10 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
   _.extend(Controller.prototype, {
 
-    // Start the app by showing the appropriate views
-    // and fetching the list of items, if there are any
+    // initialization
     start: function() {
-      this.showMap();
-      this.showControls();
+      this.setupMap();
+      this.setupControls();
       this.setupDrawers(this.triggerCollection);
       this.setupNotifications();
 
@@ -36,28 +39,24 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       App.vent.on('trigger:update', this.updateTrigger, this);
     },
 
-    showMap: function() {
+    // setup
+    setupMap: function() {
       var map = new App.Views.Map();
       App.mapRegion.show(map);
     },
 
-    showControls: function() {
-      App.Editor.Controller.controlsView = new App.Views.Controls();
-      App.controlsRegion.show(App.Editor.Controller.controlsView);
+    setupControls: function() {
+      var controlsView = new App.Views.Controls();
+      App.controlsRegion.show(controlsView);
     },
 
     setupDrawers: function(triggers) {
-      this.drawerLayout = new App.Layouts.Drawer();
+      this.drawers = new App.Layouts.Drawers();
       var listView = new App.Views.List({ collection: triggers });
-      // var emptyView = new App.Views.Empty();
-      // var newView = new App.Views.New();
 
       // populate list drawer
-      App.listDrawerRegion.show(this.drawerLayout);
-      this.drawerLayout.listRegion.show(listView);
-
-      // populate new drawer
-      // App.newDrawerRegion.show(newView);
+      App.listDrawerRegion.show(this.drawers);
+      this.drawers.listRegion.show(listView);
 
       // open list drawer
       App.vent.trigger('controls:list:toggle');
@@ -76,6 +75,27 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       }, this);
     },
 
+    // routes
+    list: function() {
+      console.log('list');
+      // show list
+    },
+
+    new: function() {
+      console.log('new');
+      var newView = new App.Views.New();
+      App.newDrawerRegion.show(newView);
+    },
+
+    edit: function(id) {
+      console.log('edit ' + id);
+      var model = this.triggerCollection.get(id);
+      var editView = new App.Views.Edit({ model: model });
+      this.drawers.editRegion.show(editView);
+      this.drawers.$el.addClass('gt-panel-editing');
+    },
+
+    // crud
     createTrigger: function(triggerData) {
       this.triggerCollection.create(triggerData);
     },
