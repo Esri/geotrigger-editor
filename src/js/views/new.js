@@ -15,8 +15,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     initialize: function(options) {
-      if (typeof options !== 'undefined' && options.layer) {
-        App.Map.zoomToLayer(options.layer);
+      var editLayer = App.Map.Draw.editLayer;
+      if (editLayer.getLayers().length) {
+        App.Map.zoomToLayer(editLayer);
         // then convert layer information into something the form can display
       }
 
