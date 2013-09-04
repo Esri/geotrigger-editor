@@ -51,6 +51,14 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       e.preventDefault();
       var data = this.$el.find('form').serializeObject();
       data = App.util.removeEmptyStrings(data);
+      if (data.tags) {
+        var tags = data.tags;
+        tags = tags.split(',');
+        for (var i=tags.length-1;i>0;i--) {
+          tags[i] = tags[i].trim();
+        }
+        data.tags = tags;
+      }
 
       if (data) { // @TODO: validate
         this.updateTrigger(data);

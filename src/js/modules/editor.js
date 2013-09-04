@@ -110,6 +110,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     },
 
     updateTrigger: function(triggerData) {
+      console.log(triggerData);
       var model = this.triggerCollection.get(triggerData.triggerId);
       model.set(triggerData);
       model.save();

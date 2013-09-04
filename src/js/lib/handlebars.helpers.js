@@ -34,4 +34,18 @@
     }
   });
 
+  Handlebars.registerHelper('tagList', function(tags, options) {
+    if (tags && tags.length) {
+      var output = [];
+      for (var i=0;i<tags.length;i++) {
+        if (tags[i].indexOf('trigger:') !== 0) {
+          output.push(tags[i]);
+        }
+      }
+      return output.join(', ');
+    } else {
+      return '';
+    }
+  });
+
 }(Handlebars, $));
