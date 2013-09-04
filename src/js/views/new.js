@@ -61,6 +61,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     parseForm: function(e) {
       e.preventDefault();
       var data = this.$el.find('form').serializeObject();
+      data = App.util.removeEmptyStrings(data);
 
       if (data) {
         this.createTrigger(data);
