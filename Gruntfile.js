@@ -80,18 +80,19 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['src/**/*.js']
+      files: ['src/js/*.js']
     },
 
     concat: {
       options: {
         // define a string to put between each file in the concatenated output
-        separator: ';'
+        separator: '\n\n'
       },
       dev: {
         src: [
           'src/js/lib/*.js',
           'src/js/app.js',
+          'src/templates/*.js',
           'src/js/modules/*.js',
           'src/js/models/*.js',
           'src/js/collections/*.js',
@@ -106,6 +107,7 @@ module.exports = function(grunt) {
         src: [
           'src/js/lib/*.js',
           'src/js/app.js',
+          'src/templates/*.js',
           'src/js/modules/*.js',
           'src/js/models/*.js',
           'src/js/collections/*.js',
@@ -120,7 +122,7 @@ module.exports = function(grunt) {
     complexity: {
       generic: {
         src: [
-          'src/**/*.js',
+          'src/js/*.js',
           'tasks/grunt-complexity.js'
         ],
         options: {
@@ -171,6 +173,21 @@ module.exports = function(grunt) {
       }
     },
 
+    handlebars: {
+      compile: {
+        options: {
+          namespace: 'GeotriggerEditor.Templates',
+          processName: function(filePath) {
+            var process = filePath.split('src/templates/')[1];
+            return process.split('.hbs')[0];
+          }
+        },
+        files: {
+          'src/templates/compiled.js': 'src/templates/*.hbs'
+        }
+      }
+    },
+
     smushit: {
       // filter by filetype
       dist: {
@@ -198,6 +215,7 @@ module.exports = function(grunt) {
     'clean:dev',
     'compass:dev',
     'copy:dev',
+    'handlebars',
     'concat:dev',
     'connect:dev',
     'watch'
@@ -207,6 +225,7 @@ module.exports = function(grunt) {
     'test',
     'clean:dist',
     'compass:dist',
+    'handlebars',
     'concat:dist',
     'uglify:dist',
     'smushit'

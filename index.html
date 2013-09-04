@@ -14,10 +14,11 @@
 </head>
 <body>
   <div id="gt-editor">
-    <nav id="gt-controls-region"></nav>
+    <div id="gt-controls-region"></div>
     <div class="gt-drawer gt-drawer-list"></div>
     <div class="gt-drawer gt-drawer-new"></div>
     <div id="gt-map-region"></div>
+    <div id="gt-notifications"></div>
   </div>
 
   <!-- dependencies -->
@@ -27,8 +28,6 @@
   <script src="vendor/backbone.js"></script>
   <script src="vendor/backbone.marionette.js"></script>
   <script src="vendor/handlebars.js"></script>
-  <script src="vendor/marionette.handlebars.js"></script>
-  <script src="vendor/geoservices.js"></script>
   <script src="vendor/geotriggers.js"></script>
   <script src="vendor/leaflet/leaflet.js"></script>
   <script src="vendor/esri-leaflet.min.js"></script>
@@ -42,10 +41,6 @@
 
   <!-- initializer -->
   <script>
-  Marionette.Handlebars = {
-    path: 'src/templates/', // temp fix til we add template path to config
-    extension: '.hbs'
-  };
   $(function(){
     GeotriggerEditor.start();
   });

@@ -6,7 +6,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   // Displays an individual trigger list item, and responds to changes that are made to the trigger.
 
   Views.ListItem = Marionette.ItemView.extend({
-    template: 'item',
+    template: App.Templates['item'],
     tagName: 'li',
     className: 'gt-result',
 
@@ -82,7 +82,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   // Displays some helpful information when no triggers are found.
 
   Views.Empty = Marionette.ItemView.extend({
-    template: 'empty',
+    template: App.Templates['empty'],
     className: 'gt-list-empty',
 
     events: {
@@ -103,7 +103,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   // filtering of activs vs completed items for display.
 
   Views.List = Marionette.CompositeView.extend({
-    template: 'list',
+    template: App.Templates['list'],
     className: 'gt-list',
     itemView: Views.ListItem,
     itemViewContainer: '.gt-results',

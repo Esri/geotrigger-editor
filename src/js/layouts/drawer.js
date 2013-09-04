@@ -4,7 +4,7 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
   // ------------------
 
   Layouts.Drawer = Backbone.Marionette.Layout.extend({
-    template: 'drawer-list',
+    template: App.Templates['drawer-list'],
     className: 'gt-panel-wrap',
 
     events: {
