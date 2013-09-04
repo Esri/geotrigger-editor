@@ -38,15 +38,27 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
           });
           break;
         case 'update':
+          var params = {
+            //'properties': this.get('properties'), // getting a 500
+            'triggerIds': triggerId,
+            'condition': this.get('condition'),
+            'action': this.get('action'),
+            'setTags': this.get('tags')
+          };
+          // console.log(params); // for debugging properties
           App.API.session.request('trigger/update', {
-            params: {
-              // 'properties': this.get('properties'), // getting a 500
-              'triggerIds': triggerId,
-              'condition': this.get('condition'),
-              'action': this.get('action'),
-              'setTags': this.get('tags')
-            },
-            callback: callback
+            params: params,
+            callback: _.bind(function(error, response) {
+              if (error) {
+                if (options && options.error) {
+                  options.error('Record Not Found');
+                }
+              } else {
+                if (options && options.success) {
+                  options.success(response);
+                }
+              }
+            }, this)
           });
           break;
         case 'delete':

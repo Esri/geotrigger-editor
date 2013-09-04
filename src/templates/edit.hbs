@@ -8,7 +8,7 @@
   <form>
     <input type='text' name='properties[title]' placeholder='Title' class='gt-trigger-title-input' value='{{properties.title}}'>
     <span class='gt-tag-label'>When a device tagged</span>
-    <input type='text' name='setTags' placeholder='enter tags' class='gt-tag-input' value='{{#each tags}}{{this}}, {{/each}}'>
+    <input type='text' name='tags' placeholder='enter tags' class='gt-tag-input' value='{{tagList tags}}'>
 
     <label for='event' class='left'>
       <select name='condition[direction]' class='gt-event'>
@@ -34,7 +34,7 @@
     <span>:</span>
 
     <label class='gt-action gt-action-message' for='message'>
-      <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'></textarea>
+      <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>{{action.notification.text}}</textarea>
     </label>
 
     <label class='gt-action gt-action-callback gt-hide' for='url'>
