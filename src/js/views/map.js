@@ -21,7 +21,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     onShow: function() {
-      App.Map.initialize({ el: this.el });
+      App.Map.start({ el: this.el });
     }
   });
 

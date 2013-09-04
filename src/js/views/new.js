@@ -6,7 +6,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   // Handles the new trigger form.
 
   Views.New = Marionette.ItemView.extend({
-    template: 'new',
+    template: App.Templates['new'],
     className: 'gt-new gt-panel-wrap',
 
     events: {
@@ -46,7 +46,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     parseForm: function(e) {
       e.preventDefault();
       var data = this.$el.find('form').serializeObject();
-      //console.log(data);
+
       if (data) {
         this.createTrigger(data);
         App.vent.trigger('controls:list:toggle');
@@ -54,6 +54,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     createTrigger: function(data) {
+      console.log(data);
       var geo;
       var layer = App.Map.Draw.editLayer.getLayers()[0];
 
@@ -70,20 +71,22 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         };
       }
 
-      var dummydata = {
-        'triggerId': 'fake-trigger-id',
+      var trigger = {
+        // 'triggerId': 'fake-trigger-id',
         'condition': {
           'direction': 'enter',
           'geo': geo
         },
         'action': {
-          'message': 'Welcome to Portland - The Mayor',
-          'callback': 'http://pdx.gov/welcome'
+          'notification': {
+            'text': 'Welcome to Portland'
+          },
+          'callbackUrl': 'http://pdx.gov/welcome'
         },
-        'tags': ['newtags']
+        'setTags': ['newtags']
       };
 
-      App.vent.trigger('trigger:create', dummydata);
+      App.vent.trigger('trigger:create', trigger);
     }
   });
 
