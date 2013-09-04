@@ -45,7 +45,7 @@ module.exports = function(grunt) {
           'src/scss/**/*.scss',
           'src/img/**/*.jpg',
           'src/img/**/*.png',
-          'src/templates/*.hbs'
+          'src/templates/**/*.hbs'
         ],
         tasks: [
           'jshint',
