@@ -5,14 +5,22 @@ GeotriggerEditor.module('Collections', function(Collections, App, Backbone, Mari
 
   Collections.Triggers = Backbone.Collection.extend({
     model: App.Models.Trigger,
-    url: '/dev/js/response.json',
+
+    fetch: function(options) {
+      App.API.session.request('trigger/list', {
+        callback: _.bind(function(error, response) {
+          if(options.reset){
+            this.reset(this.parse(response));
+          } else {
+            this.set(this.parse(response));
+          }
+        }, this)
+      });
+    },
 
     parse: function(response) {
       return response.triggers;
     }
-
-    // override sync method to use geotrigger API
-    // sync: function(method, model, options) {}
   });
 
 });

@@ -5,33 +5,60 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
 
   Models.Trigger = Backbone.Model.extend({
 
-    defaults: {
-      // 'triggerId': null,
-      'condition': {
-        'direction': 'enter',
-        'geo': {
-          // 'geocode': '920 SW 3rd Ave, Portland, OR',
-          // 'driveTime': 600,
-          // 'context': {
-          //   'locality': 'Portland',
-          //   'region': 'Oregon',
-          //   'country': 'USA',
-          //   'zipcode': '97204'
-          // }
-          'latitude': 45.5165,
-          'longitude': -122.6764,
-          'distance': 240
+    idAttribute: 'triggerId',
+
+    // override sync method to use geotrigger API
+    sync: function(method, model, options) {
+      console.log('sync:' + method);
+      var triggerId = this.get('triggerId');
+
+      function callback(error, response) {
+        if (error) {
+          if (options && options.error) {
+            options.error('Record Not Found');
+          }
+        } else if (options && options.success) {
+          options.success(response);
         }
-      },
-      'action': {
-        'message': 'Welcome to Portland'
-        // 'callback': 'http://pdx.gov/welcome'
-      },
-      'tags': ['foodcarts', 'citygreetings']
+      }
+
+      switch (method) {
+        case 'read':
+          App.API.session.request('trigger/list', {
+            params: {
+              'triggerIds': [triggerId]
+            },
+            callback: callback
+          });
+          break;
+        case 'create':
+          App.API.session.request('trigger/create', {
+            params: model.toJSON(),
+            callback: callback
+          });
+          break;
+        case 'update':
+          App.API.session.request('trigger/update', {
+            params: {
+              'triggerIds': triggerId,
+              'condition': this.get('condition'),
+              'action': this.get('action'),
+              'setTags': this.get('tags')
+            },
+            callback: callback
+          });
+          break;
+        case 'delete':
+          App.API.session.request('trigger/delete', {
+            params: {
+              'triggerIds': triggerId
+            },
+            callback: callback
+          });
+          break;
+      }
     }
 
-    // inherit sync method from collection
-    //sync: this.collection.sync
   });
 
 });

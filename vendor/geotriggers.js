@@ -1,5 +1,576 @@
-/*! geotriggers-js - v0.0.2 - 2013-05-14
+/*! geotriggers-js - v0.0.3 - 2013-09-03
 *   Copyright (c) 2013 Environmental Systems Research Institute, Inc.
 *   Apache License*/
 
-(function(e,t){"object"==typeof module&&"object"==typeof module.exports&&(XMLHttpRequest=require("xmlhttprequest").XMLHttpRequest,exports=module.exports=t()),"function"==typeof define&&define.amd&&define(t),"object"==typeof window&&(e.Geotriggers=t())})(this,function(){function e(e){this._requestQueue=[],this._events={},this._failedRefreshes=0,this.refreshTries=3;var i={preferLocalStorage:!0,persistSession:"undefined"!=typeof module&&module.exports?!1:!0,geotriggersUrl:t,tokenUrl:r,registerDeviceUrl:o,debug:!1,automaticRegistation:!0};if(!e.applicationId)throw Error("Geotriggers.Session requires an `applicationId` or a `session` parameter.");a.merge(this,a.merge(i,e)),this.authenticatedAs=this.applicationId&&this.applicationSecret?"application":"device",this.key="_geotriggers_"+this.authenticatedAs+"_"+this.applicationId,this.persistSession&&(this.preferLocalStorage&&c?a.merge(this,p.get(this.key)):h&&a.merge(this,u.get(this.key))),(this.token&&Date.now()>new Date(this.expiresOn).getTime()||!this.token)&&this.refresh()}var t="http://geotriggersdev.arcgis.com/",r="https://devext.arcgis.com/sharing/oauth2/token",o="https://devext.arcgis.com/sharing/oauth2/registerDevice",i={},n="undefined"!=typeof XDomainRequest,s=function s(){this._thens=[]};s.prototype={then:function(e,t){return this._thens.push({resolve:e,reject:t}),this},success:function(e){return this.then(e),this},error:function(e){return this.then(null,e),this},resolve:function(e){this._complete("resolve",e)},reject:function(e){this._complete("reject",e)},_complete:function(e,t){this.then="resolve"===e?function(e){e(t)}:function(e,r){r(t)},this.success=function(e){e(t)},this.error=function(e){e(t)},this.resolve=this.reject=function(){throw Error("Deferred already completed.")};for(var r=0;this._thens.length>r;r++){var o=this._thens[r];o[e]&&o[e](t)}delete this._thens}},i.Deferred=s,e.prototype.authenticated=function(){return!!this.token},e.prototype._runQueue=function(){for(var e=0;this._requestQueue.length>e;e++){var t=this._requestQueue[e];this.request(t.method,t.options,t.deferred)}},e.prototype.refresh=function(){return this.log("refrehsing session"),this._failedRefreshes>=this.refreshTries?(this.emit("authentication:cannotrefresh"),this.log("failed to refresh token "+this._failedRefreshes+" times not continuing to refresh"),void 0):(this.applicationSecret?(this.log("getting new application token"),this.request(this.tokenUrl,{params:{client_id:this.applicationId,client_secret:this.applicationSecret,f:"json",grant_type:"client_credentials"}}).then(a.bind(this,function(e){this.token=e.access_token,this.expiresOn=new Date((new Date).getTime()+1e3*(e.expires_in-300)),this._processAuth()}),a.bind(this,this._authError))):this.refreshToken?(this.log("getting new device token with a refresh token"),this.request(this.tokenUrl,{params:{client_id:this.applicationId,refresh_token:this.refreshToken,f:"json",grant_type:"refresh_token"}}).then(a.bind(this,function(e){this.token=e.access_token,this.refreshToken=e.refresh_token,this.expiresOn=new Date((new Date).getTime()+1e3*(e.expires_in-300)),this._processAuth()}),a.bind(this,this._authError))):this.automaticRegistation&&(this.log("no applicaitonSecret or refreshToken, registering a new device"),this.request(this.registerDeviceUrl,{params:{client_id:this.applicationId,f:"json"}}).then(a.bind(this,function(e){this.deviceId=e.device.deviceId,this.token=e.deviceToken.access_token,this.refreshToken=e.deviceToken.refresh_token,this.expiresOn=new Date((new Date).getTime()+1e3*(e.deviceToken.expires_in-300)),this._processAuth(e)}),a.bind(this,this._authError))),void 0)},e.prototype.toJSON=function(){var e={};for(var t in this)this.hasOwnProperty(t)&&this[t]&&!t.match(/^_.+/)&&(e[t]=this[t]);return e},e.prototype.on=function(e,t){this._events[e]===void 0&&(this._events[e]=[]),this._events[e].push(t)},e.prototype.emit=function(e){var t=[].splice.call(arguments,1);if(this._events[e]instanceof Array)for(var r=this._events[e],o=0,i=r.length;i>o;o++)r[o].apply(this,t)},e.prototype.off=function(e,t){if(this._events[e]instanceof Array)for(var r=this._events[e],o=0,i=r.length;i>o;o++)if(r[o]===t){r.splice(o,1);break}},e.prototype._processAuth=function(e){this._failedRefreshes=0,this.persistSession&&this.persist(),this.log("session refreshed running queue"),this._runQueue(),this.emit("authentication:success",e),this.emit("authenticated",e)},e.prototype._authError=function(e){this._failedRefreshes++,this.log("error getting token or registering device from ArcGIS, "+e.error_description),this.emit("authentication:failure",e),this.refresh()},e.prototype.log=function(){var e=Array.prototype.slice.apply(arguments);e.unshift(this.key),this.debug&&a.log.apply(this,e)},e.prototype.request=function(e,t,r){var o,s=this,c={params:{},callback:null,addCallbacksToDeferred:!0},h=r||new i.Deferred,p=a.merge(c,t),u=!e.match(/^https?:\/\//),l=u?this.geotriggersUrl+e:e;this.log("making request to "+l+" as a "+this.authenticatedAs);var f=function(){s.log("successful http request to "+l+" as a "+s.authenticatedAs);var t=JSON.parse(o.responseText),r=t.error?null:t,i=t.error?t.error:null;if(i&&"invalidHeader"===i.type&&i.headers.Authorization)s.log("invalid authentication for http request to "+l+" trying to refresh token"),s._requestQueue.push({method:e,options:p,deferred:h}),s.refresh();else if(i)if(i)s.log("running error callback for request to "+l+" with ",r),h.reject(i,o),p.callback&&p.callback(i,null,o);else{var n={type:"unexpected_response",message:"the api returned a non json or unexpected data"};s.log("running error callback for request to "+l+" with ",n),h.reject(n,o),p.callback&&p.callback(n,null,o)}else s.log("running success callback for request to "+l+" with ",r),h.resolve(r,o),p.callback&&p.callback(null,r,o)},d=function(){var e=JSON.parse(o.responseText);s.log("request to "+l+" as a "+s.authenticatedAs+" failed with ",e);var t={type:"http_error",message:e};h.reject(t)},g=function(){4===o.readyState&&400>o.status?f():4===o.readyState&&o.status>=400&&d()};if(n)o=new XDomainRequest,o.onload=f,o.onerror=d,o.ontimeout=d;else{if("undefined"==typeof XMLHttpRequest)throw Error("This browser does not support XMLHttpRequest or XDomainRequest");o=new XMLHttpRequest,o.onreadystatechange=g}u&&(p.params.token=this.token);var y=a.serialize(p.params);return o.open("POST",l),n||o.setRequestHeader("Content-Type","application/x-www-form-urlencoded"),o.send(y),this.log("sent request to "+l+" as a "+this.authenticatedAs+" with",p.params),h},e.prototype.persist=function(){var e={};this.applicationSecret&&(e.applicationSecret=this.applicationSecret),this.token&&(e.token=this.token),this.refreshToken&&(e.refreshToken=this.refreshToken),this.deviceId&&(e.deviceId=this.deviceId),this.preferLocalStorage&&c?(this.log("persisting session to localStorage ",e),p.set(this.key,e)):h&&(this.log("persisting session to cookie ",e),u.set(this.key,e))},e.prototype.destroy=function(){this.log("destorying persisted session"),this.preferLocalStorage&&c?p.erase(this.key):h&&u.erase(this.key)},i.Session=e;var a={bind:function(e,t){var r,o;if("function"!=typeof t)throw new TypeError;return"function"==typeof Function.prototype.bind?t.bind(e):(o=Array.prototype.slice.call(arguments,2),r=function(){if(!(this instanceof r))return t.apply(e,o.concat(Array.prototype.slice.call(arguments)));var i;i.prototype=t.prototype;var n=new i,s=t.apply(n,o.concat(Array.prototype.slice.call(arguments)));return Object(s)===s?s:n})},merge:function(e,t){for(var r in t)t.hasOwnProperty(r)&&(e[r]=t[r]);return e},log:function(){var e=Array.prototype.slice.apply(arguments);if(Function.prototype.bind&&void 0!==typeof console&&console.log){var t=Function.prototype.bind.call(console.log,console);t.apply(console,e)}},warn:function(){var e=Array.prototype.slice.apply(arguments);void 0!==typeof console&&console.warn&&console.warn.apply(console,e)},isObject:function(e){return"[object Object]"===Object.prototype.toString.call(e)},isArray:function(e){return"[object Array]"===Object.prototype.toString.call(e)},serialize:function(e,t){var r=encodeURIComponent,o=[];for(var i in e){var n,s=t?t+"["+i+"]":i,c=e[i];n="properties"===s||"condition[geo][geojson]"===s||"locations"===s||"data"===s?r(s)+"="+r(JSON.stringify(c)):a.isObject(c)?a.serialize(c,s):r(s)+"="+r(c),o.push(n)}return o.join("&")},toQueryString:function(e,t){if("object"!=typeof e)return"";var r="";for(var o in e)if(e.hasOwnProperty(o)){var i=t?t+"."+o:o;if(e[o]instanceof Array)for(var n=0;e[o].length>n;n++)r+="object"==typeof e[o][n]?"&"+a.toQueryString(e[o][n],i):"&"+encodeURIComponent(i)+"="+encodeURIComponent(e[o][n]);else r+=e[o]instanceof Date?"&"+encodeURIComponent(i)+"="+e[o].getTime():e[o]instanceof Object?e.toString&&e.toString!==Object.prototype.toString?"&"+encodeURIComponent(i)+"="+encodeURIComponent(""+e[o]):"&"+a.toQueryString(e[o],i):"&"+encodeURIComponent(i)+"="+encodeURIComponent(e[o])}return r.replace(/^&/,"")}},c="object"==typeof window&&"object"==typeof window.localStorage?!0:!1,h="object"==typeof document&&"string"==typeof document.cookie?!0:!1,p={set:function(e,t){window.localStorage.setItem(e,JSON.stringify(t))},get:function(e){return JSON.parse(window.localStorage.getItem(e))},erase:function(e){window.localStorage.removeItem(e)}},u={get:function(e){var t=document.cookie.match(RegExp(e+"=[a-zA-Z0-9.()=|%/_]+($|;)","g"));return t&&t[0]?JSON.parse(t[0].substring(e.length+1,t[0].length).replace(";",""))||null:null},set:function(e,t,r){var o=[e+"="+JSON.stringify(t),"path=/","domain="+window.location.host],i=new Date;return i.setFullYear(i.getFullYear()+1),o.push(i.toGMTString()),r&&o.push("secure"),document.cookie=o.join("; ")},erase:function(e){document.cookie=e+"; "+new Date(0).toUTCString()}};return i});
+(function (root, factory) {
+
+  // Node.
+  if(typeof module === 'object' && typeof module.exports === 'object') {
+    XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+    exports = module.exports = factory();
+  }
+
+  // AMD.
+  if(typeof define === 'function' && define.amd) {
+    define(factory);
+  }
+
+  // Browser Global.
+  if(typeof window === "object") {
+    root.Geotriggers = factory();
+  }
+
+}(this, function() {
+  /*
+  Configuration Variables
+  -----------------------------------
+  */
+  var version           = "0.0.3";
+  var geotriggersUrl    = "https://geotrigger.arcgis.com/";
+  var tokenUrl          = "https://arcgis.com/sharing/oauth2/token";
+  var registerDeviceUrl = "https://arcgis.com/sharing/oauth2/registerDevice";
+  var exports           = {};
+  var IS_IE             = typeof XDomainRequest !== "undefined";
+
+  /*
+  Custom Deferred Callbacks.
+  -----------------------------------
+  */
+
+  var Deferred = function Deferred() {
+    this._thens = [];
+  };
+
+  Deferred.prototype = {
+    then: function (onResolve, onReject) {
+      // capture calls to then()
+      this._thens.push({ resolve: onResolve, reject: onReject });
+      return this;
+    },
+    success: function(onResolve){
+      this.then(onResolve);
+      return this;
+    },
+    error: function(onReject){
+      this.then(null, onReject);
+      return this;
+    },
+    resolve: function (val) {
+      this._complete('resolve', val);
+    },
+    reject: function (ex) {
+      this._complete('reject', ex);
+    },
+    _complete: function (which, arg) {
+      // switch over to sync then()
+      this.then = (which === 'resolve') ?
+        function (resolve, reject) { resolve(arg); } :
+        function (resolve, reject) { reject(arg); };
+      this.success = function(resolve){
+        resolve(arg);
+      };
+      this.error = function(reject){
+        reject(arg);
+      };
+      // disallow multiple calls to resolve or reject
+      this.resolve = this.reject = function() {
+        throw new Error('Deferred already completed.');
+      };
+
+      // complete all waiting (async) then()s
+      for (var i = 0; i < this._thens.length; i++) {
+        var aThen = this._thens[i];
+        if(aThen[which]) {
+          aThen[which](arg);
+        }
+      }
+      delete this._thens;
+    }
+  };
+
+  exports.Deferred = Deferred;
+
+  /*
+  Main Session Object
+  -----------------------------------
+  */
+
+  function Session(options){
+    this._requestQueue = [];
+    this._events = {};
+    this._failedRefreshes = 0;
+    this.refreshTries = 3;
+
+    var defaults = {
+      preferLocalStorage: true,
+      persistSession: (typeof module !== 'undefined' && module.exports) ? false : true,
+      geotriggersUrl: geotriggersUrl,
+      tokenUrl: tokenUrl,
+      registerDeviceUrl: registerDeviceUrl,
+      debug: false,
+      automaticRegistation: true
+    };
+
+    // set application id
+    if(!options.clientId) {
+      throw new Error("Geotriggers.Session requires an `clientId` or a `session` parameter.");
+    }
+
+    // merge defaults and options into `this`
+    util.merge(this, util.merge(defaults, options));
+
+    this.authenticatedAs = (this.clientId && this.clientSecret) ? "application" : "device";
+    this.key = "_geotriggers_" + this.authenticatedAs + "_" + this.clientId;
+
+    //restore a stored session if we have one
+    if(this.persistSession) {
+      if(this.preferLocalStorage && hasLocalStorage){
+        util.merge(this, localStorage.get(this.key));
+      } else if (hasCookies) {
+        util.merge(this, cookie.get(this.key));
+      }
+    }
+
+    // if there is an access token and it is after when the token expires or there is no access token
+    if((this.token && (Date.now() > new Date(this.expiresOn).getTime())) || !this.token){
+      this.refresh();
+    }
+  }
+
+  Session.prototype.authenticated = function(){
+    return !!this.token;
+  };
+
+  Session.prototype._runQueue = function(){
+    for (var i = 0; i < this._requestQueue.length; i++) {
+      var request = this._requestQueue[i];
+      this.request(request.method, request.options, request.deferred);
+    }
+  };
+
+  Session.prototype.refresh = function(){
+    this.log("refrehsing session");
+    if(this._failedRefreshes >= this.refreshTries){
+      this.emit("authentication:cannotrefresh");
+      this.log("failed to refresh token " + this._failedRefreshes + " times not continuing to refresh");
+      return;
+    }
+    // if we have an application secret just request a new token
+    if(this.clientSecret){
+      this.log("getting new application token");
+      this.request(this.tokenUrl, {
+        params: {
+          client_id: this.clientId,
+          client_secret: this.clientSecret,
+          f: "json",
+          grant_type: "client_credentials"
+        }
+      }).then(util.bind(this, function(response){
+        this.token = response.access_token;
+        this.expiresOn = new Date(new Date().getTime() + ((response.expires_in-(60*5)) *1000));
+        this._processAuth();
+      }), util.bind(this, this._authError));
+
+    // if we have a refresh token lets use it to get a new token
+    } else if (this.refreshToken){
+      this.log("getting new device token with a refresh token");
+      this.request(this.tokenUrl, {
+        params: {
+          client_id: this.clientId,
+          refresh_token: this.refreshToken,
+          f: "json",
+          grant_type: "refresh_token"
+        }
+      }).then(util.bind(this, function(response){
+        this.token = response.access_token;
+        this.refreshToken = response.refresh_token;
+        this.expiresOn = new Date(new Date().getTime() + ((response.expires_in-(60*5)) *1000));
+        this._processAuth();
+      }), util.bind(this, this._authError));
+
+    // else register a new device
+    } else if (this.automaticRegistation) {
+      this.log("no applicaitonSecret or refreshToken, registering a new device");
+      this.request(this.registerDeviceUrl, {
+        params: {
+          client_id: this.clientId,
+          f: "json"
+        }
+      }).then(util.bind(this, function(response){
+        this.deviceId = response.device.deviceId;
+        this.token = response.deviceToken.access_token;
+        this.refreshToken = response.deviceToken.refresh_token;
+        this.expiresOn = new Date(new Date().getTime() + ((response.deviceToken.expires_in-(60*5)) *1000));
+        this._processAuth(response);
+      }), util.bind(this, this._authError));
+    }
+  };
+
+  Session.prototype.toJSON = function(){
+    var obj = {};
+      for (var key in this) {
+        if (this.hasOwnProperty(key) && this[key] && !key.match(/^_.+/)) {
+          obj[key] = this[key];
+        }
+      }
+      return obj;
+  };
+
+  Session.prototype.on = function(type, listener){
+    if (typeof this._events[type] === "undefined"){
+      this._events[type] = [];
+    }
+
+    this._events[type].push(listener);
+  };
+
+  Session.prototype.emit = function(type){
+    var args = [].splice.call(arguments,1);
+    if (this._events[type] instanceof Array){
+      var listeners = this._events[type];
+      for (var i=0, len=listeners.length; i < len; i++){
+        listeners[i].apply(this, args);
+      }
+    }
+  };
+
+  Session.prototype.off = function(type, listener){
+    if (this._events[type] instanceof Array){
+      var listeners = this._events[type];
+      for (var i=0, len=listeners.length; i < len; i++){
+        if (listeners[i] === listener){
+          listeners.splice(i, 1);
+          break;
+        }
+      }
+    }
+  };
+
+  Session.prototype._processAuth = function(response){
+    this._failedRefreshes = 0;
+    if(this.persistSession){
+      this.persist();
+    }
+    this.log("session refreshed running queue");
+    this._runQueue();
+    this.emit("authentication:success", response);
+    this.emit("authenticated", response);
+  };
+
+  Session.prototype._authError = function(error){
+    this._failedRefreshes++;
+    this.log("error getting token or registering device from ArcGIS, " + error.error_description);
+    this.emit("authentication:failure", error);
+    this.refresh();
+  };
+
+  Session.prototype.log = function(){
+    var args = Array.prototype.slice.apply(arguments);
+    args.unshift(this.key);
+    if(this.debug){
+      util.log.apply(this, args);
+    }
+  };
+
+  Session.prototype.request = function(method, options, dfd){
+    var session = this;
+
+    // set defaults for parameters, callback, XHR
+    var defaults = {
+      params: {},
+      callback: null,
+      addCallbacksToDeferred: true
+    };
+
+    // make a new deferred for callbacks
+    var deferred = dfd || new exports.Deferred();
+
+    // empty var for httpRequest which is set later
+    var httpRequest;
+
+    // merge settings and defaults
+    var settings = util.merge(defaults, options);
+
+    // assume this is a request to getriggers is it doesn't start with (http|https)://
+    var geotriggersRequest = !method.match(/^https?:\/\//);
+
+    // create the url for the request
+    var url = (geotriggersRequest) ? this.geotriggersUrl + method : method;
+
+    this.log("making request to " + url + " as a " + this.authenticatedAs);
+
+    // callback for handling a successful request
+    var handleSuccessfulResponse = function(){
+      session.log("successful http request to " + url + " as a " + session.authenticatedAs);
+      var json = JSON.parse(httpRequest.responseText);
+      var response = (json.error) ? null : json;
+      var error = (json.error) ? json.error : null;
+
+      // did our token expire?
+      // if it didn't resolve or reject the callback
+      // if it did refresh the auth and run the request again
+      if(error && error.type === "invalidHeader" && error.headers.Authorization){
+        session.log("invalid authentication for http request to " + url +" trying to refresh token");
+
+        // push our request options and deferred into the request queue
+        session._requestQueue.push({
+          method: method,
+          options: settings,
+          deferred: deferred
+        });
+        // refresh the auth
+        session.refresh();
+      } else {
+        if (!error){
+          session.log("running success callback for request to " + url + " with ", response);
+          deferred.resolve(response, httpRequest);
+          if(settings.callback) {
+            settings.callback(null, response, httpRequest);
+          }
+        } else if (error){
+          session.log("running error callback for request to " + url + " with ", response);
+          deferred.reject(error, httpRequest);
+          if(settings.callback) {
+            settings.callback(error, null, httpRequest);
+          }
+        } else {
+          var errorMessage = {
+            type: "unexpected_response",
+            message: "the api returned a non json or unexpected data"
+          };
+          session.log("running error callback for request to " + url + " with ", errorMessage);
+          deferred.reject(errorMessage, httpRequest);
+          if(settings.callback) {
+            settings.callback(errorMessage, null, httpRequest);
+          }
+        }
+      }
+    };
+
+    // callback for handling an http error
+    var handleErrorResponse = function(){
+      var errorMessage = JSON.parse(httpRequest.responseText);
+      session.log("request to " + url + " as a " + session.authenticatedAs + " failed with ", errorMessage);
+      var error = {
+        type: "http_error",
+        message: errorMessage
+      };
+      deferred.reject(error);
+    };
+
+    // callback for handling state change
+    var handleStateChange = function(){
+      if(httpRequest.readyState === 4 && httpRequest.status < 400){
+        handleSuccessfulResponse();
+      } else if(httpRequest.readyState === 4 && httpRequest.status >= 400) {
+        handleErrorResponse();
+      }
+    };
+
+    // use XDomainRequest (ie8) or XMLHttpRequest (standard)
+    if (IS_IE) {
+      httpRequest = new XDomainRequest();
+      httpRequest.onload = handleSuccessfulResponse;
+      httpRequest.onerror = handleErrorResponse;
+      httpRequest.ontimeout = handleErrorResponse;
+    } else if (typeof XMLHttpRequest !== "undefined") {
+      httpRequest = new XMLHttpRequest();
+      httpRequest.onreadystatechange = handleStateChange;
+    } else {
+      throw new Error("This browser does not support XMLHttpRequest or XDomainRequest");
+    }
+
+    // set the access token in the body
+    if(geotriggersRequest){
+      settings.params.token = this.token;
+    }
+
+    // Convert parameters to form encoded (AGO) or a JSON sting (Geotriggers)
+    var body = (geotriggersRequest) ? JSON.stringify(settings.params) : util.serialize(settings.params);
+
+    httpRequest.open("POST", url);
+
+    if(!IS_IE){
+      var contentType = (geotriggersRequest) ? 'application/json' : 'application/x-www-form-urlencoded';
+      httpRequest.setRequestHeader('Content-Type', contentType);
+    }
+
+    httpRequest.send(body);
+
+    this.log("sent request to "+ url + " as a " + this.authenticatedAs + " with", settings.params);
+
+    return deferred;
+  };
+
+  Session.prototype.persist = function() {
+    var value = {};
+    if(this.clientSecret){ value.clientSecret = this.clientSecret; }
+    if(this.token){ value.token = this.token; }
+    if(this.refreshToken){ value.refreshToken = this.refreshToken; }
+    if(this.deviceId){ value.deviceId = this.deviceId; }
+    if(this.preferLocalStorage && hasLocalStorage){
+      this.log("persisting session to localStorage ", value);
+      localStorage.set(this.key, value);
+    } else if (hasCookies) {
+      this.log("persisting session to cookie ", value);
+      cookie.set(this.key, value);
+    }
+  };
+
+  Session.prototype.destroy = function() {
+    this.log("destorying persisted session");
+    if(this.preferLocalStorage && hasLocalStorage) {
+      localStorage.erase(this.key);
+    } else if (hasCookies) {
+      cookie.erase(this.key);
+    }
+  };
+
+  exports.Session = Session;
+
+  /*
+  General Purpose Utilities
+  -----------------------------------
+  */
+
+  var util = {
+    bind: function(context, func) {
+      var bound, args;
+
+      if (typeof func !== "function") {
+        throw new TypeError();
+      }
+
+      if (typeof Function.prototype.bind === 'function') {
+        return func.bind(context);
+      }
+
+      args = Array.prototype.slice.call(arguments, 2);
+
+      return bound = function() {
+        if (!(this instanceof bound)) {
+          return func.apply(context, args.concat(Array.prototype.slice.call(arguments)));
+        }
+
+        var Ctor;
+        Ctor.prototype = func.prototype;
+
+        var self = new Ctor();
+        var result = func.apply(self, args.concat(Array.prototype.slice.call(arguments)));
+
+        if (Object(result) === result) {
+          return result;
+        }
+
+        return self;
+      };
+    },
+
+    // Merge Object 1 and Object 2.
+    // Properties from Object 2 will override properties in Object 1.
+    // Returns Object 1
+    merge: function(target, obj){
+      for (var attr in obj) {
+        if(obj.hasOwnProperty(attr)){
+          target[attr] = obj[attr];
+        }
+      }
+      return target;
+    },
+
+    // Makes it safe to log from anywhere
+    log: function(){
+      var args = Array.prototype.slice.apply(arguments);
+      if (Function.prototype.bind && typeof console !== undefined && console.log) {
+        var log = Function.prototype.bind.call(console.log, console);
+        log.apply(console, args);
+      }
+    },
+
+    isObject: function(thing){
+      return Object.prototype.toString.call(thing) === '[object Object]';
+    },
+
+    isArray: function(thing){
+      return Object.prototype.toString.call(thing) === '[object Array]';
+    },
+
+    serialize: function(obj, prefix) {
+
+        var enc = encodeURIComponent;
+
+        // make an array to hold each peice
+        var str = [];
+
+        // for every key in our object
+        for(var p in obj) {
+          var e;
+          var k = (prefix) ? prefix + "[" + p + "]" : p, v = obj[p];
+          if(k === "properties" || k === "condition[geo][geojson]" || k === "locations" || k === "data"){
+            e = enc(k) + "=" + enc(JSON.stringify(v));
+          } else {
+            e = (util.isObject(v)) ? util.serialize(v, k) : enc(k) + "=" + enc(v);
+          }
+          str.push(e);
+        }
+
+        // join with ampersands
+        return str.join("&");
+    }
+  };
+
+  /*
+  Utilities for manipulating sessions
+  -----------------------------------
+  */
+
+  var hasLocalStorage = (typeof window === "object" && typeof window.localStorage === "object") ? true : false;
+  var hasCookies = (typeof document === "object" && typeof document.cookie === "string") ? true : false;
+
+  var localStorage = {
+    set:function(key, value){
+      window.localStorage.setItem(key, JSON.stringify(value));
+    },
+    get: function(key){
+      return JSON.parse(window.localStorage.getItem(key));
+    },
+    erase: function(key){
+      window.localStorage.removeItem(key);
+    }
+  };
+
+  var cookie = {
+    get: function(key) {
+      // Still not sure that "[a-zA-Z0-9.()=|%/_]+($|;)" match *all* allowed characters in cookies
+      var tmp =  document.cookie.match((new RegExp(key +'=[a-zA-Z0-9.()=|%/_]+($|;)','g')));
+      if(!tmp || !tmp[0]){
+        return null;
+      } else {
+        return JSON.parse(tmp[0].substring(key.length+1,tmp[0].length).replace(';','')) || null;
+      }
+    },
+
+    set: function(key, value, secure) {
+      var cookie = [
+        key+'='+JSON.stringify(value),
+        'path=/',
+        'domain='+window.location.host
+      ];
+
+      var expiration_date = new Date();
+      expiration_date.setFullYear(expiration_date.getFullYear() + 1);
+      cookie.push(expiration_date.toGMTString());
+
+      if (secure){
+        cookie.push('secure');
+      }
+      return document.cookie = cookie.join('; ');
+    },
+
+    erase: function(key) {
+      document.cookie = key + "; " + new Date(0).toUTCString();
+    }
+  };
+
+  return exports;
+}));
