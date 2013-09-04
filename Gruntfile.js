@@ -41,18 +41,18 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
-          'src/**/*.js',
+          'src/js/*.js',
           'src/scss/**/*.scss',
           'src/img/**/*.jpg',
           'src/img/**/*.png',
-          'src/templates/*.hbs',
-          'src/**/*.json'
+          'src/templates/*.hbs'
         ],
         tasks: [
           'jshint',
           'clean:dev',
           'compass:dev',
           'copy:dev',
+          'handlebars',
           'concat:dev'
         ]
         // options: {
@@ -89,17 +89,31 @@ module.exports = function(grunt) {
         separator: '\n\n'
       },
       dev: {
-        src: [
-          'src/js/lib/*.js',
-          'src/js/app.js',
-          'src/templates/*.js',
-          'src/js/modules/*.js',
-          'src/js/models/*.js',
-          'src/js/collections/*.js',
-          'src/js/layouts/*.js',
-          'src/js/views/*.js'
-        ],
-        dest: 'dev/js/<%= pkg.name %>.js'
+        files: {
+          'dev/js/vendor.js': [
+            'vendor/json2.js',
+            'vendor/jquery-1.10.2.js',
+            'vendor/underscore.js',
+            'vendor/backbone.js',
+            'vendor/backbone.marionette.js',
+            'vendor/handlebars.js',
+            'vendor/geotriggers.min.js',
+            'vendor/leaflet/leaflet.js',
+            'vendor/esri-leaflet.js',
+            'vendor/leaflet/leaflet.draw-custom-src.js',
+            'vendor/leaflet/leaflet.draw.tooltip.js'
+          ],
+          'dev/js/<%= pkg.name %>.js': [
+            'src/js/lib/*.js',
+            'src/js/app.js',
+            'src/templates/*.js',
+            'src/js/modules/*.js',
+            'src/js/models/*.js',
+            'src/js/collections/*.js',
+            'src/js/layouts/*.js',
+            'src/js/views/*.js'
+          ]
+        }
       },
       // production
       dist: {
@@ -150,9 +164,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'src/',
           src: [
-            'img/**',
-            'js/response.json',
-            'templates/**'
+            'img/**'
           ],
           dest: 'dev/'
         }]
@@ -167,8 +179,7 @@ module.exports = function(grunt) {
         src: [
           'dev/img/',
           'dev/css/',
-          'dev/js/',
-          'dev/templates/'
+          'dev/js/'
         ]
       }
     },

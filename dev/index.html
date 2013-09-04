@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>ArcGIS Geotrigger Editor</title>
-  <link rel="stylesheet" href="../vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="../vendor/css/leaflet.css">
   <link rel="stylesheet" href="../vendor/css/esri-leaflet.min.css">
   <link rel="stylesheet" href="../vendor/css/leaflet.draw.css">
   <!--[if lte IE 8]>
-    <link rel="stylesheet" href="../vendor/leaflet/leaflet.ie.css">
+    <link rel="stylesheet" href="../vendor/css/leaflet.ie.css">
     <link rel="stylesheet" href="../vendor/css/leaflet.draw.ie.css">
   <![endif]-->
   <!-- Base Styles -->
@@ -19,37 +19,21 @@
   <![endif]-->
 </head>
 <body>
-  <div id="gt-editor">
-    <div id="gt-controls-region"></div>
-    <div class="gt-drawer gt-drawer-list"></div>
-    <div class="gt-drawer gt-drawer-new"></div>
-    <div id="gt-map-region"></div>
-    <div id="gt-notifications"></div>
-  </div>
+  <div id="gt-editor"></div>
 
   <!-- dependencies -->
-  <script src="../vendor/json2.js"></script>
-  <script src="../vendor/jquery-1.10.2.js"></script>
-  <script src="../vendor/underscore.js"></script>
-  <script src="../vendor/backbone.js"></script>
-  <script src="../vendor/backbone.marionette.js"></script>
-  <script src="../vendor/handlebars.js"></script>
-  <script src="../vendor/geotriggers.min.js"></script>
-  <script src="../vendor/leaflet/leaflet.js"></script>
-  <script src="../vendor/esri-leaflet.js"></script>
+  <script src="js/vendor.js"></script>
 
-  <!-- leaflet draw custom build -->
-  <script src="../vendor/leaflet/leaflet.draw-custom-src.js"></script>
-  <script src="../vendor/leaflet/leaflet.draw.tooltip.js"></script>
-
-  <!-- editor app -->
+  <!-- editor -->
   <script src="js/geotrigger-editor.js"></script>
 
   <!-- initializer -->
   <script>
-  $(function(){
-    GeotriggerEditor.start();
-  });
+    $(function(){
+      GeotriggerEditor.start({
+        el: '#gt-editor'
+      });
+    });
   </script>
 </body>
 </html>
