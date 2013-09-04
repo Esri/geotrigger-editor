@@ -8,7 +8,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
   _.extend(Map, {
 
     zoomToLayer: function(layer) {
-      this.instance.fitBounds(layer.getBounds(), {
+      App.map.fitBounds(layer.getBounds(), {
         paddingTopLeft: [App.listDrawerRegion.$el.width(), 0]
       });
     }
@@ -21,9 +21,9 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
     var el = options.el;
 
     // L.Icon.Default.imagePath = App.Config.imagePath;
-    this.instance = L.map(el).setView(App.Config.Map.center, App.Config.Map.zoom);
-    this.instance.zoomControl.setPosition('topright');
-    L.esri.basemapLayer(App.Config.Map.basemap).addTo(this.instance);
+    App.map = L.map(el).setView(App.Config.Map.center, App.Config.Map.zoom);
+    App.map.zoomControl.setPosition('topright');
+    L.esri.basemapLayer(App.Config.Map.basemap).addTo(App.map);
 
     this.Draw.start();
   });
