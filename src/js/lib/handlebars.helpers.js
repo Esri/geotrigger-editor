@@ -18,4 +18,20 @@
     return select.innerHTML;
   });
 
+  Handlebars.registerHelper('actionIcon', function(action) {
+    if (action === 'enter') {
+      return 'gt-icon-enter';
+    } else if (action === 'leave') {
+      return 'gt-icon-exit';
+    }
+  });
+
+  Handlebars.registerHelper('unlessDefaultTag', function(conditional, options) {
+    if(conditional.indexOf('trigger:') !== 0) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  });
+
 }(Handlebars, $));
