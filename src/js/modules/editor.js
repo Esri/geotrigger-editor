@@ -33,6 +33,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       this.triggerCollection.fetch({ reset: true });
 
       App.vent.on('trigger:create', this.createTrigger, this);
+      App.vent.on('trigger:update', this.updateTrigger, this);
     },
 
     showMap: function() {
@@ -77,9 +78,14 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
     createTrigger: function(triggerData) {
       this.triggerCollection.create(triggerData);
+    },
+
+    updateTrigger: function(triggerData) {
+      var model = this.triggerCollection.get(triggerData.triggerId);
+      model.set(triggerData);
+      model.save();
     }
   });
-
 
   // Editor Initializer
   // ------------------

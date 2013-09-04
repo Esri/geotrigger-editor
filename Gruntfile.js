@@ -41,18 +41,18 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
-          'src/**/*.js',
+          'src/js/*.js',
           'src/scss/**/*.scss',
           'src/img/**/*.jpg',
           'src/img/**/*.png',
-          'src/templates/*.hbs',
-          'src/**/*.json'
+          'src/templates/*.hbs'
         ],
         tasks: [
           'jshint',
           'clean:dev',
           'compass:dev',
           'copy:dev',
+          'handlebars',
           'concat:dev'
         ]
         // options: {
@@ -80,25 +80,40 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['src/**/*.js']
+      files: ['src/js/*.js']
     },
 
     concat: {
       options: {
         // define a string to put between each file in the concatenated output
-        separator: ';'
+        separator: '\n\n'
       },
       dev: {
-        src: [
-          'src/js/lib/*.js',
-          'src/js/app.js',
-          'src/js/modules/*.js',
-          'src/js/models/*.js',
-          'src/js/collections/*.js',
-          'src/js/layouts/*.js',
-          'src/js/views/*.js'
-        ],
-        dest: 'dev/js/<%= pkg.name %>.js'
+        files: {
+          'dev/js/vendor.js': [
+            'vendor/json2.js',
+            'vendor/jquery-1.10.2.js',
+            'vendor/underscore.js',
+            'vendor/backbone.js',
+            'vendor/backbone.marionette.js',
+            'vendor/handlebars.js',
+            'vendor/geotriggers.js',
+            'vendor/leaflet.js',
+            'vendor/esri-leaflet.js',
+            'vendor/leaflet.draw-custom.js',
+            'vendor/leaflet.draw.tooltip.js'
+          ],
+          'dev/js/<%= pkg.name %>.js': [
+            'src/js/lib/*.js',
+            'src/js/app.js',
+            'src/templates/*.js',
+            'src/js/modules/*.js',
+            'src/js/models/*.js',
+            'src/js/collections/*.js',
+            'src/js/layouts/*.js',
+            'src/js/views/*.js'
+          ]
+        }
       },
       // production
       dist: {
@@ -106,6 +121,7 @@ module.exports = function(grunt) {
         src: [
           'src/js/lib/*.js',
           'src/js/app.js',
+          'src/templates/*.js',
           'src/js/modules/*.js',
           'src/js/models/*.js',
           'src/js/collections/*.js',
@@ -120,7 +136,7 @@ module.exports = function(grunt) {
     complexity: {
       generic: {
         src: [
-          'src/**/*.js',
+          'src/js/**/*.js',
           'tasks/grunt-complexity.js'
         ],
         options: {
@@ -129,7 +145,7 @@ module.exports = function(grunt) {
           errorsOnly: false, // show only maintainability errors
           cyclomatic: 5,
           halstead: 15,
-          maintainability: 85
+          maintainability: 80
         }
       }
     },
@@ -148,9 +164,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'src/',
           src: [
-            'img/**',
-            'js/response.json',
-            'templates/**'
+            'img/**'
           ],
           dest: 'dev/'
         }]
@@ -165,9 +179,23 @@ module.exports = function(grunt) {
         src: [
           'dev/img/',
           'dev/css/',
-          'dev/js/',
-          'dev/templates/'
+          'dev/js/'
         ]
+      }
+    },
+
+    handlebars: {
+      compile: {
+        options: {
+          namespace: 'GeotriggerEditor.Templates',
+          processName: function(filePath) {
+            var process = filePath.split('src/templates/')[1];
+            return process.split('.hbs')[0];
+          }
+        },
+        files: {
+          'src/templates/compiled.js': 'src/templates/*.hbs'
+        }
       }
     },
 
@@ -198,6 +226,7 @@ module.exports = function(grunt) {
     'clean:dev',
     'compass:dev',
     'copy:dev',
+    'handlebars',
     'concat:dev',
     'connect:dev',
     'watch'
@@ -207,6 +236,7 @@ module.exports = function(grunt) {
     'test',
     'clean:dist',
     'compass:dist',
+    'handlebars',
     'concat:dist',
     'uglify:dist',
     'smushit'
