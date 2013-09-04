@@ -27,6 +27,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     openDrawer: function() {
       this.$el.parent().addClass('gt-open');
+      $('#gt-map-region').addClass('gt-open-drawer');
+      App.map.invalidateSize();
     },
 
     closeDrawer: function(e) {
@@ -35,12 +37,17 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
 
       this.$el.parent().removeClass('gt-open');
+      $('#gt-map-region').removeClass('gt-open-drawer');
+      App.map.invalidateSize();
+
       App.vent.trigger('controls:deactivate', 'create');
       App.vent.trigger('trigger:new:cancel');
     },
 
     toggle: function() {
       this.$el.parent().toggleClass('gt-open');
+      $('#gt-map-region').toggleClass('gt-open-drawer');
+      App.map.invalidateSize();
     },
 
     parseForm: function(e) {
