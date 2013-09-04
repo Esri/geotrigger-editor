@@ -42,7 +42,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     restoreShape: function() {
       // should start using App.vent instead of this restoreShape mess
-      if (!App.Map.instance.hasLayer(this.shape)) {
+      if (!App.map.hasLayer(this.shape)) {
         App.Map.Draw.clear();
         this.renderShape();
       }

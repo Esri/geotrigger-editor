@@ -7,33 +7,6 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
 
     idAttribute: 'triggerId',
 
-    defaults: {
-      // 'triggerId': null,
-      'condition': {
-        'direction': 'enter',
-        'geo': {
-          // 'geocode': '920 SW 3rd Ave, Portland, OR',
-          // 'driveTime': 600,
-          // 'context': {
-          //   'locality': 'Portland',
-          //   'region': 'Oregon',
-          //   'country': 'USA',
-          //   'zipcode': '97204'
-          // }
-          'latitude': 45.5165,
-          'longitude': -122.6764,
-          'distance': 240
-        }
-      },
-      'action': {
-        'notification': {
-          'text': 'Welcome to Portland'
-        }
-        // 'callbackUrl': 'http://pdx.gov/welcome'
-      },
-      'setTags': ['foodcarts', 'citygreetings']
-    },
-
     // override sync method to use geotrigger API
     sync: function(method, model, options) {
       console.log('sync:' + method);
