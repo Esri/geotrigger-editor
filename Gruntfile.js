@@ -97,11 +97,11 @@ module.exports = function(grunt) {
             'vendor/backbone.js',
             'vendor/backbone.marionette.js',
             'vendor/handlebars.js',
-            'vendor/geotriggers.min.js',
-            'vendor/leaflet/leaflet.js',
+            'vendor/geotriggers.js',
+            'vendor/leaflet.js',
             'vendor/esri-leaflet.js',
-            'vendor/leaflet/leaflet.draw-custom-src.js',
-            'vendor/leaflet/leaflet.draw.tooltip.js'
+            'vendor/leaflet.draw-custom.js',
+            'vendor/leaflet.draw.tooltip.js'
           ],
           'dev/js/<%= pkg.name %>.js': [
             'src/js/lib/*.js',
