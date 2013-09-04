@@ -27,6 +27,8 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
       this.resetButtons();
       this.$el.removeClass('gt-panel-editing');
       this.$el.parent().toggleClass('gt-open');
+      $('#gt-map-region').toggleClass('gt-open-drawer');
+      App.map.invalidateSize();
     },
 
     backToList: function(e) {
@@ -48,6 +50,9 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
 
       App.vent.trigger('controls:restore-shape');
       App.vent.trigger('controls:deactivate', 'list');
+
+      $('#gt-map-region').removeClass('gt-open-drawer');
+      App.map.invalidateSize();
     }
   });
 
