@@ -1,5 +1,3 @@
-// @TODO: investigate handlebars precompilation: http://handlebarsjs.com/precompilation.html
-
 var GeotriggerEditor = new Backbone.Marionette.Application();
 
 GeotriggerEditor.addInitializer(function(options) {

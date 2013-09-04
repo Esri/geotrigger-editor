@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Config', function(Config) {
 
   var sharedOptions = {
     showArea: false,
@@ -13,18 +13,6 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
       clickable: true
     }
   };
-
-  var icon = L.icon({
-    iconUrl: 'img/blue-dot.png',
-    iconRetinaUrl: 'img/blue-dot@2x.png',
-    iconSize: [12, 12],
-    iconAnchor: [6, 6],
-    popupAnchor: [0, 0],
-    shadowUrl: null,
-    shadowRetinaUrl: null,
-    shadowSize: [0, 0],
-    shadowAnchor: [0, 0]
-  });
 
   _.extend(Config, {
 
@@ -41,7 +29,17 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
     circleOptions: sharedOptions,
 
     drivetimeOptions: {
-      icon: icon
+      icon: L.icon({
+        iconUrl: 'img/blue-dot.png',
+        iconRetinaUrl: 'img/blue-dot@2x.png',
+        iconSize: [12, 12],
+        iconAnchor: [6, 6],
+        popupAnchor: [0, 0],
+        shadowUrl: null,
+        shadowRetinaUrl: null,
+        shadowSize: [0, 0],
+        shadowAnchor: [0, 0]
+      })
     },
 
     session: {
