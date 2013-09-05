@@ -80,7 +80,20 @@ module.exports = function(grunt) {
     },
 
     jshint: {
-      files: ['src/js/*.js']
+      options: {
+        'browser': true,
+        'curly': true,
+        'eqnull': true,
+        'evil': true,
+        'expr': true,
+        'multistr': true,
+        'trailing': true,
+        'undef': false,
+        'wsh': true,
+        'sub': true,
+        'boss': true
+      },
+      files: ['src/js/**/*.js']
     },
 
     concat: {
@@ -223,6 +236,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('dev', [
+    'jshint',
     'clean:dev',
     'compass:dev',
     'copy:dev',
