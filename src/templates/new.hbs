@@ -2,11 +2,13 @@
   <h3 class='gt-panel-top-bar-left'>Create</h3>
   <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>
 </div>
+
 <div class='gt-panel-content'>
   <form>
     <input type='text' name='properties[title]' placeholder='Title' class='gt-trigger-title-input'>
     <span class='gt-tag-label'>When a device tagged</span>
     <input type='text' name='setTags' placeholder='enter tags' class='gt-tag-input'>
+
     <label for='event' class='left'>
       <select name='condition[direction]' class='gt-event'>
         <option disabled='disabled' selected>select a condition</option>
@@ -17,9 +19,9 @@
         <option value='default' disabled='disabled' selected>select a geometry</option>
         <option value='polygon'>a polygon</option>
         <option value='radius'>a distance of</option>
-        <!-- <option value='drivetime'>a drivetime of</option> -->
       </select>
     </label>
+
     <select class='gt-action-selector'>
       <option disabled='disabled' selected>choose an action</option>
       <option value='message'>send the device a message</option>
@@ -37,13 +39,14 @@
     </label>
 
     <label class='gt-action gt-action-profile gt-hide' for='url'>
-      to <select class='gt-action-profile-selector' name='action[trackingProfile]'>
-      <option disabled='disabled' selected>choose an profile</option>
-      <option value='fine'>fine</option>
-      <option value='adaptive'>adaptive</option>
-      <option value='rough'>rough</option>
-      <option value='off'>off</option>
-    </select>
+      <span>to</span>
+      <select class='gt-action-profile-selector' name='action[trackingProfile]'>
+        <option disabled='disabled' selected>choose a tracking profile</option>
+        <option value='fine'>fine</option>
+        <option value='adaptive'>adaptive</option>
+        <option value='rough'>rough</option>
+        <option value='off'>off</option>
+      </select>
     </label>
 
     <!--
@@ -60,6 +63,7 @@
       </select>
     </label>
     -->
+
     <a href='#' class='gt-button gt-button-blue gt-submit'>Submit</a>
   </form>
 </div>

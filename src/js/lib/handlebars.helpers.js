@@ -18,4 +18,34 @@
     return select.innerHTML;
   });
 
+  Handlebars.registerHelper('actionIcon', function(action) {
+    if (action === 'enter') {
+      return 'gt-icon-enter';
+    } else if (action === 'leave') {
+      return 'gt-icon-exit';
+    }
+  });
+
+  Handlebars.registerHelper('unlessDefaultTag', function(conditional, options) {
+    if(conditional.indexOf('trigger:') !== 0) {
+      return options.fn(this);
+    } else {
+      return options.inverse(this);
+    }
+  });
+
+  Handlebars.registerHelper('tagList', function(tags, options) {
+    if (tags && tags.length) {
+      var output = [];
+      for (var i=0;i<tags.length;i++) {
+        if (tags[i].indexOf('trigger:') !== 0) {
+          output.push(tags[i]);
+        }
+      }
+      return output.join(', ');
+    } else {
+      return '';
+    }
+  });
+
 }(Handlebars, $));

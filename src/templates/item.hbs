@@ -1,8 +1,18 @@
-<span class="gt-item-edit gt-icon gt-icon-enter gt-icon-polygon"></span>
-<h5><a class="gt-item-edit" href="#">{{condition.direction}} Polygon 442 SE 42nd</a></h5>
+<span class="gt-item-edit gt-icon {{actionIcon condition.direction}} gt-icon-polygon"></span>
+<h5>
+  <a class="gt-item-edit" href="#">
+    {{#unless properties.title}}
+    untitled trigger
+    {{else}}
+    {{properties.title}}
+    {{/unless}}
+  </a>
+</h5>
 <ul class="gt-tags">
   {{#each tags}}
+  {{#unlessDefaultTag this}}
   <li>{{this}}</li>
+  {{/unlessDefaultTag}}
   {{/each}}
 </ul>
 <ul class="gt-item-controls">

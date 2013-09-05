@@ -4,6 +4,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   // ----------------
   //
   // Handles the new trigger form.
+  //
+  // @TODO: merge with edit view as behavior is near-identical
+  //        (or come up with inheritance scheme)
 
   Views.New = Marionette.ItemView.extend({
     template: App.Templates['new'],
@@ -11,9 +14,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     events: {
       'click .gt-close-drawer': 'closeDrawer',
-      'click .gt-submit': 'parseForm',
+      'change .gt-geometry-type': 'startDrawing',
       'change .gt-action-selector': 'toggleActions',
-      'change .gt-geometry-type': 'startDrawing'
+      'click .gt-submit': 'parseForm'
     },
 
     initialize: function(options) {
@@ -27,6 +30,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.listenTo(App.vent, 'drawer:new:close', this.closeDrawer);
       this.listenTo(App.vent, 'drawer:new:toggle', this.toggle);
     },
+
+    /* start: to be deleted (show/hide should be handled by parent) */
 
     openDrawer: function() {
       this.$el.parent().addClass('gt-open');
@@ -48,9 +53,19 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     toggle: function() {
-      this.$el.parent().toggleClass('gt-open');
-      $('#gt-map-region').toggleClass('gt-open-drawer');
-      App.map.invalidateSize();
+      if (this.$el.parent().hasClass('gt-open')) {
+        this.closeDrawer();
+      } else {
+        this.openDrawer();
+      }
+    },
+
+    /* end: to be deleted */
+
+    startDrawing: function (e) {
+      var tool = $(e.target).val();
+      App.Map.Draw.clear();
+      App.Map.Draw.enableTool(tool);
     },
 
     toggleActions: function(e) {
@@ -59,18 +74,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.$el.find('.gt-action-'+action).show();
     },
 
-    startDrawing: function (e) {
-      var tool = $(e.target).val();
-      App.Map.Draw.clear();
-      App.Map.Draw.enableTool(tool);
-    },
-
     parseForm: function(e) {
       e.preventDefault();
       var data = this.$el.find('form').serializeObject();
       data = App.util.removeEmptyStrings(data);
 
-      if (data) {
+      if (data) { // @TODO: validate
         this.createTrigger(data);
         App.vent.trigger('controls:list:toggle');
       }
