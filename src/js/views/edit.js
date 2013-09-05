@@ -4,12 +4,16 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   // -----------------
   //
   // Populates the edit trigger form with a preexisting trigger and handles updates.
+  //
+  // @TODO: decouple shape from view (get rid of `restoreShape`)
 
   Views.Edit = Marionette.ItemView.extend({
     template: App.Templates['edit'],
     className: 'gt-edit',
 
     events: {
+      'change .gt-geometry-type': 'startDrawing',
+      'change .gt-action-selector': 'toggleActions',
       'click .gt-submit': 'parseForm'
     },
 
@@ -31,50 +35,56 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.options.item.restoreShape();
     },
 
+    startDrawing: function (e) {
+      var tool = $(e.target).val();
+      App.Map.Draw.clear();
+      App.Map.Draw.enableTool(tool);
+    },
+
+    toggleActions: function(e) {
+      var action = $(e.target).val();
+      this.$el.find('.gt-action').hide();
+      this.$el.find('.gt-action-'+action).show();
+    },
+
     parseForm: function(e) {
       e.preventDefault();
       var data = this.$el.find('form').serializeObject();
+      data = App.util.removeEmptyStrings(data);
+      if (data.tags) {
+        var tags = data.tags;
+        tags = tags.split(',');
+        for (var i=tags.length-1;i>0;i--) {
+          tags[i] = tags[i].trim();
+        }
+        data.tags = tags;
+      }
 
-      if (data) {
+      if (data) { // @TODO: validate
         this.updateTrigger(data);
-        App.vent.trigger('controls:list:toggle');
       }
     },
 
     updateTrigger: function(data) {
-      console.log(data);
       var geo;
       var layer = App.Map.Draw.editLayer.getLayers()[0];
 
       if (layer instanceof L.Circle) {
         var latlng = layer.getLatLng();
-        geo = {
+        data.condition.geo = {
           'latitude': latlng.lat,
           'longitude': latlng.lng,
           'distance': layer.getRadius()
         };
       } else {
-        geo = {
+        data.condition.geo = {
           'geojson': layer.toGeoJSON()
         };
       }
 
-      var trigger = {
-        'triggerId': this.model.get('triggerId'),
-        'condition': {
-          'direction': 'enter',
-          'geo': geo
-        },
-        'action': {
-          'notification': {
-            'text': 'Welcome to Portland'
-          },
-          'callbackUrl': 'http://pdx.gov/welcome'
-        },
-        'setTags': ['newtags']
-      };
+      data.triggerId = this.model.get('triggerId');
 
-      App.vent.trigger('trigger:update', trigger);
+      App.vent.trigger('trigger:update', data);
     }
   });
 
