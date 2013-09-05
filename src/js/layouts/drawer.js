@@ -21,18 +21,25 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
       this.listenTo(App.vent, 'drawer:list:toggle', this.toggleDrawer);
       this.listenTo(App.vent, 'drawer:list:reset-buttons', this.resetButtons);
       this.listenTo(App.vent, 'drawer:close', this.closeDrawer);
+      this.listenTo(App.vent, 'trigger:update', this.backToList);
     },
 
-    toggleDrawer: function() {
-      this.resetButtons();
-      this.$el.removeClass('gt-panel-editing');
-      this.$el.parent().toggleClass('gt-open');
-      $('#gt-map-region').toggleClass('gt-open-drawer');
-      App.map.invalidateSize();
+    toggleDrawer: function(e) {
+      if (typeof e !== 'undefined' && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      if (this.$el.parent().hasClass('gt-open')) {
+        this.closeDrawer();
+      } else {
+        this.openDrawer();
+      }
     },
 
     backToList: function(e) {
-      e.preventDefault();
+      if (typeof e !== 'undefined' && e.preventDefault) {
+        e.preventDefault();
+      }
       this.$el.removeClass('gt-panel-editing');
     },
 
@@ -41,10 +48,23 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
       this.$el.find('.gt-reset-delete').removeClass('gt-reset-flyout');
     },
 
+    openDrawer: function(e) {
+      if (typeof e !== 'undefined' && e.preventDefault) {
+        e.preventDefault();
+      }
+      this.resetButtons();
+
+      this.$el.removeClass('gt-panel-editing');
+      this.$el.parent().addClass('gt-open');
+      $('#gt-map-region').addClass('gt-open-drawer');
+      App.map.invalidateSize();
+    },
+
     closeDrawer: function(e) {
       if (typeof e !== 'undefined' && e.preventDefault) {
         e.preventDefault();
       }
+      this.resetButtons();
 
       this.$el.parent().removeClass('gt-open');
 

@@ -16,7 +16,7 @@
   margin: 0 0 4px 100px;
   padding:14px 20px;
   color:$white;
-  background-color: rgba(0,0,0, 0.8);
+  background-color: rgba(38,38,38, 0.8);
   @include border-radius(4px);
   @include box-shadow(0 0 12px rgba(0,0,0,0.2));
   &.error {
