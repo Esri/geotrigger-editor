@@ -47,10 +47,9 @@
 .gt-search {
   width: 100%;
   @include box-sizing(border-box);
-  background: url(/dist/img/icons/search.png) no-repeat left center transparent;
-  padding: 0.5em 2em 1em 2em;
-  margin-left: 1em;
-  @include retina-display(){ background: url(/dist/img/icons/search2x.png) no-repeat left center transparent; background-size: 24px;}
+  background: url(/dist/img/icons/search.png) no-repeat 2em center transparent;
+  padding: 0.5em 2.5em 0.5em 4em;
+  @include retina-display(){ background: url(/dist/img/icons/search2x.png) no-repeat 2em center transparent; background-size: 24px;}
   input[type="search"]{
     margin-left: 0.5em;
     padding: 0.75em 0.66em 0.75em 0.66em;
@@ -75,6 +74,7 @@
   }
 }
 .gt-result {
+  display: none;
   width:100%;
   padding:1em 1em 1em 1em;
   border-bottom:1px solid $light-gray;
@@ -82,6 +82,9 @@
   @include box-sizing(border-box);
   overflow:hidden;
   // position:relative;
+  &.gt-list-visible {
+    display:block;
+  }
   .gt-item-edit {
     cursor: pointer;
   }
