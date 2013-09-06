@@ -11,32 +11,42 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-result',
 
     events: {
-      'click .gt-item-edit'           : 'editItem',
+      // 'click .gt-item-edit'           : 'editItem',
       'click .gt-item-delete'         : 'confirmDelete',
       'click .gt-reset-delete'        : 'resetDelete',
       'click .gt-item-confirm-delete' : 'destroyModel'
     },
 
-    initialize: function() {
-      this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.model, 'change', this.renderShape);
+    ui: {
+      'deleteItem' : '.gt-item-delete',
+      'confirm'    : '.gt-item-confirm-delete',
+      'reset'      : '.gt-reset-delete'
+    },
+
+    modelEvents: {
+      'change': 'modelChanged'
     },
 
     onShow: function() {
-      this.renderShape();
+      // this.renderShape();
+    },
+
+    modelChanged: function() {
+      this.render();
+      // this.renderShape();
     },
 
     renderShape: function() {
       if (this.shape) {
-        App.Map.Draw.clearShape(this.shape);
+        App.Map.clearShape(this.shape);
         this.shape = null;
       }
       var id = this.model.get('triggerId');
       var geo = this.model.get('condition').geo;
       if (geo.geojson) {
-        this.shape = App.Map.Draw.polygon(geo.geojson, id);
+        this.shape = App.Map.polygon(geo.geojson, id);
       } else {
-        this.shape = App.Map.Draw.radius(geo, id);
+        this.shape = App.Map.circle(geo, id);
       }
     },
 
@@ -50,29 +60,25 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     editItem: function(e) {
       e.preventDefault();
-      var editView = new App.Views.Edit({ model: this.model, item: this });
-      App.Editor.Controller.drawers.editRegion.show(editView);
-      App.Editor.Controller.drawers.$el.addClass('gt-panel-editing');
-      App.vent.trigger('drawer:list:reset-buttons');
+      App.vent.trigger('trigger:edit', { model: this.model, item: this });
     },
 
     confirmDelete: function(e) {
       e.preventDefault();
-      this.$el.find('.gt-item-delete').addClass('gt-item-confirm-delete');
-      this.$el.find('.gt-reset-delete').addClass('gt-reset-flyout');
+      this.ui.deleteItem.addClass('gt-item-confirm-delete');
+      this.ui.reset.addClass('gt-reset-flyout');
     },
 
     resetDelete: function(e) {
       e.preventDefault();
-      this.$el.find('.gt-item-confirm-delete').removeClass('gt-item-confirm-delete');
-      this.$el.find('.gt-reset-delete').removeClass('gt-reset-flyout');
+      this.ui.confirm.removeClass('gt-item-confirm-delete');
+      this.ui.reset.removeClass('gt-reset-flyout');
     },
 
     destroyModel: function(e) {
-      window.test = this.model;
       e.preventDefault();
-      App.Map.Draw.clearShape(this.shape);
-      this.model.destroy();
+      // App.Map.clearShape(this.shape);
+      App.vent.trigger('trigger:destroy', this.model);
     }
   });
 
@@ -83,41 +89,36 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
   Views.Empty = Marionette.ItemView.extend({
     template: App.Templates['empty'],
-    className: 'gt-list-empty',
-
-    events: {
-      'click .gt-tool-create': 'newTrigger'
-    },
-
-    newTrigger: function(e) {
-      e.preventDefault();
-      App.vent.trigger('trigger:new');
-    }
-
+    className: 'gt-list-empty'
   });
 
   // Trigger List View
   // -----------------
   //
-  // Controls the rendering of the list of items, including the
-  // filtering of activs vs completed items for display.
+  // Controls the rendering of the list of items.
 
   Views.List = Marionette.CompositeView.extend({
     template: App.Templates['list'],
-    className: 'gt-list',
+    className: 'gt-list gt-panel',
     itemView: Views.ListItem,
     itemViewContainer: '.gt-results',
     emptyView: Views.Empty,
 
-    initialize: function() {
-      var list = this;
-      this.collection.on('change reset add remove', function(){
-        if (!list.collection.length) {
-          list.$el.find('.gt-list-header').addClass('gt-hide');
-        } else {
-          list.$el.find('.gt-list-header').removeClass('gt-hide');
-        }
-      });
+    ui: {
+      'header': '.gt-list-header'
+    },
+
+    onShow: function() {
+      this.headerCheck();
+      this.collection.on('change reset add remove', _.bind(this.headerCheck, this));
+    },
+
+    headerCheck: function() {
+      if (!this.collection.length) {
+        this.ui.header.addClass('gt-hide');
+      } else {
+        this.ui.header.removeClass('gt-hide');
+      }
     }
   });
 
