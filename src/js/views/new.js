@@ -13,28 +13,25 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-new gt-panel',
 
     events: {
-      'change .gt-geometry-type': 'startDrawing',
-      'change .gt-action-selector': 'toggleActions',
-      'click .gt-submit': 'parseForm'
+      'change .gt-geometry-type'   : 'startDrawing',
+      'change .gt-action-selector' : 'toggleActions',
+      'click .gt-submit'           : 'parseForm'
     },
 
     ui: {
-      'actions': '.gt-action'
+      'actions' : '.gt-action',
+      'form'    : 'form'
     },
 
-    initialize: function(options) {
-      var editLayer = App.Map.Draw.editLayer;
-
-      if (editLayer.getLayers().length) {
-        // App.Map.zoomToLayer(editLayer);
-        // then convert layer information into something the form can display
-      }
+    onShow: function(options) {
+      var layer = App.request('draw:layer');
+      // convert layer information into form data if it exists
     },
 
-    startDrawing: function (e) {
+    startDrawing: function(e) {
       var tool = $(e.target).val();
-      App.Map.Draw.clear();
-      App.Map.Draw.enableTool(tool);
+      App.execute('draw:clear');
+      App.execute('draw:enable', tool);
     },
 
     toggleActions: function(e) {
@@ -45,7 +42,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     parseForm: function(e) {
       e.preventDefault();
-      var data = this.$el.find('form').serializeObject();
+      var data = this.ui.form.serializeObject();
       data = App.util.removeEmptyStrings(data);
 
       if (data.tags) {
@@ -63,8 +60,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     createTrigger: function(data) {
-      var geo;
-      var layer = App.Map.Draw.editLayer.getLayers()[0];
+      var layer = App.request('draw:layer');
 
       if (layer instanceof L.Circle) {
         var latlng = layer.getLatLng();

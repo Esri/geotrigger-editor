@@ -7,70 +7,98 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
 
   _.extend(Draw, {
 
-    editLayer: null,
+    _editLayer: null,
 
-    tools: {
-      // drivetime: null,
+    _tools: {
       polygon: null,
       radius: null
     },
 
-    _eventBindings: function() {
-      App.vent.on('map:draw', this.enableTool, this);
+    _setup: function() {
+      // Initialize the FeatureGroup to store existing and editable layers
+      this._editLayer = new L.FeatureGroup();
+      App.map.addLayer(this._editLayer);
 
-      App.vent.on('trigger:new', function(layer) {
-        if (layer) {
-          this.editTrigger(layer);
-        }
+      // Initialize new Draw Handlers
+      this._tools.polygon = new L.Draw.Polygon(App.map, App.Config.editOptions);
+      this._tools.radius = new L.Draw.Circle(App.map, App.Config.editOptions);
+
+      this._eventBindings();
+    },
+
+    _eventBindings: function() {
+      App.vent.on('draw:new', function(layer) {
+        this.editTrigger(layer);
       }, this);
 
-      App.vent.on('trigger:create trigger:update trigger:list trigger:edit', function(){
+      App.vent.on('index trigger:new trigger:list trigger:edit', function(){
         this.clear();
       }, this);
 
-      App.vent.on('trigger:edit', function(layer) {
-        App.Map.clearShape(layer);
+      App.vent.on('trigger:edit', function(triggerId) {
+        var layer = this.newShape(triggerId);
         this.editTrigger(layer);
-        App.Map.zoomToLayer(layer);
+        // App.Map.panToLayer(layer);
       }, this);
 
-      // Draw Created Event, fires once at the end of draw
       App.map.on('draw:created', function(e) {
         var type = e.layerType;
         var layer = e.layer;
 
-        // if (type === 'marker') {
-        //   layer.options.draggable = true;
-        //   layer.on('dragend', function(){
-        //     console.log('recalculate drivetime', [this._latlng.lat, this._latlng.lng]);
-        //   });
-        // } else {
-        //   layer.editing.enable();
-        // }
-
-        App.vent.trigger('trigger:new', layer);
+        App.vent.trigger('draw:new', layer);
       });
+
+      App.reqres.setHandler('draw:layer', _.bind(function(){
+        return this._editLayer.getLayers()[0];
+      }, this));
+
+      App.commands.setHandler('draw:clear', _.bind(function(){
+        this.clear();
+      }, this));
+
+      App.commands.setHandler('draw:enable', _.bind(function(tool){
+        this.enableTool(tool);
+      }, this));
+
+      App.commands.setHandler('draw:disable', _.bind(function(tool){
+        this.disableTool(tool);
+      }, this));
+    },
+
+    newShape: function(triggerId) {
+      var model = App.collections.triggers.get(triggerId);
+      var id = model.get('triggerId');
+      var geo = model.get('condition').geo;
+      var shape;
+
+      if (geo.geojson) {
+        shape = App.Map.polygon(geo.geojson, App.Config.editOptions.shapeOptions, false).getLayers()[0];
+      } else {
+        shape = App.Map.circle(geo, App.Config.editOptions.shapeOptions, false);
+      }
+
+      return shape;
     },
 
     editTrigger: function(layer) {
       this.clear();
       layer.editing.enable();
-      this.editLayer.addLayer(layer);
+      this._editLayer.addLayer(layer);
     },
 
     clear: function() {
-      this.editLayer.clearLayers();
+      this._editLayer.clearLayers();
     },
 
     enableTool: function(name) {
       this.disableTool();
-      this.tools[name].enable();
+      this._tools[name].enable();
     },
 
     disableTool: function(name) {
-      for (var i in this.tools) {
+      for (var i in this._tools) {
         if (typeof name === 'undefined' || i === name) {
-          this.tools[i].disable();
+          this._tools[i].disable();
         }
       }
     }
@@ -81,18 +109,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
   // ----------------------
 
   Draw.addInitializer(function() {
-    // Initialize the FeatureGroup to store existing and editable layers
-    this.editLayer = new L.FeatureGroup();
-    App.map.addLayer(this.editLayer);
-
-    // Initialize new Draw Handlers
-    this.tools.polygon = new L.Draw.Polygon(App.map, App.Config.polygonOptions);
-    this.tools.radius = new L.Draw.Circle(App.map, App.Config.circleOptions);
-
-    // drivetime tool will be enabled in later version
-    // this.tools.drivetime = new L.Draw.Marker(App.map, App.Config.drivetimeOptions);
-
-    this._eventBindings();
+    this._setup();
   });
 
 });

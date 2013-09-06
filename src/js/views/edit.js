@@ -12,43 +12,20 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-edit gt-panel',
 
     events: {
-      'change .gt-geometry-type': 'startDrawing',
-      'change .gt-action-selector': 'toggleActions',
-      'click .gt-submit': 'parseForm'
+      'change .gt-geometry-type'   : 'startDrawing',
+      'change .gt-action-selector' : 'toggleActions',
+      'click .gt-submit'           : 'parseForm'
     },
 
     ui: {
-      'actions': '.gt-action',
-      'form': 'form'
-    },
-
-    onShow: function() {
-      var item = this.options.item;
-      var layer;
-
-      if (item && item.shape) {
-
-        if (item.shape.getLayers) {
-          layer = item.shape.getLayers()[0];
-        } else if (item.shape.editing) {
-          layer = item.shape;
-        }
-
-        App.vent.trigger('trigger:edit', layer);
-
-      } else {
-        throw new Error('Layer Missing');
-      }
-    },
-
-    restoreShape: function() {
-      this.options.item.restoreShape();
+      'actions' : '.gt-action',
+      'form'    : 'form'
     },
 
     startDrawing: function (e) {
       var tool = $(e.target).val();
-      App.Map.Draw.clear();
-      App.Map.Draw.enableTool(tool);
+      App.execute('draw:clear');
+      App.execute('draw:enable', tool);
     },
 
     toggleActions: function(e) {
@@ -77,8 +54,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     updateTrigger: function(data) {
-      var geo;
-      var layer = App.Map.Draw.editLayer.getLayers()[0];
+      var layer = App.request('draw:layer');
 
       if (layer instanceof L.Circle) {
         var latlng = layer.getLatLng();

@@ -11,7 +11,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-result',
 
     events: {
-      // 'click .gt-item-edit'           : 'editItem',
       'click .gt-item-delete'         : 'confirmDelete',
       'click .gt-reset-delete'        : 'resetDelete',
       'click .gt-item-confirm-delete' : 'destroyModel'
@@ -27,40 +26,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'change': 'modelChanged'
     },
 
-    onShow: function() {
-      // this.renderShape();
-    },
-
     modelChanged: function() {
       this.render();
-      // this.renderShape();
-    },
-
-    renderShape: function() {
-      if (this.shape) {
-        App.Map.clearShape(this.shape);
-        this.shape = null;
-      }
-      var id = this.model.get('triggerId');
-      var geo = this.model.get('condition').geo;
-      if (geo.geojson) {
-        this.shape = App.Map.polygon(geo.geojson, id);
-      } else {
-        this.shape = App.Map.circle(geo, id);
-      }
-    },
-
-    restoreShape: function() {
-      // should start using App.vent instead of this restoreShape mess
-      if (!App.map.hasLayer(this.shape)) {
-        App.Map.Draw.clear();
-        this.renderShape();
-      }
-    },
-
-    editItem: function(e) {
-      e.preventDefault();
-      App.vent.trigger('trigger:edit', { model: this.model, item: this });
     },
 
     confirmDelete: function(e) {
@@ -77,7 +44,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     destroyModel: function(e) {
       e.preventDefault();
-      // App.Map.clearShape(this.shape);
       App.vent.trigger('trigger:destroy', this.model);
     }
   });
@@ -110,7 +76,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     onShow: function() {
       this.headerCheck();
-      this.collection.on('change reset add remove', _.bind(this.headerCheck, this));
+      this.listenTo(this.collection, 'change reset add remove', this.headerCheck);
     },
 
     headerCheck: function() {

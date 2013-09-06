@@ -9,5 +9,7 @@ GeotriggerEditor.addInitializer(function(options) {
 });
 
 GeotriggerEditor.on('initialize:after', function() {
-  Backbone.history.start();
+  this.collections.triggers.once('reset', function(){
+    Backbone.history.start();
+  });
 });
