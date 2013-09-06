@@ -42,14 +42,13 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
         reset: true,
         success: function() {
           App.vent.trigger('notify:clear');
-          // App.map.fitBounds(App.Map.mainLayer.getBounds());
+          App.execute('map:fit');
         }
       });
 
-      App.vent.on('trigger:new', function(options){
-        console.log('new data', options);
+      App.vent.on('draw:new', function(options){
         if (Backbone.history.fragment === 'new') {
-          console.log('already open');
+          // console.log('already open');
         } else {
           App.router.navigate('new', { trigger: true });
         }
@@ -70,7 +69,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     },
 
     setupMap: function() {
-      var view = new App.Views.Map();
+      var view = new App.Views.Map({ collection: App.collections.triggers });
       App.regions.map.show(view);
     },
 
@@ -80,10 +79,12 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
       drawer.on('show', function(){
         content.addClass('gt-active');
+        App.map.invalidateSize();
       });
 
       drawer.on('close', function(){
         content.removeClass('gt-active');
+        App.map.invalidateSize();
       });
     },
 
@@ -108,14 +109,12 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     // routes
 
     index: function() {
-      console.log('index');
       App.vent.trigger('index');
 
       App.regions.drawer.close();
     },
 
     list: function() {
-      console.log('list');
       App.vent.trigger('trigger:list');
 
       var view = new App.Views.List({ collection: App.collections.triggers });
@@ -123,17 +122,13 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     },
 
     new: function() {
-      console.log('new');
-      // App.vent.trigger('trigger:new');
+      App.vent.trigger('trigger:new');
 
       var view = new App.Views.New();
       App.regions.drawer.show(view);
     },
 
     edit: function(triggerId) {
-      console.log('edit ' + triggerId);
-      // App.vent.trigger('trigger:edit', triggerId);
-
       var model = this.getTrigger(triggerId);
 
       if (!model) {
@@ -141,6 +136,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       } else {
         var view = new App.Views.Edit({ model: model });
         App.regions.drawer.show(view);
+        App.vent.trigger('trigger:edit', triggerId);
       }
     },
 
@@ -154,7 +150,10 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     // crud
 
     createTrigger: function(triggerData) {
-      App.collections.triggers.create(triggerData);
+      App.collections.triggers.once('add', function(data){
+        App.router.navigate(data.id + '/edit', { trigger: true });
+      });
+      App.collections.triggers.create(triggerData, { wait: true });
     },
 
     getTrigger: function(id) {
@@ -163,6 +162,9 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     },
 
     updateTrigger: function(triggerData) {
+      App.collections.triggers.once('change', function(data){
+        App.router.navigate('list', { trigger: true });
+      });
       var model = App.collections.triggers.get(triggerData.triggerId);
       model.set(triggerData);
       model.save();

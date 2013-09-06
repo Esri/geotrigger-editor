@@ -22,10 +22,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'list'    : '.gt-drawer-controls .gt-tool-list',
       'create'  : '.gt-drawer-controls .gt-tool-create',
       'polygon' : '.gt-tool-controls .gt-tool-polygon',
-      'radius'  : '.gt-tool-controls .gt-tool-radius'
+      'radius'  : '.gt-tool-controls .gt-tool-radius',
+      'all'     : '.gt-tool'
     },
 
-    initialize: function() {
+    onRender: function() {
       this.listenTo(App.vent, 'trigger:new', this.showNew);
       this.listenTo(App.vent, 'trigger:list', this.showList);
     },
@@ -80,13 +81,13 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     activateTool: function(name) {
       this.disableTool();
-      App.vent.trigger('map:draw', name);
+      App.execute('draw:enable', name);
       this.activate(name);
     },
 
     disableTool: function(name) {
       if (name) {
-        App.Map.Draw.disableTool(name);
+        App.execute('draw:disable', name);
       }
       this.ui.tools.find('.gt-tool').removeClass('gt-active');
     },
@@ -113,7 +114,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       } else if (name === 'tools') {
         this.ui.tools.find('.gt-tool').removeClass('gt-active');
       } else {
-        this.$el.find('.gt-tool').removeClass('gt-active');
+        this.ui.all.removeClass('gt-active');
       }
     }
   });
