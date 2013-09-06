@@ -18,11 +18,10 @@ GeotriggerEditor.module('Filter', function(Filter, App, Backbone, Marionette, $,
           Filter._showAll();
         } else {
           for ( var i = 0; i < list.length; i++ ) {
-            var item = $(list[i]);
-            var text = "";
-
-            var title = item.context.children[1].firstChild.innerHTML;
-            var tags = item.context.children[2].children;
+            var item  = $(list[i]);
+            var text  = "";
+            var title = item.find('.gt-item-edit span')[0].innerHTML;
+            var tags  = item.find('.gt-tags li');
 
             text += title;
 
