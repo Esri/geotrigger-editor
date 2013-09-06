@@ -16,21 +16,20 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
     },
 
     _eventBindings: function() {
-      App.vent.on('map:draw:tool:enable', this.enableTool, this);
+      App.vent.on('map:draw', this.enableTool, this);
 
       App.vent.on('trigger:new', function(layer) {
         if (layer) {
           this.editTrigger(layer);
-          App.vent.trigger('controls:tools:disable-draw');
         }
       }, this);
 
-      App.vent.on('trigger:create trigger:update trigger:new:cancel', function(){
+      App.vent.on('trigger:create trigger:update trigger:list trigger:edit', function(){
         this.clear();
       }, this);
 
       App.vent.on('trigger:edit', function(layer) {
-        this.clearShape(layer);
+        App.Map.clearShape(layer);
         this.editTrigger(layer);
         App.Map.zoomToLayer(layer);
       }, this);
@@ -59,58 +58,18 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       this.editLayer.addLayer(layer);
     },
 
-    polygon: function(geo, id) {
-      polygon = new L.GeoJSON(geo, {
-        style: function(feature) {
-          return App.Config.polygonOptions.shapeOptions;
-        }
-      });
-
-      this.mainLayer.addLayer(polygon);
-
-      polygon.triggerId = id;
-
-      polygon.on('click', function(e){
-        console.log(e.target.triggerId);
-      });
-
-      return polygon;
-    },
-
-    radius: function(geo, id) {
-      var circle = L.circle(
-        [geo.latitude, geo.longitude],
-        geo.distance,
-        App.Config.circleOptions.shapeOptions
-      );
-
-      this.mainLayer.addLayer(circle);
-
-      circle.triggerId = id;
-
-      circle.on('click', function(e){
-        console.log(e.target.triggerId);
-      });
-
-      return circle;
-    },
-
-    clearShape: function(shape) {
-      App.map.removeLayer(shape);
-    },
-
     clear: function() {
       this.editLayer.clearLayers();
     },
 
-    enableTool: function(str) {
+    enableTool: function(name) {
       this.disableTool();
-      this.tools[str].enable();
+      this.tools[name].enable();
     },
 
-    disableTool: function(str) {
+    disableTool: function(name) {
       for (var i in this.tools) {
-        if (typeof str === 'undefined' || i === str) {
+        if (typeof name === 'undefined' || i === name) {
           this.tools[i].disable();
         }
       }
@@ -124,9 +83,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
   Draw.addInitializer(function() {
     // Initialize the FeatureGroup to store existing and editable layers
     this.editLayer = new L.FeatureGroup();
-    this.mainLayer = new L.FeatureGroup();
     App.map.addLayer(this.editLayer);
-    App.map.addLayer(this.mainLayer);
 
     // Initialize new Draw Handlers
     this.tools.polygon = new L.Draw.Polygon(App.map, App.Config.polygonOptions);

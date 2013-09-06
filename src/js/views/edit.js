@@ -9,7 +9,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
   Views.Edit = Marionette.ItemView.extend({
     template: App.Templates['edit'],
-    className: 'gt-edit',
+    className: 'gt-edit gt-panel',
 
     events: {
       'change .gt-geometry-type': 'startDrawing',
@@ -17,18 +17,28 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'click .gt-submit': 'parseForm'
     },
 
+    ui: {
+      'actions': '.gt-action',
+      'form': 'form'
+    },
+
     onShow: function() {
       var item = this.options.item;
       var layer;
-      if (item.shape.getLayers) {
-        layer = item.shape.getLayers()[0];
-      } else if (item.shape.editing) {
-        layer = item.shape;
-      } else {
-        throw new Error('Unknown Layer Error');
-      }
 
-      App.vent.trigger('trigger:edit', layer);
+      if (item && item.shape) {
+
+        if (item.shape.getLayers) {
+          layer = item.shape.getLayers()[0];
+        } else if (item.shape.editing) {
+          layer = item.shape;
+        }
+
+        App.vent.trigger('trigger:edit', layer);
+
+      } else {
+        throw new Error('Layer Missing');
+      }
     },
 
     restoreShape: function() {
@@ -43,14 +53,15 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     toggleActions: function(e) {
       var action = $(e.target).val();
-      this.$el.find('.gt-action').hide();
-      this.$el.find('.gt-action-'+action).show();
+      this.ui.actions.hide();
+      this.$el.find('.gt-action-' + action).show();
     },
 
     parseForm: function(e) {
       e.preventDefault();
-      var data = this.$el.find('form').serializeObject();
+      var data = this.ui.form.serializeObject();
       data = App.util.removeEmptyStrings(data);
+
       if (data.tags) {
         var tags = data.tags;
         tags = tags.split(',');

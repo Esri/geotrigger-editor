@@ -10,57 +10,26 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
   Views.New = Marionette.ItemView.extend({
     template: App.Templates['new'],
-    className: 'gt-new gt-panel-wrap',
+    className: 'gt-new gt-panel',
 
     events: {
-      'click .gt-close-drawer': 'closeDrawer',
       'change .gt-geometry-type': 'startDrawing',
       'change .gt-action-selector': 'toggleActions',
       'click .gt-submit': 'parseForm'
     },
 
+    ui: {
+      'actions': '.gt-action'
+    },
+
     initialize: function(options) {
       var editLayer = App.Map.Draw.editLayer;
+
       if (editLayer.getLayers().length) {
-        App.Map.zoomToLayer(editLayer);
+        // App.Map.zoomToLayer(editLayer);
         // then convert layer information into something the form can display
       }
-
-      this.listenTo(App.vent, 'drawer:new:open', this.openDrawer);
-      this.listenTo(App.vent, 'drawer:new:close', this.closeDrawer);
-      this.listenTo(App.vent, 'drawer:new:toggle', this.toggle);
     },
-
-    /* start: to be deleted (show/hide should be handled by parent) */
-
-    openDrawer: function() {
-      this.$el.parent().addClass('gt-open');
-      $('#gt-map-region').addClass('gt-open-drawer');
-      App.map.invalidateSize();
-    },
-
-    closeDrawer: function(e) {
-      if (typeof e !== 'undefined' && e.preventDefault) {
-        e.preventDefault();
-      }
-
-      this.$el.parent().removeClass('gt-open');
-      $('#gt-map-region').removeClass('gt-open-drawer');
-      App.map.invalidateSize();
-
-      App.vent.trigger('controls:deactivate', 'create');
-      App.vent.trigger('trigger:new:cancel');
-    },
-
-    toggle: function() {
-      if (this.$el.parent().hasClass('gt-open')) {
-        this.closeDrawer();
-      } else {
-        this.openDrawer();
-      }
-    },
-
-    /* end: to be deleted */
 
     startDrawing: function (e) {
       var tool = $(e.target).val();
@@ -70,8 +39,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     toggleActions: function(e) {
       var action = $(e.target).val();
-      this.$el.find('.gt-action').hide();
-      this.$el.find('.gt-action-'+action).show();
+      this.ui.actions.hide();
+      this.$el.find('.gt-action-' + action).show();
     },
 
     parseForm: function(e) {
@@ -79,14 +48,21 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var data = this.$el.find('form').serializeObject();
       data = App.util.removeEmptyStrings(data);
 
+      if (data.tags) {
+        var tags = data.tags;
+        tags = tags.split(',');
+        for (var i=tags.length-1;i>0;i--) {
+          tags[i] = tags[i].trim();
+        }
+        data.tags = tags;
+      }
+
       if (data) { // @TODO: validate
         this.createTrigger(data);
-        App.vent.trigger('controls:list:toggle');
       }
     },
 
     createTrigger: function(data) {
-      console.log(data);
       var geo;
       var layer = App.Map.Draw.editLayer.getLayers()[0];
 

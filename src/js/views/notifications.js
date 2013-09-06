@@ -16,7 +16,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     render: function() {
       Marionette.ItemView.prototype.render.apply(this, arguments);
-      this.$el.addClass(this.model.get('type'));
+
+      var type = this.model.get('type');
+      this.$el.addClass(type);
 
       this.listenTo(App.vent, 'notify:clear', this.destroyNotification);
     },

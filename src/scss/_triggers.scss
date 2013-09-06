@@ -50,7 +50,7 @@
   background: url(/dist/img/icons/search.png) no-repeat left center transparent;
   padding: 0.5em 2em 1em 2em;
   margin-left: 1em;
-  @include retina-display(){ background: url(/dist/img/icons/search2x.png) no-repeat left center transparent; background-size: 24px;}
+  @include retina-display { background: url(/dist/img/icons/search2x.png) no-repeat left center transparent; background-size: 24px;}
   input[type="search"]{
     margin-left: 0.5em;
     padding: 0.75em 0.66em 0.75em 0.66em;
@@ -100,7 +100,7 @@
     &.gt-icon-polygon {background: url('/dist/img/icons/enter-polygon.png') no-repeat center center transparent;}
     &.gt-icon-radius {background: url('/dist/img/icons/enter-radius.png') no-repeat center center transparent;}
     &.gt-icon-drivetime{background: url('/dist/img/icons/enter-drivetime.png') no-repeat center center transparent;}
-    @include retina-display(){
+    @include retina-display {
       background: url('/dist/img/icons/enter-polygon2x.png') no-repeat center center transparent; background-size: 36px;
       &.gt-icon-polygon {background: url('/dist/img/icons/enter-polygon2x.png') no-repeat center center transparent; background-size: 36px;}
       &.gt-icon-radius {background: url('/dist/img/icons/enter-radius2x.png') no-repeat center center transparent; background-size: 36px;}
