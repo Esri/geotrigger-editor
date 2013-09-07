@@ -11,68 +11,40 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-result',
 
     events: {
-      'click .gt-item-edit'           : 'editItem',
       'click .gt-item-delete'         : 'confirmDelete',
       'click .gt-reset-delete'        : 'resetDelete',
       'click .gt-item-confirm-delete' : 'destroyModel'
     },
 
-    initialize: function() {
-      this.listenTo(this.model, 'change', this.render);
-      this.listenTo(this.model, 'change', this.renderShape);
+    ui: {
+      'deleteItem' : '.gt-item-delete',
+      'confirm'    : '.gt-item-confirm-delete',
+      'reset'      : '.gt-reset-delete'
     },
 
-    onShow: function() {
-      this.renderShape();
+    modelEvents: {
+      'change': 'modelChanged'
     },
 
-    renderShape: function() {
-      if (this.shape) {
-        App.Map.Draw.clearShape(this.shape);
-        this.shape = null;
-      }
-      var id = this.model.get('triggerId');
-      var geo = this.model.get('condition').geo;
-      if (geo.geojson) {
-        this.shape = App.Map.Draw.polygon(geo.geojson, id);
-      } else {
-        this.shape = App.Map.Draw.radius(geo, id);
-      }
-    },
-
-    restoreShape: function() {
-      // should start using App.vent instead of this restoreShape mess
-      if (!App.map.hasLayer(this.shape)) {
-        App.Map.Draw.clear();
-        this.renderShape();
-      }
-    },
-
-    editItem: function(e) {
-      e.preventDefault();
-      var editView = new App.Views.Edit({ model: this.model, item: this });
-      App.Editor.Controller.drawers.editRegion.show(editView);
-      App.Editor.Controller.drawers.$el.addClass('gt-panel-editing');
-      App.vent.trigger('drawer:list:reset-buttons');
+    modelChanged: function() {
+      this.render();
     },
 
     confirmDelete: function(e) {
       e.preventDefault();
-      this.$el.find('.gt-item-delete').addClass('gt-item-confirm-delete');
-      this.$el.find('.gt-reset-delete').addClass('gt-reset-flyout');
+      this.ui.deleteItem.addClass('gt-item-confirm-delete');
+      this.ui.reset.addClass('gt-reset-flyout');
     },
 
     resetDelete: function(e) {
       e.preventDefault();
-      this.$el.find('.gt-item-confirm-delete').removeClass('gt-item-confirm-delete');
-      this.$el.find('.gt-reset-delete').removeClass('gt-reset-flyout');
+      this.ui.confirm.removeClass('gt-item-confirm-delete');
+      this.ui.reset.removeClass('gt-reset-flyout');
     },
 
     destroyModel: function(e) {
-      window.test = this.model;
       e.preventDefault();
-      App.Map.Draw.clearShape(this.shape);
-      this.model.destroy();
+      App.vent.trigger('trigger:destroy', this.model);
     }
   });
 
@@ -83,41 +55,75 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
   Views.Empty = Marionette.ItemView.extend({
     template: App.Templates['empty'],
-    className: 'gt-list-empty',
-
-    events: {
-      'click .gt-tool-create': 'newTrigger'
-    },
-
-    newTrigger: function(e) {
-      e.preventDefault();
-      App.vent.trigger('trigger:new');
-    }
-
+    className: 'gt-list-empty'
   });
 
   // Trigger List View
   // -----------------
   //
-  // Controls the rendering of the list of items, including the
-  // filtering of activs vs completed items for display.
+  // Controls the rendering of the list of items.
 
   Views.List = Marionette.CompositeView.extend({
     template: App.Templates['list'],
-    className: 'gt-list',
+    className: 'gt-list gt-panel',
     itemView: Views.ListItem,
     itemViewContainer: '.gt-results',
     emptyView: Views.Empty,
 
-    initialize: function() {
-      var list = this;
-      this.collection.on('change reset add remove', function(){
-        if (!list.collection.length) {
-          list.$el.find('.gt-list-header').addClass('gt-hide');
-        } else {
-          list.$el.find('.gt-list-header').removeClass('gt-hide');
-        }
-      });
+    events: {
+      'keyup .gt-search' : 'filter'
+    },
+
+    ui: {
+      'header'  : '.gt-list-header',
+      'search'  : '.gt-search input',
+      'results' : '.gt-results'
+    },
+
+    onShow: function() {
+      this.headerCheck();
+      this.listenTo(this.collection, 'change reset add remove', this.headerCheck);
+    },
+
+    headerCheck: function() {
+      if (!this.collection.length) {
+        this.ui.header.addClass('gt-hide');
+      } else {
+        this.ui.header.removeClass('gt-hide');
+      }
+    },
+
+    filter: function(e) {
+      var value = this.ui.search.val();
+
+      if (!value.length) {
+        this.ui.results.removeClass('gt-filtering');
+      } else {
+        this.ui.results.addClass('gt-filtering');
+
+        var list = this.ui.results.find('.gt-result');
+        var arr = this.ui.search.val().split(/\s+/);
+        var values = '(?=.*' + arr.join(')(?=.*') + ')';
+        var regex = new RegExp(values, 'i');
+
+        list.each(function(){
+          var item = $(this);
+          var tags  = item.find('.gt-tags li');
+          var text = "";
+
+          text += item.find('.gt-item-edit span').text();
+
+          tags.each(function(){
+            text += $(this).text();
+          });
+
+          if (regex.exec(text)) {
+            item.addClass('gt-list-visible');
+          } else {
+            item.removeClass('gt-list-visible');
+          }
+        });
+      }
     }
   });
 
