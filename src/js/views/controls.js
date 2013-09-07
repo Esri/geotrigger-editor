@@ -12,110 +12,109 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     events: {
       'click .gt-tool-list'       : 'toggleList',
       'click .gt-tool-create'     : 'toggleNew',
-      'click .gt-tool-polygon'    : 'polygon',
-      'click .gt-tool-radius'     : 'radius'
-      // 'click .gt-tool-drivetime'  : 'drivetime'
+      'click .gt-tool-polygon'    : 'togglePolygon',
+      'click .gt-tool-radius'     : 'toggleRadius'
     },
 
-    initialize: function() {
-      this.listenTo(App.vent, 'controls:deactivate', this.hideControl);
-      this.listenTo(App.vent, 'controls:restore-shape', this.restoreShape);
-      this.listenTo(App.vent, 'controls:tools:disable-draw', this.disableDrawTool);
+    ui: {
+      'drawers' : '.gt-drawer-controls',
+      'tools'   : '.gt-tool-controls',
+      'list'    : '.gt-drawer-controls .gt-tool-list',
+      'create'  : '.gt-drawer-controls .gt-tool-create',
+      'polygon' : '.gt-tool-controls .gt-tool-polygon',
+      'radius'  : '.gt-tool-controls .gt-tool-radius',
+      'all'     : '.gt-tool'
+    },
+
+    onRender: function() {
       this.listenTo(App.vent, 'trigger:new', this.showNew);
-      this.listenTo(App.vent, 'controls:list:toggle', this.toggleList);
+      this.listenTo(App.vent, 'trigger:list', this.showList);
     },
 
-    hideControl: function(name) {
-      this.$el.find('.gt-tool-' + name).removeClass('gt-active');
+    // drawers
+
+    showNew: function() {
+      this.clear('drawers');
+      this.activate('create');
     },
 
-    showControl: function(name) {
-      this.$el.find('.gt-tool-' + name).addClass('gt-active');
-    },
-
-    toggleControl: function(name) {
-      this.$el.find('.gt-tool-' + name).toggleClass('gt-active');
+    showList: function() {
+      this.clear('drawers');
+      this.activate('list');
     },
 
     toggleList: function(e) {
-      if (typeof e !== 'undefined' && e.preventDefault) {
+      if (this.ui.list.hasClass('gt-active')) {
         e.preventDefault();
+        App.router.navigate('', { trigger: true });
       }
 
-      App.vent.trigger('drawer:new:close');
-      App.vent.trigger('drawer:list:toggle');
-
-      this.toggleControl('list');
-
-      this.restoreShape();
+      this.toggle('list');
     },
 
     toggleNew: function(e) {
-      if (typeof e !== 'undefined' && e.preventDefault) {
+      if (this.ui.create.hasClass('gt-active')) {
         e.preventDefault();
+        App.router.navigate('', { trigger: true });
       }
 
-      // make sure list drawer is closed
-      App.vent.trigger('drawer:close');
+      this.toggle('create');
+    },
 
-      if (!App.newDrawerRegion.currentView || !App.newDrawerRegion.$el.hasClass('gt-open')) {
-        var newView = new App.Views.New();
-        App.newDrawerRegion.show(newView);
+    // tools
+
+    togglePolygon: function(e) {
+      if (this.ui.polygon.hasClass('gt-active')) {
+        this.disableTool('polygon');
+      } else {
+        this.activateTool('polygon');
       }
-
-      // toggle active state of new drawer
-      App.vent.trigger('drawer:new:toggle');
-      App.vent.trigger('drawer:list:reset-buttons');
-      this.toggleControl('create');
-      this.restoreShape();
     },
 
-    showNew: function() {
-      var newView = new App.Views.New();
-      App.newDrawerRegion.show(newView);
-
-      // make sure list drawer is closed
-      App.vent.trigger('drawer:close');
-
-      // show new drawer
-      App.vent.trigger('drawer:new:open');
-      this.showControl('create');
-      App.vent.trigger('drawer:list:reset-buttons');
-      this.restoreShape();
-    },
-
-    polygon: function(e) {
-      e.preventDefault();
-      this.enableDrawTool('polygon');
-    },
-
-    radius: function(e) {
-      e.preventDefault();
-      this.enableDrawTool('radius');
-    },
-
-    // drivetime: function(e) {
-    //   e.preventDefault();
-    //   this.enableDrawTool('drivetime');
-    // },
-
-    enableDrawTool: function(str) {
-      this.disableDrawTool();
-      App.vent.trigger('map:draw:tool:enable', str);
-      this.showControl(str);
-      App.vent.trigger('drawer:list:reset-buttons');
-    },
-
-    disableDrawTool: function(str) {
-      if (str) {
-        App.Map.Draw.disableTool(str);
+    toggleRadius: function(e) {
+      if (this.ui.radius.hasClass('gt-active')) {
+        this.disableTool('radius');
+      } else {
+        this.activateTool('radius');
       }
-      this.$el.find('.gt-draw-tools .gt-tool').removeClass('gt-active');
     },
 
-    restoreShape: function() {
-      if (App.Editor.Controller.drawers.editRegion.currentView) {
-        App.Editor.Controller.drawers.editRegion.currentView.restoreShape();
+    activateTool: function(name) {
+      this.disableTool();
+      App.execute('draw:enable', name);
+      this.activate(name);
+    },
+
+    disableTool: function(name) {
+      if (name) {
+        App.execute('draw:disable', name);
+      }
+      this.ui.tools.find('.gt-tool').removeClass('gt-active');
+    },
+
+    // helpers
+
+    activate: function(name) {
+      this.ui[name].addClass('gt-active');
+    },
+
+    toggle: function(name) {
+      if (name === 'list') {
+        this.ui.list.toggleClass('gt-active');
+        this.ui.create.removeClass('gt-active');
+      } else if (name === 'create') {
+        this.ui.create.toggleClass('gt-active');
+        this.ui.list.removeClass('gt-active');
+      }
+    },
+
+    clear: function(name) {
+      if (name === 'drawers') {
+        this.ui.drawers.find('.gt-tool').removeClass('gt-active');
+      } else if (name === 'tools') {
+        this.ui.tools.find('.gt-tool').removeClass('gt-active');
+      } else {
+        this.ui.all.removeClass('gt-active');
       }
     }
   });

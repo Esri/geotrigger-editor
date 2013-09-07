@@ -83,7 +83,7 @@
   &.gt-new-trigger {
     @extend .gt-back-to-list;
     // background:url('/dist/img/icons/new.png') no-repeat center center transparent;
-    // @include retina-display(){}
+    // @include retina-display {}
   }
   &:hover {
     background-color:$off-white;
