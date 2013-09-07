@@ -15,19 +15,52 @@
 @import "triggers";
 @import "notifications";
 
-#gt-map {
-  position:absolute;
-  top:0;
-  right:0;
-  bottom:0;
-  width:100%;
+#gt-regions {
+  @include clearfix;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
-.gt-open-drawer {
-  width:100%;
-  #gt-map {
-    width:60%;
+
+#gt-content {
+  @include full;
+  left: 70px;
+
+  &.gt-active {
+    #gt-drawer-region {
+      width: 40%;
+    }
+    #gt-map-region {
+      width: 60%;
+    }
   }
 }
+
+#gt-drawer-region {
+  @include full;
+  right: auto;
+  width: 0;
+}
+
+#gt-map-region {
+  @include full;
+  left: auto;
+  width: 100%;
+}
+
+#gt-map {
+  @include full;
+}
+
+#gt-cont
+
+.gt-open-drawer {
+  width: 100%;
+  #gt-map {
+    width: 60%;
+  }
+}
+
 .gt-container {
   box-sizing:border-box;
   position:absolute;

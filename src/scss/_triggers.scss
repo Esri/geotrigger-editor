@@ -66,8 +66,19 @@
     background-color: $lighter-gray;
   }
 }
+
+.gt-results {
+  &.gt-filtering {
+    .gt-result {
+      display: none;
+      &.gt-list-visible {
+        display: block;
+      }
+    }
+  }
+}
+
 .gt-result {
-  display: none;
   width:100%;
   padding:1em 1em 1em 1em;
   border-bottom:1px solid $light-gray;
@@ -75,9 +86,6 @@
   @include box-sizing(border-box);
   overflow:hidden;
   // position:relative;
-  &.gt-list-visible {
-    display:block;
-  }
   .gt-item-edit {
     cursor: pointer;
   }
@@ -96,7 +104,7 @@
     &.gt-icon-polygon {background: url('/dist/img/icons/enter-polygon.png') no-repeat center center transparent;}
     &.gt-icon-radius {background: url('/dist/img/icons/enter-radius.png') no-repeat center center transparent;}
     &.gt-icon-drivetime{background: url('/dist/img/icons/enter-drivetime.png') no-repeat center center transparent;}
-    @include retina-display(){
+    @include retina-display {
       background: url('/dist/img/icons/enter-polygon2x.png') no-repeat center center transparent; background-size: 36px;
       &.gt-icon-polygon {background: url('/dist/img/icons/enter-polygon2x.png') no-repeat center center transparent; background-size: 36px;}
       &.gt-icon-radius {background: url('/dist/img/icons/enter-radius2x.png') no-repeat center center transparent; background-size: 36px;}
