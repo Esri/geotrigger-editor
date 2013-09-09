@@ -7,9 +7,3 @@ GeotriggerEditor.addInitializer(function(options) {
   this.addRegions({ mainRegion: el });
   this.mainRegion.show(layout);
 });
-
-GeotriggerEditor.on('initialize:after', function() {
-  this.collections.triggers.once('reset', function(){
-    Backbone.history.start();
-  });
-});

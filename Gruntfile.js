@@ -189,7 +189,11 @@ module.exports = function(grunt) {
 
     clean: {
       dist: {
-        src: 'dist/'
+        src: [
+          'dist/img/',
+          'dist/css/',
+          'dist/js/'
+        ]
       },
       dev: {
         src: [
