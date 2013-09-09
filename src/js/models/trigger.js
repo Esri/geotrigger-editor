@@ -10,32 +10,34 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
     // override sync method to use geotrigger API
     sync: function(method, model, options) {
       console.log('sync:' + method);
+
       var triggerId = this.get('triggerId');
 
-      function callback(error, response) {
+      var callback = _.bind(function(error, response) {
         if (error) {
           if (options && options.error) {
             options.error('Record Not Found');
           }
-        } else if (options && options.success) {
-          options.success(response);
+        } else {
+          if (options && options.success) {
+            options.success(response);
+          }
         }
-      }
+      }, this);
+
+      var request = function(route, params) {
+        App.API.session.request(route, {
+          params: params,
+          callback: callback
+        });
+      };
 
       switch (method) {
         case 'read':
-          App.API.session.request('trigger/list', {
-            params: {
-              'triggerIds': [triggerId]
-            },
-            callback: callback
-          });
+          request('trigger/list', { 'triggerIds': [ triggerId ] });
           break;
         case 'create':
-          App.API.session.request('trigger/create', {
-            params: model.toJSON(),
-            callback: callback
-          });
+          request('trigger/create', model.toJSON());
           break;
         case 'update':
           var params = {
@@ -46,28 +48,10 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
             'setTags': this.get('tags')
           };
           // console.log(params); // for debugging properties
-          App.API.session.request('trigger/update', {
-            params: params,
-            callback: _.bind(function(error, response) {
-              if (error) {
-                if (options && options.error) {
-                  options.error('Record Not Found');
-                }
-              } else {
-                if (options && options.success) {
-                  options.success(response);
-                }
-              }
-            }, this)
-          });
+          request('trigger/update', params);
           break;
         case 'delete':
-          App.API.session.request('trigger/delete', {
-            params: {
-              'triggerIds': triggerId
-            },
-            callback: callback
-          });
+          request('trigger/delete', { 'triggerIds': triggerId });
           break;
       }
     }
