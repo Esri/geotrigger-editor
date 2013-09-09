@@ -38,12 +38,7 @@ GeotriggerEditor.module('Config', function(Config) {
 
     imagePath: '/images',
     sharedOptions: sharedOptions,
-    editOptions: editOptions,
-
-    session: {
-      clientId: 'rcMNAPBoIn2M1JoI',
-      clientSecret: '77edd9c16dde46ad9a93b79c83229887'
-    }
+    editOptions: editOptions
 
   });
 
