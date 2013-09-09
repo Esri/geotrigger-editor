@@ -14,7 +14,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     events: {
       'change .gt-geometry-type'   : 'startDrawing',
       'change .gt-action-selector' : 'toggleActions',
-      'click .gt-submit'           : 'parseForm'
+      'click .gt-submit'           : 'parseForm',
+      'click .gt-trigger-delete'   : 'destroyModel'
     },
 
     ui: {
@@ -72,6 +73,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       data.triggerId = this.model.get('triggerId');
 
       App.vent.trigger('trigger:update', data);
+    },
+
+    destroyModel: function(e) {
+      e.preventDefault();
+      App.vent.trigger('trigger:destroy', this.model);
     }
   });
 
