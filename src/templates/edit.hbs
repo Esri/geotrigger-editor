@@ -19,17 +19,21 @@
         {{/select}}
       </select>
       <select name='geometry-type' class='gt-geometry-type'>
-        <option value='default' disabled='disabled' selected>select a geometry</option>
+        <option value='default' disabled='disabled'>select a geometry</option>
+        {{#selectShape condition}}
         <option value='polygon'>a polygon</option>
         <option value='radius'>a distance of</option>
+        {{/selectShape}}
       </select>
     </label>
 
     <select name='action-selector' class='gt-action'>
-      <option disabled='disabled' selected>choose an action</option>
-      <option value='message'>send the device a message</option>
-      <option value='callback'>post to a server</option>
-      <option value='profile'>change tracking profile</option>
+      <option disabled='disabled'>choose an action</option>
+      {{#select action}}
+      <option value='notification'>send the device a message</option>
+      <option value='callbackUrl'>post to a server</option>
+      <option value='trackingProfile'>change tracking profile</option>
+      {{/select}}
     </select>
     <span>:</span>
 

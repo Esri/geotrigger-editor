@@ -40,6 +40,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
         success: function() {
           App.vent.trigger('notify:clear');
           App.execute('map:fit');
+          Backbone.history.start();
         }
       });
 
