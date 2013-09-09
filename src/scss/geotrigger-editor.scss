@@ -29,6 +29,7 @@
   &.gt-active {
     #gt-drawer-region {
       width: 40%;
+      @include box-shadow(0 0 12px rgba(0,0,0,0.3));
     }
     #gt-map-region {
       width: 60%;
@@ -38,6 +39,7 @@
 
 #gt-drawer-region {
   @include full;
+  z-index:2;
   right: auto;
   width: 0;
 }
