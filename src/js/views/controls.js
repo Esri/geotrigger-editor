@@ -27,29 +27,32 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     onRender: function() {
-      this.listenTo(App.vent, 'trigger:new', this.showNew);
-      this.listenTo(App.vent, 'trigger:list', this.showList);
+      this.listenTo(App.router, 'route', this.handleStateChange);
+      this.listenTo(App.vent, 'draw:new', this.disableTool);
+    },
+
+    handleStateChange: function(route) {
+      this.clear('drawers');
+      switch (route) {
+        case 'new':
+          this.activate('create');
+          break;
+        case 'edit':
+          this.activate('list');
+          break;
+        case 'list':
+          this.activate('list');
+          break;
+      }
     },
 
     // drawers
-
-    showNew: function() {
-      this.clear('drawers');
-      this.activate('create');
-    },
-
-    showList: function() {
-      this.clear('drawers');
-      this.activate('list');
-    },
 
     toggleList: function(e) {
       if (this.ui.list.hasClass('gt-active')) {
         e.preventDefault();
         App.router.navigate('', { trigger: true });
       }
-
-      this.toggle('list');
     },
 
     toggleNew: function(e) {
@@ -57,8 +60,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         e.preventDefault();
         App.router.navigate('', { trigger: true });
       }
-
-      this.toggle('create');
     },
 
     // tools

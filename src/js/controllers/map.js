@@ -7,23 +7,19 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
   _.extend(Map, {
 
-    _mainLayer: null,
-
     _setup: function(options) {
       // L.Icon.Default.imagePath = App.Config.imagePath;
       App.map = this.map = L.map(options.el).setView(App.Config.Map.center, App.Config.Map.zoom);
       this.map.zoomControl.setPosition('topright');
       L.esri.basemapLayer(App.Config.Map.basemap).addTo(App.map);
 
-      this._mainLayer = new L.FeatureGroup();
-      App.map.addLayer(this._mainLayer);
-
+      this.Layers.start();
       this._eventBindings();
     },
 
     _eventBindings: function() {
       App.commands.setHandler('map:fit', _.bind(function(){
-        this.map.fitBounds(this._mainLayer.getBounds());
+        this.map.fitBounds(this.Layers.main.getBounds());
       }, this));
     },
 
@@ -62,7 +58,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       });
 
       if (add !== false) {
-        this._mainLayer.addLayer(polygon);
+        this.Layers.main.addLayer(polygon);
       }
 
       return polygon;
@@ -77,7 +73,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       );
 
       if (add !== false) {
-        this._mainLayer.addLayer(circle);
+        this.Layers.main.addLayer(circle);
       }
 
       return circle;

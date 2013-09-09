@@ -47,8 +47,8 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       });
 
       App.vent.on('draw:new', function(options){
-        if (Backbone.history.fragment === 'new') {
-          // console.log('already open');
+        if (Backbone.history.fragment === 'new' ||
+            Backbone.history.fragment.match('edit')) {
         } else {
           App.router.navigate('new', { trigger: true });
         }
