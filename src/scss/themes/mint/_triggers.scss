@@ -35,7 +35,7 @@
   background-color:#eee;
   padding: 0.5em 2em 1.5em 2em;
   input[type="search"]{
-    background: url(/dist/img/icons/search.png) no-repeat left center transparent;
+    background: url(../img/icons/search.png) no-repeat left center transparent;
     background-size: 28px;
     padding: 0 0 0.2em 31px;
     border: none;
@@ -72,7 +72,7 @@
     width:40px;
     height:40px;
     display:inline-block;
-    background: url('/dist/img/icons/enter-polygon.png') no-repeat center center transparent;
+    background: url('../img/icons/enter-polygon.png') no-repeat center center transparent;
     background-size: 40px;
     float: left;
     cursor: pointer;
@@ -81,25 +81,25 @@
     // top: 50%;
     margin-top: 6px;
     &.gt-icon-polygon {
-      background: url('/dist/img/icons/enter-polygon.png') no-repeat center center transparent; background-size: 40px;
+      background: url('../img/icons/enter-polygon.png') no-repeat center center transparent; background-size: 40px;
     }
     &.gt-icon-radius {
-      background: url('/dist/img/icons/enter-radius.png') no-repeat center center transparent; background-size: 40px;
+      background: url('../img/icons/enter-radius.png') no-repeat center center transparent; background-size: 40px;
     }
     &.gt-icon-drivetime{
-      background: url('/dist/img/icons/enter-drivetime.png') no-repeat center center transparent; background-size: 40px;
+      background: url('../img/icons/enter-drivetime.png') no-repeat center center transparent; background-size: 40px;
     }
   }
   .gt-icon-exit {
     @extend .gt-icon-enter;
     &.gt-icon-polygon {
-      background: url('/dist/img/icons/exit-polygon.png') no-repeat center center transparent; background-size: 40px;
+      background: url('../img/icons/exit-polygon.png') no-repeat center center transparent; background-size: 40px;
     }
     &.gt-icon-radius {
-      background: url('/dist/img/icons/exit-radius.png') no-repeat center center transparent; background-size: 40px;
+      background: url('../img/icons/exit-radius.png') no-repeat center center transparent; background-size: 40px;
     }
     &.gt-icon-drivetime{
-      background: url('/dist/img/icons/exit-drivetime.png') no-repeat center center transparent; background-size: 40px;
+      background: url('../img/icons/exit-drivetime.png') no-repeat center center transparent; background-size: 40px;
     }
   }
   h5 {
@@ -231,15 +231,15 @@
     width:40px;
     height:40px;
     display:inline-block;
-    // background: url('/dist/img/icons/enter-polygon.png') no-repeat center center transparent;
+    // background: url('../img/icons/enter-polygon.png') no-repeat center center transparent;
     // background-size: 40px;
     position: absolute;
     left: 10px;
     top: 50%;
     margin-top: -20px;
   }
-  .gt-icon-create {background:url('/dist/img/icons/create-dark.png') no-repeat center center; background-size:36px;}
-  .gt-icon-polygon {background:url('/dist/img/icons/polygon-dark.png') no-repeat center center; background-size:24px;}
-  .gt-icon-radius {background:url('/dist/img/icons/radius-dark.png') no-repeat center center; background-size:24px;}
-  .gt-icon-drivetime {background:url('/dist/img/icons/drivetime-dark.png') no-repeat center center; background-size:24px;}
+  .gt-icon-create {background:url('../img/icons/create-dark.png') no-repeat center center; background-size:36px;}
+  .gt-icon-polygon {background:url('../img/icons/polygon-dark.png') no-repeat center center; background-size:24px;}
+  .gt-icon-radius {background:url('../img/icons/radius-dark.png') no-repeat center center; background-size:24px;}
+  .gt-icon-drivetime {background:url('../img/icons/drivetime-dark.png') no-repeat center center; background-size:24px;}
 }

@@ -33,22 +33,20 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     start: function() {
       this.setup();
 
-      App.vent.trigger('notify', {
-        type: 'info',
-        message: 'Triggers loading'
-      });
+      App.vent.trigger('notify', 'Triggers loading');
 
       App.collections.triggers.fetch({
         reset: true,
         success: function() {
           App.vent.trigger('notify:clear');
           App.execute('map:fit');
+          Backbone.history.start();
         }
       });
 
       App.vent.on('draw:new', function(options){
-        if (Backbone.history.fragment === 'new') {
-          // console.log('already open');
+        if (Backbone.history.fragment === 'new' ||
+            Backbone.history.fragment.match('edit')) {
         } else {
           App.router.navigate('new', { trigger: true });
         }
@@ -100,8 +98,15 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
       App.regions.notes.show(view);
 
-      App.vent.on('notify', function(attributes){
-        var note = new App.Models.Notification(attributes);
+      App.vent.on('notify', function(options){
+        if (typeof options === 'string') {
+          options = {
+            type: 'info',
+            message: options
+          };
+        }
+
+        var note = new App.Models.Notification(options);
         App.collections.notifications.add(note);
       }, this);
     },
@@ -151,7 +156,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
     createTrigger: function(triggerData) {
       App.collections.triggers.once('add', function(data){
-        App.router.navigate(data.id + '/edit', { trigger: true });
+        App.router.navigate('list', { trigger: true });
       });
       App.collections.triggers.create(triggerData, { wait: true });
     },
@@ -171,6 +176,11 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     },
 
     deleteTrigger: function(model) {
+      App.collections.triggers.once('remove', function(data){
+        if (Backbone.history.fragment.match('edit')) {
+          App.router.navigate('list', { trigger: true });
+        }
+      });
       model.destroy();
     }
   });
