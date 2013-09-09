@@ -7,18 +7,12 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
 
   _.extend(Draw, {
 
-    _editLayer: null,
-
     _tools: {
       polygon: null,
       radius: null
     },
 
     _setup: function() {
-      // Initialize the FeatureGroup to store existing and editable layers
-      this._editLayer = new L.FeatureGroup();
-      App.map.addLayer(this._editLayer);
-
       // Initialize new Draw Handlers
       this._tools.polygon = new L.Draw.Polygon(App.map, App.Config.editOptions);
       this._tools.radius = new L.Draw.Circle(App.map, App.Config.editOptions);
@@ -28,16 +22,16 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
 
     _eventBindings: function() {
       App.vent.on('draw:new', function(layer) {
-        this.editTrigger(layer);
+        this.editLayer(layer);
       }, this);
 
-      App.vent.on('index trigger:new trigger:list trigger:edit', function(){
+      App.vent.on('index trigger:list trigger:edit', function(){
         this.clear();
       }, this);
 
       App.vent.on('trigger:edit', function(triggerId) {
         var layer = this.newShape(triggerId);
-        this.editTrigger(layer);
+        this.editLayer(layer);
         // App.Map.panToLayer(layer);
       }, this);
 
@@ -49,7 +43,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       });
 
       App.reqres.setHandler('draw:layer', _.bind(function(){
-        return this._editLayer.getLayers()[0];
+        return App.Map.Layers.edit.getLayers()[0];
       }, this));
 
       App.commands.setHandler('draw:clear', _.bind(function(){
@@ -80,14 +74,14 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       return shape;
     },
 
-    editTrigger: function(layer) {
+    editLayer: function(layer) {
       this.clear();
       layer.editing.enable();
-      this._editLayer.addLayer(layer);
+      App.Map.Layers.edit.addLayer(layer);
     },
 
     clear: function() {
-      this._editLayer.clearLayers();
+      App.Map.Layers.edit.clearLayers();
     },
 
     enableTool: function(name) {
