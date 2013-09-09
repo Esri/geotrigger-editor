@@ -8,22 +8,16 @@
   background:$darker-gray;
   left:0;
   border-right:1px solid $darkest-gray;
-  .gt-control {
-    width:70px;
-    padding:0;
-    height:60px;
-    color:white;
-    display:block;
-  }
   .gt-tool {
     border:none;
-    width:70px;
-    height:60px;
+    width:0;
+    height:0;
     background-color:$darker-gray;
     color:$white;
     display:block;
-    padding:0;
+    padding: 30px 35px;
     opacity:0.7;
+    position:relative;
     @include transition(opacity 200ms linear);
     border-top:1px solid $dark-gray;
     border-bottom:1px solid $darkest-gray;
@@ -42,9 +36,12 @@
 
     &:before {
       content:"";
-      width:70px;
-      height:60px;
-      display:block;
+      position: absolute;
+      top:0;
+      left:0;
+      right:0;
+      bottom:0;
+      padding:0;
       @include background-image(radial-gradient(100% 100%, rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%));
       opacity:0;
     }
