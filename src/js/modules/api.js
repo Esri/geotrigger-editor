@@ -6,7 +6,7 @@ GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
           !options.credentials ||
           !options.credentials.clientId ||
           !options.credentials.clientSecret) {
-        throw new Error('GeotriggerEditor requires a `credentials` object with a `clientId` and `clientSecret`');
+        throw new Error('GeotriggerEditor requires a `credentials` object with `clientId` and `clientSecret` properties');
       }
 
       this.session = new Geotriggers.Session({
