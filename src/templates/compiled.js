@@ -51,7 +51,7 @@ function program3(depth0,data) {
   options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data};
   stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n      </select>\n    </label>\n\n    <button class='gt-button gt-button-blue gt-submit'>Update</button>\n  </form>\n</div>";
+  buffer += "\n      </select>\n    </label>\n    <button class='gt-button gt-button-blue gt-submit'>Update</button>\n  </form>\n  <a href=\"#\" class=\"gt-trigger-delete\">Delete</a>\n</div>";
   return buffer;
   });
 
@@ -116,7 +116,7 @@ function program6(depth0,data) {
   buffer += "\n  </a>\n</h5>\n<ul class=\"gt-tags\">\n  ";
   stack2 = helpers.each.call(depth0, depth0.tags, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</ul>\n<ul class=\"gt-item-controls\">\n	<li><a class=\"gt-reset-delete\" href=\"#\">&#x2716;</a></li>\n	<li><a class=\"gt-item-delete gt-button-small\" href=\"#\"></a></li>\n</ul>";
+  buffer += "\n</ul>\n<ul class=\"gt-item-controls\">\n	<li><a class=\"gt-reset-delete\" href=\"#\">&#x2716;</a></li>\n	<li><button class=\"gt-item-delete gt-button-small gt-button-delete\"></button></li>\n</ul>";
   return buffer;
   });
 

@@ -38,7 +38,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     resetDelete: function(e) {
       e.preventDefault();
-      this.ui.confirm.removeClass('gt-item-confirm-delete');
+      this.ui.deleteItem.removeClass('gt-item-confirm-delete');
       this.ui.reset.removeClass('gt-reset-flyout');
     },
 

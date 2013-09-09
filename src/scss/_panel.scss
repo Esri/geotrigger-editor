@@ -63,8 +63,9 @@
   background:$white;
   @include transition(background-color 100ms linear);
   &.gt-close-drawer {
-    float: right;
-    background: url('/dist/img/icons/x.png') no-repeat center center transparent;
+    float:right;
+    background:url('/dist/img/icons/x.png') no-repeat center center transparent;
+    @include retina-display(){background:url('/dist/img/icons/x2x.png') no-repeat center center transparent; background-size: 24px;}
     border-left: 1px solid $lighter-gray;
     @include retina-display() {
       background: url('/dist/img/icons/x2x.png') no-repeat center center transparent;
@@ -72,18 +73,16 @@
     }
   }
   &.gt-back-to-list {
-    float: left;
-    background: url('/dist/img/icons/left-arrow.png') no-repeat center center transparent;
-    border-right: 1px solid $lighter-gray;
-    @include retina-display() {
-      background: url('/dist/img/icons/left-arrow2x.png') no-repeat center center transparent;
-      background-size: 24px;
-    }
+    float:left;
+    background:url('/dist/img/icons/left-arrow.png') no-repeat center center transparent;
+    border-right:1px solid $lighter-gray;
+    @include retina-display(){background:url('/dist/img/icons/left-arrow2x.png') no-repeat center center transparent; background-size: 24px;}
   }
   &.gt-new-trigger {
     @extend .gt-back-to-list;
-    // background:url('/dist/img/icons/new.png') no-repeat center center transparent;
-    // @include retina-display {}
+    background:none;
+    border-right: none;
+    @include retina-display(){background:none;}
   }
   &:hover {
     background-color:$off-white;
