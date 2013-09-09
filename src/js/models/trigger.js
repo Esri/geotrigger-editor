@@ -19,6 +19,9 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
             options.error('Record Not Found');
           }
         } else {
+          if (method !== 'read') {
+            App.vent.trigger('notify', 'Trigger ' + method + 'd successfully');
+          }
           if (options && options.success) {
             options.success(response);
           }
