@@ -81,8 +81,8 @@
   &.gt-new-trigger {
     @extend .gt-back-to-list;
     background:none;
-    @include retina-display(){background:none;}
     border-right: none;
+    @include retina-display(){background:none;}
   }
   &:hover {
     background-color:$off-white;

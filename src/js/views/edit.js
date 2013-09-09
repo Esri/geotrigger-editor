@@ -9,48 +9,36 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
   Views.Edit = Marionette.ItemView.extend({
     template: App.Templates['edit'],
-    className: 'gt-edit',
+    className: 'gt-edit gt-panel',
 
     events: {
-      'change .gt-geometry-type': 'startDrawing',
-      'change .gt-action-selector': 'toggleActions',
-      'click .gt-submit': 'parseForm'
+      'change .gt-geometry-type'   : 'startDrawing',
+      'change .gt-action-selector' : 'toggleActions',
+      'click .gt-submit'           : 'parseForm'
     },
 
-    onShow: function() {
-      var item = this.options.item;
-      var layer;
-      if (item.shape.getLayers) {
-        layer = item.shape.getLayers()[0];
-      } else if (item.shape.editing) {
-        layer = item.shape;
-      } else {
-        throw new Error('Unknown Layer Error');
-      }
-
-      App.vent.trigger('trigger:edit', layer);
-    },
-
-    restoreShape: function() {
-      this.options.item.restoreShape();
+    ui: {
+      'actions' : '.gt-action',
+      'form'    : 'form'
     },
 
     startDrawing: function (e) {
       var tool = $(e.target).val();
-      App.Map.Draw.clear();
-      App.Map.Draw.enableTool(tool);
+      App.execute('draw:clear');
+      App.execute('draw:enable', tool);
     },
 
     toggleActions: function(e) {
       var action = $(e.target).val();
-      this.$el.find('.gt-action').hide();
-      this.$el.find('.gt-action-'+action).show();
+      this.ui.actions.hide();
+      this.$el.find('.gt-action-' + action).show();
     },
 
     parseForm: function(e) {
       e.preventDefault();
-      var data = this.$el.find('form').serializeObject();
+      var data = this.ui.form.serializeObject();
       data = App.util.removeEmptyStrings(data);
+
       if (data.tags) {
         var tags = data.tags;
         tags = tags.split(',');
@@ -66,8 +54,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     updateTrigger: function(data) {
-      var geo;
-      var layer = App.Map.Draw.editLayer.getLayers()[0];
+      var layer = App.request('draw:layer');
 
       if (layer instanceof L.Circle) {
         var latlng = layer.getLatLng();

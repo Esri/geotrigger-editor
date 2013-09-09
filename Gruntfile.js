@@ -29,6 +29,7 @@ module.exports = function(grunt) {
           'js/lib/*.js',
           'js/app.js',
           'src/js/modules/*.js',
+          'src/js/controllers/*.js',
           'src/js/models/*.js',
           'src/js/collections/*.js',
           'src/js/layouts/*.js',
@@ -121,6 +122,7 @@ module.exports = function(grunt) {
             'src/js/app.js',
             'src/templates/*.js',
             'src/js/modules/*.js',
+            'src/js/controllers/*.js',
             'src/js/models/*.js',
             'src/js/collections/*.js',
             'src/js/layouts/*.js',
@@ -136,6 +138,7 @@ module.exports = function(grunt) {
           'src/js/app.js',
           'src/templates/*.js',
           'src/js/modules/*.js',
+          'src/js/controllers/*.js',
           'src/js/models/*.js',
           'src/js/collections/*.js',
           'src/js/layouts/*.js',
@@ -156,8 +159,8 @@ module.exports = function(grunt) {
           // jsLintXML: 'report.xml', // create XML JSLint-like report
           // checkstyleXML: 'checkstyle.xml', // create checkstyle report
           errorsOnly: false, // show only maintainability errors
-          cyclomatic: 5,
-          halstead: 15,
+          cyclomatic: 10,
+          halstead: 30,
           maintainability: 80
         }
       }

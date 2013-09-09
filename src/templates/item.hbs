@@ -1,10 +1,10 @@
 <span class="gt-item-edit gt-icon {{actionIcon condition.direction}} gt-icon-polygon"></span>
 <h5>
-  <a class="gt-item-edit" href="#">
+  <a class="gt-item-edit" href="#{{triggerId}}/edit">
     {{#unless properties.title}}
-    untitled trigger
+    <span>untitled trigger</span>
     {{else}}
-    {{properties.title}}
+    <span>{{properties.title}}</span>
     {{/unless}}
   </a>
 </h5>
