@@ -155,7 +155,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div id=\"gt-controls-region\"></div>\n<div id=\"gt-content\">\n  <div id=\"gt-drawer-region\"></div>\n  <div id=\"gt-map-region\"></div>\n</div>\n<div id=\"gt-notes-region\"></div>\n";
+  return "<div id=\"gt-controls-region\"></div>\n<div id=\"gt-content\">\n  <div id=\"gt-drawer-region\"></div>\n  <div id=\"gt-map-region\"></div>\n  <div id=\"gt-notes-region\"></div>\n</div>\n";
   });
 
 this["GeotriggerEditor"]["Templates"]["new"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

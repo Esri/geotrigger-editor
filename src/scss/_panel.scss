@@ -84,9 +84,6 @@
     border-right: none;
     @include retina-display(){background:none;}
   }
-  &:hover {
-    background-color:$off-white;
-  }
 }
 .gt-panel-content{
   @include box-sizing(border-box);
