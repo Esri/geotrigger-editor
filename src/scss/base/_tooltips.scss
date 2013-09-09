@@ -1,14 +1,15 @@
-a.gt-tooltip {
+.gt-tooltip {
   span {
     display:none;
     z-index:10;
     padding:14px 20px;
     color:$white;
+    font-size: 14px;
     @include border-radius(4px);
     @include box-shadow(0 0 12px rgba(0,0,0,0.2));
     padding: 14px 20px;
-    margin-top: -50px;
-    margin-left: 120%;
+    margin-top: -21px;
+    margin-left: 56px;
     width: auto;
     white-space: nowrap;
     background-color: rgba(0,0,0,.8);
