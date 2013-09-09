@@ -44,13 +44,12 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
           break;
         case 'update':
           var params = {
-            //'properties': this.get('properties'), // getting a 500
+            'properties': this.get('properties'),
             'triggerIds': triggerId,
             'condition': this.get('condition'),
             'action': this.get('action'),
             'setTags': this.get('tags')
           };
-          // console.log(params); // for debugging properties
           request('trigger/update', params);
           break;
         case 'delete':
