@@ -33,6 +33,18 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
+  return "\n        <option value='polygon'>a polygon</option>\n        <option value='radius'>a distance of</option>\n        ";
+  }
+
+function program5(depth0,data) {
+  
+  
+  return "\n      <option value='notification'>send the device a message</option>\n      <option value='callbackUrl'>post to a server</option>\n      <option value='trackingProfile'>change tracking profile</option>\n      ";
+  }
+
+function program7(depth0,data) {
+  
+  
   return "\n        <option value='fine'>fine</option>\n        <option value='adaptive'>adaptive</option>\n        <option value='rough'>rough</option>\n        <option value='off'>off</option>\n        ";
   }
 
@@ -45,10 +57,18 @@ function program3(depth0,data) {
   options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data};
   stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n      </select>\n      <select name='geometry-type' class='gt-geometry-type'>\n        <option value='default' disabled='disabled' selected>select a geometry</option>\n        <option value='polygon'>a polygon</option>\n        <option value='radius'>a distance of</option>\n      </select>\n    </label>\n\n    <select name='action-selector' class='gt-action'>\n      <option disabled='disabled' selected>choose an action</option>\n      <option value='message'>send the device a message</option>\n      <option value='callback'>post to a server</option>\n      <option value='profile'>change tracking profile</option>\n    </select>\n    <span>:</span>\n\n    <label class='gt-action gt-action-message' for='message'>\n      <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
+  buffer += "\n      </select>\n      <select name='geometry-type' class='gt-geometry-type'>\n        <option value='default' disabled='disabled'>select a geometry</option>\n        ";
+  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data};
+  stack2 = ((stack1 = helpers.selectShape || depth0.selectShape),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "selectShape", depth0.condition, options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n      </select>\n    </label>\n\n    <select name='action-selector' class='gt-action'>\n      <option disabled='disabled'>choose an action</option>\n      ";
+  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data};
+  stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, depth0.action, options) : helperMissing.call(depth0, "select", depth0.action, options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n    </select>\n    <span>:</span>\n\n    <label class='gt-action gt-action-message' for='message'>\n      <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "</textarea>\n    </label>\n\n    <label class='gt-action gt-action-callback gt-hide' for='url'>\n      <input type='text' name='action[callbackUrl]' placeholder='url (optional)'>\n    </label>\n\n    <label class='gt-action gt-action-profile gt-hide' for='url'>\n      <span>to</span>\n      <select class='gt-action-profile-selector' name='action[trackingProfile]'>\n        <option disabled='disabled'>choose a tracking profile</option>\n        ";
-  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data};
+  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data};
   stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n      </select>\n    </label>\n    <button class='gt-button gt-button-blue gt-submit'>Update</button>\n  </form>\n  <a href=\"#\" class=\"gt-trigger-delete\">Delete</a>\n</div>";
