@@ -1,19 +1,22 @@
 #gt-notes-region {
   height: auto;
-  position: absolute;
   z-index: 1;
-  left: 40%;
-  top: 10px;
+  position: relative;
+  margin: 0 auto;
+  width: 300px;
 }
-
+.gt-active {
+  #gt-notes-region {
+    padding-left: 40%;
+  }
+}
 .gt-notification-list {
   list-style-type: none;
 }
 
 .gt-notification {
-  width: 18em;
   z-index:9;
-  margin: 0 0 4px 100px;
+  margin: 4px 0;
   padding:14px 20px;
   color:$white;
   background-color: rgba(38,38,38, 0.8);
@@ -22,8 +25,6 @@
   &.error {
     background-color: rgba(180, 20, 20, 0.8);
   }
-
-
   .gt-close {
     float: right;
     margin-top: -3px;
