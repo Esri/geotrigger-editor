@@ -29,9 +29,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var id = this.model.get('triggerId');
       var geo = this.model.get('condition').geo;
 
-      if (this._shape) {
-        this.removeShape();
-      }
+      this.removeShape();
 
       if (geo.geojson) {
         this._shape = App.Map.polygon(geo.geojson);
@@ -45,8 +43,10 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     removeShape: function() {
-      App.Map.removeShape(this._shape);
-      delete this._shape;
+      if (this._shape) {
+        App.Map.removeShape(this._shape);
+        delete this._shape;
+      }
     },
 
     onClose: function() {
