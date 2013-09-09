@@ -38,6 +38,7 @@
 
 #gt-drawer-region {
   @include full;
+  z-index:2;
   right: auto;
   width: 0;
 }
