@@ -6,7 +6,7 @@ GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
           !options.credentials ||
           !options.credentials.clientId ||
           !options.credentials.clientSecret) {
-        throw new Error('missing credentials');
+        throw new Error('GeotriggerEditor requires a `credentials` object with `clientId` and `clientSecret` properties');
       }
 
       this.session = new Geotriggers.Session({
@@ -16,8 +16,7 @@ GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
       });
 
     } catch (e) {
-      // console.error(e.name + ": " + e.message);
-      throw new Error('GeotriggerEditor requires a `credentials` object with a `clientId` and `clientSecret`');
+      console.error(e.name + ": " + e.message);
     }
   });
 
