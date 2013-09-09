@@ -39,6 +39,21 @@
   margin-left: 3%;
 }
 
+.gt-trigger-delete {
+  padding-top: 2em;
+  display: block;
+  color: $gray;
+  text-decoration: none;
+  max-width: 3em;
+  &:hover {
+    color: $red;
+  }
+}
+
+.gt-submit {
+  float: right;
+}
+
 /* - - - - - - - - - - Trigger List - - - - - - - - - - */
 .gt-list-header {
   border-bottom:1px solid $light-gray;
@@ -171,9 +186,6 @@
     float: right;
     list-style-type: none;
     margin-right: 3px;
-    .gt-button-small {
-      width: 2.5rem;
-    }
     &:first-child {
       float: left;
       padding-top: 0.45rem;
@@ -185,7 +197,7 @@
 .gt-item-delete {
   margin-top: 0;
   &:before {
-    content: "delete";
+    content: "Delete";
   }
 }
 
@@ -198,7 +210,7 @@
     background-color: darken($red, 10%);
   }
   &:before {
-    content: "sure?";
+    content: "Sure?";
   }
 }
 

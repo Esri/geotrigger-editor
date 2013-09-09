@@ -33,13 +33,21 @@
   }
 }
 
-.gt-button-small {
+.gt-button-delete {
   @extend .gt-button;
-  padding: 0.5em;
+  padding: 1em;
   background-color: $light-gray;
   border: 1px solid darken($light-gray, 10%);
   @include transition(background-color 200ms linear);
   &:hover {
     background-color: darken($light-gray, 10%);
   }
+}
+
+.gt-submit {
+  float: right;
+}
+
+.gt-button-small {
+  padding: 0.5em;
 }
