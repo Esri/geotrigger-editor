@@ -29,6 +29,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     onRender: function() {
       this.listenTo(App.router, 'route', this.handleStateChange);
       this.listenTo(App.vent, 'draw:new', this.disableTool);
+      this.listenTo(App.vent, 'draw:enable', function(tool){
+        this.activate(tool);
+      });
+      this.listenTo(App.vent, 'draw:disable', function(tool){
+        this.ui.tools.find('.gt-tool').removeClass('gt-active');
+      });
     },
 
     handleStateChange: function(route) {
@@ -68,7 +74,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       if (this.ui.polygon.hasClass('gt-active')) {
         this.disableTool('polygon');
       } else {
-        this.activateTool('polygon');
+        this.enableTool('polygon');
       }
     },
 
@@ -76,21 +82,17 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       if (this.ui.radius.hasClass('gt-active')) {
         this.disableTool('radius');
       } else {
-        this.activateTool('radius');
+        this.enableTool('radius');
       }
     },
 
-    activateTool: function(name) {
+    enableTool: function(tool) {
       this.disableTool();
-      App.execute('draw:enable', name);
-      this.activate(name);
+      App.vent.trigger('draw:enable', tool);
     },
 
-    disableTool: function(name) {
-      if (name) {
-        App.execute('draw:disable', name);
-      }
-      this.ui.tools.find('.gt-tool').removeClass('gt-active');
+    disableTool: function(tool) {
+      App.vent.trigger('draw:disable', tool);
     },
 
     // helpers
