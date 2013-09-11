@@ -200,15 +200,14 @@
 .gt-edit-controls {
   position: relative;
   margin-top: 10px;
-  max-width: 6em;
+  max-width: 14em;
+  float: left;
   li {
     list-style-type: none;
+    margin-top: 2px;
     margin-right: 3px;
     max-width: 6em;
-    &:first-child {
-      float: left;
-      padding-top: 0.45rem;
-    }
+    float: left;
   }
 }
 
@@ -254,7 +253,7 @@
   }
   &.gt-reset-flyout-right {
     left: 6em;
-    margin-top: 10px;
+    margin-top: 16px;
     color: $gray;
     visibility: visible;
     display:block;
