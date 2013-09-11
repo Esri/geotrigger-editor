@@ -108,6 +108,7 @@ module.exports = function(grunt) {
             'vendor/json2.js',
             'vendor/jquery-1.10.2.js',
             'vendor/underscore.js',
+            'vendor/underscore.deep-extend.js',
             'vendor/backbone.js',
             'vendor/backbone.marionette.js',
             'vendor/handlebars.js',
