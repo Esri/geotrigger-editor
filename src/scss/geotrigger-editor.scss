@@ -30,18 +30,22 @@
     #gt-drawer-region {
       width: 40%;
       @include box-shadow(0 0 12px rgba(0,0,0,0.3));
+      display:block;
     }
     #gt-map-region {
-      width: 60%;
+      width: 100%;
     }
   }
 }
 
 #gt-drawer-region {
   @include full;
+  max-width:600px;
+  min-width:400px;
   z-index:2;
   right: auto;
   width: 0;
+  display: none;
 }
 
 #gt-map-region {
