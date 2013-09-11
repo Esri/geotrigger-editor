@@ -32,7 +32,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       App.vent.on('trigger:edit', function(triggerId) {
         var layer = this.newShape(triggerId);
         this.editLayer(layer);
-        // App.Map.panToLayer(layer);
+        App.Map.panToLayer(layer);
       }, this);
 
       App.map.on('draw:created', function(e) {
