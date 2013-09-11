@@ -71,7 +71,7 @@ function program7(depth0,data) {
   options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data};
   stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n      </select>\n    </label>\n    <button class='gt-button gt-button-blue gt-submit'>Update</button>\n  </form>\n  <a href=\"#\" class=\"gt-trigger-delete\">Delete</a>\n</div>";
+  buffer += "\n      </select>\n    </label>\n    <button class='gt-button gt-button-blue gt-submit'>Update</button>\n    <ul class=\"gt-edit-controls\">\n      <li>\n        <a class=\"gt-reset-delete\" href=\"#\">&#x2716;</a>\n      </li>\n      <li>\n        <button class=\"gt-item-delete gt-button-delete\"></button>\n      </li>\n    </ul>\n  </form>\n</div>";
   return buffer;
   });
 
