@@ -44,19 +44,20 @@
   @include box-sizing(border-box);
   background-color:$white;
   border-bottom: 1px solid $lighter-gray;
-  text-align:center;
+  // text-align:center;
   h3 {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
+    padding-left: 12px;
     &.gt-panel-top-bar-left {
-      padding-left: 48px;
+      padding-left: 32px;
     }
   }
   .gt-tool-create {
     float: left;
     position: absolute;
-    left: 12px;
+    right: 72px;
     margin-top: 8px;
     top: 0;
   }
