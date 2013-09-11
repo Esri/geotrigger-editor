@@ -28,19 +28,14 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
         }
       }, this);
 
-      var request = function(route, params) {
-        App.API.session.request(route, {
-          params: params,
-          callback: callback
-        });
-      };
+      var request = App.API.session.request;
 
       switch (method) {
         case 'read':
-          request('trigger/list', { 'triggerIds': [ triggerId ] });
+          request('trigger/list', { 'triggerIds': [ triggerId ] }, callback);
           break;
         case 'create':
-          request('trigger/create', model.toJSON());
+          request('trigger/create', model.toJSON(), callback);
           break;
         case 'update':
           var params = {
@@ -50,10 +45,10 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
             'action': this.get('action'),
             'setTags': this.get('tags')
           };
-          request('trigger/update', params);
+          request('trigger/update', params, callback);
           break;
         case 'delete':
-          request('trigger/delete', { 'triggerIds': triggerId });
+          request('trigger/delete', { 'triggerIds': triggerId }, callback);
           break;
       }
     }

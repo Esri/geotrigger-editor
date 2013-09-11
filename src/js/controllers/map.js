@@ -19,7 +19,9 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
     _eventBindings: function() {
       App.commands.setHandler('map:fit', _.bind(function(){
-        this.map.fitBounds(this.Layers.main.getBounds());
+        this.map.fitBounds(this.Layers.main.getBounds(), {
+          animate: false
+        });
       }, this));
     },
 
