@@ -50,8 +50,15 @@
     vertical-align: middle;
     line-height: normal;
     &.gt-panel-top-bar-left {
-      padding-left:32px;
+      padding-left: 48px;
     }
+  }
+  .gt-tool-create {
+    float: left;
+    position: absolute;
+    left: 12px;
+    margin-top: 8px;
+    top: 0;
   }
 }
 .gt-panel-top-bar-button {
@@ -80,11 +87,12 @@
   }
   &.gt-new-trigger {
     @extend .gt-back-to-list;
-    background:none;
-    border-right: none;
-    @include retina-display(){background:none;}
+    background:url('../img/icons/create.png') no-repeat center center transparent;
+    border-right: 1px solid $lighter-gray;
+    @include retina-display(){background:url('../img/icons/create2x.png') no-repeat center center transparent; background-size: 24px;}
   }
 }
+
 .gt-panel-content{
   @include box-sizing(border-box);
   width:100%;
