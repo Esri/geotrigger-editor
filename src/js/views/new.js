@@ -24,20 +24,49 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     onShow: function(options) {
-      var layer = App.request('draw:layer');
-      // convert layer information into form data if it exists
+      this.parseShape();
+      this.listenTo(App.vent, 'draw:new', this.parseShape);
     },
 
     startDrawing: function(e) {
       var tool = $(e.target).val();
-      App.execute('draw:clear');
-      App.execute('draw:enable', tool);
+      // App.execute('draw:clear');
+      App.vent.trigger('draw:enable', tool);
+      // @TODO: radius input
+      // if (tool === 'radius') {
+      //   this.ui.form.find('[name="radius"]').show();
+      // } else {
+      //   this.ui.form.find('[name="radius"]').hide();
+      // }
     },
 
     toggleActions: function(e) {
       var action = $(e.target).val();
       this.ui.actions.hide();
       this.$el.find('.gt-action-' + action).show();
+    },
+
+    parseShape: function() {
+      var layer = App.request('draw:layer');
+      window.layer = layer;
+      var direction = this.ui.form.find('[name="condition[direction]"]');
+      var geometry = this.ui.form.find('[name="geometry-type"]');
+      // var radius = this.ui.form.find('[name="radius"]'); // @TODO: radius
+      switch (true) {
+        case (layer instanceof L.Polygon):
+          if (direction.val() === null) {
+            direction.val('enter');
+          }
+          geometry.val('polygon');
+          break;
+        case (layer instanceof L.Circle):
+          if (direction.val() === null) {
+            direction.val('enter');
+          }
+          geometry.val('radius');
+          // radius.show().val(Math.round(layer.getRadius())); // @TODO: radius
+          break;
+      }
     },
 
     parseForm: function(e) {

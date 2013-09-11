@@ -54,6 +54,12 @@
   float: right;
 }
 
+.gt-form {
+  .gt-radius {
+    display: none;
+  }
+}
+
 /* - - - - - - - - - - Trigger List - - - - - - - - - - */
 .gt-list-header {
   border-bottom:1px solid $light-gray;
@@ -246,7 +252,7 @@
     }
   }
   &.gt-reset-flyout-right {
-    left: 10.5em;
+    left: 6em;
     margin-top: 16px;
     color: $gray;
     visibility: visible;
