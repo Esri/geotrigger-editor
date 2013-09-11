@@ -12,15 +12,20 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-edit gt-panel',
 
     events: {
-      'change .gt-geometry-type'   : 'startDrawing',
-      'change .gt-action-selector' : 'toggleActions',
-      'click .gt-submit'           : 'parseForm',
-      'click .gt-trigger-delete'   : 'destroyModel'
+      'change .gt-geometry-type'      : 'startDrawing',
+      'change .gt-action-selector'    : 'toggleActions',
+      'click .gt-submit'              : 'parseForm',
+      'click .gt-item-delete'         : 'confirmDelete',
+      'click .gt-reset-delete'        : 'resetDelete',
+      'click .gt-item-confirm-delete' : 'destroyModel'
     },
 
     ui: {
-      'actions' : '.gt-action',
-      'form'    : 'form'
+      'actions'    : '.gt-action',
+      'form'       : 'form',
+      'deleteItem' : '.gt-item-delete',
+      'confirm'    : '.gt-item-confirm-delete',
+      'reset'      : '.gt-reset-delete'
     },
 
     startDrawing: function (e) {
@@ -73,6 +78,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       data.triggerId = this.model.get('triggerId');
 
       App.vent.trigger('trigger:update', data);
+    },
+
+    confirmDelete: function(e) {
+      e.preventDefault();
+      this.ui.deleteItem.addClass('gt-item-confirm-delete');
+      this.ui.reset.addClass('gt-reset-flyout-right');
+    },
+
+    resetDelete: function(e) {
+      e.preventDefault();
+      this.ui.deleteItem.removeClass('gt-item-confirm-delete');
+      this.ui.reset.removeClass('gt-reset-flyout-right');
     },
 
     destroyModel: function(e) {

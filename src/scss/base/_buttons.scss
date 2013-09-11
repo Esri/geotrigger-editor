@@ -44,6 +44,11 @@
   }
 }
 
+.gt-button-clear {
+  @extend .gt-button-delete;
+  margin-top: -3px;
+}
+
 .gt-submit {
   float: right;
 }
