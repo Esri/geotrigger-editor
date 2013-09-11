@@ -186,6 +186,20 @@
     list-style-type: none;
     margin-right: 3px;
     &:first-child {
+      padding-top: 0.45rem;
+    }
+  }
+}
+
+.gt-edit-controls {
+  position: relative;
+  margin-top: 10px;
+  max-width: 6em;
+  li {
+    list-style-type: none;
+    margin-right: 3px;
+    max-width: 6em;
+    &:first-child {
       float: left;
       padding-top: 0.45rem;
     }
@@ -194,6 +208,7 @@
 
 /* - - - - - - - - - - Delete - Confirm Delete - - - - - - - - - - */
 .gt-item-delete {
+  display: inline-block;
   margin-top: 0;
   &:before {
     content: "Delete";
@@ -221,6 +236,19 @@
   color: $gray;
   visibility: hidden;
   &.gt-reset-flyout {
+    left: 0;
+    top: 9px;
+    color: $gray;
+    visibility: visible;
+    display:block;
+    @include transition(transform 100ms ease-in);
+    &:hover {
+      color: $red;
+    }
+  }
+  &.gt-reset-flyout-right {
+    left: 6em;
+    margin-top: 10px;
     color: $gray;
     visibility: visible;
     display:block;
