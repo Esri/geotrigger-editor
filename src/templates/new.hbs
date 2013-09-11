@@ -4,7 +4,7 @@
 </div>
 
 <div class='gt-panel-content'>
-  <form>
+  <form class='gt-form gt-form-new'>
     <input type='text' name='properties[title]' placeholder='Title' class='gt-trigger-title-input'>
     <span class='gt-tag-label'>When a device tagged</span>
     <input type='text' name='setTags' placeholder='enter tags' class='gt-tag-input'>
@@ -18,27 +18,28 @@
       <select name='geometry-type' class='gt-geometry-type'>
         <option value='default' disabled='disabled' selected>select a geometry</option>
         <option value='polygon'>a polygon</option>
-        <option value='radius'>a distance of</option>
+        <option value='radius'>a circle</option>
       </select>
+      <input type='text' name='radius' class='gt-radius'>
     </label>
 
     <select class='gt-action-selector'>
       <option disabled='disabled' selected>choose an action</option>
-      <option value='message'>send the device a message</option>
-      <option value='callback'>post to a server</option>
-      <option value='profile'>change tracking profile</option>
+      <option value='notification'>send the device a message</option>
+      <option value='callbackUrl'>post to a server</option>
+      <option value='trackingProfile'>change tracking profile</option>
     </select>
     <span>:</span>
 
-    <label class='gt-action gt-action-message' for='message'>
+    <label class='gt-action gt-action-notification' for='message'>
       <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'></textarea>
     </label>
 
-    <label class='gt-action gt-action-callback gt-hide' for='url'>
+    <label class='gt-action gt-action-callbackUrl gt-hide' for='url'>
       <input type='text' name='action[callbackUrl]' placeholder='url (optional)'>
     </label>
 
-    <label class='gt-action gt-action-profile gt-hide' for='url'>
+    <label class='gt-action gt-action-trackingProfile gt-hide' for='url'>
       <span>to</span>
       <select class='gt-action-profile-selector' name='action[trackingProfile]'>
         <option disabled='disabled' selected>choose a tracking profile</option>
@@ -65,5 +66,10 @@
     -->
 
     <button class='gt-button gt-button-blue gt-submit'>Submit</button>
+    <ul class='gt-edit-controls'>
+      <li>
+        <input type='reset' class='gt-item-clear gt-button-clear' value='Reset'>
+      </li>
+    </ul>
   </form>
 </div>

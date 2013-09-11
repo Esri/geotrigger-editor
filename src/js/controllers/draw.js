@@ -14,8 +14,8 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
 
     _setup: function() {
       // Initialize new Draw Handlers
-      this._tools.polygon = new L.Draw.Polygon(App.map, App.Config.editOptions);
-      this._tools.radius = new L.Draw.Circle(App.map, App.Config.editOptions);
+      this._tools.polygon = new L.Draw.Polygon(App.map, App.config.editOptions);
+      this._tools.radius = new L.Draw.Circle(App.map, App.config.editOptions);
 
       this._eventBindings();
     },
@@ -50,11 +50,11 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
         this.clear();
       }, this));
 
-      App.commands.setHandler('draw:enable', _.bind(function(tool){
+      App.vent.on('draw:enable', _.bind(function(tool){
         this.enableTool(tool);
       }, this));
 
-      App.commands.setHandler('draw:disable', _.bind(function(tool){
+      App.vent.on('draw:disable', _.bind(function(tool){
         this.disableTool(tool);
       }, this));
     },
@@ -66,9 +66,9 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       var shape;
 
       if (geo.geojson) {
-        shape = App.Map.polygon(geo.geojson, App.Config.editOptions.shapeOptions, false).getLayers()[0];
+        shape = App.Map.polygon(geo.geojson, App.config.editOptions.shapeOptions, false).getLayers()[0];
       } else {
-        shape = App.Map.circle(geo, App.Config.editOptions.shapeOptions, false);
+        shape = App.Map.circle(geo, App.config.editOptions.shapeOptions, false);
       }
 
       return shape;

@@ -12,27 +12,59 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-edit gt-panel',
 
     events: {
-      'change .gt-geometry-type'   : 'startDrawing',
-      'change .gt-action-selector' : 'toggleActions',
-      'click .gt-submit'           : 'parseForm',
-      'click .gt-trigger-delete'   : 'destroyModel'
+      'change .gt-geometry-type'      : 'startDrawing',
+      'change .gt-action-selector'    : 'toggleActions',
+      'click .gt-submit'              : 'parseForm',
+      'click .gt-item-delete'         : 'confirmDelete',
+      'click .gt-reset-delete'        : 'resetDelete',
+      'click .gt-item-confirm-delete' : 'destroyModel'
     },
 
     ui: {
-      'actions' : '.gt-action',
-      'form'    : 'form'
+      'actions'    : '.gt-action',
+      'form'       : 'form',
+      'deleteItem' : '.gt-item-delete',
+      'confirm'    : '.gt-item-confirm-delete',
+      'reset'      : '.gt-reset-delete'
+    },
+
+    onShow: function() {
+      this.listenTo(App.vent, 'draw:new', this.parseShape);
     },
 
     startDrawing: function (e) {
       var tool = $(e.target).val();
-      App.execute('draw:clear');
-      App.execute('draw:enable', tool);
+      // App.execute('draw:clear');
+      App.vent.trigger('draw:enable', tool);
     },
 
     toggleActions: function(e) {
       var action = $(e.target).val();
       this.ui.actions.hide();
       this.$el.find('.gt-action-' + action).show();
+    },
+
+    parseShape: function() {
+      var layer = App.request('draw:layer');
+      window.layer = layer;
+      var direction = this.ui.form.find('[name="condition[direction]"]');
+      var geometry = this.ui.form.find('[name="geometry-type"]');
+      // var radius = this.ui.form.find('[name="radius"]'); // @TODO: radius
+      switch (true) {
+        case (layer instanceof L.Polygon):
+          if (direction.val() === null) {
+            direction.val('enter');
+          }
+          geometry.val('polygon');
+          break;
+        case (layer instanceof L.Circle):
+          if (direction.val() === null) {
+            direction.val('enter');
+          }
+          geometry.val('radius');
+          // radius.show().val(Math.round(layer.getRadius())); // @TODO: radius
+          break;
+      }
     },
 
     parseForm: function(e) {
@@ -73,6 +105,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       data.triggerId = this.model.get('triggerId');
 
       App.vent.trigger('trigger:update', data);
+    },
+
+    confirmDelete: function(e) {
+      e.preventDefault();
+      this.ui.deleteItem.addClass('gt-item-confirm-delete');
+      this.ui.reset.addClass('gt-reset-flyout-right');
+    },
+
+    resetDelete: function(e) {
+      e.preventDefault();
+      this.ui.deleteItem.removeClass('gt-item-confirm-delete');
+      this.ui.reset.removeClass('gt-reset-flyout-right');
     },
 
     destroyModel: function(e) {

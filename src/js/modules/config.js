@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Config', function(Config) {
+GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $, _) {
 
   var sharedOptions = {
     showArea: false,
@@ -17,29 +17,31 @@ GeotriggerEditor.module('Config', function(Config) {
   var editOptions = {
     showArea: false,
     shapeOptions: {
-      stroke: true,
       color: '#00dcb1',
-      weight: 2,
       opacity: 0.8,
+      dashArray: '10, 10',
+      weight: 2,
       fill: true,
-      fillColor: null, //same as color by default
-      fillOpacity: 0.2,
-      clickable: true
+      fillOpacity: 0.2
     }
   };
 
-  _.extend(Config, {
-
-    Map: {
+  var defaults = {
+    map: {
       basemap: 'Streets',
       center: [45.516484, -122.676339],
       zoom: 12
     },
 
+    fitOnLoad: true,
+
     imagePath: '/images',
     sharedOptions: sharedOptions,
     editOptions: editOptions
+  };
 
+  Config.addInitializer(function(options) {
+    App.config = _.deepExtend(defaults, options);
   });
 
 });
