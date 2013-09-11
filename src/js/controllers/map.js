@@ -34,17 +34,18 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
         latlng = layer.getCenter();
       }
 
+      if ($('#gt-content').hasClass('gt-active')){
+        drawer = $('#gt-drawer-region').width() / 2;
+        var projected = this.map.project(latlng);
+        projected.x = projected.x - drawer;
+        latlng = this.map.unproject(projected);
+      }
+
       if (latlng) {
         this.map.panTo(latlng, {
           animate: false
         });
       }
-    },
-
-    zoomToLayer: function(layer) {
-      this.map.fitBounds(layer.getBounds(), {
-        padding: [60, 60]
-      });
     },
 
     removeShape: function(shape) {

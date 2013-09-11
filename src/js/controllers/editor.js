@@ -79,12 +79,10 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
       drawer.on('show', function(){
         content.addClass('gt-active');
-        App.map.invalidateSize();
       });
 
       drawer.on('close', function(){
         content.removeClass('gt-active');
-        App.map.invalidateSize();
       });
     },
 
