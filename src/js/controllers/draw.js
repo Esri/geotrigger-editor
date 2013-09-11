@@ -50,11 +50,11 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
         this.clear();
       }, this));
 
-      App.commands.setHandler('draw:enable', _.bind(function(tool){
+      App.vent.on('draw:enable', _.bind(function(tool){
         this.enableTool(tool);
       }, this));
 
-      App.commands.setHandler('draw:disable', _.bind(function(tool){
+      App.vent.on('draw:disable', _.bind(function(tool){
         this.disableTool(tool);
       }, this));
     },

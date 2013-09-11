@@ -19,9 +19,7 @@ GeotriggerEditor.module('Collections', function(Collections, App, Backbone, Mari
         }
       }, this);
 
-      App.API.session.request('trigger/list', {
-        callback: callback
-      });
+      App.API.session.request('trigger/list', callback);
     },
 
     parse: function(response) {
