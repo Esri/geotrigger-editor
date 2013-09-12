@@ -40,6 +40,15 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this._shape.on('click', _.bind(function(){
         App.router.navigate(this.model.id + '/edit', { trigger: true });
       }, this));
+
+      this._shape.on('mouseover', _.bind(function(){
+        App.Map.focusShape(this._shape);
+      }, this));
+
+      this._shape.on('mouseout', _.bind(function(){
+        App.Map.unfocusShape(this._shape);
+      }, this));
+
     },
 
     removeShape: function() {
