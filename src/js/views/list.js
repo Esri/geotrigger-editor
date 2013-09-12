@@ -134,7 +134,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
         list.each(function(){
           var item = $(this);
-          var tags  = item.find('.gt-tags li');
+          var tags  = item.find('.gt-tags a');
           var text = '';
 
           text += item.find('.gt-item-edit span').text();
