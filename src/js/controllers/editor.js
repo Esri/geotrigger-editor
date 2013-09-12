@@ -39,10 +39,10 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
         reset: true,
         success: function() {
           App.vent.trigger('notify:clear');
+          Backbone.history.start();
           if (App.config.fitOnLoad) {
             App.execute('map:fit');
           }
-          Backbone.history.start();
         }
       });
 
