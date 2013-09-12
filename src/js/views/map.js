@@ -49,7 +49,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         App.Map.unfocusShape(this._shape);
       }, this));
 
-
     },
 
     removeShape: function() {
