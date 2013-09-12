@@ -121,15 +121,16 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     },
 
     list: function(term) {
-      App.vent.trigger('trigger:list');
+      if (!App.regions.drawer.$el || !App.regions.drawer.$el.has('.gt-list').length) {
+        App.vent.trigger('trigger:list');
+        var view = new App.Views.List({ collection: App.collections.triggers });
+        App.regions.drawer.show(view);
+      }
 
       if (term) {
         term = decodeURIComponent(term.replace(/\+/g,'%20'));
-        console.log(term);
+        App.vent.trigger('trigger:list:search', term);
       }
-
-      var view = new App.Views.List({ collection: App.collections.triggers });
-      App.regions.drawer.show(view);
     },
 
     new: function() {
