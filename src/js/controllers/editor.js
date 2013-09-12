@@ -131,6 +131,8 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
       var view = new App.Views.New();
       App.regions.drawer.show(view);
+
+      App.vent.trigger('trigger:new:ready');
     },
 
     edit: function(triggerId) {
