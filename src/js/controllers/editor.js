@@ -9,6 +9,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     appRoutes: {
       '': 'index',
       'list': 'list',
+      'list?q=:term': 'list',
       'new': 'new',
       ':id/edit': 'edit',
       '*notfound': 'notFound'
@@ -119,8 +120,13 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       App.regions.drawer.close();
     },
 
-    list: function() {
+    list: function(term) {
       App.vent.trigger('trigger:list');
+
+      if (term) {
+        term = decodeURIComponent(term.replace(/\+/g,'%20'));
+        console.log(term);
+      }
 
       var view = new App.Views.List({ collection: App.collections.triggers });
       App.regions.drawer.show(view);
