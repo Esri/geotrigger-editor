@@ -59,7 +59,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
       if (latlng) {
         this.map.panTo(latlng, {
-          animate: false
+          animate: true
         });
       }
     },

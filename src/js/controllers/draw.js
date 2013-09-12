@@ -29,6 +29,13 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
         this.clear();
       }, this);
 
+      App.vent.on('trigger:new:ready', function() {
+        var layer = App.request('draw:layer');
+        if (layer){
+          App.Map.panToLayer(layer);
+        }
+      }, this);
+
       App.vent.on('trigger:edit', function(triggerId) {
         var layer = this.newShape(triggerId);
         this.editLayer(layer);
