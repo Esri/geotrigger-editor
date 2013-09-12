@@ -26,6 +26,18 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
     }
   };
 
+  var highlightOptions = {
+    showArea: false,
+    shapeOptions: {
+      color: '#00dcb1',
+      opacity: 0.8,
+      stroke: true,
+      weight: 2,
+      fill: true,
+      fillOpacity: 0.2
+    }
+  };
+
   var defaults = {
     map: {
       basemap: 'Streets',
@@ -37,7 +49,9 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
 
     imagePath: '/images',
     sharedOptions: sharedOptions,
-    editOptions: editOptions
+    editOptions: editOptions,
+    highlightOptions: highlightOptions
+
   };
 
   Config.addInitializer(function(options) {

@@ -49,6 +49,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
+    focusShape: function() {
+      if (this._shape) {
+        App.Map.focusShape(this._shape);
+      }
+    },
+
+    unfocusShape: function() {
+      if (this._shape) {
+        App.Map.unfocusShape(this._shape);
+      }
+    },
+
     onClose: function() {
       this.removeShape();
     }
@@ -68,7 +80,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       App.Map.start({ el: this.el });
 
       this.listenTo(App.vent, 'trigger:edit', this.hideShape);
-      this.listenTo(App.vent, 'index trigger:new trigger:list trigger:edit', this.restore);
+      this.listenTo(App.vent, 'index trigger:new trigger:list trigger:edit trigger', this.restore);
+      this.listenTo(App.vent, 'trigger:focus', this.focusShape);
+      this.listenTo(App.vent, 'trigger:unfocus', this.unfocusShape);
     },
 
     hideShape: function(triggerId) {
@@ -76,6 +90,19 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var view = this.children.findByModel(model);
       view.removeShape();
     },
+
+    focusShape: function(triggerId) {
+      var model = App.collections.triggers.get(triggerId);
+      var view = this.children.findByModel(model);
+      view.focusShape();
+    },
+
+    unfocusShape: function(triggerId) {
+      var model = App.collections.triggers.get(triggerId);
+      var view = this.children.findByModel(model);
+      view.unfocusShape();
+    },
+
 
     restore: function(id) {
       this.children.each(function(child, index, arr){
