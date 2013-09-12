@@ -84,6 +84,7 @@
 }
 
 .gt-results {
+  border-top: 1px solid $light-gray;
   &.gt-filtering {
     .gt-result {
       display: none;
@@ -95,13 +96,19 @@
 }
 
 .gt-result {
-  width:100%;
-  padding:1em 1em 1em 1em;
-  border-bottom:1px solid $light-gray;
-  position:relative;
   @include box-sizing(border-box);
-  overflow:hidden;
-  // position:relative;
+  background: transparent;
+  border-bottom: 1px solid $light-gray;
+  cursor: pointer;
+  padding: 1em;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+
+  &:hover {
+    background: $white;
+  }
+
   .gt-item-edit {
     cursor: pointer;
   }
