@@ -43,7 +43,10 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
           }
         } else {
           if (method !== 'read') {
-            App.vent.trigger('notify', 'Trigger ' + method + 'd successfully');
+            App.vent.trigger('notify', {
+              message: 'Trigger ' + method + 'd successfully',
+              timeout: 3500
+            });
           }
           if (options && options.success) {
             options.success(response);
