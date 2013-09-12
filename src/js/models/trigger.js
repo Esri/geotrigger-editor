@@ -18,14 +18,14 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
           var message = "Error creating trigger";
 
           // polygons constructed over the dateline
-          var outOfRange = new RegExp('Coordinate values are out of range', 'i');
-          if (outOfRange.exec(JSON.stringify(error))){
+          var outOfRange = JSON.stringify(error).match('Coordinate values are out of range');
+          if (outOfRange) {
             message = "Coordinate values are out of range";
           }
 
           // polygons that intersect themselves
-          var intersection = new RegExp('Error performing intersection', 'i');
-          if (intersection.exec(JSON.stringify(error))){
+          var intersects = JSON.stringify(error).match('Error performing intersection');
+          if (intersects) {
             message = "Polygons can't intersect themselves";
           }
 
