@@ -68,6 +68,14 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       this.map.removeLayer(shape);
     },
 
+    focusShape: function(shape) {
+      shape.setStyle(App.config.highlightOptions.shapeOptions);
+    },
+
+    unfocusShape: function(shape) {
+      shape.setStyle(App.config.sharedOptions.shapeOptions);
+    },
+
     polygon: function(geo, shapeOptions, add) {
       shapeOptions = shapeOptions || App.config.sharedOptions.shapeOptions;
       var polygon = new L.GeoJSON(geo, {
