@@ -111,23 +111,23 @@
     }
   }
 }
+
 .gt-tags {
-  display:block;
+  cursor: default;
+  display: block;
   overflow-x: scroll;
   white-space: nowrap;
-  padding-bottom:12px;
+  padding-bottom: 12px;
   padding-left: 1rem;
-  // width: 100%-4.2rem;
   float: left;
-  li {
-    list-style-type: none;
+
+  a {
     border: none;
     color: $gray;
     margin-right: 3px;
-    display: inline;
-    overflow-x: scroll;
   }
 }
+
 .gt-item-controls {
   width: 5.2em;
   text-align: right;
