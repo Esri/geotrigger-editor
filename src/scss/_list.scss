@@ -1,76 +1,21 @@
-/* - - - - - - - - - - New Geotrigger Form - - - - - - - - - - */
-.gt-trigger-title-input {
-  width:100%;
-  margin-bottom:1em;
-}
-.gt-tag-label {
-  margin-right: 3%;
-  width: 40%;
-  display: inline-block;
-  margin-top: 1.25rem;
-}
-.gt-tag-input {
-  width:55%;
-  float:right;
-}
-.gt-event {
-  width:40%;
-}
-.gt-geometry-type {
-  width:55%;
-  float:right;
-}
-.gt-action-selector {
-  width:60%;
-}
-.gt-date-start {
-  width:23%;
-  margin-left:3%;
-  margin-right:3%;
-}
-.gt-date-end {
-  width:30%;
-  margin-left: 3%;
-}
-
-.gt-action-profile-selector {
-  width:30%;
-  margin-left: 3%;
-}
-
-.gt-trigger-delete {
-  padding-top: 2em;
-  display: block;
-  color: $gray;
-  text-decoration: none;
-  max-width: 3em;
-  &:hover {
-    color: $red;
-  }
-}
-
-.gt-submit {
-  float: right;
-}
-
-.gt-form {
-  .gt-radius {
-    display: none;
-  }
-}
-
 /* - - - - - - - - - - Trigger List - - - - - - - - - - */
 
 .gt-search {
   @include box-sizing(border-box);
   padding: 0.5em 2em;
-  input[type="search"]{
+
+  input[type="search"] {
     @include box-sizing(border-box);
-    background: url(../img/icons/search2.png) no-repeat 4px center transparent;
-    @include retina-display(){ background: url(../img/icons/search22x.png) no-repeat 4px center transparent; background-size: 24px;}
+    background: url(../img/icons/search2.png) no-repeat 4px center $white;
     padding: 0.75em 0.66em 0.75em 32px;
+
+    @include retina-display {
+      background: url(../img/icons/search22x.png) no-repeat 4px center $white;
+      background-size: 24px;
+    }
   }
 }
+
 .gt-result-link {
   background-color: $white;
   text-decoration: none;
