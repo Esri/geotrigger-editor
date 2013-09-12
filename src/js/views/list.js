@@ -13,7 +13,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     events: {
       'click .gt-item-delete'         : 'confirmDelete',
       'click .gt-reset-delete'        : 'resetDelete',
-      'click .gt-item-confirm-delete' : 'destroyModel'
+      'click .gt-item-confirm-delete' : 'destroyModel',
+      'mouseover .gt-item-edit'       : 'focusShape',
+      'mouseout .gt-item-edit'        : 'unfocusShape'
     },
 
     ui: {
@@ -45,6 +47,16 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     destroyModel: function(e) {
       e.preventDefault();
       App.vent.trigger('trigger:destroy', this.model);
+    },
+
+    focusShape: function(){
+      var id = this.model.get("triggerId");
+      App.vent.trigger('trigger:focus', id);
+    },
+
+    unfocusShape: function(){
+      var id = this.model.get("triggerId");
+      App.vent.trigger('trigger:unfocus', id);
     }
   });
 
