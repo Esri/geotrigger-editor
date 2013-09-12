@@ -19,10 +19,25 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
     _eventBindings: function() {
       App.commands.setHandler('map:fit', _.bind(function(){
-        this.map.fitBounds(this.Layers.main.getBounds(), {
-          animate: false
+        var bounds = this.Layers.main.getBounds();
+        var drawerWidth = this.getDrawerWidth();
+
+        this.map.fitBounds(bounds, {
+          animate: false,
+          paddingTopLeft: [drawerWidth, 0]
         });
       }, this));
+    },
+
+    getDrawerWidth: function() {
+      var $content = App.mainRegion.$el.find('#gt-content');
+      var $drawer = $content.find('#gt-drawer-region');
+
+      if ($content.hasClass('gt-active')){
+        return $drawer.width();
+      } else {
+        return 0;
+      }
     },
 
     panToLayer: function(layer) {
@@ -34,10 +49,11 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
         latlng = layer.getCenter();
       }
 
-      if ($('#gt-content').hasClass('gt-active')){
-        drawer = $('#gt-drawer-region').width() / 2;
+      var drawerWidth = this.getDrawerWidth();
+
+      if (drawerWidth) {
         var projected = this.map.project(latlng);
-        projected.x = projected.x - drawer;
+        projected.x = projected.x - (drawerWidth / 2);
         latlng = this.map.unproject(projected);
       }
 
