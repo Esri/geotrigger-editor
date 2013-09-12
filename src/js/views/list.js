@@ -11,9 +11,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-result',
 
     events: {
+      'click'                         : 'editItem',
       'click .gt-item-delete'         : 'confirmDelete',
       'click .gt-reset-delete'        : 'resetDelete',
-      'click .gt-item-confirm-delete' : 'destroyModel'
+      'click .gt-item-confirm-delete' : 'destroyModel',
+      'mouseover'                     : 'focusShape',
+      'mouseout'                      : 'unfocusShape'
     },
 
     ui: {
@@ -30,21 +33,39 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.render();
     },
 
+    editItem: function() {
+      var id = this.model.get('triggerId');
+      App.router.navigate(id + '/edit', { trigger: true });
+    },
+
     confirmDelete: function(e) {
       e.preventDefault();
+      e.stopPropagation();
       this.ui.deleteItem.addClass('gt-item-confirm-delete');
       this.ui.reset.addClass('gt-reset-flyout');
     },
 
     resetDelete: function(e) {
       e.preventDefault();
+      e.stopPropagation();
       this.ui.deleteItem.removeClass('gt-item-confirm-delete');
       this.ui.reset.removeClass('gt-reset-flyout');
     },
 
     destroyModel: function(e) {
       e.preventDefault();
+      e.stopPropagation();
       App.vent.trigger('trigger:destroy', this.model);
+    },
+
+    focusShape: function(){
+      var id = this.model.get('triggerId');
+      App.vent.trigger('trigger:focus', id);
+    },
+
+    unfocusShape: function(){
+      var id = this.model.get('triggerId');
+      App.vent.trigger('trigger:unfocus', id);
     }
   });
 
@@ -109,7 +130,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         list.each(function(){
           var item = $(this);
           var tags  = item.find('.gt-tags li');
-          var text = "";
+          var text = '';
 
           text += item.find('.gt-item-edit span').text();
 
