@@ -128,20 +128,24 @@ function program6(depth0,data) {
   return buffer;
   }
 
-  buffer += "<span class=\"gt-item-edit gt-icon ";
+  buffer += "<a href='#";
+  if (stack1 = helpers.triggerId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.triggerId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "/edit'>\n<span class='gt-item-edit gt-icon ";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.actionIcon || depth0.actionIcon),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options) : helperMissing.call(depth0, "actionIcon", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options)))
-    + " gt-icon-polygon\"></span>\n<h5>\n  <a class=\"gt-item-edit\" href=\"#";
+    + " gt-icon-polygon'></span>\n<h5>\n  <a class='gt-item-edit' href='#";
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "/edit\">\n    ";
+    + "/edit'>\n    ";
   stack2 = helpers.unless.call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n  </a>\n</h5>\n<ul class=\"gt-tags\">\n  ";
+  buffer += "\n  </a>\n</h5>\n<ul class='gt-tags'>\n  ";
   stack2 = helpers.each.call(depth0, depth0.tags, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</ul>\n<ul class=\"gt-item-controls\">\n	<li><a class=\"gt-reset-delete\" href=\"#\">&#x2716;</a></li>\n	<li><button class=\"gt-item-delete gt-button-small gt-button-delete\"></button></li>\n</ul>";
+  buffer += "\n</ul>\n<ul class='gt-item-controls'>\n  <li><a class='gt-reset-delete' href='#'>&#x2716;</a></li>\n  <li><button class='gt-item-delete gt-button-small gt-button-delete'></button></li>\n</ul>";
   return buffer;
   });
 
@@ -151,7 +155,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"gt-list-header gt-hide\">\n  <div class=\"gt-panel-top-bar\">\n    <a href=\"#new\" class=\"gt-button gt-button-blue gt-tool-create\">Create</a>\n    <h3 class=\"gt-panel-top-bar-left\">List</h3>\n    <a href=\"#\" class=\"gt-panel-top-bar-button gt-close-drawer\"></a>\n  </div>\n  </div>\n  <div class=\"gt-search\">\n    <input type=\"search\"></input>\n  </div>\n<ul class=\"gt-results\"></ul>";
+  return "<div class='gt-list-header gt-hide'>\n  <div class='gt-panel-top-bar'>\n    <a href='#new' class='gt-button gt-button-blue gt-tool-create'>Create</a>\n    <h3 class='gt-panel-top-bar-left'>List</h3>\n    <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n  </div>\n  </div>\n  <div class='gt-search'>\n    <input type='search'></input>\n  </div>\n<ul class='gt-results'></ul>";
   });
 
 this["GeotriggerEditor"]["Templates"]["main"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -160,7 +164,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div id=\"gt-controls-region\"></div>\n<div id=\"gt-content\">\n  <div id=\"gt-drawer-region\"></div>\n  <div id=\"gt-map-region\"></div>\n  <div id=\"gt-notes-region\"></div>\n</div>\n";
+  return "<div id='gt-controls-region'></div>\n<div id='gt-content'>\n  <div id='gt-drawer-region'></div>\n  <div id='gt-map-region'></div>\n  <div id='gt-notes-region'></div>\n</div>\n";
   });
 
 this["GeotriggerEditor"]["Templates"]["new"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -178,7 +182,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<button class=\"gt-close\">&times;</button> ";
+  buffer += "<button class='gt-close'>&times;</button> ";
   if (stack1 = helpers.message) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = depth0.message; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
   buffer += escapeExpression(stack1);

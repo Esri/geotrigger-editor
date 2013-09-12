@@ -15,26 +15,30 @@
 }
 
 .gt-notification {
-  z-index:9;
-  margin: 4px 0;
-  padding:14px 20px;
-  color:$white;
-  background-color: rgba(38,38,38, 0.8);
   @include border-radius(4px);
   @include box-shadow(0 0 12px rgba(0,0,0,0.2));
+  background-color: rgba(38,38,38, 0.8);
+  color: $white;
+  display: none;
+  margin: 4px 0;
+  padding: 14px 20px;
+  z-index: 9;
+
   &.error {
     background-color: rgba(180, 20, 20, 0.8);
   }
+
   .gt-close {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: #fafafa;
     float: right;
     margin-top: -3px;
     margin-right: -12px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    -webkit-appearance: none;
-    color: #fafafa;
     opacity: 0.75;
+    -webkit-appearance: none;
+
     &:hover {
       opacity: 1;
     }

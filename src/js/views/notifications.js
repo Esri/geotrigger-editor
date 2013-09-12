@@ -17,14 +17,26 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     render: function() {
       Marionette.ItemView.prototype.render.apply(this, arguments);
 
-      var type = this.model.get('type');
+      var type = this.model.get('type') || 'info';
       this.$el.addClass(type);
 
       this.listenTo(App.vent, 'notify:clear', this.destroyNotification);
     },
 
+    onShow: function() {
+      this.$el.fadeIn();
+      var timeout = this.model.get('timeout');
+      if (typeof timeout === 'number') {
+        setTimeout(_.bind(function() {
+          this.destroyNotification();
+        }, this), timeout);
+      }
+    },
+
     destroyNotification: function() {
-      this.model.destroy();
+      this.$el.fadeOut(_.bind(function(){
+        this.model.destroy();
+      }, this));
     }
   });
 

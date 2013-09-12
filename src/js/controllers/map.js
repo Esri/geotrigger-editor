@@ -59,13 +59,21 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
       if (latlng) {
         this.map.panTo(latlng, {
-          animate: false
+          animate: true
         });
       }
     },
 
     removeShape: function(shape) {
       this.map.removeLayer(shape);
+    },
+
+    focusShape: function(shape) {
+      shape.setStyle(App.config.highlightOptions.shapeOptions);
+    },
+
+    unfocusShape: function(shape) {
+      shape.setStyle(App.config.sharedOptions.shapeOptions);
     },
 
     polygon: function(geo, shapeOptions, add) {
