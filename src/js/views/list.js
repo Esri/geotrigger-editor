@@ -12,6 +12,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     events: {
       'click'                         : 'editItem',
+      'click .gt-tags'                : 'tagsClick',
       'click .gt-item-delete'         : 'confirmDelete',
       'click .gt-reset-delete'        : 'resetDelete',
       'click .gt-item-confirm-delete' : 'destroyModel',
@@ -36,6 +37,10 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     editItem: function() {
       var id = this.model.get('triggerId');
       App.router.navigate(id + '/edit', { trigger: true });
+    },
+
+    tagsClick: function(e) {
+      e.stopPropagation();
     },
 
     confirmDelete: function(e) {
