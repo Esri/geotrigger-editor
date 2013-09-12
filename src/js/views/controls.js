@@ -41,7 +41,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.clear('drawers');
       switch (route) {
         case 'new':
-          this.activate('create');
+          this.activate('list');
           break;
         case 'edit':
           this.activate('list');
