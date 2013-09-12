@@ -89,7 +89,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       App.Map.start({ el: this.el });
 
       this.listenTo(App.vent, 'trigger:edit', this.hideShape);
-      this.listenTo(App.vent, 'index trigger:new trigger:list trigger:edit trigger', this.restore);
+      this.listenTo(App.vent, 'index trigger:new trigger:list trigger:edit', this.restore);
       this.listenTo(App.vent, 'trigger:focus', this.focusShape);
       this.listenTo(App.vent, 'trigger:unfocus', this.unfocusShape);
     },
