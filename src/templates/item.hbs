@@ -1,17 +1,27 @@
 <span class='gt-item-edit gt-icon {{actionIcon condition.direction}} gt-icon-polygon'></span>
 <h5>
+  {{#if properties.title}}
   <a class='gt-item-edit' href='#{{triggerId}}/edit'>
-    {{#unless properties.title}}
-    <span>{{triggerId}}</span>
-    {{else}}
     <span>{{properties.title}}</span>
-    {{/unless}}
+  </a>
+  {{/if}}
+  <a class='gt-item-details {{#unless properties.title}}gt-item-details-visible{{/unless}}' href='#{{triggerId}}/edit'>
+    {{#unless condition.geo.geojson}}<span>{{condition.direction }} {{condition.geo.distance}} meter radius</span>
+    {{else}}<span>{{condition.direction }} {{condition.geo.geojson.coordinates.0.length}} sided polygon</span>{{/unless}}
   </a>
 </h5>
-<div class='gt-tags'>
-  Tags: {{{tagLinks tags}}}
+<div class="gt-item-toolbar">
+  <a class='gt-edit-icon' href='#{{triggerId}}/edit'></a>
+  <a class='gt-delete-icon' href="#"></a>
 </div>
-<ul class='gt-item-controls'>
-  <li><a class='gt-reset-delete' href='#'>&#x2716;</a></li>
-  <li><button class='gt-item-delete gt-button-small gt-button-delete'></button></li>
-</ul>
+<div class='gt-tags'>
+  <strong>Tags:</strong> {{{tagLinks tags}}}
+</div>
+<div class='gt-id'>
+  <strong>Id:</strong> {{triggerId}}
+</div>
+<div class="gt-list-delete">
+  <h5>Delete {{#if properties.title}}{{properties.title}}{{else}}this trigger{{/if}}?</h5>
+  <button class="gt-confirm-delete gt-button-small gt-button-delete">Delete</button>
+  <button class="gt-cancel-delete gt-button-small gt-button-delete">Cancel</button>
+</div>
