@@ -41,6 +41,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     tagsClick: function(e) {
       e.stopPropagation();
+      console.log(this.model);
     },
 
     confirmDelete: function(e) {
