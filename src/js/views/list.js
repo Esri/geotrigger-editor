@@ -11,17 +11,17 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-result',
 
     events: {
-      'click'                         : 'editItem',
+      'click .gt-item-edit'           : 'editItem',
       'click .gt-tags'                : 'tagsClick',
-      'click .gt-item-delete'         : 'confirmDelete',
-      'click .gt-reset-delete'        : 'resetDelete',
-      'click .gt-item-confirm-delete' : 'destroyModel',
+      'click .gt-delete-icon'         : 'confirmDelete',
+      'click .gt-cancel-delete'       : 'resetDelete',
+      'click .gt-confirm-delete'      : 'destroyModel',
       'mouseover'                     : 'focusShape',
       'mouseout'                      : 'unfocusShape'
     },
 
     ui: {
-      'deleteItem' : '.gt-item-delete',
+      'deleteItem' : '.gt-list-delete',
       'confirm'    : '.gt-item-confirm-delete',
       'reset'      : '.gt-reset-delete'
     },
@@ -41,20 +41,20 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     tagsClick: function(e) {
       e.stopPropagation();
+      console.log(this.model);
     },
 
     confirmDelete: function(e) {
       e.preventDefault();
       e.stopPropagation();
-      this.ui.deleteItem.addClass('gt-item-confirm-delete');
-      this.ui.reset.addClass('gt-reset-flyout');
+      this.ui.deleteItem.addClass('gt-visible');
     },
 
     resetDelete: function(e) {
       e.preventDefault();
       e.stopPropagation();
-      this.ui.deleteItem.removeClass('gt-item-confirm-delete');
-      this.ui.reset.removeClass('gt-reset-flyout');
+      this.ui.deleteItem.removeClass('gt-visible');
+      console.log("what up");
     },
 
     destroyModel: function(e) {
@@ -97,13 +97,15 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     emptyView: Views.Empty,
 
     events: {
-      'keyup .gt-search' : 'filter'
+      'keyup .gt-search'     : 'filter',
+      'click .gt-icon-clear' : 'clearFilter'
     },
 
     ui: {
-      'header'  : '.gt-list-header',
-      'search'  : '.gt-search input',
-      'results' : '.gt-results'
+      'header'     : '.gt-list-header',
+      'search'     : '.gt-search input',
+      'results'    : '.gt-results',
+      'searchBar'  : '.gt-search'
     },
 
     onShow: function() {
@@ -125,6 +127,15 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.filter();
     },
 
+    clearFilter: function() {
+      this.ui.search.val('');
+      this.ui.results.removeClass('gt-filtering');
+      this.ui.searchBar.removeClass('gt-filtering');
+      if (Backbone.history.fragment !== 'list') {
+        App.router.navigate('list', { trigger: false });
+      }
+    },
+
     filter: function(e) {
       var value = this.ui.search.val();
 
@@ -137,6 +148,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         App.router.navigate('list?q=' + encodeURIComponent(value).replace(/%20/g, '+'), { trigger: true });
       } else {
         this.ui.results.addClass('gt-filtering');
+        this.ui.searchBar.addClass('gt-filtering');
 
         var list = this.ui.results.find('.gt-result');
         var arr = this.ui.search.val().split(/\s+/);
@@ -145,10 +157,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
         list.each(function(){
           var item = $(this);
-          var tags  = item.find('.gt-tags a');
+          var tags = item.find('.gt-tags a');
           var text = '';
 
           text += item.find('.gt-item-edit span').text();
+          text += item.find('.gt-id').text();
+          text += item.find('.gt-item-details span').text();
 
           tags.each(function(){
             text += $(this).text();
