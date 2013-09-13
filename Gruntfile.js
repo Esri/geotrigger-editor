@@ -30,15 +30,12 @@ module.exports = function(grunt) {
             'vendor/json2.js',
             'vendor/jquery-1.10.2.js',
             'vendor/underscore.js',
-            'vendor/underscore.deep-extend.js',
             'vendor/backbone.js',
             'vendor/backbone.marionette.js',
             'vendor/handlebars.js',
             'vendor/geotriggers.js',
             'vendor/leaflet.js',
-            'vendor/esri-leaflet.js',
-            'vendor/leaflet.draw-custom.js',
-            'vendor/leaflet.draw.tooltip.js'
+            'vendor/esri-leaflet.js'
           ],
           'dist/js/<%= pkg.name %>.min.js': [
             'src/js/lib/*.js',
@@ -110,7 +107,15 @@ module.exports = function(grunt) {
         'sub': true,
         'boss': true
       },
-      files: ['src/js/**/*.js']
+      files: [
+        'src/js/collections/*.js',
+        'src/js/controllers/*.js',
+        'src/js/layouts/*.js',
+        'src/js/models/*.js',
+        'src/js/modules/*.js',
+        'src/js/views/*.js',
+        'src/js/*.js'
+      ]
     },
 
     concat: {
@@ -124,15 +129,12 @@ module.exports = function(grunt) {
             'vendor/json2.js',
             'vendor/jquery-1.10.2.js',
             'vendor/underscore.js',
-            'vendor/underscore.deep-extend.js',
             'vendor/backbone.js',
             'vendor/backbone.marionette.js',
             'vendor/handlebars.js',
             'vendor/geotriggers.js',
             'vendor/leaflet.js',
-            'vendor/esri-leaflet.js',
-            'vendor/leaflet.draw-custom.js',
-            'vendor/leaflet.draw.tooltip.js'
+            'vendor/esri-leaflet.js'
           ],
           'dev/js/<%= pkg.name %>.js': [
             'src/js/lib/*.js',
@@ -153,15 +155,12 @@ module.exports = function(grunt) {
             'vendor/json2.js',
             'vendor/jquery-1.10.2.js',
             'vendor/underscore.js',
-            'vendor/underscore.deep-extend.js',
             'vendor/backbone.js',
             'vendor/backbone.marionette.js',
             'vendor/handlebars.js',
             'vendor/geotriggers.js',
             'vendor/leaflet.js',
-            'vendor/esri-leaflet.js',
-            'vendor/leaflet.draw-custom.js',
-            'vendor/leaflet.draw.tooltip.js'
+            'vendor/esri-leaflet.js'
           ],
           'dist/js/<%= pkg.name %>.js': [
             'src/js/lib/*.js',
@@ -181,7 +180,13 @@ module.exports = function(grunt) {
     complexity: {
       generic: {
         src: [
-          'src/js/**/*.js',
+          'src/js/collections/*.js',
+          'src/js/controllers/*.js',
+          'src/js/layouts/*.js',
+          'src/js/models/*.js',
+          'src/js/modules/*.js',
+          'src/js/views/*.js',
+          'src/js/*.js',
           'tasks/grunt-complexity.js'
         ],
         options: {

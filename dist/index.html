@@ -5,13 +5,13 @@
   <title>ArcGIS Geotrigger Editor</title>
   <link rel="stylesheet" href="../vendor/css/leaflet.css">
   <link rel="stylesheet" href="../vendor/css/esri-leaflet.min.css">
-  <link rel="stylesheet" href="../vendor/css/leaflet.draw.css">
+  <link rel="stylesheet" href="../vendor/css/leaflet.draw.css"> <!-- @TODO: move to geotrigger-editor.css -->
   <!--[if lte IE 8]>
     <link rel="stylesheet" href="../vendor/css/leaflet.ie.css">
     <link rel="stylesheet" href="../vendor/css/leaflet.draw.ie.css">
   <![endif]-->
   <!-- Base Styles -->
-  <link rel="stylesheet" href="css/geotrigger-editor.css">
+  <link rel="stylesheet" href="../dev/css/geotrigger-editor.css">
   <!-- Theme Styles-->
   <!-- <link rel="stylesheet" href="css/themes/mint/mint.css"> -->
   <!--[if lte IE 8]>
@@ -36,11 +36,10 @@
 <body>
   <div id="gt-editor"></div>
 
-  <!-- dependencies
+  <!-- vendor dependencies
   <script src="../vendor/json2.js"></script>
   <script src="../vendor/jquery-1.10.2.js"></script>
   <script src="../vendor/underscore.js"></script>
-  <script src="../vendor/underscore.deep-extend.js"></script>
   <script src="../vendor/backbone.js"></script>
   <script src="../vendor/backbone.marionette.js"></script>
   <script src="../vendor/handlebars.js"></script>
@@ -48,14 +47,10 @@
   <script src="../vendor/leaflet.js"></script>
   <script src="../vendor/esri-leaflet.js"></script> -->
 
-  <!-- leaflet draw custom build
-  <script src="../vendor/leaflet.draw-custom.js"></script>
-  <script src="../vendor/leaflet.draw.tooltip.js"></script> -->
-
-  <script src="js/geotrigger-editor.dependencies.min.js"></script>
+  <script src="js/geotrigger-editor.dependencies.js"></script>
 
   <!-- editor app -->
-  <script src="js/geotrigger-editor.min.js"></script>
+  <script src="js/geotrigger-editor.js"></script>
 
   <!-- initializer -->
   <script>
