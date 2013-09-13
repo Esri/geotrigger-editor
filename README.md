@@ -35,7 +35,7 @@ You need an HTTP server at `localhost:8080` serving files from the root of the r
 
 Testing requires PhantomJS to be running. You can install it with homebrew (`brew install phantomjs`), and get it started by running `phantomjs --webdriver=4444`. The local server should already be running too. The `grunt test` task takes care of the latter part (see `Grunt Tasks` below).
 
-## Grunt Tasks
+### Grunt Tasks
 
 1. `grunt dev`
 
@@ -53,7 +53,7 @@ The `default` grunt task is `dev`.
 
 ## Issues
 
-Find a bug or want to request a new feature?  Please let us know by submitting an issue.
+Find a bug or want to request a new feature? Please let us know by submitting an [issue](https://github.com/geoloqi/geotrigger-editor/issues).
 
 ## Contributing
 
