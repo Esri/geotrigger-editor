@@ -1,5 +1,19 @@
 /* - - - - - - - - - - Trigger List - - - - - - - - - - */
 
+.gt-list {
+  &.gt-filtering {
+    .gt-icon-clear {
+      display: inline-block;
+    }
+    .gt-result {
+      display: none;
+      &.gt-list-visible {
+        display: block;
+      }
+    }
+  }
+}
+
 .gt-search {
   @include box-sizing(border-box);
   padding: 0.5em 2em;
@@ -15,24 +29,20 @@
       background-size: 24px;
     }
   }
-  .gt-icon-clear{
-    display:none;
-    width: 16px;
-    height:16px;
+  .gt-icon-clear {
     background: url('../img/icons/delete.png') no-repeat center center transparent;
-    background-size:16px;
+    background-size: 16px;
+    display: none;
+    height: 16px;
+    margin-top: -8px;
+    width: 16px;
+    position: absolute;
+    top: 50%;
+    right: 2.6em;
+
     @include retina-display {
       background: url('../img/icons/delete@2x.png') no-repeat center center transparent;
       background-size: 16px;
-    }
-    position: absolute;
-    top: 50%;
-    margin-top: -8px;
-    right: 2.6em;
-  }
-  &.gt-filtering {
-    .gt-icon-clear {
-      display: inline-block;
     }
   }
 }
@@ -51,14 +61,6 @@
 
 .gt-results {
   border-top: 1px solid $light-gray;
-  &.gt-filtering {
-    .gt-result {
-      display: none;
-      &.gt-list-visible {
-        display: block;
-      }
-    }
-  }
 }
 
 .gt-result {
@@ -77,6 +79,7 @@
   .gt-item-edit {
     cursor: pointer;
   }
+
   .gt-icon-enter {
     width:48px;
     height:48px;
@@ -112,34 +115,35 @@
       &.gt-icon-drivetime{background: url('../img/icons/exit-drivetime2x.png') no-repeat center center transparent; background-size: 36px;}
     }
   }
+
   .gt-item-toolbar {
-    float:right;
-    height:20px;
-    width: 60px;
+    padding: 19px 19px 6px 6px;
+    text-align: right;
     position: absolute;
     top: 0;
     right: 0;
-    padding: 19px 6px 6px 6px;
+
     .gt-edit-icon {
+      background: url('../img/icons/settings.png') no-repeat center center transparent;
+      background-size: 16px;
       display:inline-block;
       width: 16px;
-      height:16px;
-      background: url('../img/icons/settings.png') no-repeat center center transparent;
-      background-size:16px;
+      height: 16px;
       @include retina-display {
         background: url('../img/icons/settings@2x.png') no-repeat center center transparent;
         background-size: 16px;
       }
     }
+
     .gt-delete-icon {
       @extend .gt-edit-icon;
       background: url('../img/icons/trash.png') no-repeat center center transparent;
-      background-size:16px;
+      background-size: 16px;
+      margin-left: 6px;
       @include retina-display {
         background: url('../img/icons/trash@2x.png') no-repeat center center transparent;
         background-size: 16px;
       }
-      margin-left:6px;
     }
   }
   h5 {
@@ -172,22 +176,23 @@
 }
 
 .gt-tags {
-  cursor: default;
   display: block;
-  padding-bottom: 0.25em;
-  padding-left: 8px;
   font-size: 0.9em;
-  float: left;
   line-height: 1.5em;
-  width:100%;
+  padding: 0 52px .25em 8px;
+
   strong {
     font-weight: 600;
+    font-variant: small-caps;
+    text-transform: lowercase;
   }
+
   a {
     border: none;
     color: $gray;
     margin-left: 3px;
     text-decoration: none;
+
     &:hover {
       color: $blue;
     }
