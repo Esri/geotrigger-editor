@@ -9,6 +9,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     appRoutes: {
       '': 'index',
       'list': 'list',
+      'list?q=:term': 'list',
       'new': 'new',
       ':id/edit': 'edit',
       '*notfound': 'notFound'
@@ -119,11 +120,17 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       App.regions.drawer.close();
     },
 
-    list: function() {
-      App.vent.trigger('trigger:list');
+    list: function(term) {
+      if (!App.regions.drawer.$el || !App.regions.drawer.$el.has('.gt-list').length) {
+        App.vent.trigger('trigger:list');
+        var view = new App.Views.List({ collection: App.collections.triggers });
+        App.regions.drawer.show(view);
+      }
 
-      var view = new App.Views.List({ collection: App.collections.triggers });
-      App.regions.drawer.show(view);
+      if (term) {
+        term = decodeURIComponent(term.replace(/\+/g,'%20'));
+        App.vent.trigger('trigger:list:search', term);
+      }
     },
 
     new: function() {
