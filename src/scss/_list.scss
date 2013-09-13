@@ -45,7 +45,7 @@
   background: transparent;
   border-bottom: 1px solid $light-gray;
   cursor: pointer;
-  padding: 1em;
+  padding: 1em 1em 1em 64px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -68,6 +68,7 @@
     // left: 10px;
     // top: 50%;
     margin-top: 6px;
+    margin-left: -48px;
     background: url('../img/icons/enter-polygon.png') no-repeat center center transparent;
     &.gt-icon-polygon {background: url('../img/icons/enter-polygon.png') no-repeat center center transparent;}
     &.gt-icon-radius {background: url('../img/icons/enter-radius.png') no-repeat center center transparent;}
@@ -91,16 +92,45 @@
       &.gt-icon-drivetime{background: url('../img/icons/exit-drivetime2x.png') no-repeat center center transparent; background-size: 36px;}
     }
   }
+  .gt-item-toolbar {
+    float:right;
+    height:20px;
+    width: 60px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 19px 6px 6px 6px;
+    .gt-edit-icon {
+      display:inline-block;
+      width: 16px;
+      height:16px;
+      background: url('../img/icons/settings.png') no-repeat center center transparent;
+      background-size:16px;
+      @include retina-display {
+        background: url('../img/icons/settings@2x.png') no-repeat center center transparent;
+        background-size: 16px;
+      }
+    }
+    .gt-delete-icon {
+      @extend .gt-edit-icon;
+      background: url('../img/icons/trash.png') no-repeat center center transparent;
+      @include retina-display {
+        background: url('../img/icons/trash@2x.png') no-repeat center center transparent;
+        background-size: 16px;
+      }
+      margin-left:6px;
+    }
+  }
   h5 {
-    // width: 100%;
-    padding-left: 1rem;
+    padding-left: 8px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     line-height: 1.5em;
     vertical-align: top;
-    margin-bottom: 0.5em;
-    margin-right: 93px;
+    padding-bottom: 0.5em;
+    margin-bottom:0;
+    margin-right: 64px;
     a {
       color: $dark-gray;
       text-decoration: none;
@@ -110,22 +140,39 @@
       }
     }
   }
+  .gt-item-details {
+    display:none;
+    &.gt-item-details-visible {
+      display:block;
+    }
+  }
 }
 
 .gt-tags {
   cursor: default;
   display: block;
-  overflow-x: scroll;
-  white-space: nowrap;
-  padding-bottom: 12px;
-  padding-left: 1rem;
+  padding-bottom: 0.25em;
+  padding-left: 8px;
+  font-size: 0.9em;
   float: left;
-
+  line-height: 1.5em;
+  width:100%;
+  strong {
+    font-weight: 600;
+  }
   a {
     border: none;
     color: $gray;
-    margin-right: 3px;
+    margin-left: 3px;
+    text-decoration: none;
+    &:hover {
+      color: $blue;
+    }
   }
+}
+
+.gt-id {
+  @extend .gt-tags;
 }
 
 .gt-item-controls {
