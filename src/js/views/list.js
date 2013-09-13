@@ -41,7 +41,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     tagsClick: function(e) {
       e.stopPropagation();
-      console.log(this.model);
     },
 
     confirmDelete: function(e) {
@@ -54,7 +53,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       e.preventDefault();
       e.stopPropagation();
       this.ui.deleteItem.removeClass('gt-visible');
-      console.log("what up");
     },
 
     destroyModel: function(e) {
@@ -97,21 +95,20 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     emptyView: Views.Empty,
 
     events: {
-      'keyup .gt-search'     : 'filter',
-      'click .gt-icon-clear' : 'clearFilter'
+      'keyup .gt-search'     : 'filter'
     },
 
     ui: {
       'header'     : '.gt-list-header',
       'search'     : '.gt-search input',
-      'results'    : '.gt-results',
-      'searchBar'  : '.gt-search'
+      'results'    : '.gt-results'
     },
 
     onShow: function() {
       this.headerCheck();
       this.listenTo(this.collection, 'change reset add remove', this.headerCheck);
       this.listenTo(App.vent, 'trigger:list:search', this.search);
+      this.listenTo(App.vent, 'trigger:list:reset', this.clearFilter);
     },
 
     headerCheck: function() {
@@ -129,26 +126,21 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     clearFilter: function() {
       this.ui.search.val('');
-      this.ui.results.removeClass('gt-filtering');
-      this.ui.searchBar.removeClass('gt-filtering');
-      if (Backbone.history.fragment !== 'list') {
-        App.router.navigate('list', { trigger: false });
-      }
+      this.$el.removeClass('gt-filtering');
     },
 
     filter: function(e) {
       var value = this.ui.search.val();
 
       if (!value.length) {
-        this.ui.results.removeClass('gt-filtering');
+        this.$el.removeClass('gt-filtering');
         if (Backbone.history.fragment !== 'list') {
           App.router.navigate('list', { trigger: false });
         }
       } else if (typeof e !== 'undefined' && e.keyCode === 13) {
         App.router.navigate('list?q=' + encodeURIComponent(value).replace(/%20/g, '+'), { trigger: true });
       } else {
-        this.ui.results.addClass('gt-filtering');
-        this.ui.searchBar.addClass('gt-filtering');
+        this.$el.addClass('gt-filtering');
 
         var list = this.ui.results.find('.gt-result');
         var arr = this.ui.search.val().split(/\s+/);
