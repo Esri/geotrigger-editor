@@ -69,4 +69,18 @@
     }
   });
 
+  Handlebars.registerHelper('tagLinks', function(tags, options) {
+    if (tags && tags.length) {
+      var output = [];
+      for (var i=0;i<tags.length;i++) {
+        if (tags[i].indexOf('trigger:') !== 0) {
+          output.push('<a href="#list?q=' + encodeURIComponent(tags[i]).replace(/%20/g, '+') + '">' + tags[i] + '</a>');
+        }
+      }
+      return output.join(', ');
+    } else {
+      return '';
+    }
+  });
+
 }(Handlebars, $));

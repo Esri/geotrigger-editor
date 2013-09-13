@@ -22,7 +22,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 this["GeotriggerEditor"]["Templates"]["edit"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+  var buffer = "", stack1, stack2, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this, functionType="function";
 
 function program1(depth0,data) {
   
@@ -33,45 +33,45 @@ function program1(depth0,data) {
 function program3(depth0,data) {
   
   
-  return "\n        <option value='polygon'>a polygon</option>\n        <option value='radius'>a circle</option>\n        ";
+  return "\n        <option value='polygon'>polygon</option>\n        <option value='radius'>circle</option>\n        ";
   }
 
 function program5(depth0,data) {
   
   
-  return "\n      <option value='notification'>send the device a message</option>\n      <option value='callbackUrl'>post to a server</option>\n      <option value='trackingProfile'>change tracking profile</option>\n      ";
+  return "\n        <option value='notification'>send the device a message</option>\n        <option value='callbackUrl'>post to a server</option>\n        <option value='trackingProfile'>change tracking profile</option>\n        ";
   }
 
 function program7(depth0,data) {
   
   
-  return "\n        <option value='fine'>fine</option>\n        <option value='adaptive'>adaptive</option>\n        <option value='rough'>rough</option>\n        <option value='off'>off</option>\n        ";
+  return "\n          <option value='fine'>fine</option>\n          <option value='adaptive'>adaptive</option>\n          <option value='rough'>rough</option>\n          <option value='off'>off</option>\n          ";
   }
 
-  buffer += "<div class='gt-panel-top-bar'>\n  <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>\n  <h3>Edit</h3>\n  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n</div>\n\n<div class='gt-panel-content'>\n  <form class='gt-form gt-form-edit'>\n    <input type='text' name='properties[title]' placeholder='Title' class='gt-trigger-title-input' value='"
-    + escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'>\n    <span class='gt-tag-label'>When a device tagged</span>\n    <input type='text' name='tags' placeholder='enter tags' class='gt-tag-input' value='";
+  buffer += "<div class='gt-panel-top-bar'>\n  <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>\n  <h3>Edit</h3>\n  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n</div>\n\n<div class='gt-panel-content'>\n  <form class='gt-form gt-form-edit'>\n    <section class='gt-form-section'>\n      <label for='tags'>\n        <span>When a device tagged</span>\n        <input type='text' name='tags' placeholder='enter tags' class='gt-tag-input' value='";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.tagList || depth0.tagList),stack1 ? stack1.call(depth0, depth0.tags, options) : helperMissing.call(depth0, "tagList", depth0.tags, options)))
-    + "'>\n\n    <label for='event' class='left'>\n      <select name='condition[direction]' class='gt-event'>\n        <option disabled='disabled'>select a condition</option>\n        ";
+    + "'>\n      </label>\n\n      <select name='condition[direction]' class='gt-event'>\n        ";
   options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data};
   stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n      </select>\n      <select name='geometry-type' class='gt-geometry-type'>\n        <option value='default' disabled='disabled'>select a geometry</option>\n        ";
+  buffer += "\n      </select>\n\n      <span>a</span>\n\n      <select name='geometry-type' class='gt-geometry-type'>\n        ";
   options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data};
   stack2 = ((stack1 = helpers.selectShape || depth0.selectShape),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "selectShape", depth0.condition, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n      </select>\n    </label>\n\n    <select class='gt-action-selector'>\n      <option disabled='disabled'>choose an action</option>\n      ";
+  buffer += "\n      </select>\n\n      <span>, </span>\n\n      <select class='gt-action-selector'>\n        ";
   options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data};
   stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, depth0.action, options) : helperMissing.call(depth0, "select", depth0.action, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n    </select>\n    <span>:</span>\n\n    <label class='gt-action gt-action-notification' for='message'>\n      <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
+  buffer += "\n      </select>\n      <span>:</span>\n\n      <label class='gt-action gt-action-notification' for='message'>\n        <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</textarea>\n    </label>\n\n    <label class='gt-action gt-action-callbackUrl gt-hide' for='url'>\n      <input type='text' name='action[callbackUrl]' placeholder='url (optional)'>\n    </label>\n\n    <label class='gt-action gt-action-trackingProfile gt-hide' for='url'>\n      <span>to</span>\n      <select class='gt-action-profile-selector' name='action[trackingProfile]'>\n        <option disabled='disabled'>choose a tracking profile</option>\n        ";
+    + "</textarea>\n      </label>\n\n      <label class='gt-action gt-action-callbackUrl gt-hide' for='url'>\n        <input type='text' name='action[callbackUrl]' placeholder='url (optional)'>\n      </label>\n\n      <label class='gt-action gt-action-trackingProfile gt-hide' for='url'>\n        <span>to</span>\n        <select class='gt-action-profile-selector' name='action[trackingProfile]'>\n          ";
   options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data};
   stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n      </select>\n    </label>\n\n    <button class='gt-button gt-button-blue gt-submit'>Update</button>\n    <ul class='gt-edit-controls'>\n      <li>\n        <a class='gt-reset-delete' href='#'>&#x2716;</a>\n      </li>\n      <li>\n        <button class='gt-item-delete gt-button-delete'></button>\n      </li>\n    </ul>\n  </form>\n</div>";
+  buffer += "\n        </select>\n      </label>\n\n      <label for='title'>\n        Nickname (optional):\n        <input type='text' name='properties[title]' placeholder='Title' class='gt-trigger-title-input' value='"
+    + escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n      </label>\n    </section>\n\n    <section class='gt-form-section'>\n      <button class='gt-button gt-button-blue gt-submit'>Update</button>\n      <ul class='gt-edit-controls'>\n        <li>\n          <a class='gt-reset-delete' href='#'>&#x2716;</a>\n        </li>\n        <li>\n          <button class='gt-item-delete gt-button-delete'></button>\n        </li>\n      </ul>\n    </section>\n  </form>\n</div>";
   return buffer;
   });
 
@@ -87,7 +87,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 this["GeotriggerEditor"]["Templates"]["item"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
 function program1(depth0,data) {
   
@@ -109,30 +109,7 @@ function program3(depth0,data) {
   return buffer;
   }
 
-function program5(depth0,data) {
-  
-  var buffer = "", stack1, stack2, options;
-  buffer += "\n  ";
-  options = {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data};
-  stack2 = ((stack1 = helpers.unlessDefaultTag || depth0.unlessDefaultTag),stack1 ? stack1.call(depth0, depth0, options) : helperMissing.call(depth0, "unlessDefaultTag", depth0, options));
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n  ";
-  return buffer;
-  }
-function program6(depth0,data) {
-  
-  var buffer = "";
-  buffer += "\n  <li>"
-    + escapeExpression((typeof depth0 === functionType ? depth0.apply(depth0) : depth0))
-    + "</li>\n  ";
-  return buffer;
-  }
-
-  buffer += "<a href='#";
-  if (stack1 = helpers.triggerId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.triggerId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "/edit'>\n<span class='gt-item-edit gt-icon ";
+  buffer += "<span class='gt-item-edit gt-icon ";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.actionIcon || depth0.actionIcon),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options) : helperMissing.call(depth0, "actionIcon", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options)))
     + " gt-icon-polygon'></span>\n<h5>\n  <a class='gt-item-edit' href='#";
@@ -142,10 +119,11 @@ function program6(depth0,data) {
     + "/edit'>\n    ";
   stack2 = helpers.unless.call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n  </a>\n</h5>\n<ul class='gt-tags'>\n  ";
-  stack2 = helpers.each.call(depth0, depth0.tags, {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
+  buffer += "\n  </a>\n</h5>\n<div class='gt-tags'>\n  Tags: ";
+  options = {hash:{},data:data};
+  stack2 = ((stack1 = helpers.tagLinks || depth0.tagLinks),stack1 ? stack1.call(depth0, depth0.tags, options) : helperMissing.call(depth0, "tagLinks", depth0.tags, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</ul>\n<ul class='gt-item-controls'>\n  <li><a class='gt-reset-delete' href='#'>&#x2716;</a></li>\n  <li><button class='gt-item-delete gt-button-small gt-button-delete'></button></li>\n</ul>";
+  buffer += "\n</div>\n<ul class='gt-item-controls'>\n  <li><a class='gt-reset-delete' href='#'>&#x2716;</a></li>\n  <li><button class='gt-item-delete gt-button-small gt-button-delete'></button></li>\n</ul>";
   return buffer;
   });
 
@@ -173,7 +151,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class='gt-panel-top-bar'>\n  <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>\n  <h3>Create</h3>\n  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n</div>\n\n<div class='gt-panel-content'>\n  <form class='gt-form gt-form-new'>\n    <input type='text' name='properties[title]' placeholder='Title' class='gt-trigger-title-input'>\n    <span class='gt-tag-label'>When a device tagged</span>\n    <input type='text' name='setTags' placeholder='enter tags' class='gt-tag-input'>\n\n    <label for='event' class='left'>\n      <select name='condition[direction]' class='gt-event'>\n        <option disabled='disabled' selected>select a condition</option>\n        <option value='enter'>enters</option>\n        <option value='leave'>leaves</option>\n      </select>\n      <select name='geometry-type' class='gt-geometry-type'>\n        <option value='default' disabled='disabled' selected>select a geometry</option>\n        <option value='polygon'>a polygon</option>\n        <option value='radius'>a circle</option>\n      </select>\n      <input type='text' name='radius' class='gt-radius'>\n    </label>\n\n    <select class='gt-action-selector'>\n      <option disabled='disabled' selected>choose an action</option>\n      <option value='notification'>send the device a message</option>\n      <option value='callbackUrl'>post to a server</option>\n      <option value='trackingProfile'>change tracking profile</option>\n    </select>\n    <span>:</span>\n\n    <label class='gt-action gt-action-notification' for='message'>\n      <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'></textarea>\n    </label>\n\n    <label class='gt-action gt-action-callbackUrl gt-hide' for='url'>\n      <input type='text' name='action[callbackUrl]' placeholder='url (optional)'>\n    </label>\n\n    <label class='gt-action gt-action-trackingProfile gt-hide' for='url'>\n      <span>to</span>\n      <select class='gt-action-profile-selector' name='action[trackingProfile]'>\n        <option disabled='disabled' selected>choose a tracking profile</option>\n        <option value='fine'>fine</option>\n        <option value='adaptive'>adaptive</option>\n        <option value='rough'>rough</option>\n        <option value='off'>off</option>\n      </select>\n    </label>\n\n    <!--\n    <label for='date'>\n      This will start\n      <select class='gt-date-start'>\n        <option value='now'>now</option>\n        <option value='future'>in the future</option>\n      </select>\n      and persist\n      <select class='gt-date-end'>\n        <option value='never'>indefinitely</option>\n        <option value='future'>until a future date</option>\n      </select>\n    </label>\n    -->\n\n    <button class='gt-button gt-button-blue gt-submit'>Submit</button>\n    <ul class='gt-edit-controls'>\n      <li>\n        <input type='reset' class='gt-item-clear gt-button-clear' value='Reset'>\n      </li>\n    </ul>\n  </form>\n</div>";
+  return "<div class='gt-panel-top-bar'>\n  <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>\n  <h3>Create</h3>\n  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n</div>\n\n<div class='gt-panel-content'>\n  <form class='gt-form gt-form-new'>\n    <section class='gt-form-section'>\n      <label for='tags'>\n        <span>When a device tagged</span>\n        <input type='text' name='setTags' placeholder='tag 1, tag 2..' class='gt-tag-input'>\n      </label>\n\n      <select name='condition[direction]' class='gt-event'>\n        <option value='enter' selected>enters</option>\n        <option value='leave'>leaves</option>\n      </select>\n\n      <span>a</span>\n\n      <select name='geometry-type' class='gt-geometry-type'>\n        <option value='polygon' selected>polygon</option>\n        <option value='radius'>circle</option>\n      </select>\n\n      <span>, </span>\n\n      <!-- <input type='text' name='radius' class='gt-radius'> -->\n\n      <!-- <button class='gt-button gt-button-clear gt-add-action'>add an action</button> -->\n\n      <select class='gt-action-selector'>\n        <option value='notification' selected>send the device a message</option>\n        <option value='callbackUrl'>post to a server</option>\n        <option value='trackingProfile'>change tracking profile</option>\n      </select>\n      <span>:</span>\n\n      <label class='gt-action gt-action-notification' for='message'>\n        <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'></textarea>\n      </label>\n\n      <label class='gt-action gt-action-callbackUrl gt-hide' for='url'>\n        <input type='text' name='action[callbackUrl]' placeholder='url (optional)'>\n      </label>\n\n      <label class='gt-action gt-action-trackingProfile gt-hide' for='url'>\n        <span>to</span>\n        <select class='gt-action-profile-selector' name='action[trackingProfile]'>\n          <option disabled='disabled' selected>choose a tracking profile</option>\n          <option value='fine'>fine</option>\n          <option value='adaptive'>adaptive</option>\n          <option value='rough'>rough</option>\n          <option value='off'>off</option>\n        </select>\n      </label>\n\n      <!--\n      <label for='date'>\n        This will start\n        <select class='gt-date-start'>\n          <option value='now'>now</option>\n          <option value='future'>in the future</option>\n        </select>\n        and persist\n        <select class='gt-date-end'>\n          <option value='never'>indefinitely</option>\n          <option value='future'>until a future date</option>\n        </select>\n      </label>\n      -->\n\n      <label for='title'>\n        Nickname (optional):\n        <input type='text' name='properties[title]' placeholder='Title' class='gt-trigger-title-input'>\n      </label>\n    </section>\n\n    <section class='gt-form-section'>\n      <button class='gt-button gt-button-blue gt-submit'>Submit</button>\n      <!-- <ul class='gt-edit-controls'>\n        <li>\n          <input type='reset' class='gt-item-clear gt-button-clear' value='Reset'>\n        </li>\n      </ul> -->\n    </section>\n  </form>\n</div>";
   });
 
 this["GeotriggerEditor"]["Templates"]["notification"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {

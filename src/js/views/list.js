@@ -12,6 +12,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     events: {
       'click'                         : 'editItem',
+      'click .gt-tags'                : 'tagsClick',
       'click .gt-item-delete'         : 'confirmDelete',
       'click .gt-reset-delete'        : 'resetDelete',
       'click .gt-item-confirm-delete' : 'destroyModel',
@@ -36,6 +37,10 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     editItem: function() {
       var id = this.model.get('triggerId');
       App.router.navigate(id + '/edit', { trigger: true });
+    },
+
+    tagsClick: function(e) {
+      e.stopPropagation();
     },
 
     confirmDelete: function(e) {
@@ -104,6 +109,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     onShow: function() {
       this.headerCheck();
       this.listenTo(this.collection, 'change reset add remove', this.headerCheck);
+      this.listenTo(App.vent, 'trigger:list:search', this.search);
     },
 
     headerCheck: function() {
@@ -114,11 +120,21 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
+    search: function(term) {
+      this.ui.search.val(term);
+      this.filter();
+    },
+
     filter: function(e) {
       var value = this.ui.search.val();
 
       if (!value.length) {
         this.ui.results.removeClass('gt-filtering');
+        if (Backbone.history.fragment !== 'list') {
+          App.router.navigate('list', { trigger: false });
+        }
+      } else if (typeof e !== 'undefined' && e.keyCode === 13) {
+        App.router.navigate('list?q=' + encodeURIComponent(value).replace(/%20/g, '+'), { trigger: true });
       } else {
         this.ui.results.addClass('gt-filtering');
 
@@ -129,7 +145,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
         list.each(function(){
           var item = $(this);
-          var tags  = item.find('.gt-tags li');
+          var tags  = item.find('.gt-tags a');
           var text = '';
 
           text += item.find('.gt-item-edit span').text();

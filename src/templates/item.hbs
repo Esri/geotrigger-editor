@@ -1,4 +1,3 @@
-<a href='#{{triggerId}}/edit'>
 <span class='gt-item-edit gt-icon {{actionIcon condition.direction}} gt-icon-polygon'></span>
 <h5>
   <a class='gt-item-edit' href='#{{triggerId}}/edit'>
@@ -9,13 +8,9 @@
     {{/unless}}
   </a>
 </h5>
-<ul class='gt-tags'>
-  {{#each tags}}
-  {{#unlessDefaultTag this}}
-  <li>{{this}}</li>
-  {{/unlessDefaultTag}}
-  {{/each}}
-</ul>
+<div class='gt-tags'>
+  Tags: {{{tagLinks tags}}}
+</div>
 <ul class='gt-item-controls'>
   <li><a class='gt-reset-delete' href='#'>&#x2716;</a></li>
   <li><button class='gt-item-delete gt-button-small gt-button-delete'></button></li>
