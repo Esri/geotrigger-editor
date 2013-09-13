@@ -125,6 +125,8 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
         App.vent.trigger('trigger:list');
         var view = new App.Views.List({ collection: App.collections.triggers });
         App.regions.drawer.show(view);
+      } else if (!term) {
+        App.vent.trigger('trigger:list:reset');
       }
 
       if (term) {
