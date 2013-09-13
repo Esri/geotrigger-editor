@@ -111,18 +111,22 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n      "
+  buffer += "<span>"
+    + escapeExpression(((stack1 = ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + " "
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo)),stack1 == null || stack1 === false ? stack1 : stack1.distance)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + " meter radius\n      ";
+    + " meter radius</span>\n    ";
   return buffer;
   }
 
 function program7(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n      "
+  buffer += "<span>"
+    + escapeExpression(((stack1 = ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + " "
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo)),stack1 == null || stack1 === false ? stack1 : stack1.geojson)),stack1 == null || stack1 === false ? stack1 : stack1.coordinates)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.length)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + " sided polygon\n      ";
+    + " sided polygon</span>";
   return buffer;
   }
 
@@ -151,12 +155,10 @@ function program11(depth0,data) {
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "/edit'>\n    <span>\n      "
-    + escapeExpression(((stack1 = ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + " ";
+    + "/edit'>\n    ";
   stack2 = helpers.unless.call(depth0, ((stack1 = ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo)),stack1 == null || stack1 === false ? stack1 : stack1.geojson), {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n    </span>\n  </a>\n</h5>\n<div class=\"gt-item-toolbar\">\n  <a class='gt-edit-icon' href='#";
+  buffer += "\n  </a>\n</h5>\n<div class=\"gt-item-toolbar\">\n  <a class='gt-edit-icon' href='#";
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)

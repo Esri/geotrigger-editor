@@ -146,10 +146,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
         list.each(function(){
           var item = $(this);
-          var tags  = item.find('.gt-tags a');
+          var tags = item.find('.gt-tags a');
           var text = '';
 
           text += item.find('.gt-item-edit span').text();
+          text += item.find('.gt-id').text();
+          text += item.find('.gt-item-details span').text();
 
           tags.each(function(){
             text += $(this).text();
