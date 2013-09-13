@@ -3,6 +3,7 @@
 .gt-search {
   @include box-sizing(border-box);
   padding: 0.5em 2em;
+  position: relative;
 
   input[type="search"] {
     @include box-sizing(border-box);
@@ -12,6 +13,26 @@
     @include retina-display {
       background: url(../img/icons/search22x.png) no-repeat 4px center $white;
       background-size: 24px;
+    }
+  }
+  .gt-icon-clear{
+    display:none;
+    width: 16px;
+    height:16px;
+    background: url('../img/icons/delete.png') no-repeat center center transparent;
+    background-size:16px;
+    @include retina-display {
+      background: url('../img/icons/delete@2x.png') no-repeat center center transparent;
+      background-size: 16px;
+    }
+    position: absolute;
+    top: 50%;
+    margin-top: -8px;
+    right: 2.6em;
+  }
+  &.gt-filtering {
+    .gt-icon-clear {
+      display: inline-block;
     }
   }
 }

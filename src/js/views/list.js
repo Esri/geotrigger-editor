@@ -23,8 +23,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     ui: {
       'deleteItem' : '.gt-list-delete',
       'confirm'    : '.gt-item-confirm-delete',
-      'reset'      : '.gt-reset-delete',
-
+      'reset'      : '.gt-reset-delete'
     },
 
     modelEvents: {
@@ -98,13 +97,15 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     emptyView: Views.Empty,
 
     events: {
-      'keyup .gt-search' : 'filter'
+      'keyup .gt-search'     : 'filter',
+      'click .gt-icon-clear' : 'clearFilter'
     },
 
     ui: {
-      'header'  : '.gt-list-header',
-      'search'  : '.gt-search input',
-      'results' : '.gt-results'
+      'header'     : '.gt-list-header',
+      'search'     : '.gt-search input',
+      'results'    : '.gt-results',
+      'searchBar'  : '.gt-search'
     },
 
     onShow: function() {
@@ -126,6 +127,15 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.filter();
     },
 
+    clearFilter: function() {
+      this.ui.search.val('');
+      this.ui.results.removeClass('gt-filtering');
+      this.ui.searchBar.removeClass('gt-filtering');
+      if (Backbone.history.fragment !== 'list') {
+        App.router.navigate('list', { trigger: false });
+      }
+    },
+
     filter: function(e) {
       var value = this.ui.search.val();
 
@@ -138,6 +148,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         App.router.navigate('list?q=' + encodeURIComponent(value).replace(/%20/g, '+'), { trigger: true });
       } else {
         this.ui.results.addClass('gt-filtering');
+        this.ui.searchBar.addClass('gt-filtering');
 
         var list = this.ui.results.find('.gt-result');
         var arr = this.ui.search.val().split(/\s+/);
