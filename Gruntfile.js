@@ -21,21 +21,37 @@ module.exports = function(grunt) {
 
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
         report: 'gzip'
       },
       dist: {
-        src: [
-          'js/lib/*.js',
-          'js/app.js',
-          'src/js/modules/*.js',
-          'src/js/controllers/*.js',
-          'src/js/models/*.js',
-          'src/js/collections/*.js',
-          'src/js/layouts/*.js',
-          'src/js/views/*.js'
-        ],
-        dest: 'dist/js/<%= pkg.name %>.min.js'
+        files: {
+          'dist/js/<%= pkg.name %>.dependencies.min.js': [
+            'vendor/json2.js',
+            'vendor/jquery-1.10.2.js',
+            'vendor/underscore.js',
+            'vendor/underscore.deep-extend.js',
+            'vendor/backbone.js',
+            'vendor/backbone.marionette.js',
+            'vendor/handlebars.js',
+            'vendor/geotriggers.js',
+            'vendor/leaflet.js',
+            'vendor/esri-leaflet.js',
+            'vendor/leaflet.draw-custom.js',
+            'vendor/leaflet.draw.tooltip.js'
+          ],
+          'dist/js/<%= pkg.name %>.min.js': [
+            'src/js/lib/*.js',
+            'src/js/app.js',
+            'src/templates/*.js',
+            'src/js/modules/*.js',
+            'src/js/controllers/*.js',
+            'src/js/models/*.js',
+            'src/js/collections/*.js',
+            'src/js/layouts/*.js',
+            'src/js/views/*.js'
+          ]
+        }
       }
     },
 
@@ -104,7 +120,7 @@ module.exports = function(grunt) {
       },
       dev: {
         files: {
-          'dev/js/vendor.js': [
+          'dev/js/<%= pkg.name %>.dependencies.js': [
             'vendor/json2.js',
             'vendor/jquery-1.10.2.js',
             'vendor/underscore.js',
@@ -131,22 +147,34 @@ module.exports = function(grunt) {
           ]
         }
       },
-      // production
       dist: {
-        // the files to concatenate
-        src: [
-          'src/js/lib/*.js',
-          'src/js/app.js',
-          'src/templates/*.js',
-          'src/js/modules/*.js',
-          'src/js/controllers/*.js',
-          'src/js/models/*.js',
-          'src/js/collections/*.js',
-          'src/js/layouts/*.js',
-          'src/js/views/*.js'
-        ],
-        // the location of the resulting JS file
-        dest: 'dist/js/<%= pkg.name %>.js'
+        files: {
+          'dist/js/<%= pkg.name %>.dependencies.js': [
+            'vendor/json2.js',
+            'vendor/jquery-1.10.2.js',
+            'vendor/underscore.js',
+            'vendor/underscore.deep-extend.js',
+            'vendor/backbone.js',
+            'vendor/backbone.marionette.js',
+            'vendor/handlebars.js',
+            'vendor/geotriggers.js',
+            'vendor/leaflet.js',
+            'vendor/esri-leaflet.js',
+            'vendor/leaflet.draw-custom.js',
+            'vendor/leaflet.draw.tooltip.js'
+          ],
+          'dist/js/<%= pkg.name %>.js': [
+            'src/js/lib/*.js',
+            'src/js/app.js',
+            'src/templates/*.js',
+            'src/js/modules/*.js',
+            'src/js/controllers/*.js',
+            'src/js/models/*.js',
+            'src/js/collections/*.js',
+            'src/js/layouts/*.js',
+            'src/js/views/*.js'
+          ]
+        }
       }
     },
 
