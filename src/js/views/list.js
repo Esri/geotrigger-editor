@@ -11,19 +11,20 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-result',
 
     events: {
-      'click'                         : 'editItem',
+      'click .gt-item-edit'           : 'editItem',
       'click .gt-tags'                : 'tagsClick',
-      'click .gt-item-delete'         : 'confirmDelete',
-      'click .gt-reset-delete'        : 'resetDelete',
-      'click .gt-item-confirm-delete' : 'destroyModel',
+      'click .gt-delete-icon'         : 'confirmDelete',
+      'click .gt-cancel-delete'       : 'resetDelete',
+      'click .gt-confirm-delete'      : 'destroyModel',
       'mouseover'                     : 'focusShape',
       'mouseout'                      : 'unfocusShape'
     },
 
     ui: {
-      'deleteItem' : '.gt-item-delete',
+      'deleteItem' : '.gt-list-delete',
       'confirm'    : '.gt-item-confirm-delete',
-      'reset'      : '.gt-reset-delete'
+      'reset'      : '.gt-reset-delete',
+
     },
 
     modelEvents: {
@@ -47,15 +48,14 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     confirmDelete: function(e) {
       e.preventDefault();
       e.stopPropagation();
-      this.ui.deleteItem.addClass('gt-item-confirm-delete');
-      this.ui.reset.addClass('gt-reset-flyout');
+      this.ui.deleteItem.addClass('gt-visible');
     },
 
     resetDelete: function(e) {
       e.preventDefault();
       e.stopPropagation();
-      this.ui.deleteItem.removeClass('gt-item-confirm-delete');
-      this.ui.reset.removeClass('gt-reset-flyout');
+      this.ui.deleteItem.removeClass('gt-visible');
+      console.log("what up");
     },
 
     destroyModel: function(e) {

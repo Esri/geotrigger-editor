@@ -126,6 +126,18 @@ function program7(depth0,data) {
   return buffer;
   }
 
+function program9(depth0,data) {
+  
+  var stack1;
+  return escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
+  }
+
+function program11(depth0,data) {
+  
+  
+  return "this trigger";
+  }
+
   buffer += "<span class='gt-item-edit gt-icon ";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.actionIcon || depth0.actionIcon),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options) : helperMissing.call(depth0, "actionIcon", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options)))
@@ -156,7 +168,10 @@ function program7(depth0,data) {
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "\n</div>\n<!--<ul class='gt-item-controls'>\n  <li><a class='gt-reset-delete' href='#'>&#x2716;</a></li>\n  <li><button class='gt-item-delete gt-button-small gt-button-delete'></button></li>\n</ul>-->";
+    + "\n</div>\n<div class=\"gt-list-delete\">\n  <h5>Delete ";
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "?</h5>\n  <button class=\"gt-confirm-delete gt-button-small gt-button-delete\">Delete</button>\n  <button class=\"gt-cancel-delete gt-button-small gt-button-delete\">Cancel</button>\n</div>";
   return buffer;
   });
 
