@@ -1,8 +1,23 @@
 /* - - - - - - - - - - Trigger List - - - - - - - - - - */
 
+.gt-list {
+  &.gt-filtering {
+    .gt-icon-clear {
+      display: inline-block;
+    }
+    .gt-result {
+      display: none;
+      &.gt-list-visible {
+        display: block;
+      }
+    }
+  }
+}
+
 .gt-search {
   @include box-sizing(border-box);
   padding: 0.5em 2em;
+  position: relative;
 
   input[type="search"] {
     @include box-sizing(border-box);
@@ -12,6 +27,22 @@
     @include retina-display {
       background: url(../img/icons/search22x.png) no-repeat 4px center $white;
       background-size: 24px;
+    }
+  }
+  .gt-icon-clear {
+    background: url('../img/icons/delete.png') no-repeat center center transparent;
+    background-size: 16px;
+    display: none;
+    height: 16px;
+    margin-top: -8px;
+    width: 16px;
+    position: absolute;
+    top: 50%;
+    right: 2.6em;
+
+    @include retina-display {
+      background: url('../img/icons/delete@2x.png') no-repeat center center transparent;
+      background-size: 16px;
     }
   }
 }
@@ -30,22 +61,13 @@
 
 .gt-results {
   border-top: 1px solid $light-gray;
-  &.gt-filtering {
-    .gt-result {
-      display: none;
-      &.gt-list-visible {
-        display: block;
-      }
-    }
-  }
 }
 
 .gt-result {
   @include box-sizing(border-box);
   background: transparent;
   border-bottom: 1px solid $light-gray;
-  cursor: pointer;
-  padding: 1em;
+  padding: 1em 1em 1em 64px;
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -57,6 +79,7 @@
   .gt-item-edit {
     cursor: pointer;
   }
+
   .gt-icon-enter {
     width:48px;
     height:48px;
@@ -68,6 +91,7 @@
     // left: 10px;
     // top: 50%;
     margin-top: 6px;
+    margin-left: -48px;
     background: url('../img/icons/enter-polygon.png') no-repeat center center transparent;
     &.gt-icon-polygon {background: url('../img/icons/enter-polygon.png') no-repeat center center transparent;}
     &.gt-icon-radius {background: url('../img/icons/enter-radius.png') no-repeat center center transparent;}
@@ -91,41 +115,93 @@
       &.gt-icon-drivetime{background: url('../img/icons/exit-drivetime2x.png') no-repeat center center transparent; background-size: 36px;}
     }
   }
+
+  .gt-item-toolbar {
+    padding: 19px 19px 6px 6px;
+    text-align: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .gt-edit-icon {
+      background: url('../img/icons/settings.png') no-repeat center center transparent;
+      background-size: 16px;
+      display:inline-block;
+      width: 16px;
+      height: 16px;
+      @include retina-display {
+        background: url('../img/icons/settings@2x.png') no-repeat center center transparent;
+        background-size: 16px;
+      }
+    }
+
+    .gt-delete-icon {
+      @extend .gt-edit-icon;
+      background: url('../img/icons/trash.png') no-repeat center center transparent;
+      background-size: 16px;
+      margin-left: 6px;
+      @include retina-display {
+        background: url('../img/icons/trash@2x.png') no-repeat center center transparent;
+        background-size: 16px;
+      }
+    }
+  }
   h5 {
-    // width: 100%;
-    padding-left: 1rem;
+    padding-left: 8px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     line-height: 1.5em;
     vertical-align: top;
-    margin-bottom: 0.5em;
-    margin-right: 93px;
+    padding-bottom: 0.5em;
+    margin-bottom:0;
+    margin-right: 64px;
     a {
       color: $dark-gray;
       text-decoration: none;
+      width:100%;
+      display: block;
       @include transition(color 100ms linear);
       &:hover {
         color: $blue;
       }
     }
   }
+  .gt-item-details {
+    display:none;
+    &.gt-item-details-visible {
+      display:block;
+    }
+  }
 }
 
 .gt-tags {
-  cursor: default;
   display: block;
-  overflow-x: scroll;
-  white-space: nowrap;
-  padding-bottom: 12px;
-  padding-left: 1rem;
-  float: left;
-
+  font-size: 0.9em;
+  line-height: 1.5em;
+  padding: 0 52px .25em 8px;
+  strong {
+    font-weight: 600;
+    font-variant: small-caps;
+    text-transform: lowercase;
+  }
+  span {
+    font-size: 10px;
+    padding-left:1px;
+  }
   a {
     border: none;
     color: $gray;
-    margin-right: 3px;
+    margin-left: 3px;
+    text-decoration: none;
+    &:hover {
+      color: $blue;
+    }
   }
+}
+
+.gt-id {
+  @extend .gt-tags;
 }
 
 .gt-item-controls {
@@ -160,6 +236,38 @@
 }
 
 /* - - - - - - - - - - Delete - Confirm Delete - - - - - - - - - - */
+.gt-list-delete {
+  display: none;
+  @include full();
+  background-color: $darker-gray;
+  h5 {
+    margin-top: 2.2em;
+    margin-left: 0.25em;
+    display: inline-block;
+    color: $white;
+    font-size: 16px;
+    margin-right: 0px;
+    white-space: normal;
+    width:100%;
+    @include box-sizing(border-box);
+    padding-right: 9em;
+  }
+  button {
+    font-size: 14px;
+    margin-right: 0.5em;
+    margin-top: 2.2em;
+    position: absolute;
+    top: 0;
+    right: 0;
+    &.gt-cancel-delete {
+      right:4.7em;
+    }
+  }
+  &.gt-visible {
+    display:block;
+  }
+}
+
 .gt-item-delete {
   display: inline-block;
   margin-top: 0;
@@ -178,6 +286,13 @@
   }
   &:before {
     content: "Sure?";
+  }
+}
+
+.gt-confirm-delete {
+  @extend .gt-item-confirm-delete;
+  &:before {
+    content: none;
   }
 }
 

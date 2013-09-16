@@ -1,17 +1,26 @@
-<span class='gt-item-edit gt-icon {{actionIcon condition.direction}} gt-icon-polygon'></span>
+<span class='gt-item-edit gt-icon {{actionIcon condition.direction condition.geo}} gt-icon-polygon'></span>
 <h5>
+  {{#if properties.title}}
   <a class='gt-item-edit' href='#{{triggerId}}/edit'>
-    {{#unless properties.title}}
-    <span>{{triggerId}}</span>
-    {{else}}
     <span>{{properties.title}}</span>
-    {{/unless}}
+  </a>
+  {{/if}}
+  <a class='gt-item-details {{#unless properties.title}}gt-item-details-visible{{/unless}}' href='#{{triggerId}}/edit'>
+    <span>{{defaultTitle condition}}</span>
   </a>
 </h5>
-<div class='gt-tags'>
-  Tags: {{{tagLinks tags}}}
+<div class="gt-item-toolbar">
+  <a class='gt-edit-icon' href='#{{triggerId}}/edit'></a>
+  <a class='gt-delete-icon' href="#"></a>
 </div>
-<ul class='gt-item-controls'>
-  <li><a class='gt-reset-delete' href='#'>&#x2716;</a></li>
-  <li><button class='gt-item-delete gt-button-small gt-button-delete'></button></li>
-</ul>
+<div class='gt-tags'>
+  <strong>Tags</strong><span>:</span> {{{tagLinks tags}}}
+</div>
+<div class='gt-id'>
+  <strong>ID</strong><span>:</span> {{triggerId}}
+</div>
+<div class="gt-list-delete">
+  <h5>Delete {{#if properties.title}}{{properties.title}}{{else}}{{defaultTitle condition}}{{/if}}?</h5>
+  <button class="gt-confirm-delete gt-button-small gt-button-delete">Delete</button>
+  <button class="gt-cancel-delete gt-button-small gt-button-delete">Cancel</button>
+</div>
