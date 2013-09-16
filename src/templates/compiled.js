@@ -116,8 +116,9 @@ function program5(depth0,data) {
 
 function program7(depth0,data) {
   
-  
-  return "this trigger";
+  var stack1, options;
+  options = {hash:{},data:data};
+  return escapeExpression(((stack1 = helpers.defaultTitle || depth0.defaultTitle),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "defaultTitle", depth0.condition, options)));
   }
 
   buffer += "<span class='gt-item-edit gt-icon ";
