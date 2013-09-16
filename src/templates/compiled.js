@@ -110,41 +110,20 @@ function program3(depth0,data) {
 
 function program5(depth0,data) {
   
-  var buffer = "", stack1;
-  buffer += "<span>"
-    + escapeExpression(((stack1 = ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + " "
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo)),stack1 == null || stack1 === false ? stack1 : stack1.distance)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + " meter radius</span>\n    ";
-  return buffer;
-  }
-
-function program7(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "<span>"
-    + escapeExpression(((stack1 = ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + " "
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo)),stack1 == null || stack1 === false ? stack1 : stack1.geojson)),stack1 == null || stack1 === false ? stack1 : stack1.coordinates)),stack1 == null || stack1 === false ? stack1 : stack1[0])),stack1 == null || stack1 === false ? stack1 : stack1.length)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + " sided polygon</span>";
-  return buffer;
-  }
-
-function program9(depth0,data) {
-  
   var stack1;
   return escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
   }
 
-function program11(depth0,data) {
+function program7(depth0,data) {
   
-  
-  return "this trigger";
+  var stack1, options;
+  options = {hash:{},data:data};
+  return escapeExpression(((stack1 = helpers.defaultTitle || depth0.defaultTitle),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "defaultTitle", depth0.condition, options)));
   }
 
   buffer += "<span class='gt-item-edit gt-icon ";
   options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.actionIcon || depth0.actionIcon),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options) : helperMissing.call(depth0, "actionIcon", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options)))
+  buffer += escapeExpression(((stack1 = helpers.actionIcon || depth0.actionIcon),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo), options) : helperMissing.call(depth0, "actionIcon", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo), options)))
     + " gt-icon-polygon'></span>\n<h5>\n  ";
   stack2 = helpers['if'].call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
@@ -155,23 +134,23 @@ function program11(depth0,data) {
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "/edit'>\n    ";
-  stack2 = helpers.unless.call(depth0, ((stack1 = ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo)),stack1 == null || stack1 === false ? stack1 : stack1.geojson), {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n  </a>\n</h5>\n<div class=\"gt-item-toolbar\">\n  <a class='gt-edit-icon' href='#";
+    + "/edit'>\n    <span>";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.defaultTitle || depth0.defaultTitle),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "defaultTitle", depth0.condition, options)))
+    + "</span>\n  </a>\n</h5>\n<div class=\"gt-item-toolbar\">\n  <a class='gt-edit-icon' href='#";
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "/edit'></a>\n  <a class='gt-delete-icon' href=\"#\"></a>\n</div>\n<div class='gt-tags'>\n  <strong>Tags:</strong> ";
+    + "/edit'></a>\n  <a class='gt-delete-icon' href=\"#\"></a>\n</div>\n<div class='gt-tags'>\n  <strong>Tags</strong><span>:</span> ";
   options = {hash:{},data:data};
   stack2 = ((stack1 = helpers.tagLinks || depth0.tagLinks),stack1 ? stack1.call(depth0, depth0.tags, options) : helperMissing.call(depth0, "tagLinks", depth0.tags, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</div>\n<div class='gt-id'>\n  <strong>ID:</strong> ";
+  buffer += "\n</div>\n<div class='gt-id'>\n  <strong>ID</strong><span>:</span> ";
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
     + "\n</div>\n<div class=\"gt-list-delete\">\n  <h5>Delete ";
-  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),data:data});
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "?</h5>\n  <button class=\"gt-confirm-delete gt-button-small gt-button-delete\">Delete</button>\n  <button class=\"gt-cancel-delete gt-button-small gt-button-delete\">Cancel</button>\n</div>";
   return buffer;
