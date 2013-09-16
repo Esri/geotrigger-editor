@@ -1,0 +1,99 @@
+.gt-form {
+  .gt-form-section {
+    @include clearfix;
+  }
+
+  .gt-actions {
+    .gt-button {
+      margin: 0;
+    }
+  }
+
+  label {
+    @include clearfix;
+    margin: 0 0 1.5em;
+
+    span.gt-label-left {
+      display: inline-block;
+      float: left;
+      padding-top: .7em;
+    }
+
+    span.gt-label-block {
+      display: block;
+      margin-bottom: 1em;
+    }
+
+    &.gt-action {
+      margin-top: 1em;
+    }
+
+    &:last-child {
+      margin-bottom: 1em;
+    }
+  }
+
+  .gt-nick-wrapper {
+    border: 1px solid $lighter-gray;
+    border-width: 1px 0;
+    margin: .5em 0 .5em;
+    padding: 1.5em 0 .5em;
+  }
+
+  input, select {
+    margin: 0;
+
+    &.gt-input-right {
+      width: 50%;
+      float: right;
+    }
+  }
+
+  select {
+    width: auto;
+
+    &.gt-direction {
+      margin-right: 1.5%;
+      // width: 38%;
+    }
+
+    &.gt-geometry-type {
+      width: 55%;
+      float: right;
+    }
+  }
+
+  textarea {
+    margin: 0;
+  }
+
+  .gt-radius {
+    display: none;
+  }
+
+  .gt-submit {
+    float: right;
+  }
+
+  /* old */
+
+  .gt-action-profile-selector {
+    margin-left: 3%;
+    width: 30%;
+  }
+
+  .gt-action-selector {
+    width:60%;
+  }
+
+  .gt-date-start {
+    width:23%;
+    margin-left:3%;
+    margin-right:3%;
+  }
+
+  .gt-date-end {
+    width:30%;
+    margin-left: 3%;
+  }
+}
