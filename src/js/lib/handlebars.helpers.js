@@ -39,12 +39,29 @@
     return select.innerHTML;
   });
 
-  Handlebars.registerHelper('actionIcon', function(action) {
+  Handlebars.registerHelper('actionIcon', function(action, shape) {
+    var classes = '';
     if (action === 'enter') {
-      return 'gt-icon-enter';
+      classes += 'gt-icon-enter ';
     } else if (action === 'leave') {
-      return 'gt-icon-exit';
+      classes += 'gt-icon-exit ';
     }
+    if (shape.geojson) {
+      classes += 'gt-icon-polygon ';
+    }
+    if (shape.distance) {
+      classes += 'gt-icon-radius ';
+    }
+    return classes;
+  });
+
+  Handlebars.registerHelper('defaultTitle', function(action) {
+    // if (action === 'enter') {
+    //   return 'gt-icon-enter';
+    // } else if (action === 'leave') {
+    //   return 'gt-icon-exit';
+    // }
+    return 'default title';
   });
 
   Handlebars.registerHelper('unlessDefaultTag', function(conditional, options) {
