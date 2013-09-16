@@ -240,16 +240,27 @@
   @include full();
   background-color: $darker-gray;
   h5 {
-    margin-top:2em;
-    margin-left:0.5em;
-    display:inline-block;
+    margin-top: 2.2em;
+    margin-left: 0.25em;
+    display: inline-block;
     color: $white;
+    font-size: 16px;
+    margin-right: 0px;
+    white-space: normal;
+    width:100%;
+    @include box-sizing(border-box);
+    padding-right: 9em;
   }
   button {
     font-size: 14px;
-    margin-right: 1.5em;
+    margin-right: 0.5em;
     margin-top: 2.2em;
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    &.gt-cancel-delete {
+      right:4.7em;
+    }
   }
   &.gt-visible {
     display:block;
