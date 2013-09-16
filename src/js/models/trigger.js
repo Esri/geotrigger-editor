@@ -22,7 +22,11 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
           if (outOfRange) {
             message = "Coordinate values are out of range";
           }
-
+          // update deleted trigger
+          var deleted = JSON.stringify(error).match('no triggers found');
+          if (deleted) {
+            message = "Deleted triggers can't be updated";
+          }
           // polygons that intersect themselves
           var intersects = JSON.stringify(error).match('Error performing intersection');
           if (intersects) {
