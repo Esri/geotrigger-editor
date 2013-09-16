@@ -1,4 +1,4 @@
-<span class='gt-item-edit gt-icon {{actionIcon condition.direction}} gt-icon-polygon'></span>
+<span class='gt-item-edit gt-icon {{actionIcon condition.direction condition.geo}} gt-icon-polygon'></span>
 <h5>
   {{#if properties.title}}
   <a class='gt-item-edit' href='#{{triggerId}}/edit'>
@@ -6,8 +6,7 @@
   </a>
   {{/if}}
   <a class='gt-item-details {{#unless properties.title}}gt-item-details-visible{{/unless}}' href='#{{triggerId}}/edit'>
-    {{#unless condition.geo.geojson}}<span>{{condition.direction }} {{condition.geo.distance}} meter radius</span>
-    {{else}}<span>{{condition.direction }} {{condition.geo.geojson.coordinates.0.length}} sided polygon</span>{{/unless}}
+    <span>{{defaultTitle condition}}</span>
   </a>
 </h5>
 <div class="gt-item-toolbar">
@@ -15,13 +14,13 @@
   <a class='gt-delete-icon' href="#"></a>
 </div>
 <div class='gt-tags'>
-  <strong>Tags:</strong> {{{tagLinks tags}}}
+  <strong>Tags</strong><span>:</span> {{{tagLinks tags}}}
 </div>
 <div class='gt-id'>
-  <strong>ID:</strong> {{triggerId}}
+  <strong>ID</strong><span>:</span> {{triggerId}}
 </div>
 <div class="gt-list-delete">
-  <h5>Delete {{#if properties.title}}{{properties.title}}{{else}}this trigger{{/if}}?</h5>
+  <h5>Delete {{#if properties.title}}{{properties.title}}{{else}}{{defaultTitle condition}}{{/if}}?</h5>
   <button class="gt-confirm-delete gt-button-small gt-button-delete">Delete</button>
   <button class="gt-cancel-delete gt-button-small gt-button-delete">Cancel</button>
 </div>

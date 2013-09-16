@@ -39,12 +39,32 @@
     return select.innerHTML;
   });
 
-  Handlebars.registerHelper('actionIcon', function(action) {
+  Handlebars.registerHelper('actionIcon', function(action, shape) {
+    var classes = '';
     if (action === 'enter') {
-      return 'gt-icon-enter';
+      classes += 'gt-icon-enter ';
     } else if (action === 'leave') {
-      return 'gt-icon-exit';
+      classes += 'gt-icon-exit ';
     }
+    if (shape.geojson) {
+      classes += 'gt-icon-polygon ';
+    }
+    if (shape.distance) {
+      classes += 'gt-icon-radius ';
+    }
+    return classes;
+  });
+
+  Handlebars.registerHelper('defaultTitle', function(trigger) {
+    var title = '' + trigger.direction;
+    if (trigger.geo.distance){
+      title += ' ' + trigger.geo.distance + ' meter radius';
+    } else if (trigger.geo.geojson) {
+      var sides = trigger.geo.geojson.coordinates[0].length - 1;
+      title += ' ' + sides + ' sided polygon';
+    }
+    title = title.charAt(0).toUpperCase() + title.slice(1);
+    return title;
   });
 
   Handlebars.registerHelper('unlessDefaultTag', function(conditional, options) {
