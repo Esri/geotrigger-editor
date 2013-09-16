@@ -141,11 +141,11 @@ function program7(depth0,data) {
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "/edit'></a>\n  <a class='gt-delete-icon' href=\"#\"></a>\n</div>\n<div class='gt-tags'>\n  <strong>Tags:</strong> ";
+    + "/edit'></a>\n  <a class='gt-delete-icon' href=\"#\"></a>\n</div>\n<div class='gt-tags'>\n  <strong>Tags</strong><span>:</span> ";
   options = {hash:{},data:data};
   stack2 = ((stack1 = helpers.tagLinks || depth0.tagLinks),stack1 ? stack1.call(depth0, depth0.tags, options) : helperMissing.call(depth0, "tagLinks", depth0.tags, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</div>\n<div class='gt-id'>\n  <strong>ID:</strong> ";
+  buffer += "\n</div>\n<div class='gt-id'>\n  <strong>ID</strong><span>:</span> ";
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)

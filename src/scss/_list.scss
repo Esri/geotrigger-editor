@@ -180,19 +180,20 @@
   font-size: 0.9em;
   line-height: 1.5em;
   padding: 0 52px .25em 8px;
-
   strong {
     font-weight: 600;
     font-variant: small-caps;
     text-transform: lowercase;
   }
-
+  span {
+    font-size: 10px;
+    padding-left:1px;
+  }
   a {
     border: none;
     color: $gray;
     margin-left: 3px;
     text-decoration: none;
-
     &:hover {
       color: $blue;
     }
