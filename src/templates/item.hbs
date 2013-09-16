@@ -6,8 +6,7 @@
   </a>
   {{/if}}
   <a class='gt-item-details {{#unless properties.title}}gt-item-details-visible{{/unless}}' href='#{{triggerId}}/edit'>
-    {{#unless condition.geo.geojson}}<span>{{condition.direction }} {{condition.geo.distance}} meter radius</span>
-    {{else}}<span>{{condition.direction }} {{condition.geo.geojson.coordinates.0.length}} sided polygon</span>{{/unless}}
+    <span>{{defaultTitle condition}}</span>
   </a>
 </h5>
 <div class="gt-item-toolbar">

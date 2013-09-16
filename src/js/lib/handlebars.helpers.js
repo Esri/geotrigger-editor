@@ -55,13 +55,16 @@
     return classes;
   });
 
-  Handlebars.registerHelper('defaultTitle', function(action) {
-    // if (action === 'enter') {
-    //   return 'gt-icon-enter';
-    // } else if (action === 'leave') {
-    //   return 'gt-icon-exit';
-    // }
-    return 'default title';
+  Handlebars.registerHelper('defaultTitle', function(trigger) {
+    var title = '' + trigger.direction;
+    if (trigger.geo.distance){
+      title += ' ' + trigger.geo.distance + ' meter radius';
+    } else if (trigger.geo.geojson) {
+      var sides = trigger.geo.geojson.coordinates[0].length - 1;
+      title += ' ' + sides + ' sided polygon';
+    }
+    title = title.charAt(0).toUpperCase() + title.slice(1);
+    return title;
   });
 
   Handlebars.registerHelper('unlessDefaultTag', function(conditional, options) {
