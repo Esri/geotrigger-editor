@@ -1,50 +1,24 @@
-/* - - - - - - - - - - Panels - - - - - - - - - - */
-.gt-panel-wrap {
-  width:100%;
-  position:absolute;
-  top:0;
-  left:0;
-  bottom:0;
-  background:$white;
-  //@include transition(transform 300ms ease-in);
-  &.gt-panel-editing {
-    //@include transform(translate3D(-50%,0,0));
-    .gt-panel-edit {
-      display: block;
-    }
-    .gt-panel-list {
-      display: none;
-      background-color: $white;
-    }
-  }
-  &.gt-new {
-    overflow-y: scroll;
-    width: 100%;
-    background-color: $lightest-gray;
-  }
-}
 .gt-panel {
-  width:100%;
-  position:absolute;
-  top:0;
-  bottom:0;
-  background: $lightest-gray;
+  background-color: $lightest-gray;
+  background-color: rgba(251, 251, 251, .95);
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
   -webkit-overflow-scrolling: touch;
-  overflow-y:scroll;
+  overflow-y: scroll;
 }
-.gt-panel-list { left: 0; display:block; }
-.gt-panel-edit { left: 0; display: none;}
 
 /* - - - - - - - - - - Panel Top Bar - - - - - - - - - - */
 .gt-panel-top-bar {
+  background-color: $white;
+  background-color: rgba(255, 255, 255, .6);
   width:100%;
   height:62px;
   line-height:62px;
   overflow: hidden;
   @include box-sizing(border-box);
-  background-color:$white;
-  border-bottom: 1px solid $lighter-gray;
-  // text-align:center;
+  border-bottom:1px solid $lighter-gray;
   h3 {
     display: inline-block;
     vertical-align: middle;
@@ -100,3 +74,30 @@
   padding:2em;
   background-color:transparent;
 }
+/* not in use */
+.gt-panel-wrap {
+  width:100%;
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  background:$white;
+  //@include transition(transform 300ms ease-in);
+  &.gt-panel-editing {
+    //@include transform(translate3D(-50%,0,0));
+    .gt-panel-edit {
+      display: block;
+    }
+    .gt-panel-list {
+      display: none;
+      background-color: $white;
+    }
+  }
+  &.gt-new {
+    overflow-y: scroll;
+    width: 100%;
+    background-color: $lightest-gray;
+  }
+}
+.gt-panel-list { left: 0; display:block; }
+.gt-panel-edit { left: 0; display: none; }
