@@ -54,21 +54,10 @@
     .gt-cancel-delete {
       padding: 8px;
     }
-    .gt-confirm-delete {
-
-    }
   }
 }
 
 /* - - - - - - - - - - Edit Delete - - - - - - - - - - */
-.gt-item-delete {
-  display: inline-block;
-  margin-top: 0;
-  &:before {
-    content: "Delete";
-  }
-}
-
 .gt-item-confirm-delete {
   margin-top: 0;
   background-color:$red;
@@ -79,41 +68,5 @@
   }
   &:before {
     content: "Sure?";
-  }
-}
-
-.gt-confirm-delete {
-  @extend .gt-item-confirm-delete;
-  &:before {
-    content: none;
-  }
-}
-
-.gt-reset-delete {
-  position: absolute;
-  text-decoration: none;
-  color: $gray;
-  visibility: hidden;
-  &.gt-reset-flyout {
-    left: 0;
-    top: 9px;
-    color: $gray;
-    visibility: visible;
-    display:block;
-    @include transition(transform 100ms ease-in);
-    &:hover {
-      color: $red;
-    }
-  }
-  &.gt-reset-flyout-right {
-    left: 6em;
-    margin-top: 16px;
-    color: $gray;
-    visibility: visible;
-    display:block;
-    @include transition(transform 100ms ease-in);
-    &:hover {
-      color: $red;
-    }
   }
 }
