@@ -7,15 +7,20 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   //
   // @TODO: decouple shape from view (get rid of `restoreShape`)
 
-  Views.Edit = Marionette.ItemView.extend({
+  Views.Form = Marionette.ItemView.extend({
     template: App.Templates['form'],
-    className: 'gt-edit gt-panel',
+    className: 'gt-panel',
 
     events: {
+      // edit events
       'change .gt-geometry-type'      : 'startDrawing',
       'change .gt-action-selector'    : 'toggleActions',
       'change .gt-add-action'         : 'addAction',
+
+      // submit events
       'click .gt-submit'              : 'parseForm',
+
+      // delete events
       'click .gt-item-delete'         : 'confirmDelete',
       'click .gt-reset-delete'        : 'resetDelete',
       'click .gt-item-confirm-delete' : 'destroyModel'
@@ -30,13 +35,21 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     onShow: function() {
+      if (!this.model) {
+        this.parseShape();
+      }
       this.listenTo(App.vent, 'draw:new', this.parseShape);
     },
 
     startDrawing: function (e) {
       var tool = $(e.target).val();
-      // App.execute('draw:clear');
       App.vent.trigger('draw:enable', tool);
+      // @TODO: radius input
+      // if (tool === 'radius') {
+      //   this.ui.form.find('[name="radius"]').show();
+      // } else {
+      //   this.ui.form.find('[name="radius"]').hide();
+      // }
     },
 
     toggleActions: function(e) {
@@ -94,11 +107,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
 
       if (data) { // @TODO: validate
-        this.updateTrigger(data);
+        this.createOrUpdateTrigger(data);
       }
     },
 
-    updateTrigger: function(data) {
+    createOrUpdateTrigger: function(data) {
       var layer = App.request('draw:layer');
 
       if (layer instanceof L.Circle) {
@@ -114,9 +127,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         };
       }
 
-      data.triggerId = this.model.get('triggerId');
-
-      App.vent.trigger('trigger:update', data);
+      if (!this.model) {
+        App.vent.trigger('trigger:create', data);
+      } else {
+        data.triggerId = this.model.get('triggerId');
+        App.vent.trigger('trigger:update', data);
+      }
     },
 
     confirmDelete: function(e) {
