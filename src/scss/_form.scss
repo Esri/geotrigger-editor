@@ -9,6 +9,11 @@
     }
   }
 
+  .gt-add-notification-event {
+    float: right;
+    padding-bottom: 0.5em;
+  }
+
   label {
     @include clearfix;
     margin: 0 0 1.5em;
@@ -17,6 +22,7 @@
       display: inline-block;
       float: left;
       padding-top: .7em;
+      padding-right: 1em
     }
 
     span.gt-label-block {
@@ -26,6 +32,19 @@
 
     &.gt-action {
       margin-top: 1em;
+    }
+
+    &.gt-trigger-event {
+      margin: auto;
+      margin-bottom: 1em;
+      padding-top: 1em;
+
+      // gray background event clusters
+      // edit here if you want to change dem styles
+      padding: 1em 6px 0 6px;
+      width: 95%;
+      border: 6px solid $lighter-gray;
+      background-color: $lighter-gray;
     }
 
     &:last-child {
@@ -40,12 +59,24 @@
     padding: 1.5em 0 .5em;
   }
 
-  input, select {
+  input, select, textarea {
     margin: 0;
+
+    &.gt-input-left {
+      margin-right: 1em;
+    }
 
     &.gt-input-right {
       width: 50%;
       float: right;
+    }
+
+    &.gt-input-wide {
+      width: 74%;
+    }
+
+    .gt-input-fill {
+      width: 100%;
     }
   }
 
