@@ -1,37 +1,13 @@
 .gt-tooltip {
   span {
-    display:none;
-    z-index:10;
-    padding:14px 20px;
     color:$white;
-    font-size: 14px;
-    @include border-radius(4px);
+    @include border-radius(0);
     @include box-shadow(0 0 12px rgba(0,0,0,0.2));
-    padding: 14px 20px;
-    margin-top: -21px;
-    margin-left: 56px;
-    width: auto;
-    white-space: nowrap;
     background-color: $green;
-    position:absolute;
     &:before {
-      content: "";
-      display:inline-block;
-      width:0;
-      height:0;
       border-right:8px solid $green;
       border-bottom:8px solid transparent;
       border-top:8px solid transparent;
-      position:absolute;
-      left: -8px;
-      top: 50%;
-      margin-top: -8px;
-    }
-  }
-  &:hover span {
-    display:inline;
-    &:hover {
-      display:none;
     }
   }
 }
