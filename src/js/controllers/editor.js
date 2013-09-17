@@ -137,7 +137,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     new: function() {
       App.vent.trigger('trigger:new');
 
-      var view = new App.Views.New();
+      var view = new App.Views.Form();
       App.regions.drawer.show(view);
 
       App.vent.trigger('trigger:new:ready');
@@ -149,7 +149,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       if (!model) {
         this.notFound();
       } else {
-        var view = new App.Views.Edit({ model: model });
+        var view = new App.Views.Form({ model: model });
         App.regions.drawer.show(view);
         App.vent.trigger('trigger:edit', triggerId);
       }
