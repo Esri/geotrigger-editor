@@ -3,62 +3,6 @@
     @include clearfix;
   }
 
-  .gt-actions {
-    .gt-button {
-      margin: 0;
-    }
-  }
-
-  .gt-add-notification-event {
-    float: right;
-    padding-bottom: 0.5em;
-  }
-
-  label {
-    @include clearfix;
-    margin: 0 0 1.5em;
-
-    span.gt-label-left {
-      display: inline-block;
-      float: left;
-      padding-top: .7em;
-      padding-right: 1em
-    }
-
-    span.gt-label-block {
-      display: block;
-      margin-bottom: 1em;
-    }
-
-    &.gt-action {
-      margin-top: 1em;
-    }
-
-    &.gt-trigger-event {
-      margin: auto;
-      margin-bottom: 1em;
-      padding-top: 1em;
-
-      // gray background event clusters
-      // edit here if you want to change dem styles
-      padding: 1em 6px 0 6px;
-      width: 95%;
-      border: 6px solid $lighter-gray;
-      background-color: $lighter-gray;
-    }
-
-    &:last-child {
-      margin-bottom: 1em;
-    }
-  }
-
-  .gt-nick-wrapper {
-    border: 1px solid $lighter-gray;
-    border-width: 1px 0;
-    margin: .5em 0 .5em;
-    padding: 1.5em 0 .5em;
-  }
-
   input, select, textarea {
     margin: 0;
 
@@ -70,18 +14,11 @@
       width: 50%;
       float: right;
     }
-
-    &.gt-input-wide {
-      width: 74%;
-    }
-
-    .gt-input-fill {
-      width: 100%;
-    }
   }
 
   select {
     width: auto;
+    padding: 0.25em 0;
 
     &.gt-direction {
       margin-right: 1.5%;
@@ -94,8 +31,20 @@
     }
   }
 
+  label {
+    @include clearfix;
+    margin: 0 0 1.5em;
+  }
+
   textarea {
     margin: 0;
+  }
+
+  .gt-nick-wrapper {
+    border: 1px solid $lighter-gray;
+    border-width: 1px 0;
+    margin: .5em 0 .5em;
+    padding: 1.5em 0 .5em;
   }
 
   .gt-radius {
@@ -106,25 +55,45 @@
     float: right;
   }
 
-  /* old */
-
-  .gt-action-profile-selector {
-    margin-left: 3%;
-    width: 30%;
+  .gt-trigger-event {
+    margin: auto;
+    margin-bottom: 1em;
+    padding-top: 1em;
+    @include clearfix;
+    // gray background event clusters
+    // edit here if you want to change dem styles
+    padding: 1em 6px 0 6px;
+    width: 95%;
+    border: 6px solid $lighter-gray;
+    background-color: $lighter-gray;
   }
 
-  .gt-action-selector {
-    width:60%;
+  .gt-notification-action {
+    @include clearfix;
+    padding: 0.5em 0;
   }
 
-  .gt-date-start {
-    width:23%;
-    margin-left:3%;
-    margin-right:3%;
+  .gt-notification-left {
+    float: left;
+    width: 40%;
   }
 
-  .gt-date-end {
-    width:30%;
-    margin-left: 3%;
+  .gt-notification-right {
+    float: right;
+    width: 60%;
+  }
+
+  .gt-add-notification-action {
+    float: right;
+    width: 100%;
+    text-align: right;
+    padding: 0.5em 0;
+  }
+
+  .gt-add-trigger-event {
+    float: right;
+    .gt-button {
+      margin-top: 0;
+    }
   }
 }
