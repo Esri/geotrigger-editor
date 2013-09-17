@@ -1,28 +1,4 @@
-/* - - - - - - - - - - Panels - - - - - - - - - - */
-.gt-panel-wrap {
-  width:100%;
-  position:absolute;
-  top:0;
-  left:0;
-  bottom:0;
-  background:$white;
-  //@include transition(transform 300ms ease-in);
-  &.gt-panel-editing {
-    //@include transform(translate3D(-50%,0,0));
-    .gt-panel-edit {
-      display: block;
-    }
-    .gt-panel-list {
-      display: none;
-      background-color: $white;
-    }
-  }
-  &.gt-new {
-    overflow-y: scroll;
-    width: 100%;
-    background-color: $lightest-gray;
-  }
-}
+/* - - - - - - - - - - Panel - - - - - - - - - - */
 .gt-panel {
   width:100%;
   position:absolute;
@@ -62,6 +38,7 @@
     top: 0;
   }
 }
+
 .gt-panel-top-bar-button {
   width:62px;
   height:62px;
