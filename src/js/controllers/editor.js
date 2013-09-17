@@ -41,7 +41,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
         success: function() {
           App.vent.trigger('notify:clear');
           Backbone.history.start();
-          if (App.config.fitOnLoad) {
+          if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
             App.execute('map:fit');
           }
         }
@@ -116,7 +116,6 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
     index: function() {
       App.vent.trigger('index');
-
       App.regions.drawer.close();
     },
 
