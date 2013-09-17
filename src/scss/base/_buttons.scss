@@ -31,6 +31,22 @@
       background-color: darken($red, 10%);
     }
   }
+  &.gt-button-disabled,
+  &.gt-button:disabled {
+    background-color: $lightest-gray;
+    border: 1px solid darken($lightest-gray, 10%);
+    color: $light-gray;
+    &:hover {
+      background-color: $lightest-gray;
+    }
+  }
+  &.gt-button-cancel {
+    background-color: $gray;
+    border: 1px solid darken($gray, 10%);
+    &:hover {
+      background-color: darken($gray, 10%);
+    }
+  }
 }
 
 .gt-button-delete {

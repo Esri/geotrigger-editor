@@ -25,10 +25,12 @@
     // Populate it with the option HTML
     select.innerHTML = options.fn(this);
 
-    if (value.geo.geojson) {
-      select.value = 'polygon';
-    } else {
-      select.value = 'radius';
+    if (value && value.geo) {
+      if (value.geo.geojson) {
+        select.value = 'polygon';
+      } else {
+        select.value = 'radius';
+      }
     }
 
     // Find the selected node, if it exists, add the selected attribute to it
