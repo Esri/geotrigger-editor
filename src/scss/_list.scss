@@ -127,11 +127,19 @@
       background: url('../img/icons/settings.png') no-repeat center center transparent;
       background-size: 16px;
       display:inline-block;
-      width: 16px;
       height: 16px;
+      opacity: .8;
+      width: 16px;
+
       @include retina-display {
         background: url('../img/icons/settings@2x.png') no-repeat center center transparent;
         background-size: 16px;
+      }
+
+      @include transition(opacity 100ms linear);
+
+      &:hover {
+        opacity: 1;
       }
     }
 
@@ -140,12 +148,14 @@
       background: url('../img/icons/trash.png') no-repeat center center transparent;
       background-size: 16px;
       margin-left: 6px;
+
       @include retina-display {
         background: url('../img/icons/trash@2x.png') no-repeat center center transparent;
         background-size: 16px;
       }
     }
   }
+
   h5 {
     padding-left: 8px;
     text-overflow: ellipsis;
@@ -167,6 +177,7 @@
       }
     }
   }
+
   .gt-item-details {
     display:none;
     &.gt-item-details-visible {

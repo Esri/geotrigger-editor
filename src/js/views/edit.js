@@ -8,12 +8,13 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   // @TODO: decouple shape from view (get rid of `restoreShape`)
 
   Views.Edit = Marionette.ItemView.extend({
-    template: App.Templates['edit'],
+    template: App.Templates['form'],
     className: 'gt-edit gt-panel',
 
     events: {
       'change .gt-geometry-type'      : 'startDrawing',
       'change .gt-action-selector'    : 'toggleActions',
+      'change .gt-add-action'         : 'addAction',
       'click .gt-submit'              : 'parseForm',
       'click .gt-item-delete'         : 'confirmDelete',
       'click .gt-reset-delete'        : 'resetDelete',
@@ -42,6 +43,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var action = $(e.target).val();
       this.ui.actions.hide();
       this.$el.find('.gt-action-' + action).show();
+    },
+
+    addAction: function(e) {
+      e.preventDefault();
+      console.log('add action');
     },
 
     parseShape: function() {
