@@ -31,75 +31,137 @@
       </label>
 
       <div class='gt-actions'>
-        <!-- <button class='gt-button gt-button-blue gt-add-action'>Add an action...</button> -->
-
-        <!-- <select class='gt-action-selector'>
-          {{#select action}}
-          <option value='notification'>send the device a message</option>
-          <option value='callbackUrl'>post to a server</option>
-          <option value='trackingProfile'>change tracking profile</option>
-          {{/select}}
-        </select>
-        <span>:</span> -->
-
-        <label class='gt-action'>
-          <span class='gt-label-block'>send a message to the device:</span>
-          <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>{{action.notification.text}}</textarea>
-        </label>
-
-        <label class='gt-action'>
-          <span class='gt-label-left'>send a URL to the device:</span>
-          <input class='gt-input-right' type='text' name='action[notification][url]' placeholder='http://' value='{{action.notification.url}}'>
-        </label>
-
-        <label class='gt-action'>
-          <span class='gt-label-left'>send the device a sound:</span>
-          <input class='gt-input-right' type='text' name='action[notification][sound]' placeholder='sound' value='{{action.notification.sound}}'>
-        </label>
-
-        <label class='gt-action'>
-          <span class='gt-label-block'>send data to the device:</span>
-          <textarea class='gt-action-message-box' name='action[notification][data]' placeholder='{ your: "data" }'>{{action.notification.data}}</textarea>
-        </label>
-
-        <label class='gt-action'>
-          <span class='gt-label-left'>send an icon to the device (android):</span>
-          <input class='gt-input-right' type='text' name='action[notification][icon]' placeholder='icon' value='{{action.notification.icon}}'>
-        </label>
-
-        <label class='gt-action'>
-          <span class='gt-label-left'>post to a server:</span>
-          <input class='gt-input-right' type='text' name='action[callbackUrl]' placeholder='http://' value='{{action.callbackUrl}}'>
-        </label>
-
-        <label class='gt-action'>
-          <span class='gt-label-left'>change the tracking profile to:</span>
-          <select class='gt-input-right' name='action[trackingProfile]'>
-            <option>---</option>
-            {{#select action.trackingProfile}}
-            <option value='fine'>fine</option>
-            <option value='adaptive'>adaptive</option>
-            <option value='rough'>rough</option>
-            <option value='off'>off</option>
-            {{/select}}
+        <label for="action">
+          <select name='action-select' class='gt-label-block gt-input-wide'>
+            <option value='notification'>send a notification</option>
+            <option value='callbackUrl'>post the a server</option>
+            <option value='trackingProfile'>change the tracking profile</option>
           </select>
+        </label>
+
+        <label for='gt-notifications' class="gt-trigger-event">
+          <!-- Action One -->
+          <label for='gt-notification-action'>
+            <span class='gt-label-left'> to the device with</span>
+            <select class='gt-input-right'>
+              <option value='message'>a message:</option>
+              <option value='sound'>a sound:</option>
+              <option value='data'>data:</option>
+              <option value='url'>a URL:</option>
+              <option value='icon'>an icon:</option>
+            </select>
+          </label>
+
+          <label class='gt-action'>
+            <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>{{action.notification.text}}</textarea>
+          </label>
+
+          <!-- Next Action -->
+          <label for='gt-notification-action'>
+            <span class='gt-label-left'>and </span>
+            <select class='gt-input-left'>
+              <!-- <option value='message'>a message:</option> -->
+              <option value='sound'>a sound:</option>
+              <option value='data'>data:</option>
+              <option value='url'>a URL:</option>
+              <option value='icon'>an icon:</option>
+            </select>
+
+            <input class='gt-input-wide' type='text' name='action[notification][sound]' placeholder='sound' value='{{action.notification.sound}}'>
+          </label>
+
+
+          <!-- Next Action -->
+          <label for='gt-notification-action'>
+            <span class='gt-label-left'>and </span>
+            <select class='gt-input-left'>
+              <!-- <option value='message'>a message:</option> -->
+              <!-- <option value='sound'>a sound:</option> -->
+              <option value='data'>data:</option>
+              <option value='url'>a URL:</option>
+              <option value='icon'>an icon:</option>
+            </select>
+          <!-- </label> -->
+
+          <!-- <label class='gt-action'> -->
+            <textarea class='gt-input-wide' name='action[notification][data]' placeholder='{ your: "data" }'>{{action.notification.data}}</textarea>
+          </label>
+
+          <!-- Next Action -->
+          <label for='gt-notification-action'>
+            <span class='gt-label-left'>and </span>
+            <select class='gt-input-left'>
+              <!-- <option value='message'>a message:</option> -->
+              <!-- <option value='sound'>a sound:</option> -->
+              <!-- <option value='data'>data:</option> -->
+              <option value='url'>a URL:</option>
+              <option value='icon'>an icon:</option>
+            </select>
+
+            <input class='gt-input-wide' type='text' name='action[notification][url]' placeholder='http://' value='{{action.notification.url}}'>
+          </label>
+
+          <!-- Next Action -->
+          <label for='gt-notification-action'>
+            <span class='gt-label-left'>and </span>
+            <select class='gt-input-left'>
+              <!-- <option value='message'>a message:</option> -->
+              <!-- <option value='sound'>a sound:</option> -->
+              <!-- <option value='data'>data:</option> -->
+              <!-- <option value='url'>a URL:</option> -->
+              <option value='icon'>an icon:</option>
+            </select>
+
+             <input class='gt-input-wide' type='text' name='action[notification][icon]' placeholder='icon' value='{{action.notification.icon}}'>
+          </label>
+
+          <span class="gt-add-notification-event"><a href="#">+ add an action</a></span>
+        </label>
+
+      <div class='gt-actions'>
+        <label for='action' class="gt-trigger-event">
+          <label>
+            <span class='gt-label-left'>also </span>
+            <select name='action-select' class='gt-input-right gt-label-block gt-input-wide'>
+              <!-- <option vlaue='notification'>send a notification</option> -->
+              <option value='trackingProfile'>change the tracking profile</option>
+              <option value='callbackUrl'>post the a server</option>
+            </select>
+          </label>
+
+          <label for='gt-trackingProfile-action'>
+            <span class='gt-label-left'>to </span>
+            <select class='gt-input-right' name='action[trackingProfile]'>
+              <option>---</option>
+              {{#select action.trackingProfile}}
+              <option value='fine'>fine</option>
+              <option value='adaptive'>adaptive</option>
+              <option value='rough'>rough</option>
+              <option value='off'>off</option>
+              {{/select}}
+            </select>
+          </label>
         </label>
       </div>
 
-      <!--
-      <label for='date'>
-        This will start
-        <select class='gt-date-start'>
-          <option value='now'>now</option>
-          <option value='future'>in the future</option>
-        </select>
-        and persist
-        <select class='gt-date-end'>
-          <option value='never'>indefinitely</option>
-          <option value='future'>until a future date</option>
-        </select>
-      </label>
-      -->
+      <div class='gt-actions'>
+        <label for='action' class="gt-trigger-event">
+          <label>
+            <span class='gt-label-left'>and </span>
+            <select name='action-select' class='gt-input-right gt-label-block gt-input-wide'>
+              <!-- <option vlaue='notification'>send a notification</option> -->
+              <!-- <option value='trackingProfile'>change the tracking profile</option> -->
+              <option value='callbackUrl'>post to a server</option>
+            </select>
+          </label>
+
+          <label for='gt-postUrl-action'>
+            <input class='gt-input-fill' type='text' name='action[callbackUrl]' placeholder='http://' value='{{action.callbackUrl}}'>
+          </label>
+        </label>
+      </div>
+
+      <span class="gt-add-notification-event"><a class='gt-button' href="#">+ add an event</a></span>
     </section>
 
     <section class='gt-form-section gt-nick-wrapper'>
