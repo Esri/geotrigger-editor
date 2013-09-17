@@ -66,7 +66,7 @@ function program9(depth0,data) {
 function program11(depth0,data) {
   
   
-  return "\n            <option>---</option>\n            <option value='fine'>fine</option>\n            <option value='adaptive'>adaptive</option>\n            <option value='rough'>rough</option>\n            <option value='off'>off</option>\n            ";
+  return "\n            <option value='fine'>fine</option>\n            <option value='adaptive'>adaptive</option>\n            <option value='rough'>rough</option>\n            <option value='off'>off</option>\n            ";
   }
 
 function program13(depth0,data) {
@@ -105,7 +105,7 @@ function program13(depth0,data) {
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.icon)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "'>\n        </label>\n\n        <label class='gt-action'>\n          <span class='gt-label-left'>post to a server:</span>\n          <input class='gt-input-right' type='text' name='action[callbackUrl]' placeholder='http://' value='"
     + escapeExpression(((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.callbackUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'>\n        </label>\n\n        <label class='gt-action'>\n          <span class='gt-label-left'>change the tracking profile to:</span>\n          <select class='gt-input-right' name='action[trackingProfile]'>\n            ";
+    + "'>\n        </label>\n\n        <label class='gt-action'>\n          <span class='gt-label-left'>change the tracking profile to:</span>\n          <select class='gt-input-right' name='action[trackingProfile]'>\n            <option>---</option>\n            ";
   options = {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data};
   stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }

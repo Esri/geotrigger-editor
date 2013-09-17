@@ -74,6 +74,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var data = this.ui.form.serializeObject();
       data = App.util.removeEmptyStrings(data);
 
+      if (data.action &&
+          data.action.trackingProfile &&
+          data.action.trackingProfile === '---') {
+        delete data.action.trackingProfile;
+      }
+
       if (data.tags) {
         var tags = data.tags;
         tags = tags.split(',');
