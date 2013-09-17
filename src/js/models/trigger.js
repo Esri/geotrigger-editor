@@ -12,6 +12,7 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
       console.log('sync:' + method);
 
       var triggerId = this.get('triggerId');
+      var params;
 
       var callback = _.bind(function(error, response) {
         if (error) {
@@ -59,10 +60,16 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
           App.API.session.request('trigger/list', { 'triggerIds': [ triggerId ] }, callback);
           break;
         case 'create':
-          App.API.session.request('trigger/create', model.toJSON(), callback);
+          params = {
+            'properties': this.get('properties'),
+            'condition': this.get('condition'),
+            'action': this.get('action'),
+            'setTags': this.get('tags')
+          };
+          App.API.session.request('trigger/create', params, callback);
           break;
         case 'update':
-          var params = {
+          params = {
             'properties': this.get('properties'),
             'triggerIds': triggerId,
             'condition': this.get('condition'),
