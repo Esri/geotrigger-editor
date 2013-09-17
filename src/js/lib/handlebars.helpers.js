@@ -85,7 +85,7 @@
       }
       return output.join(', ');
     } else {
-      return '';
+      return 'no tags';
     }
   });
 
