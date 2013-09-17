@@ -16,9 +16,12 @@
   }
 }
 
-
-
 .gt-result {
+  background-color: $white;
+  border-right: 4px solid $white;
+  &:hover {
+    border-right: 4px solid $green;
+  }
   h5 {
     padding-left: 0.4em;
     margin-top: 0.5em;
@@ -41,6 +44,7 @@
     color: $green;
   }
 }
+
 .gt-list-delete {
   h5 {
     margin-top: 2.2em;
@@ -52,6 +56,64 @@
     }
     .gt-confirm-delete {
 
+    }
+  }
+}
+
+/* - - - - - - - - - - Edit Delete - - - - - - - - - - */
+.gt-item-delete {
+  display: inline-block;
+  margin-top: 0;
+  &:before {
+    content: "Delete";
+  }
+}
+
+.gt-item-confirm-delete {
+  margin-top: 0;
+  background-color:$red;
+  border: 1px solid darken($red, 10%);
+  @include transition(background-color 20ms linear);
+  &:hover {
+    background-color: darken($red, 10%);
+  }
+  &:before {
+    content: "Sure?";
+  }
+}
+
+.gt-confirm-delete {
+  @extend .gt-item-confirm-delete;
+  &:before {
+    content: none;
+  }
+}
+
+.gt-reset-delete {
+  position: absolute;
+  text-decoration: none;
+  color: $gray;
+  visibility: hidden;
+  &.gt-reset-flyout {
+    left: 0;
+    top: 9px;
+    color: $gray;
+    visibility: visible;
+    display:block;
+    @include transition(transform 100ms ease-in);
+    &:hover {
+      color: $red;
+    }
+  }
+  &.gt-reset-flyout-right {
+    left: 6em;
+    margin-top: 16px;
+    color: $gray;
+    visibility: visible;
+    display:block;
+    @include transition(transform 100ms ease-in);
+    &:hover {
+      color: $red;
     }
   }
 }
