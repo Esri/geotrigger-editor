@@ -24,11 +24,6 @@
 }
 
 .gt-button-small {
-  @extend .gt-button;
   padding: 0.5em;
-  background-color: $light-gray;
   @include transition(background-color 200ms linear);
-  &:hover {
-    background-color: darken($light-gray, 10%);
-  }
 }

@@ -1,0 +1,57 @@
+/* - - - - - - - - - - Trigger List - - - - - - - - - - */
+.gt-search {
+  background-color:$lightest-gray;
+  input[type="search"]{
+    background-image: none;
+    border-bottom: 2px dashed transparent;
+    color: $dark-gray;
+    font-weight: 600;
+    font-size: 1.5em;
+    &:focus {
+      color:$darkest-gray;
+    }
+  }
+  .gt-icon-clear {
+    margin-top:-11px;
+  }
+}
+
+
+
+.gt-result {
+  h5 {
+    padding-left: 0.4em;
+    margin-top: 0.5em;
+    margin-bottom:0;
+    a {
+      color: $dark-gray;
+      &:hover {
+        color: $green;
+      }
+    }
+  }
+}
+
+.gt-id {
+  display: none;
+}
+
+.gt-tags {
+  a:hover {
+    color: $green;
+  }
+}
+.gt-list-delete {
+  h5 {
+    margin-top: 2.2em;
+    font-size:16px;
+  }
+  button{
+    .gt-cancel-delete {
+      padding: 8px;
+    }
+    .gt-confirm-delete {
+
+    }
+  }
+}
