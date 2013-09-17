@@ -87,12 +87,16 @@
       }
       return output.join(', ');
     } else {
-      return 'no tags';
+      return '';
     }
   });
 
   Handlebars.registerHelper('tagLinks', function(tags, options) {
     if (tags && tags.length) {
+      if (tags.length === 1 &&
+          tags[0].indexOf('trigger:') === 0) {
+        return '<strong>none</strong>';
+      }
       var output = [];
       for (var i=0;i<tags.length;i++) {
         if (tags[i].indexOf('trigger:') !== 0) {
@@ -101,7 +105,7 @@
       }
       return output.join(', ');
     } else {
-      return '';
+      return '<strong>none</strong>';
     }
   });
 
