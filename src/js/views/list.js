@@ -15,7 +15,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'click .gt-tags'                : 'tagsClick',
       'click .gt-delete-icon'         : 'confirmDelete',
       'click .gt-cancel-delete'       : 'resetDelete',
-      'click .gt-list-delete'         : 'resetDelete',
       'click .gt-confirm-delete'      : 'destroyModel',
       'mouseover'                     : 'focusShape',
       'mouseout'                      : 'unfocusShape'

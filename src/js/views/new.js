@@ -9,7 +9,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   //        (or come up with inheritance scheme)
 
   Views.New = Marionette.ItemView.extend({
-    template: App.Templates['new'],
+    template: App.Templates['form'],
     className: 'gt-new gt-panel',
 
     events: {
