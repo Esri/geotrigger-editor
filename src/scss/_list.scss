@@ -1,5 +1,4 @@
 /* - - - - - - - - - - Trigger List - - - - - - - - - - */
-
 .gt-list {
   &.gt-filtering {
     .gt-icon-clear {
@@ -71,7 +70,6 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-
   &:hover {
     background: $white;
   }
@@ -84,15 +82,12 @@
     width:48px;
     height:48px;
     display:inline-block;
-    // background-size: 40px;
     float: left;
     cursor: pointer;
-    // position: absolute;
-    // left: 10px;
-    // top: 50%;
     margin-top: 6px;
     margin-left: -48px;
     background: url('../img/icons/enter-polygon.png') no-repeat center center transparent;
+    background-size: 36px;
     &.gt-icon-polygon {background: url('../img/icons/enter-polygon.png') no-repeat center center transparent;}
     &.gt-icon-radius {background: url('../img/icons/enter-radius.png') no-repeat center center transparent;}
     &.gt-icon-drivetime{background: url('../img/icons/enter-drivetime.png') no-repeat center center transparent;}
@@ -130,14 +125,11 @@
       height: 16px;
       opacity: .8;
       width: 16px;
-
       @include retina-display {
         background: url('../img/icons/settings@2x.png') no-repeat center center transparent;
         background-size: 16px;
       }
-
       @include transition(opacity 100ms linear);
-
       &:hover {
         opacity: 1;
       }
@@ -148,7 +140,6 @@
       background: url('../img/icons/trash.png') no-repeat center center transparent;
       background-size: 16px;
       margin-left: 6px;
-
       @include retina-display {
         background: url('../img/icons/trash@2x.png') no-repeat center center transparent;
         background-size: 16px;
@@ -234,7 +225,6 @@
 
 .gt-edit-controls {
   position: relative;
-  margin-top: 10px;
   max-width: 14em;
   float: left;
   li {
@@ -246,7 +236,7 @@
   }
 }
 
-/* - - - - - - - - - - Delete - Confirm Delete - - - - - - - - - - */
+/* - - - - - - - - - - List Delete - - - - - - - - - - */
 .gt-list-delete {
   display: none;
   @include full();
@@ -279,6 +269,7 @@
   }
 }
 
+/* - - - - - - - - - - Edit Delete - - - - - - - - - - */
 .gt-item-delete {
   display: inline-block;
   margin-top: 0;
@@ -308,8 +299,6 @@
 }
 
 .gt-reset-delete {
-  // @include transform(translate3D(18px,0,0));
-  // margin-top: 0.4rem;
   position: absolute;
   text-decoration: none;
   color: $gray;
@@ -375,8 +364,6 @@
     width:40px;
     height:40px;
     display:inline-block;
-    // background: url('../img/icons/enter-polygon.png') no-repeat center center transparent;
-    // background-size: 40px;
     position: absolute;
     left: 10px;
     top: 50%;

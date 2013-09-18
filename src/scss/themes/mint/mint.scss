@@ -1,34 +1,14 @@
 @import "compass";
+@import "../../base/mixins";
 @import "config";
-@import "base/reset";
-@import "base/mixins";
 @import "base/typography";
 @import "base/forms";
 @import "base/buttons";
 @import "base/tooltips";
 
 //STRUCTURE
-@import "helpers";
 @import "toolbar";
 @import "drawer";
-@import "panel";
-@import "triggers";
+@import "list";
+@import "form";
 @import "notifications";
-
-#gt-map {
-  position:absolute;
-  top:0;
-  right:0;
-  bottom:0;
-  left:0;
-}
-.gt-container {
-  box-sizing:border-box;
-  position:absolute;
-  z-index:2;
-  width:50%;
-  top:0;
-  bottom:0;
-  left:0;
-  background-color:transparent;
-}
