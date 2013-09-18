@@ -4,28 +4,41 @@
     @include clearfix;
   }
 
-  .gt-actions .gt-button {
+  input, select, textarea {
     margin: 0;
+
+    &.gt-input-left {
+      margin-right: 1em;
+    }
+
+    &.gt-input-right {
+      width: 50%;
+      float: right;
+    }
+  }
+
+  select {
+    width: auto;
+    padding: 0.25em 0;
+
+    &.gt-direction {
+      margin-right: 1.5%;
+      // width: 38%;
+    }
+
+    &.gt-geometry-type {
+      width: 55%;
+      float: right;
+    }
   }
 
   label {
-    &.gt-action {
-      margin-top: 1em;
-    }
-    &:last-child {
-      margin-bottom: 1em;
-    }
+    @include clearfix;
+    margin: 0 0 1.5em;
   }
 
-  .gt-label-left {
-    display: inline-block;
-    float: left;
-    padding-top: .7em;
-  }
-
-  .gt-label-block {
-    display: block;
-    margin-bottom: 1em;
+  textarea {
+    margin: 0;
   }
 
   .gt-nick-wrapper {
@@ -33,21 +46,6 @@
     border-width: 1px 0;
     margin: .5em 0 .5em;
     padding: 1.5em 0 .5em;
-  }
-
-  .gt-input-right {
-    width: 50%;
-    float: right;
-  }
-
-  .gt-direction {
-    width: 30%;
-    margin-right: 1.5%;
-  }
-
-  .gt-geometry-type {
-    width: 55%;
-    float: right;
   }
 
   .gt-radius {
@@ -58,24 +56,45 @@
     float: right;
   }
 
-  /* - - - old - - - - */
-  .gt-action-profile-selector {
-    margin-left: 3%;
-    width: 30%;
+  .gt-trigger-event {
+    margin: auto;
+    margin-bottom: 1em;
+    padding-top: 1em;
+    @include clearfix;
+    // gray background event clusters
+    // edit here if you want to change dem styles
+    padding: 1em 6px 0 6px;
+    width: 95%;
+    border: 6px solid $lighter-gray;
+    background-color: $lighter-gray;
   }
 
-  .gt-action-selector {
-    width:60%;
+  .gt-notification-action {
+    @include clearfix;
+    padding: 0.5em 0;
   }
 
-  .gt-date-start {
-    width:23%;
-    margin-left:3%;
-    margin-right:3%;
+  .gt-notification-left {
+    float: left;
+    width: 40%;
   }
 
-  .gt-date-end {
-    width:30%;
-    margin-left: 3%;
+  .gt-notification-right {
+    float: right;
+    width: 60%;
+  }
+
+  .gt-add-notification-action {
+    float: right;
+    width: 100%;
+    text-align: right;
+    padding: 0.5em 0;
+  }
+
+  .gt-add-trigger-event {
+    float: right;
+    .gt-button {
+      margin-top: 0;
+    }
   }
 }

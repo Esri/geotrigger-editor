@@ -1,36 +1,48 @@
 GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
-  // Trigger New View
-  // ----------------
+  // Trigger Edit View
+  // -----------------
   //
-  // Handles the new trigger form.
+  // Populates the edit trigger form with a preexisting trigger and handles updates.
   //
-  // @TODO: merge with edit view as behavior is near-identical
-  //        (or come up with inheritance scheme)
+  // @TODO: decouple shape from view (get rid of `restoreShape`)
 
-  Views.New = Marionette.ItemView.extend({
+  Views.Form = Marionette.ItemView.extend({
     template: App.Templates['form'],
-    className: 'gt-new gt-panel',
+    className: 'gt-panel',
 
     events: {
-      'change .gt-geometry-type'   : 'startDrawing',
-      'change .gt-action-selector' : 'toggleActions',
-      'click .gt-submit'           : 'parseForm'
+      // edit events
+      'change .gt-geometry-type'      : 'startDrawing',
+      'change .gt-action-selector'    : 'toggleActions',
+      'change .gt-add-action'         : 'addAction',
+
+      // submit events
+      'click .gt-submit'              : 'parseForm',
+
+      // delete events
+      'click .gt-item-delete'         : 'confirmDelete',
+      'click .gt-reset-delete'        : 'resetDelete',
+      'click .gt-item-confirm-delete' : 'destroyModel'
     },
 
     ui: {
-      'actions' : '.gt-action',
-      'form'    : 'form'
+      'actions'    : '.gt-action',
+      'form'       : 'form',
+      'deleteItem' : '.gt-item-delete',
+      'confirm'    : '.gt-item-confirm-delete',
+      'reset'      : '.gt-reset-delete'
     },
 
-    onShow: function(options) {
-      this.parseShape();
+    onShow: function() {
+      if (!this.model) {
+        this.parseShape();
+      }
       this.listenTo(App.vent, 'draw:new', this.parseShape);
     },
 
-    startDrawing: function(e) {
+    startDrawing: function (e) {
       var tool = $(e.target).val();
-      // App.execute('draw:clear');
       App.vent.trigger('draw:enable', tool);
       // @TODO: radius input
       // if (tool === 'radius') {
@@ -44,6 +56,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var action = $(e.target).val();
       this.ui.actions.hide();
       this.$el.find('.gt-action-' + action).show();
+    },
+
+    addAction: function(e) {
+      e.preventDefault();
+      console.log('add action');
     },
 
     parseShape: function() {
@@ -74,6 +91,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var data = this.ui.form.serializeObject();
       data = App.util.removeEmptyStrings(data);
 
+      if (data.action &&
+          data.action.trackingProfile &&
+          data.action.trackingProfile === '---') {
+        delete data.action.trackingProfile;
+      }
+
       if (data.tags) {
         var tags = data.tags;
         tags = tags.split(',');
@@ -84,11 +107,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
 
       if (data) { // @TODO: validate
-        this.createTrigger(data);
+        this.createOrUpdateTrigger(data);
       }
     },
 
-    createTrigger: function(data) {
+    createOrUpdateTrigger: function(data) {
       var layer = App.request('draw:layer');
 
       if (layer instanceof L.Circle) {
@@ -104,7 +127,29 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         };
       }
 
-      App.vent.trigger('trigger:create', data);
+      if (!this.model) {
+        App.vent.trigger('trigger:create', data);
+      } else {
+        data.triggerId = this.model.get('triggerId');
+        App.vent.trigger('trigger:update', data);
+      }
+    },
+
+    confirmDelete: function(e) {
+      e.preventDefault();
+      this.ui.deleteItem.addClass('gt-item-confirm-delete');
+      this.ui.reset.addClass('gt-reset-flyout-right');
+    },
+
+    resetDelete: function(e) {
+      e.preventDefault();
+      this.ui.deleteItem.removeClass('gt-item-confirm-delete');
+      this.ui.reset.removeClass('gt-reset-flyout-right');
+    },
+
+    destroyModel: function(e) {
+      e.preventDefault();
+      App.vent.trigger('trigger:destroy', this.model);
     }
   });
 
