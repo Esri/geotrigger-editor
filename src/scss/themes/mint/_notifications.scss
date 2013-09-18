@@ -1,35 +1,18 @@
-#gt-notes-region {
-  width: 40%;
-  height: auto;
-  position: absolute;
-  z-index: 1;
-  left: 47%;
-  top: 10px;
-}
+
 
 .gt-notification {
-  display: inline-block;
-  background: rgba(255,255,245,.95);
-  font-size: 12px;
-  padding: 6px 7px 7px 12px;
-  @include box-shadow(0 0 12px rgba(0,0,0,0.2));
-  .gt-type {
-    font-weight: bold;
+  @include border-radius(0);
+  background-color: $green;
+  color: $white;
+
+  &.error {
+    background-color: rgba(180, 20, 20, 1);
+    color: white;
   }
+
   .gt-close {
-    padding: 0 0 0 4px;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    -webkit-appearance: none;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 1;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
-    opacity: 0.4;
-    &:hover {
-      opacity: 1;
-    }
+    color: #fafafa;
+    margin-top: -3px;
+    margin-right: -12px;
   }
 }

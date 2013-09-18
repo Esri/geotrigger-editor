@@ -33,6 +33,11 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
           if (intersects) {
             message = "Polygons can't intersect themselves";
           }
+          // invalid message property
+          var noMessage = JSON.stringify(error).match('message:Not a valid parameter for this request');
+          if (noMessage) {
+            message = "Notifications must have a valid message";
+          }
 
           App.vent.trigger('notify', {
             type: 'error',
