@@ -48,28 +48,22 @@ function program3(depth0,data) {
 function program5(depth0,data) {
   
   
-  return "\n          <option value='enter'>enters</option>\n          <option value='leave'>leaves</option>\n          ";
+  return "\n            <option value='enter'>enters</option>\n            <option value='leave'>leaves</option>\n            ";
   }
 
 function program7(depth0,data) {
   
   
-  return "\n          <option value='polygon'>polygon</option>\n          <option value='radius'>circle</option>\n          ";
+  return "\n            <option value='polygon'>polygon</option>\n            <option value='radius'>circle</option>\n            ";
   }
 
 function program9(depth0,data) {
   
   
-  return "\n          <option value='notification'>send the device a message</option>\n          <option value='callbackUrl'>post to a server</option>\n          <option value='trackingProfile'>change tracking profile</option>\n          ";
+  return "\n            <option value='fine'>fine</option>\n            <option value='adaptive'>adaptive</option>\n            <option value='rough'>rough</option>\n            <option value='off'>off</option>\n            ";
   }
 
 function program11(depth0,data) {
-  
-  
-  return "\n            <option>---</option>\n            <option value='fine'>fine</option>\n            <option value='adaptive'>adaptive</option>\n            <option value='rough'>rough</option>\n            <option value='off'>off</option>\n            ";
-  }
-
-function program13(depth0,data) {
   
   
   return "\n      <ul class='gt-edit-controls'>\n        <li>\n          <a class='gt-reset-delete' href='#'>&#x2716;</a>\n        </li>\n        <li>\n          <button class='gt-item-delete gt-button-delete'></button>\n        </li>\n      </ul>\n      ";
@@ -78,41 +72,77 @@ function program13(depth0,data) {
   buffer += "<div class='gt-panel-top-bar'>\n  <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>\n  <h3>";
   stack1 = helpers['if'].call(depth0, depth0.triggerId, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</h3>\n  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n</div>\n\n<div class='gt-panel-content'>\n  <form class='gt-form gt-form-edit'>\n    <section class='gt-form-section'>\n      <label for='tags'>\n        <span class='gt-label-left'>When a device tagged</span>\n        <input type='text' name='tags' placeholder='enter tags' class='gt-input-right' value='";
+  buffer += "</h3>\n  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n</div>\n\n<div class='gt-panel-content'>\n  <form class='gt-form gt-form-edit'>\n    <section class='gt-form-section'>\n      <div class='gt-trigger-conditions'>\n        <label for='tags'>\n          <span class='gt-label-left'>When a device tagged</span>\n          <input type='text' name='tags' placeholder='enter tags' class='gt-input-right' value='";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.tagList || depth0.tagList),stack1 ? stack1.call(depth0, depth0.tags, options) : helperMissing.call(depth0, "tagList", depth0.tags, options)))
-    + "'>\n      </label>\n\n      <label for='condition'>\n        <select name='condition[direction]' class='gt-direction'>\n          ";
+    + "'>\n        </label>\n\n        <label for='condition'>\n          <select name='condition[direction]' class='gt-direction'>\n            ";
   options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data};
   stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n        </select>\n\n        <span>a</span>\n\n        <select name='geometry-type' class='gt-input-right'>\n          ";
+  buffer += "\n          </select>\n\n          <span>a</span>\n\n          <select name='geometry-type' class='gt-input-right'>\n            ";
   options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data};
   stack2 = ((stack1 = helpers.selectShape || depth0.selectShape),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "selectShape", depth0.condition, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n        </select>\n      </label>\n\n      <div class='gt-actions'>\n        <!-- <button class='gt-button gt-button-blue gt-add-action'>Add an action...</button> -->\n\n        <!-- <select class='gt-action-selector'>\n          ";
-  options = {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data};
-  stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, depth0.action, options) : helperMissing.call(depth0, "select", depth0.action, options));
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n        </select>\n        <span>:</span> -->\n\n        <label class='gt-action'>\n          <span class='gt-label-block'>send a message to the device:</span>\n          <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
+  buffer += "\n          </select>\n        </label>\n      </div>\n\n      <div class='gt-trigger-event'>\n        <div>\n          <label for=\"action\">\n            <select name='action-select' class='gt-label-block gt-input-wide'>\n              <option value='notification'>send a notification to the device</option>\n              <option value='callbackUrl'>post the a server</option>\n              <option value='trackingProfile'>change the tracking profile</option>\n            </select>\n          </label>\n        </div>\n\n        <!-- Notifcation Action One -->\n        <div class='gt-notification-action'>\n          <div class='gt-notification-left'>\n            <label for='gt-notification-action'>\n              <span class='gt-label-left'> with </span>\n              <select class='gt-input-left'>\n                <option value='message'>a message:</option>\n                <option value='sound'>a sound:</option>\n                <option value='data'>data:</option>\n                <option value='url'>a URL:</option>\n                <option value='icon'>an icon:</option>\n              </select>\n            </label>\n          </div>\n\n          <div class='gt-notification-right'>\n            <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</textarea>\n        </label>\n\n        <label class='gt-action'>\n          <span class='gt-label-left'>send a URL to the device:</span>\n          <input class='gt-input-right' type='text' name='action[notification][url]' placeholder='http://' value='"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'>\n        </label>\n\n        <label class='gt-action'>\n          <span class='gt-label-left'>send the device a sound:</span>\n          <input class='gt-input-right' type='text' name='action[notification][sound]' placeholder='sound' value='"
+    + "</textarea>\n            <!-- <input class='gt-input' type='text' name='action[notification][sound]' placeholder='sound' value='"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.sound)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'>\n        </label>\n\n        <label class='gt-action'>\n          <span class='gt-label-block'>send data to the device:</span>\n          <textarea class='gt-action-message-box' name='action[notification][data]' placeholder='{ your: \"data\" }'>"
+    + "'> -->\n            <!-- <textarea class='gt-input' name='action[notification][data]' placeholder='{ your: \"data\" }'>"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.data)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</textarea>\n        </label>\n\n        <label class='gt-action'>\n          <span class='gt-label-left'>send an icon to the device (android):</span>\n          <input class='gt-input-right' type='text' name='action[notification][icon]' placeholder='icon' value='"
+    + "</textarea> -->\n            <!-- <input class='gt-input-wide' type='text' name='action[notification][url]' placeholder='http://' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'> -->\n            <!-- <input class='gt-input-wide' type='text' name='action[notification][icon]' placeholder='icon' value='"
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.icon)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'>\n        </label>\n\n        <label class='gt-action'>\n          <span class='gt-label-left'>post to a server:</span>\n          <input class='gt-input-right' type='text' name='action[callbackUrl]' placeholder='http://' value='"
-    + escapeExpression(((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.callbackUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'>\n        </label>\n\n        <label class='gt-action'>\n          <span class='gt-label-left'>change the tracking profile to:</span>\n          <select class='gt-input-right' name='action[trackingProfile]'>\n            ";
-  options = {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data};
+    + "'> -->\n          </div>\n        </div>\n\n        <!-- Notifcation  Next Action -->\n        <div class='gt-notification-action'>\n          <div class='gt-notification-left'>\n            <label for='gt-notification-action'>\n              <span class='gt-label-left'> and </span>\n              <select class='gt-input-left'>\n                <!-- <option value='message'>a message:</option> -->\n                <option value='sound'>a sound:</option>\n                <option value='data'>data:</option>\n                <option value='url'>a URL:</option>\n                <option value='icon'>an icon:</option>\n              </select>\n            </label>\n          </div>\n\n          <div class='gt-notification-right'>\n            <!-- <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea> -->\n            <input class='gt-input' type='text' name='action[notification][sound]' placeholder='sound' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.sound)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n            <!-- <textarea class='gt-input' name='action[notification][data]' placeholder='{ your: \"data\" }'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.data)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea> -->\n            <!-- <input class='gt-input' type='text' name='action[notification][url]' placeholder='http://' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'> -->\n            <!-- <input class='gt-input' type='text' name='action[notification][icon]' placeholder='icon' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.icon)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'> -->\n          </div>\n        </div>\n\n        <!-- Notifcation Next Action -->\n        <div class='gt-notification-action'>\n          <div class='gt-notification-left'>\n            <label for='gt-notification-action'>\n              <span class='gt-label-left'> and </span>\n              <select class='gt-input-left'>\n                <!-- <option value='message'>a message:</option> -->\n                <!-- <option value='sound'>a sound:</option> -->\n                <option value='data'>data:</option>\n                <option value='url'>a URL:</option>\n                <option value='icon'>an icon:</option>\n              </select>\n            </label>\n          </div>\n\n          <div class='gt-notification-right'>\n            <!-- <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea> -->\n            <!-- <input class='gt-input' type='text' name='action[notification][sound]' placeholder='sound' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.sound)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'> -->\n            <textarea class='gt-input' name='action[notification][data]' placeholder='{ your: \"data\" }'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.data)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea>\n            <!-- <input class='gt-input' type='text' name='action[notification][url]' placeholder='http://' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'> -->\n            <!-- <input class='gt-input' type='text' name='action[notification][icon]' placeholder='icon' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.icon)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'> -->\n          </div>\n        </div>\n\n        <!-- Notifcation Next Action -->\n        <div class='gt-notification-action'>\n          <div class='gt-notification-left'>\n            <label for='gt-notification-action'>\n              <span class='gt-label-left'> and </span>\n              <select class='gt-input-left'>\n                <!-- <option value='message'>a message:</option> -->\n                <!-- <option value='sound'>a sound:</option> -->\n                <!-- <option value='data'>data:</option> -->\n                <option value='url'>a URL:</option>\n                <option value='icon'>an icon:</option>\n              </select>\n            </label>\n          </div>\n\n          <div class='gt-notification-right'>\n            <!-- <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea> -->\n            <!-- <input class='gt-input' type='text' name='action[notification][sound]' placeholder='sound' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.sound)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'> -->\n            <!-- <textarea class='gt-input' name='action[notification][data]' placeholder='{ your: \"data\" }'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.data)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea> -->\n            <input class='gt-input' type='text' name='action[notification][url]' placeholder='http://' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n            <!-- <input class='gt-input' type='text' name='action[notification][icon]' placeholder='icon' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.icon)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'> -->\n          </div>\n        </div>\n\n        <!-- Notifcation Next Action -->\n        <div class='gt-notification-action'>\n          <div class='gt-notification-left'>\n            <label for='gt-notification-action'>\n              <span class='gt-label-left'> and </span>\n              <select class='gt-input-left'>\n                <option value='message'>a message:</option>\n                <option value='sound'>a sound:</option>\n                <option value='data'>data:</option>\n                <option value='url'>a URL:</option>\n                <option value='icon'>an icon:</option>\n              </select>\n            </label>\n          </div>\n\n          <div class='gt-notification-right'>\n            <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea>\n            <!-- <input class='gt-input' type='text' name='action[notification][sound]' placeholder='sound' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.sound)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'> -->\n            <!-- <textarea class='gt-input' name='action[notification][data]' placeholder='{ your: \"data\" }'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.data)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea> -->\n            <!-- <input class='gt-input' type='text' name='action[notification][url]' placeholder='http://' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'> -->\n            <!-- <input class='gt-input' type='text' name='action[notification][icon]' placeholder='icon' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.icon)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'> -->\n          </div>\n        </div>\n\n        <!-- Add Next Notification Action -->\n        <span class=\"gt-add-notification-action\"><a href=\"#\">+ add an action</a></span>\n      </div>\n\n      <div class='gt-trigger-event'>\n          <span class='gt-label-left'>also </span>\n          <select name='action-select' class='gt-input-left gt-label-block'>\n            <option vlaue='notification'>send a notification</option>\n            <option value='trackingProfile'>change the tracking profile</option>\n            <option value='callbackUrl'>post the a server</option>\n          </select>\n\n          <span class='gt-label-left'>to </span>\n          <select class='gt-input-left' name='action[trackingProfile]'>\n            <option>---</option>\n            ";
+  options = {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data};
   stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n          </select>\n        </label>\n      </div>\n\n      <!--\n      <label for='date'>\n        This will start\n        <select class='gt-date-start'>\n          <option value='now'>now</option>\n          <option value='future'>in the future</option>\n        </select>\n        and persist\n        <select class='gt-date-end'>\n          <option value='never'>indefinitely</option>\n          <option value='future'>until a future date</option>\n        </select>\n      </label>\n      -->\n    </section>\n\n    <section class='gt-form-section gt-nick-wrapper'>\n      <label for='title'>\n        <span class='gt-label-left'>Title <em>(optional)</em></span>\n        <input class='gt-input-right' type='text' name='properties[title]' placeholder='My Cool Trigger' value='"
+  buffer += "\n          </select>\n\n      </div>\n\n      <div class='gt-trigger-event'>\n          <label>\n            <span class='gt-label-left'>and </span>\n            <select name='action-select' class='gt-input-left gt-label-block'>\n              <option vlaue='notification'>send a notification</option>\n              <option value='trackingProfile'>change the tracking profile</option>\n              <option value='callbackUrl'>post to a server</option>\n            </select>\n          </label>\n\n          <label for='gt-postUrl-action'>\n            <input class='gt-input-fill' type='text' name='action[callbackUrl]' placeholder='http://' value='"
+    + escapeExpression(((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.callbackUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n          </label>\n      </div>\n\n      <span class=\"gt-add-trigger-event\"><a class='gt-button' href=\"#\">+ add an event</a></span>\n    </section>\n\n    <section class='gt-form-section gt-nick-wrapper'>\n      <label for='title'>\n        <span class='gt-label-left'>Title <em>(optional)</em></span>\n        <input class='gt-input-right' type='text' name='properties[title]' placeholder='My Cool Trigger' value='"
     + escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "'>\n      </label>\n    </section>\n\n    <section class='gt-form-section'>\n      <button class='gt-button gt-button-blue gt-submit'>Update</button>\n      ";
-  stack2 = helpers['if'].call(depth0, depth0.triggerId, {hash:{},inverse:self.noop,fn:self.program(13, program13, data),data:data});
+  stack2 = helpers['if'].call(depth0, depth0.triggerId, {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n    </section>\n  </form>\n</div>";
   return buffer;
