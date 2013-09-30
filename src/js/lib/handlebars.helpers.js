@@ -1,4 +1,4 @@
-(function(Handlebars, $) {
+(function(App, Handlebars, $) {
 
   Handlebars.registerHelper('select', function(value, options) {
     // Create a select element
@@ -109,4 +109,6 @@
     }
   });
 
-}(Handlebars, $));
+  Handlebars.registerPartial('notification', App.Templates['form/notification']);
+
+}(GeotriggerEditor, Handlebars, $));

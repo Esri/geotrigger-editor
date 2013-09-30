@@ -8,7 +8,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   // @TODO: decouple shape from view (get rid of `restoreShape`)
 
   Views.Form = Marionette.ItemView.extend({
-    template: App.Templates['form'],
+    template: App.Templates['form/index'],
     className: 'gt-panel',
 
     events: {

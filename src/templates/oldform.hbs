@@ -33,15 +33,13 @@
       </div>
 
       <div class='gt-trigger-event'>
-        <div>
-          <label for="action">
-            <select name='action-select' class='gt-label-block gt-input-wide'>
-              <option value='notification'>send a notification to the device</option>
-              <option value='callbackUrl'>post the a server</option>
-              <option value='trackingProfile'>change the tracking profile</option>
-            </select>
-          </label>
-        </div>
+        <label for='action'>
+          <select name='action-select' class='gt-action-select gt-label-block gt-input-wide'>
+            <option value='notification'>send a notification to the device</option>
+            <option value='callbackUrl'>post to a callback URL</option>
+            <option value='trackingProfile'>change the tracking profile</option>
+          </select>
+        </label>
 
         <!-- Notifcation Action One -->
         <div class='gt-notification-action'>
@@ -164,43 +162,42 @@
         </div>
 
         <!-- Add Next Notification Action -->
-        <span class="gt-add-notification-action"><a href="#">+ add an action</a></span>
+        <div class="gt-add-notification-action">
+          <a href="#">+ add an action</a>
+        </div>
       </div>
 
       <div class='gt-trigger-event'>
-          <span class='gt-label-left'>also </span>
-          <select name='action-select' class='gt-input-left gt-label-block'>
-            <option vlaue='notification'>send a notification</option>
-            <option value='trackingProfile'>change the tracking profile</option>
-            <option value='callbackUrl'>post the a server</option>
-          </select>
+        <span class='gt-label-left'>also </span>
+        <select class='gt-action-select gt-input-left gt-label-block' name='action-select'>
+          <option vlaue='notification'>send a notification</option>
+          <option value='callbackUrl'>post to a callback URL</option>
+          <option value='trackingProfile'>change the tracking profile</option>
+        </select>
 
-          <span class='gt-label-left'>to </span>
-          <select class='gt-input-left' name='action[trackingProfile]'>
-            <option>---</option>
-            {{#select action.trackingProfile}}
-            <option value='fine'>fine</option>
-            <option value='adaptive'>adaptive</option>
-            <option value='rough'>rough</option>
-            <option value='off'>off</option>
-            {{/select}}
-          </select>
-
+        <span class='gt-label-left'>to </span>
+        <select class='gt-input-left' name='action[trackingProfile]'>
+          <option>---</option>
+          {{#select action.trackingProfile}}
+          <option value='fine'>fine</option>
+          <option value='adaptive'>adaptive</option>
+          <option value='rough'>rough</option>
+          <option value='off'>off</option>
+          {{/select}}
+        </select>
       </div>
 
       <div class='gt-trigger-event'>
-          <label>
-            <span class='gt-label-left'>and </span>
-            <select name='action-select' class='gt-input-left gt-label-block'>
-              <option vlaue='notification'>send a notification</option>
-              <option value='trackingProfile'>change the tracking profile</option>
-              <option value='callbackUrl'>post to a server</option>
-            </select>
-          </label>
+        <span class='gt-label-left'>and </span>
+        <select name='action-select' class='gt-input-left gt-label-block'>
+          <option vlaue='notification'>send a notification</option>
+          <option value='callbackUrl'>post to a callback URL</option>
+          <option value='trackingProfile'>change the tracking profile</option>
+        </select>
 
-          <label for='gt-postUrl-action'>
-            <input class='gt-input-fill' type='text' name='action[callbackUrl]' placeholder='http://' value='{{action.callbackUrl}}'>
-          </label>
+        <label for='gt-postUrl-action'>
+          <input class='gt-input-fill' type='text' name='action[callbackUrl]' placeholder='http://' value='{{action.callbackUrl}}'>
+        </label>
       </div>
 
       <span class="gt-add-trigger-event"><a class='gt-button' href="#">+ add an event</a></span>
