@@ -32,10 +32,40 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'reset'      : '.gt-reset-delete'
     },
 
+    // supported actions
+    actions: ['callbackUrl','notification','trackingProfile'],
+
+    // supported notifications
+    notifications: ['text','url','sound','data','icon'],
+
     onShow: function() {
+      var actionsHtml = '';
+      var i;
+
+      // if new
       if (!this.model) {
+        // get shape from map
         this.parseShape();
+        // add default action (notification.text) to form
+        actionsHtml = App.Templates['form/actions/notification'](this.serializeData());
       }
+
+      // if edit
+      else {
+        var actions = this.model.get('action');
+        console.log(actions);
+        // populate form
+        for (i=0; i<this.actions.length; i++) {
+          if (actions.hasOwnProperty(this.actions[i])) {
+            var tpl = App.Templates['form/actions/' + this.actions[i]];
+            var data = this.serializeData();
+            actionsHtml += tpl(data);
+          }
+        }
+      }
+
+      this.$el.find('.gt-actions').html(actionsHtml);
+
       this.listenTo(App.vent, 'draw:new', this.parseShape);
     },
 

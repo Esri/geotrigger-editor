@@ -6,7 +6,7 @@
 
 <div class='gt-panel-content'>
   <form class='gt-form gt-form-edit'>
-    <section class='gt-form-section'>
+    <section class='gt-form-section gt-conditions'>
       <div class='gt-trigger-conditions'>
         <label for='tags'>
           <span class='gt-label-left'>When a device tagged</span>
@@ -31,93 +31,9 @@
           </select>
         </label>
       </div>
-
-      <div class='gt-trigger-event'>
-        <label for='action'>
-          <select name='action-select' class='gt-action-select gt-label-block gt-input-wide'>
-            <option value='notification'>send a notification to the device</option>
-            <option value='callbackUrl'>post to a callback URL</option>
-            <option value='trackingProfile'>change the tracking profile</option>
-          </select>
-        </label>
-
-        <!-- Notifcation Action One -->
-        <div class='gt-notification-action'>
-          <div class='gt-notification-left'>
-            <label for='gt-notification-action'>
-              <span class='gt-label-left'> with </span>
-              <select class='gt-input-left'>
-                <option value='message'>a message:</option>
-                <option value='sound'>a sound:</option>
-                <option value='data'>data:</option>
-                <option value='url'>a URL:</option>
-                <option value='icon'>an icon:</option>
-              </select>
-            </label>
-          </div>
-
-          <div class='gt-notification-right'>
-            <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>{{action.notification.text}}</textarea>
-            <!-- <input class='gt-input' type='text' name='action[notification][sound]' placeholder='sound' value='{{action.notification.sound}}'> -->
-            <!-- <textarea class='gt-input' name='action[notification][data]' placeholder='{ your: "data" }'>{{action.notification.data}}</textarea> -->
-            <!-- <input class='gt-input-wide' type='text' name='action[notification][url]' placeholder='http://' value='{{action.notification.url}}'> -->
-            <!-- <input class='gt-input-wide' type='text' name='action[notification][icon]' placeholder='icon' value='{{action.notification.icon}}'> -->
-          </div>
-        </div>
-
-        {{>notification}}
-
-        {{>notification}}
-
-        {{>notification}}
-
-        {{>notification}}
-
-        {{>notification}}
-
-        {{>notification}}
-
-        <!-- Add Next Notification Action -->
-        <div class="gt-add-notification-action">
-          <a href="#">+ add an action</a>
-        </div>
-      </div>
-
-      <div class='gt-trigger-event'>
-        <span class='gt-label-left'>also </span>
-        <select class='gt-action-select gt-input-left gt-label-block' name='action-select'>
-          <option vlaue='notification'>send a notification</option>
-          <option value='callbackUrl'>post to a callback URL</option>
-          <option value='trackingProfile'>change the tracking profile</option>
-        </select>
-
-        <span class='gt-label-left'>to </span>
-        <select class='gt-input-left' name='action[trackingProfile]'>
-          <option>---</option>
-          {{#select action.trackingProfile}}
-          <option value='fine'>fine</option>
-          <option value='adaptive'>adaptive</option>
-          <option value='rough'>rough</option>
-          <option value='off'>off</option>
-          {{/select}}
-        </select>
-      </div>
-
-      <div class='gt-trigger-event'>
-        <span class='gt-label-left'>and </span>
-        <select name='action-select' class='gt-input-left gt-label-block'>
-          <option vlaue='notification'>send a notification</option>
-          <option value='callbackUrl'>post to a callback URL</option>
-          <option value='trackingProfile'>change the tracking profile</option>
-        </select>
-
-        <label for='gt-postUrl-action'>
-          <input class='gt-input-fill' type='text' name='action[callbackUrl]' placeholder='http://' value='{{action.callbackUrl}}'>
-        </label>
-      </div>
-
-      <span class="gt-add-trigger-event"><a class='gt-button' href="#">+ add an event</a></span>
     </section>
+
+    <section class="gt-form-section gt-actions"></section>
 
     <section class='gt-form-section gt-nick-wrapper'>
       <label for='title'>
@@ -127,8 +43,8 @@
     </section>
 
     <section class='gt-form-section'>
-      <button class='gt-button gt-button-blue gt-submit'>Update</button>
       {{#if triggerId}}
+      <button class='gt-button gt-button-blue gt-submit'>Update</button>
       <ul class='gt-edit-controls'>
         <li>
           <a class='gt-reset-delete' href='#'>&#x2716;</a>
@@ -137,6 +53,8 @@
           <button class='gt-item-delete gt-button-delete'></button>
         </li>
       </ul>
+      {{else}}
+      <button class='gt-button gt-button-blue gt-submit' disabled>Save</button>
       {{/if}}
     </section>
   </form>
