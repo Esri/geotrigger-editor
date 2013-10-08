@@ -1,0 +1,19 @@
+<div class='gt-trigger-event'>
+  <span class='gt-label-left'>also </span>
+  <select class='gt-action-select gt-input-left gt-label-block' name='action-select'>
+    <option vlaue='notification'>send a notification</option>
+    <option value='callbackUrl'>post to a callback URL</option>
+    <option value='trackingProfile'>change the tracking profile</option>
+  </select>
+
+  <span class='gt-label-left'>to </span>
+  <select class='gt-input-left' name='action[trackingProfile]'>
+    <option>---</option>
+    {{#select action.trackingProfile}}
+    <option value='fine'>fine</option>
+    <option value='adaptive'>adaptive</option>
+    <option value='rough'>rough</option>
+    <option value='off'>off</option>
+    {{/select}}
+  </select>
+</div>

@@ -1,11 +1,9 @@
 GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
-  // Trigger Edit View
+  // Trigger Form View
   // -----------------
   //
   // Populates the edit trigger form with a preexisting trigger and handles updates.
-  //
-  // @TODO: decouple shape from view (get rid of `restoreShape`)
 
   Views.Form = Marionette.ItemView.extend({
     template: App.Templates['form/index'],
