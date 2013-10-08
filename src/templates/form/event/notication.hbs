@@ -1,0 +1,50 @@
+<div class='gt-trigger-event'>
+        <label for='action'>
+          <select name='action-select' class='gt-action-select gt-label-block gt-input-wide'>
+            <option value='notification'>send a notification to the device</option>
+            <option value='callbackUrl'>post to a callback URL</option>
+            <option value='trackingProfile'>change the tracking profile</option>
+          </select>
+        </label>
+
+        <!-- Notifcation Action One -->
+        <div class='gt-notification-action'>
+          <div class='gt-notification-left'>
+            <label for='gt-notification-action'>
+              <span class='gt-label-left'> with </span>
+              <select class='gt-input-left'>
+                <option value='message'>a message:</option>
+                <option value='sound'>a sound:</option>
+                <option value='data'>data:</option>
+                <option value='url'>a URL:</option>
+                <option value='icon'>an icon:</option>
+              </select>
+            </label>
+          </div>
+
+          <div class='gt-notification-right'>
+            <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>{{action.notification.text}}</textarea>
+            <!-- <input class='gt-input' type='text' name='action[notification][sound]' placeholder='sound' value='{{action.notification.sound}}'> -->
+            <!-- <textarea class='gt-input' name='action[notification][data]' placeholder='{ your: "data" }'>{{action.notification.data}}</textarea> -->
+            <!-- <input class='gt-input-wide' type='text' name='action[notification][url]' placeholder='http://' value='{{action.notification.url}}'> -->
+            <!-- <input class='gt-input-wide' type='text' name='action[notification][icon]' placeholder='icon' value='{{action.notification.icon}}'> -->
+          </div>
+        </div>
+
+        {{>notification}}
+
+        {{>notification}}
+
+        {{>notification}}
+
+        {{>notification}}
+
+        {{>notification}}
+
+        {{>notification}}
+
+        <!-- Add Next Notification Action -->
+        <div class="gt-add-notification-action">
+          <a href="#">+ add an action</a>
+        </div>
+      </div>

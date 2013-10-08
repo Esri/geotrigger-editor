@@ -1,0 +1,12 @@
+<div class='gt-trigger-event'>
+  <span class='gt-label-left'>and </span>
+  <select name='action-select' class='gt-input-left gt-label-block'>
+    <option vlaue='notification'>send a notification</option>
+    <option value='callbackUrl'>post to a callback URL</option>
+    <option value='trackingProfile'>change the tracking profile</option>
+  </select>
+
+  <label for='gt-postUrl-action'>
+    <input class='gt-input-fill' type='text' name='action[callbackUrl]' placeholder='http://' value='{{action.callbackUrl}}'>
+  </label>
+</div>
