@@ -13,6 +13,10 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // edit events
       'change .gt-geometry-type'      : 'startDrawing',
 
+      // form events
+      'click .gt-add-action'          : 'addAction',
+      'click .gt-add-notification'    : 'addNotification',
+
       // submit events
       'click .gt-submit'              : 'parseForm',
 
@@ -23,18 +27,29 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     ui: {
-      'actions'    : '.gt-action',
-      'form'       : 'form',
-      'deleteItem' : '.gt-item-delete',
-      'confirm'    : '.gt-item-confirm-delete',
-      'reset'      : '.gt-reset-delete'
+      'actions'         : '.gt-actions',
+      'addAction'       : '.gt-add-action',
+      'form'            : 'form',
+      'deleteItem'      : '.gt-item-delete',
+      'confirm'         : '.gt-item-confirm-delete',
+      'reset'           : '.gt-reset-delete'
     },
 
     // supported actions
-    actions: ['callbackUrl','notification','trackingProfile'],
+    actions: [
+      'callbackUrl',
+      'notification',
+      'trackingProfile'
+    ],
 
     // supported notifications
-    notifications: ['text','url','sound','data','icon'],
+    notifications: [
+      'text',
+      'url',
+      'sound',
+      'data',
+      'icon'
+    ],
 
     onShow: function() {
       this.buildForm();
@@ -43,45 +58,114 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     buildForm: function() {
-      var actionsHtml = '';
-
-      // if new
       if (!this.model) {
-        // get shape from map
-        this.parseShape();
-
-        // add default action (notification.text)
-        actionsHtml = App.Templates['form/actions/notification'](this.serializeData());
+        this.buildNewForm();
+      } else {
+        this.buildEditForm();
       }
+    },
 
-      // if edit
-      else {
-        var allActions = this.actions;
-        var currentActions = this.model.get('action');
+    buildNewForm: function() {
+      var data = this.serializeData();
 
-        // populate form
-        for (var i = 0; i < allActions.length; i++) {
+      var actionsHtml = '';
+      var noteHtml = '';
 
-          // if current trigger has action i
-          if (currentActions.hasOwnProperty(allActions[i])) {
+      // get shape from map
+      this.parseShape();
 
-            // get template and data
-            var tpl = App.Templates['form/actions/' + allActions[i]];
-            var data = this.serializeData();
+      // add default action (notification.text)
+      actionsHtml = App.Templates['form/actions/notification/index'](data);
+      noteHtml = App.Templates['form/actions/notification/text'](data);
 
-            // build html chunk and add to actions html pile
-            actionsHtml += tpl(data);
+      this.notifications = _.without(this.notifications, 'text');
+
+      this.ui.actions.html(actionsHtml);
+      this.ui.actions.find('.gt-notification-actions').html(noteHtml);
+    },
+
+    buildEditForm: function() {
+      var currentActions = this.model.get('action');
+      var data = this.serializeData();
+
+      var actionsHtml = '';
+      var noteHtml = '';
+
+      // notification
+      if (currentActions.hasOwnProperty('notification')) {
+        actionsHtml += App.Templates['form/actions/notification/index'](data);
+        this.actions = _.without(this.actions, 'notification');
+
+        for (var prop in currentActions.notification) {
+          if (currentActions.notification.hasOwnProperty(prop)) {
+            noteHtml += App.Templates['form/actions/notification/' + prop](data);
+            this.notifications = _.without(this.notifications, prop);
           }
         }
       }
 
-      this.$el.find('.gt-actions').html(actionsHtml);
+      // callback
+      if (currentActions.hasOwnProperty('callbackUrl')) {
+        actionsHtml += App.Templates['form/actions/callbackUrl'](data);
+        this.actions = _.without(this.actions, 'callbackUrl');
+      }
+
+      // tracking profile
+      if (currentActions.hasOwnProperty('trackingProfile')) {
+        actionsHtml += App.Templates['form/actions/trackingProfile'](data);
+        this.actions = _.without(this.actions, 'trackingProfile');
+      }
+
+      this.ui.actions.html(actionsHtml);
+
+      if (this.actions.length === 0) {
+        this.ui.addAction.hide();
+      }
+
+      if (noteHtml !== '') {
+        console.log('hey');
+        this.ui.actions.find('.gt-notification-actions').html(noteHtml);
+      }
+
+      if (this.notifications.length === 0) {
+        this.ui.actions.find('.gt-add-notification').hide();
+      }
     },
 
-    addAction: function() {},
+    addAction: function(e) {
+      if (e && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      var action = this.actions.pop();
+
+      if (action === 'notification') {
+        this.ui.actions.append(App.Templates['form/actions/notification/index']({}));
+        this.ui.actions.find('.gt-notification-actions').html(App.Templates['form/actions/notification/text']({}));
+        this.notifications = _.without(this.notifications, 'text');
+      } else {
+        this.ui.actions.append(App.Templates['form/actions/' + action]({}));
+      }
+
+      if (this.actions.length === 0) {
+        this.ui.addAction.hide();
+      }
+    },
+
     removeAction: function() {},
 
-    addNotification: function() {},
+    addNotification: function(e) {
+      if (e && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      this.ui.actions.find('.gt-notification-actions').append(App.Templates['form/actions/notification/' + this.notifications.pop()]({}));
+
+      if (this.notifications.length === 0) {
+        this.ui.actions.find('.gt-add-notification').hide();
+      }
+    },
+
     removeNotification: function() {},
 
     startDrawing: function (e) {

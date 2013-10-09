@@ -40,16 +40,72 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["GeotriggerEditor"]["Templates"]["form/actions/notification"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/data"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); partials = this.merge(partials, Handlebars.partials); data = data || {};
-  var buffer = "", stack1, self=this;
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div class=\"gt-trigger-action\">\n  <label for=\"action\">\n    send a notification to the device with\n  </label>\n\n  <div class=\"gt-notification-actions\">\n    ";
-  stack1 = self.invokePartial(partials.notification, 'notification', depth0, helpers, partials, data);
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n  </div>\n\n  <!-- Add Next Notification Action -->\n  <div class=\"gt-add-notification-action\">\n    <a href=\"#\">+ add a notification</a>\n  </div>\n</div>";
+  buffer += "<div class='gt-notification-action'>\n  <div class='gt-notification-left'>\n    <label for='gt-notification-action'>\n      <span class='gt-label-left'>some data:</span>\n    </label>\n  </div>\n\n  <div class='gt-notification-right'>\n    <textarea class='gt-input' name='action[notification][data]' placeholder='{ \"your\": \"data\" }'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.data)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea>\n  </div>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/icon"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class='gt-notification-action'>\n  <div class='gt-notification-left'>\n    <label for='gt-notification-action'>\n      <span class='gt-label-left'>an icon:</span>\n    </label>\n  </div>\n\n  <div class='gt-notification-right'>\n    <input class='gt-input' type='text' name='action[notification][icon]' placeholder='icon' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.icon)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n  </div>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"gt-trigger-action\">\n  <label for=\"action\">send a notification to the device with</label>\n\n  <div class=\"gt-notification-actions\"></div>\n\n  <button class=\"gt-button gt-button-small gt-add-notification\">+ add a notification</button>\n</div>";
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/sound"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class='gt-notification-action'>\n  <div class='gt-notification-left'>\n    <label for='gt-notification-action'>\n      <span class='gt-label-left'>a sound:</span>\n    </label>\n  </div>\n\n  <div class='gt-notification-right'>\n    <input class='gt-input' type='text' name='action[notification][sound]' placeholder='sound' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.sound)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n  </div>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/text"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class='gt-notification-action'>\n  <div class='gt-notification-left'>\n    <label for='gt-notification-action'>\n      <span class='gt-label-left'>a message:</span>\n    </label>\n  </div>\n\n  <div class='gt-notification-right'>\n    <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea>\n  </div>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/url"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class='gt-notification-action'>\n  <div class='gt-notification-left'>\n    <label for='gt-notification-action'>\n      <span class='gt-label-left'>a URL:</span>\n    </label>\n  </div>\n\n  <div class='gt-notification-right'>\n    <input class='gt-input' type='text' name='action[notification][url]' placeholder='http://' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n  </div>\n</div>";
   return buffer;
   });
 
@@ -127,32 +183,12 @@ function program11(depth0,data) {
   options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data};
   stack2 = ((stack1 = helpers.selectShape || depth0.selectShape),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "selectShape", depth0.condition, options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n          </select>\n        </label>\n      </div>\n    </section>\n\n    <section class=\"gt-form-section gt-actions\"></section>\n\n    <section class='gt-form-section gt-nick-wrapper'>\n      <label for='title'>\n        <span class='gt-label-left'>Title <em>(optional)</em></span>\n        <input class='gt-input-right' type='text' name='properties[title]' placeholder='My Cool Trigger' value='"
+  buffer += "\n          </select>\n        </label>\n      </div>\n    </section>\n\n    <section class=\"gt-form-section gt-actions\"></section>\n\n    <button class=\"gt-button gt-button-small gt-add-action\">+ add an action</button>\n\n    <section class='gt-form-section gt-nick-wrapper'>\n      <label for='title'>\n        <span class='gt-label-left'>Title <em>(optional)</em></span>\n        <input class='gt-input-right' type='text' name='properties[title]' placeholder='My Cool Trigger' value='"
     + escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'>\n      </label>\n    </section>\n\n    <section class='gt-form-section'>\n      ";
+    + "'>\n      </label>\n    </section>\n\n    <section class='gt-form-section gt-submit-wrapper'>\n      ";
   stack2 = helpers['if'].call(depth0, depth0.triggerId, {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n    </section>\n  </form>\n</div>";
-  return buffer;
-  });
-
-this["GeotriggerEditor"]["Templates"]["form/notification"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
-
-
-  buffer += "<div class='gt-notification-action'>\n  <div class='gt-notification-left'>\n    <label for='gt-notification-action'>\n      <span class='gt-label-left'>a message:</span>\n    </label>\n  </div>\n\n  <div class='gt-notification-right'>\n    <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</textarea>\n    <!-- <input class='gt-input' type='text' name='action[notification][sound]' placeholder='sound' value='"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.sound)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'> -->\n    <!-- <textarea class='gt-input' name='action[notification][data]' placeholder='{ your: \"data\" }'>"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.data)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</textarea> -->\n    <!-- <input class='gt-input' type='text' name='action[notification][url]' placeholder='http://' value='"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'> -->\n    <!-- <input class='gt-input' type='text' name='action[notification][icon]' placeholder='icon' value='"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.icon)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'> -->\n  </div>\n</div>";
   return buffer;
   });
 
@@ -164,20 +200,20 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
 function program1(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n  <a class='gt-item-edit' href='#";
-  if (stack1 = helpers.triggerId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.triggerId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "/edit'>\n    <span>"
+  buffer += "\n      <span>"
     + escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</span>\n  </a>\n  ";
+    + "</span>\n    ";
   return buffer;
   }
 
 function program3(depth0,data) {
   
-  
-  return "gt-item-details-visible";
+  var buffer = "", stack1, options;
+  buffer += "\n      <span>";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.defaultTitle || depth0.defaultTitle),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "defaultTitle", depth0.condition, options)))
+    + "</span>\n    ";
+  return buffer;
   }
 
 function program5(depth0,data) {
@@ -196,20 +232,14 @@ function program7(depth0,data) {
   buffer += "<span class='gt-item-edit gt-icon ";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.actionIcon || depth0.actionIcon),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo), options) : helperMissing.call(depth0, "actionIcon", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo), options)))
-    + " gt-icon-polygon'></span>\n<h5>\n  ";
-  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n  <a class='gt-item-details ";
-  stack2 = helpers.unless.call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "' href='#";
+    + " gt-icon-polygon'></span>\n<h5>\n  <a class='gt-item-edit' href='#";
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)
-    + "/edit'>\n    <span>";
-  options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.defaultTitle || depth0.defaultTitle),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "defaultTitle", depth0.condition, options)))
-    + "</span>\n  </a>\n</h5>\n<div class='gt-item-toolbar'>\n  <a class='gt-edit-icon' href='#";
+    + "/edit'>\n    ";
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n  </a>\n</h5>\n<div class='gt-item-toolbar'>\n  <a class='gt-edit-icon' href='#";
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
   buffer += escapeExpression(stack2)

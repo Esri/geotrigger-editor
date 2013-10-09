@@ -84,15 +84,9 @@
     width: 60%;
   }
 
-  .gt-add-notification-action {
-    text-align: right;
-    padding: 0.5em 0;
-  }
-
-  .gt-add-trigger-event {
+  .gt-add-action,
+  .gt-add-notification {
+    display: block;
     float: right;
-    .gt-button {
-      margin-top: 0;
-    }
   }
 }

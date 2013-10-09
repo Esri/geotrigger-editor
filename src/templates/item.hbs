@@ -1,12 +1,11 @@
 <span class='gt-item-edit gt-icon {{actionIcon condition.direction condition.geo}} gt-icon-polygon'></span>
 <h5>
-  {{#if properties.title}}
   <a class='gt-item-edit' href='#{{triggerId}}/edit'>
-    <span>{{properties.title}}</span>
-  </a>
-  {{/if}}
-  <a class='gt-item-details {{#unless properties.title}}gt-item-details-visible{{/unless}}' href='#{{triggerId}}/edit'>
-    <span>{{defaultTitle condition}}</span>
+    {{#if properties.title}}
+      <span>{{properties.title}}</span>
+    {{else}}
+      <span>{{defaultTitle condition}}</span>
+    {{/if}}
   </a>
 </h5>
 <div class='gt-item-toolbar'>
