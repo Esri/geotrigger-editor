@@ -3,6 +3,40 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
   // Trigger Model
   // -------------
 
+  // private functions
+
+  function processError(error) {
+    // default message
+    var msg = "Error creating trigger";
+
+    // regexable error string
+    var str = JSON.stringify(error);
+
+    // out of range (polygons constructed over the dateline)
+    if (null !== str.match("Coordinate values are out of range")) {
+      msg = "Coordinate values are out of range";
+    }
+
+    // not found (trying to update a deleted trigger)
+    if (null !== str.match("no triggers found")) {
+      msg = "Deleted triggers can't be updated";
+    }
+
+    // intersects (polygons that intersect themselves)
+    if (null !== str.match("Error performing intersection")) {
+      msg = "Polygons can't intersect themselves";
+    }
+
+    // no message (invalid message property)
+    if (null !== str.match("message:Not a valid parameter for this request")) {
+      msg = "Notifications must have a valid message";
+    }
+
+    return msg;
+  }
+
+  // the model itself
+
   Models.Trigger = Backbone.Model.extend({
 
     idAttribute: 'triggerId',
@@ -16,32 +50,9 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
 
       var callback = _.bind(function(error, response) {
         if (error) {
-          var message = "Error creating trigger";
-
-          // polygons constructed over the dateline
-          var outOfRange = JSON.stringify(error).match('Coordinate values are out of range');
-          if (outOfRange) {
-            message = "Coordinate values are out of range";
-          }
-          // update deleted trigger
-          var deleted = JSON.stringify(error).match('no triggers found');
-          if (deleted) {
-            message = "Deleted triggers can't be updated";
-          }
-          // polygons that intersect themselves
-          var intersects = JSON.stringify(error).match('Error performing intersection');
-          if (intersects) {
-            message = "Polygons can't intersect themselves";
-          }
-          // invalid message property
-          var noMessage = JSON.stringify(error).match('message:Not a valid parameter for this request');
-          if (noMessage) {
-            message = "Notifications must have a valid message";
-          }
-
           App.vent.trigger('notify', {
             type: 'error',
-            message: message
+            message: processError(error)
           });
 
           if (options && options.error) {
@@ -54,6 +65,7 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
               timeout: 3500
             });
           }
+
           if (options && options.success) {
             options.success(response);
           }
@@ -64,28 +76,42 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
         case 'read':
           App.API.session.request('trigger/list', { 'triggerIds': [ triggerId ] }, callback);
           break;
+
         case 'create':
           params = {
-            'properties': this.get('properties'),
-            'condition': this.get('condition'),
-            'action': this.get('action'),
-            'setTags': this.get('tags')
+            'properties' : this.get('properties'),
+            'condition'  : this.get('condition'),
+            'action'     : this.get('action'),
+            'setTags'    : this.get('tags')
           };
           App.API.session.request('trigger/create', params, callback);
           break;
+
         case 'update':
           params = {
-            'properties': this.get('properties'),
-            'triggerIds': triggerId,
-            'condition': this.get('condition'),
-            'action': this.get('action'),
-            'setTags': this.get('tags')
+            'properties' : this.get('properties'),
+            'triggerIds' : triggerId,
+            'condition'  : this.get('condition'),
+            'action'     : this.get('action'),
+            'setTags'    : this.get('tags')
           };
           App.API.session.request('trigger/update', params, callback);
           break;
+
         case 'delete':
           App.API.session.request('trigger/delete', { 'triggerIds': triggerId }, callback);
           break;
+
+        default:
+          throw new Error('Unsupported method: ' + method);
+      }
+    },
+
+    parse: function(response) {
+      if (response.triggers) {
+        return response.triggers;
+      } else {
+        return response;
       }
     }
 
