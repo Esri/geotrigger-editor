@@ -12,8 +12,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     events: {
       // edit events
       'change .gt-geometry-type'      : 'startDrawing',
-      'change .gt-action-selector'    : 'toggleActions',
-      'change .gt-add-action'         : 'addAction',
 
       // submit events
       'click .gt-submit'              : 'parseForm',
@@ -39,35 +37,52 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     notifications: ['text','url','sound','data','icon'],
 
     onShow: function() {
+      this.buildForm();
+
+      this.listenTo(App.vent, 'draw:new', this.parseShape);
+    },
+
+    buildForm: function() {
       var actionsHtml = '';
-      var i;
 
       // if new
       if (!this.model) {
         // get shape from map
         this.parseShape();
-        // add default action (notification.text) to form
+
+        // add default action (notification.text)
         actionsHtml = App.Templates['form/actions/notification'](this.serializeData());
       }
 
       // if edit
       else {
-        var actions = this.model.get('action');
-        console.log(actions);
+        var allActions = this.actions;
+        var currentActions = this.model.get('action');
+
         // populate form
-        for (i=0; i<this.actions.length; i++) {
-          if (actions.hasOwnProperty(this.actions[i])) {
-            var tpl = App.Templates['form/actions/' + this.actions[i]];
+        for (var i = 0; i < allActions.length; i++) {
+
+          // if current trigger has action i
+          if (currentActions.hasOwnProperty(allActions[i])) {
+
+            // get template and data
+            var tpl = App.Templates['form/actions/' + allActions[i]];
             var data = this.serializeData();
+
+            // build html chunk and add to actions html pile
             actionsHtml += tpl(data);
           }
         }
       }
 
       this.$el.find('.gt-actions').html(actionsHtml);
-
-      this.listenTo(App.vent, 'draw:new', this.parseShape);
     },
+
+    addAction: function() {},
+    removeAction: function() {},
+
+    addNotification: function() {},
+    removeNotification: function() {},
 
     startDrawing: function (e) {
       var tool = $(e.target).val();
@@ -78,17 +93,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // } else {
       //   this.ui.form.find('[name="radius"]').hide();
       // }
-    },
-
-    toggleActions: function(e) {
-      var action = $(e.target).val();
-      this.ui.actions.hide();
-      this.$el.find('.gt-action-' + action).show();
-    },
-
-    addAction: function(e) {
-      e.preventDefault();
-      console.log('add action');
     },
 
     parseShape: function() {
