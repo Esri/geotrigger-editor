@@ -39,7 +39,6 @@ module.exports = function(grunt) {
           ],
           'dist/js/<%= pkg.name %>.min.js': [
             'src/js/app.js',
-            'src/templates/*.js',
             'src/js/lib/*.js',
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
@@ -138,7 +137,6 @@ module.exports = function(grunt) {
           ],
           'dev/js/<%= pkg.name %>.js': [
             'src/js/app.js',
-            'src/templates/*.js',
             'src/js/lib/*.js',
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
@@ -164,7 +162,6 @@ module.exports = function(grunt) {
           ],
           'dist/js/<%= pkg.name %>.js': [
             'src/js/app.js',
-            'src/templates/*.js',
             'src/js/lib/*.js',
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
@@ -249,7 +246,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'src/templates/compiled.js': 'src/templates/**/*.hbs'
+          'src/js/lib/templates.js': 'src/templates/**/*.hbs'
         }
       }
     },

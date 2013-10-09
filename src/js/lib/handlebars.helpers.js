@@ -58,15 +58,16 @@
   });
 
   Handlebars.registerHelper('defaultTitle', function(trigger) {
-    var title = '' + trigger.direction;
-    if (trigger.geo.distance){
-      title += ' ' + trigger.geo.distance + ' meter radius';
-    } else if (trigger.geo.geojson) {
-      var sides = trigger.geo.geojson.coordinates[0].length - 1;
-      title += ' ' + sides + ' sided polygon';
-    }
-    title = title.charAt(0).toUpperCase() + title.slice(1);
-    return title;
+    console.log(trigger);
+    // var title = '' + trigger.direction;
+    // if (trigger.geo.distance){
+    //   title += ' ' + trigger.geo.distance + ' meter radius';
+    // } else if (trigger.geo.geojson) {
+    //   var sides = trigger.geo.geojson.coordinates[0].length - 1;
+    //   title += ' ' + sides + ' sided polygon';
+    // }
+    // title = title.charAt(0).toUpperCase() + title.slice(1);
+    return 'default Title (todo)';
   });
 
   Handlebars.registerHelper('unlessDefaultTag', function(conditional, options) {
@@ -109,6 +110,9 @@
     }
   });
 
-  Handlebars.registerPartial('notification', App.Templates['form/notification']);
+  Handlebars.registerHelper('form-notification', function(key, content){
+    console.log(key, content);
+    return 'sup';
+  });
 
 }(GeotriggerEditor, Handlebars, $));
