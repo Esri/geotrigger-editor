@@ -15,7 +15,9 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       // form events
       'click .gt-add-action'          : 'addAction',
+      'click .gt-remove-action'       : 'removeAction',
       'click .gt-add-notification'    : 'addNotification',
+      'click .gt-remove-notification' : 'removeNotification',
 
       // submit events
       'click .gt-submit'              : 'parseForm',
@@ -78,6 +80,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       actionsHtml = App.Templates['form/actions/notification/index'](data);
       noteHtml = App.Templates['form/actions/notification/text'](data);
 
+      this.actions = _.without(this.actions, 'notification');
       this.notifications = _.without(this.notifications, 'text');
 
       this.ui.actions.html(actionsHtml);
@@ -152,7 +155,30 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    removeAction: function() {},
+    removeAction: function(e) {
+      if (e && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      var $el = $(e.target).parent();
+      var type = $el.data('action-type');
+
+      $el.remove();
+
+      this.actions.push(type);
+
+      if (type === 'notification') {
+        this.notifications = [
+          'text',
+          'url',
+          'sound',
+          'data',
+          'icon'
+        ];
+      }
+
+      this.ui.addAction.show();
+    },
 
     addNotification: function(e) {
       if (e && e.preventDefault) {
@@ -166,7 +192,21 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    removeNotification: function() {},
+    removeNotification: function(e) {
+      if (e && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      var $el = $(e.target).parent();
+      var type = $el.data('notification-type');
+
+      console.log($el);
+
+      $el.remove();
+
+      this.notifications.push(type);
+      this.ui.actions.find('.gt-add-notification').show();
+    },
 
     startDrawing: function (e) {
       var tool = $(e.target).val();
