@@ -117,34 +117,6 @@
     position: absolute;
     top: 0;
     right: 0;
-
-    .gt-edit-icon {
-      background: url('../img/icons/settings.png') no-repeat center center transparent;
-      background-size: 16px;
-      display:inline-block;
-      height: 16px;
-      opacity: .8;
-      width: 16px;
-      @include retina-display {
-        background: url('../img/icons/settings@2x.png') no-repeat center center transparent;
-        background-size: 16px;
-      }
-      @include transition(opacity 100ms linear);
-      &:hover {
-        opacity: 1;
-      }
-    }
-
-    .gt-delete-icon {
-      @extend .gt-edit-icon;
-      background: url('../img/icons/trash.png') no-repeat center center transparent;
-      background-size: 16px;
-      margin-left: 6px;
-      @include retina-display {
-        background: url('../img/icons/trash@2x.png') no-repeat center center transparent;
-        background-size: 16px;
-      }
-    }
   }
 
   h5 {

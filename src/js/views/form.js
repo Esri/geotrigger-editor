@@ -14,8 +14,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'change .gt-geometry-type'      : 'startDrawing',
 
       // form events
+      'click .gt-add-title'           : 'addTitle',
+      'click .gt-remove-title'        : 'removeTitle',
+
       'click .gt-add-action'          : 'addAction',
       'click .gt-remove-action'       : 'removeAction',
+
       'click .gt-add-notification'    : 'addNotification',
       'click .gt-remove-notification' : 'removeNotification',
 
@@ -94,6 +98,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var actionsHtml = '';
       var noteHtml = '';
 
+      // build actions:
+
       // notification
       if (currentActions.hasOwnProperty('notification')) {
         actionsHtml += App.Templates['form/actions/notification/index'](data);
@@ -107,7 +113,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         }
       }
 
-      // callback
+      // callback URL
       if (currentActions.hasOwnProperty('callbackUrl')) {
         actionsHtml += App.Templates['form/actions/callbackUrl'](data);
         this.actions = _.without(this.actions, 'callbackUrl');
@@ -126,13 +132,31 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
 
       if (noteHtml !== '') {
-        console.log('hey');
         this.ui.actions.find('.gt-notification-actions').html(noteHtml);
       }
 
       if (this.notifications.length === 0) {
         this.ui.actions.find('.gt-add-notification').hide();
       }
+    },
+
+    addTitle: function(e) {
+      if (e && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      $(e.target).addClass('gt-hide');
+      this.$el.find('.gt-title').removeClass('gt-hide');
+    },
+
+    removeTitle: function(e) {
+      if (e && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      $(e.target).closest('.gt-property').addClass('gt-hide');
+      $('input[name="properties[title]"]').val('');
+      this.$el.find('.gt-add-title').removeClass('gt-hide');
     },
 
     addAction: function(e) {
@@ -160,7 +184,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         e.preventDefault();
       }
 
-      var $el = $(e.target).parent();
+      var $el = $(e.target).closest('.gt-property');
       var type = $el.data('action-type');
 
       $el.remove();
@@ -197,7 +221,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         e.preventDefault();
       }
 
-      var $el = $(e.target).parent();
+      var $el = $(e.target).closest('.gt-notification-action');
       var type = $el.data('notification-type');
 
       console.log($el);
@@ -247,12 +271,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var data = this.ui.form.serializeObject();
       data = App.util.removeEmptyStrings(data);
 
-      if (data.action &&
-          data.action.trackingProfile &&
-          data.action.trackingProfile === '---') {
-        delete data.action.trackingProfile;
-      }
-
       if (data.tags) {
         var tags = data.tags;
         tags = tags.split(',');
@@ -260,9 +278,32 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
           tags[i] = tags[i].trim();
         }
         data.tags = tags;
+      } else {
+        // at least one tag required
       }
 
-      if (data) { // @TODO: validate
+      if (data.condition && data.condition.geo) {
+
+      } else {
+        // condition and condition.geo required
+      }
+
+      if (data.action) {
+        // tracking profile
+        if (!data.action.trackingProfile ||
+            data.action.trackingProfile === '---') {
+          data.action.trackingProfile = null;
+        }
+
+        // callback URL
+        if (!data.action.callbackUrl) {
+          data.action.callbackUrl = null;
+        }
+      } else {
+        // at least one action required
+      }
+
+      if (data && data.tags && data.condition && data.action) {
         this.createOrUpdateTrigger(data);
       }
     },

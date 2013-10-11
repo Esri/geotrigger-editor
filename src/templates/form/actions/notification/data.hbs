@@ -1,13 +1,13 @@
-<div data-notification-type='data' class='gt-notification-action'>
-  <div class='gt-notification-left'>
-    <label for='gt-notification-action'>
-      <span class='gt-label-left'>some data:</span>
-    </label>
-  </div>
+<div data-notification-type='data' class='gt-property-item gt-notification-action'>
+  <label class="gt-notification-left" for='action[notification][data]'>
+    <span class='gt-label-left'>data:</span>
+  </label>
 
-  <div class='gt-notification-right'>
+  <div class="gt-notification-center">
     <textarea class='gt-input' name='action[notification][data]' placeholder='{ "your": "data" }'>{{action.notification.data}}</textarea>
   </div>
 
-  <a class="gt-remove-notification">x</a>
+  <div class='gt-notification-right'>
+    <a class="gt-remove-notification gt-delete-icon"></a>
+  </div>
 </div>
