@@ -2,6 +2,7 @@
 .gt-form {
   .gt-form-section {
     @include clearfix;
+    margin-bottom: 1em;
   }
 
   input, select, textarea {
@@ -18,34 +19,40 @@
   }
 
   select {
-    width: auto;
+    margin: 0;
     padding: 0.25em 0;
+    width: auto;
 
     &.gt-direction {
-      margin-right: 1.5%;
-      // width: 38%;
+      display: block;
+      float: left;
+      width: 40%;
     }
 
     &.gt-geometry-type {
+      display: block;
+      float: left;
       width: 55%;
-      float: right;
     }
-  }
 
-  label {
-    @include clearfix;
-    margin: 0 0 1.5em;
+    &.gt-select-full {
+      width: 100%;
+    }
   }
 
   textarea {
     margin: 0;
   }
 
-  .gt-nick-wrapper {
-    border: 1px solid $lighter-gray;
-    border-width: 1px 0;
-    margin: .5em 0 .5em;
-    padding: 1.5em 0 .5em;
+  .gt-title-wrapper {
+    border-top: 1px solid #efefef;
+    margin: 1em 0 1em;
+    padding: 1em 0 0;
+  }
+
+  .gt-submit-wrapper {
+    border-top: 1px solid $lighter-gray;
+    padding: 1em 0;
   }
 
   .gt-radius {
@@ -56,17 +63,46 @@
     float: right;
   }
 
-  .gt-trigger-action {
-    margin: auto;
-    margin-bottom: 1em;
-    padding-top: 1em;
+  .gt-property {
     @include clearfix;
+    margin-bottom: 1em;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
     // gray background event clusters
     // edit here if you want to change dem styles
-    padding: 1em 6px 0 6px;
-    width: 95%;
-    border: 6px solid $lighter-gray;
-    background-color: $lighter-gray;
+    // padding: 1em 6px 0 6px;
+    // width: 95%;
+    // border: 6px solid $lighter-gray;
+    // background-color: $lighter-gray;
+
+    .gt-property-item {
+      @include clearfix;
+      background-color: $lighter-gray;
+      margin: 0 0 1px;
+      padding: .5em;
+      width: auto;
+
+      .gt-conjunction {
+        display: block;
+        float: left;
+        padding-top: .6em;
+        text-align: center;
+        width: 10%;
+      }
+    }
+
+    .gt-property-header {
+      @extend .gt-property-item;
+      @include border-radius(3px 3px 0 0);
+      background-color: $lighter-gray;
+      .gt-remove-action,
+      .gt-remove-title {
+        cursor: pointer;
+        float: right;
+      }
+    }
   }
 
   .gt-notification-action {
@@ -75,18 +111,44 @@
   }
 
   .gt-notification-left {
+    display: block;
     float: left;
-    width: 40%;
+    width: 30%;
+    .gt-label-left {
+      display: inline-block;
+    }
+  }
+
+  .gt-notification-center {
+    float: left;
+    width: 63%;
   }
 
   .gt-notification-right {
-    float: right;
-    width: 60%;
+    float: left;
+    width: 7%;
+    .gt-remove-notification {
+      cursor: pointer;
+      float: right;
+    }
   }
 
   .gt-add-action,
-  .gt-add-notification {
+  .gt-add-title {
     display: block;
-    float: right;
+    float: left;
+    margin-right: 1em;
+  }
+
+  .gt-add-notification {
+    background: #eee;
+    border: none;
+    @include border-radius(0 0 3px 3px);
+    color: #999;
+    display: inline-block;
+    float: left;
+    font-size: 1em;
+    font-weight: 900;
+    padding: 0.2em 0.7em 0.3em;
   }
 }

@@ -48,6 +48,14 @@
       background-color: darken($gray, 10%);
     }
   }
+  &.gt-button-light-gray {
+    background-color: $light-gray;
+    border: 1px solid darken($light-gray, 10%);
+    color: $gray;
+    &:hover {
+      background-color: darken($light-gray, 10%);
+    }
+  }
 }
 
 .gt-button-delete {
