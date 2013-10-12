@@ -12,11 +12,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       App.map = this.map = L.map(options.el).setView(App.config.map.center, App.config.map.zoom);
       this.map.zoomControl.setPosition('topright');
 
-      // L.esri.basemapLayer(App.config.map.basemap).addTo(App.map);
-      L.tileLayer('http://mapattack-tiles-{s}.pdx.esri.com/dark/{z}/{y}/{x}', {
-        maxZoom: 18,
-        subdomains: '0123'
-      }).addTo(App.map);
+      L.esri.basemapLayer(App.config.map.basemap).addTo(App.map);
 
       this.Layers.start();
       this._eventBindings();
