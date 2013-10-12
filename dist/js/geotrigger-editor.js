@@ -183,7 +183,7 @@ function program11(depth0,data) {
 function program13(depth0,data) {
   
   
-  return "\n      <button class='gt-button gt-button-blue gt-submit' disabled>Save</button>\n      ";
+  return "\n      <button class='gt-button gt-button-blue gt-submit'>Save</button>\n      ";
   }
 
   buffer += "<div class='gt-panel-top-bar'>\n  <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>\n  <h3>";
