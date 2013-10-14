@@ -34,7 +34,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     start: function() {
       this.setup();
 
-      App.vent.trigger('notify', 'Triggers loading');
+      App.vent.trigger('notify', 'Loading Geotriggers');
 
       App.collections.triggers.fetch({
         reset: true,
