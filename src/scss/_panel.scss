@@ -29,17 +29,13 @@
       padding-left: 32px;
     }
     .gt-trigger-count {
-      @include border-radius(3px);
-      background: $lighter-gray;
-      display: inline-block;
-      font-size: .6em;
-      font-weight: normal;
-      padding: .2em .3em;
-      vertical-align: middle;
+      font-size: .7em;
+      font-weight: 200;
     }
   }
   .gt-tool-create {
     float: left;
+    font-size: 1em;
     position: absolute;
     right: 72px;
     margin-top: 8px;
