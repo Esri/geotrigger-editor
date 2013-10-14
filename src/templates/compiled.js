@@ -273,10 +273,15 @@ function program7(depth0,data) {
 this["GeotriggerEditor"]["Templates"]["list"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  return "<div class='gt-list-header gt-hide'>\n  <div class='gt-panel-top-bar'>\n    <a href='#new' class='gt-button gt-button-blue gt-tool-create'>Create</a>\n    <h3 class='gt-panel-top-bar-left'>List</h3>\n    <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n  </div>\n  </div>\n  <div class='gt-search'>\n    <input type='search' placeholder='Search'><a href=\"#list\" class=\"gt-icon-clear\"></a>\n  </div>\n<ul class='gt-results'></ul>";
+  buffer += "<div class='gt-list-header gt-hide'>\n  <div class='gt-panel-top-bar'>\n    <a href='#new' class='gt-button gt-button-blue gt-tool-create'>Create</a>\n    <h3 class='gt-panel-top-bar-left'>List <span class=\"gt-trigger-count\">";
+  if (stack1 = helpers.count) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.count; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "</span></h3>\n    <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n  </div>\n  </div>\n  <div class='gt-search'>\n    <input type='search' placeholder='Search'><a href=\"#list\" class=\"gt-icon-clear\"></a>\n  </div>\n<ul class='gt-results'></ul>";
+  return buffer;
   });
 
 this["GeotriggerEditor"]["Templates"]["main"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
