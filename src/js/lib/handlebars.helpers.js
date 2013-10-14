@@ -109,9 +109,4 @@
     }
   });
 
-  Handlebars.registerHelper('form-notification', function(key, content){
-    console.log(key, content);
-    return 'sup';
-  });
-
 }(GeotriggerEditor, Handlebars, $));
