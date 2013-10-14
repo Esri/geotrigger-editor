@@ -28,6 +28,15 @@
     &.gt-panel-top-bar-left {
       padding-left: 32px;
     }
+    .gt-trigger-count {
+      @include border-radius(3px);
+      background: $lighter-gray;
+      display: inline-block;
+      font-size: .6em;
+      font-weight: normal;
+      padding: .2em .3em;
+      vertical-align: middle;
+    }
   }
   .gt-tool-create {
     float: left;

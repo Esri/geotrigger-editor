@@ -122,7 +122,8 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     list: function(term) {
       if (!App.regions.drawer.$el || !App.regions.drawer.$el.has('.gt-list').length) {
         App.vent.trigger('trigger:list');
-        var view = new App.Views.List({ collection: App.collections.triggers });
+        var model = new Backbone.Model({ count: App.collections.triggers.length });
+        var view = new App.Views.List({ model: model, collection: App.collections.triggers });
         App.regions.drawer.show(view);
       } else if (!term) {
         App.vent.trigger('trigger:list:reset');
