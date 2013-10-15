@@ -105,14 +105,19 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     onShow: function() {
-      this.headerCheck();
-      this.listenTo(this.collection, 'change reset add remove', this.headerCheck);
+      this.refresh();
+      this.listenTo(this.collection, 'change reset add remove', this.refresh);
       this.listenTo(App.vent, 'trigger:list:search', this.search);
       this.listenTo(App.vent, 'trigger:list:reset', this.clearFilter);
     },
 
-    headerCheck: function() {
-      if (!this.collection.length) {
+    refresh: function() {
+      var count = this.collection.length;
+      this.model.set('count', count);
+
+      this.render();
+
+      if (!count) {
         this.ui.header.addClass('gt-hide');
       } else {
         this.ui.header.removeClass('gt-hide');

@@ -1,7 +1,7 @@
 /* - - - - - - - - - - Panel - - - - - - - - - - */
 .gt-panel {
   background-color: $lightest-gray;
-  background-color: rgba(251, 251, 251, .95);
+  // background-color: rgba(251, 251, 251, .95);
   width: 100%;
   position: absolute;
   top: 0;
@@ -28,9 +28,14 @@
     &.gt-panel-top-bar-left {
       padding-left: 32px;
     }
+    .gt-trigger-count {
+      font-size: .7em;
+      font-weight: 200;
+    }
   }
   .gt-tool-create {
     float: left;
+    font-size: 1em;
     position: absolute;
     right: 72px;
     margin-top: 8px;
