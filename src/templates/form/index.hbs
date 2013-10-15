@@ -8,10 +8,8 @@
   <form class='gt-form gt-form-edit'>
 
     <section class='gt-form-section gt-conditions'>
-      <div data-action-type="notification" class="gt-property">
-        <div class="gt-property-header">
-          When a device tagged..
-        </div>
+      <div class="gt-property">
+        <div class="gt-property-header">When a device tagged..</div>
 
         <div class="gt-property-item">
           <textarea class='gt-input' name='tags' placeholder='enter tags'>{{tagList tags}}</textarea>
@@ -39,8 +37,10 @@
 
     <section class="gt-form-section gt-actions"></section>
 
-    <section class="gt-form-section">
-      <button class="gt-button gt-button-light-gray gt-button-small gt-add-action">&#043; add an action</button>
+    <section class="gt-form-section gt-action-toggles">
+      <button data-action="notification" class="gt-button gt-button-light-gray gt-button-small gt-add-action">&#043; send a notification</button>
+      <button data-action="callbackUrl" class="gt-button gt-button-light-gray gt-button-small gt-add-action">&#043; post to a callback URL</button>
+      <button data-action="trackingProfile" class="gt-button gt-button-light-gray gt-button-small gt-add-action">&#043; change the tracking profile</button>
     </section>
 
     <section class="gt-form-section gt-title-wrapper">
