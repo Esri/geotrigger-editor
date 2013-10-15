@@ -1,4 +1,4 @@
-(function(Handlebars, $) {
+(function(App, Handlebars, $) {
 
   Handlebars.registerHelper('select', function(value, options) {
     // Create a select element
@@ -61,7 +61,7 @@
     var title = '' + trigger.direction;
     if (trigger.geo.distance){
       title += ' ' + trigger.geo.distance + ' meter radius';
-    } else if (trigger.geo.geojson) {
+    } else if (trigger.geo.geojson && trigger.geo.geojson.coordinates) {
       var sides = trigger.geo.geojson.coordinates[0].length - 1;
       title += ' ' + sides + ' sided polygon';
     }
@@ -109,4 +109,4 @@
     }
   });
 
-}(Handlebars, $));
+}(GeotriggerEditor, Handlebars, $));

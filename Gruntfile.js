@@ -38,9 +38,9 @@ module.exports = function(grunt) {
             'vendor/esri-leaflet.js'
           ],
           'dist/js/<%= pkg.name %>.min.js': [
-            'src/js/lib/*.js',
             'src/js/app.js',
-            'src/templates/*.js',
+            'src/templates/compiled.js',
+            'src/js/lib/*.js',
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
             'src/js/models/*.js',
@@ -114,7 +114,7 @@ module.exports = function(grunt) {
         'src/js/models/*.js',
         'src/js/modules/*.js',
         'src/js/views/*.js',
-        'src/js/*.js'
+        'src/js/app.js'
       ]
     },
 
@@ -137,9 +137,9 @@ module.exports = function(grunt) {
             'vendor/esri-leaflet.js'
           ],
           'dev/js/<%= pkg.name %>.js': [
-            'src/js/lib/*.js',
             'src/js/app.js',
-            'src/templates/*.js',
+            'src/templates/compiled.js',
+            'src/js/lib/*.js',
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
             'src/js/models/*.js',
@@ -163,9 +163,9 @@ module.exports = function(grunt) {
             'vendor/esri-leaflet.js'
           ],
           'dist/js/<%= pkg.name %>.js': [
-            'src/js/lib/*.js',
             'src/js/app.js',
-            'src/templates/*.js',
+            'src/templates/compiled.js',
+            'src/js/lib/*.js',
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
             'src/js/models/*.js',
@@ -243,12 +243,13 @@ module.exports = function(grunt) {
         options: {
           namespace: 'GeotriggerEditor.Templates',
           processName: function(filePath) {
+            console.log(filePath);
             var process = filePath.split('src/templates/')[1];
             return process.split('.hbs')[0];
           }
         },
         files: {
-          'src/templates/compiled.js': 'src/templates/*.hbs'
+          'src/templates/compiled.js': 'src/templates/**/*.hbs'
         }
       }
     },

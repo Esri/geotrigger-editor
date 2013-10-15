@@ -1,0 +1,77 @@
+<div class='gt-panel-top-bar'>
+  <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>
+  <h3>{{#if triggerId}}Edit{{else}}Create{{/if}}</h3>
+  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>
+</div>
+
+<div class='gt-panel-content'>
+  <form class='gt-form gt-form-edit'>
+
+    <section class='gt-form-section gt-conditions'>
+      <div class="gt-property">
+        <div class="gt-property-header">When a device tagged..</div>
+
+        <div class="gt-property-item">
+          <textarea class='gt-input' name='tags' placeholder='enter tags'>{{tagList tags}}</textarea>
+        </div>
+
+        <div class="gt-property-item">
+            <select name='condition[direction]' class='gt-direction'>
+              {{#select condition.direction}}
+              <option value='enter'>enters</option>
+              <option value='leave'>leaves</option>
+              {{/select}}
+            </select>
+
+            <span class="gt-conjunction">a</span>
+
+            <select name='geometry-type' class='gt-input-right'>
+              {{#selectShape condition}}
+              <option value='polygon'>polygon</option>
+              <option value='radius'>circle</option>
+              {{/selectShape}}
+            </select>
+        </div>
+      </div>
+    </section>
+
+    <section class="gt-form-section gt-actions"></section>
+
+    <section class="gt-form-section gt-action-toggles">
+      <button data-action="notification" class="gt-button gt-button-light-gray gt-button-small gt-add-action">&#043; send a notification</button>
+      <button data-action="callbackUrl" class="gt-button gt-button-light-gray gt-button-small gt-add-action">&#043; post to a callback URL</button>
+      <button data-action="trackingProfile" class="gt-button gt-button-light-gray gt-button-small gt-add-action">&#043; change the tracking profile</button>
+    </section>
+
+    <section class="gt-form-section gt-title-wrapper">
+      <button class="gt-button gt-button-light-gray gt-button-small gt-add-title{{#if properties.title}} gt-hide{{/if}}">&#043; add a title</button>
+
+      <div class='gt-title gt-property{{#unless properties.title}} gt-hide{{/unless}}'>
+        <div class="gt-property-header">
+          Title
+          <a class="gt-remove-title gt-delete-icon"></a>
+        </div>
+
+        <div class="gt-property-item">
+          <input class='gt-input-fill' type='text' name='properties[title]' placeholder='Geotrigger Title' value='{{properties.title}}'>
+        </div>
+      </div>
+    </section>
+
+    <section class='gt-form-section gt-submit-wrapper'>
+      {{#if triggerId}}
+      <button class='gt-button gt-button-blue gt-submit'>Update</button>
+      <ul class='gt-edit-controls'>
+        <li>
+          <a class='gt-reset-delete' href='#'>&#x2716;</a>
+        </li>
+        <li>
+          <button class='gt-item-delete gt-button-delete'></button>
+        </li>
+      </ul>
+      {{else}}
+      <button class='gt-button gt-button-blue gt-submit'>Save</button>
+      {{/if}}
+    </section>
+  </form>
+</div>

@@ -1,0 +1,17 @@
+<div data-action="trackingProfile" class="gt-property">
+  <div class="gt-property-header">
+    change the device's tracking profile
+    <a class="gt-remove-action gt-delete-icon"></a>
+  </div>
+
+  <div class="gt-property-item">
+    <select class="gt-select-full" name="action[trackingProfile]">
+      {{#select action.trackingProfile}}
+      <option value="fine">[3] fine</option>
+      <option value="adaptive">[2] adaptive</option>
+      <option value="rough">[1] rough</option>
+      <option value="off">[0] off</option>
+      {{/select}}
+    </select>
+  </div>
+</div>
