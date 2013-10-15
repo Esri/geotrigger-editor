@@ -41,22 +41,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'reset'           : '.gt-reset-delete'
     },
 
-    // supported actions
-    actions: [
-      'callbackUrl',
-      'notification',
-      'trackingProfile'
-    ],
-
-    // supported notifications
-    notifications: [
-      'text',
-      'url',
-      'sound',
-      'data',
-      'icon'
-    ],
-
     onShow: function() {
       this.buildForm();
 
@@ -84,8 +68,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       actionsHtml = App.Templates['form/actions/notification/index'](data);
       noteHtml = App.Templates['form/actions/notification/text'](data);
 
-      this.actions = _.without(this.actions, 'notification');
-      this.notifications = _.without(this.notifications, 'text');
+      var $action = $('.gt-add-action[data-action="notification"]');
+      $action.hide();
+
+      var $notification = $('.gt-add-notification[data-notification="text"]');
+      $notification.hide();
 
       this.ui.actions.html(actionsHtml);
       this.ui.actions.find('.gt-notification-actions').html(noteHtml);
@@ -98,17 +85,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var actionsHtml = '';
       var noteHtml = '';
 
+      var prop;
+
       // build actions:
 
       // notification
       if (currentActions.hasOwnProperty('notification')) {
         actionsHtml += App.Templates['form/actions/notification/index'](data);
-        this.actions = _.without(this.actions, 'notification');
+        this.$el.find('.gt-add-action[data-action="notification"').hide();
 
-        for (var prop in currentActions.notification) {
+        for (prop in currentActions.notification) {
           if (currentActions.notification.hasOwnProperty(prop)) {
             noteHtml += App.Templates['form/actions/notification/' + prop](data);
-            this.notifications = _.without(this.notifications, prop);
           }
         }
       }
@@ -116,27 +104,26 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // callback URL
       if (currentActions.hasOwnProperty('callbackUrl')) {
         actionsHtml += App.Templates['form/actions/callbackUrl'](data);
-        this.actions = _.without(this.actions, 'callbackUrl');
+        this.$el.find('.gt-add-action[data-action="callbackUrl"').hide();
       }
 
       // tracking profile
       if (currentActions.hasOwnProperty('trackingProfile')) {
         actionsHtml += App.Templates['form/actions/trackingProfile'](data);
-        this.actions = _.without(this.actions, 'trackingProfile');
+        this.$el.find('.gt-add-action[data-action="trackingProfile"').hide();
       }
 
       this.ui.actions.html(actionsHtml);
 
-      if (this.actions.length === 0) {
-        this.ui.addAction.hide();
-      }
-
       if (noteHtml !== '') {
         this.ui.actions.find('.gt-notification-actions').html(noteHtml);
-      }
-
-      if (this.notifications.length === 0) {
-        this.ui.actions.find('.gt-add-notification').hide();
+        // panic
+        for (prop in currentActions.notification) {
+          if (currentActions.notification.hasOwnProperty(prop)) {
+            var $notification = this.$el.find('.gt-add-notification[data-notification="' + prop + '"]');
+            $notification.hide();
+          }
+        }
       }
     },
 
@@ -160,48 +147,45 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     addAction: function(e) {
-      if (e && e.preventDefault) {
-        e.preventDefault();
-      }
+      var $el, action;
 
-      var action = this.actions.pop();
+      if (typeof e === 'object' && e.preventDefault) {
+        e.preventDefault();
+        $el = $(e.target);
+        action = $el.data('action');
+      } else if (typeof e === 'string') {
+        action = e;
+        $el = this.$el.find(".gt-add-action[data-action='" + action + "']");
+      }
 
       if (action === 'notification') {
         this.ui.actions.append(App.Templates['form/actions/notification/index']({}));
         this.ui.actions.find('.gt-notification-actions').html(App.Templates['form/actions/notification/text']({}));
-        this.notifications = _.without(this.notifications, 'text');
+        this.$el.find('.gt-add-notification[data-notification="text"]').hide();
       } else {
         this.ui.actions.append(App.Templates['form/actions/' + action]({}));
       }
 
-      if (this.actions.length === 0) {
-        this.ui.addAction.hide();
-      }
+      $el.hide();
     },
 
     removeAction: function(e) {
-      if (e && e.preventDefault) {
-        e.preventDefault();
-      }
+      var $el, action;
 
-      var $el = $(e.target).closest('.gt-property');
-      var type = $el.data('action-type');
+      if (typeof e === 'object' && e.preventDefault) {
+        e.preventDefault();
+        $el = $(e.target).closest('.gt-property');
+        action = $el.data('action');
+      } else if (typeof e === 'string') {
+        action = e;
+        $el = this.$el.find(".gt-property[data-action='" + action + "']");
+      }
 
       $el.remove();
 
-      this.actions.push(type);
+      var $btn = $('.gt-add-action[data-action="' + action + '"]');
 
-      if (type === 'notification') {
-        this.notifications = [
-          'text',
-          'url',
-          'sound',
-          'data',
-          'icon'
-        ];
-      }
-
-      this.ui.addAction.show();
+      $btn.show();
     },
 
     addNotification: function(e) {
@@ -209,11 +193,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         e.preventDefault();
       }
 
-      this.ui.actions.find('.gt-notification-actions').append(App.Templates['form/actions/notification/' + this.notifications.pop()]({}));
+      var $el = $(e.target);
+      var notification = $el.data('notification');
 
-      if (this.notifications.length === 0) {
-        this.ui.actions.find('.gt-add-notification').hide();
-      }
+      this.ui.actions.find('.gt-notification-actions').append(App.Templates['form/actions/notification/' + notification]({}));
+
+      $el.hide();
     },
 
     removeNotification: function(e) {
@@ -222,14 +207,13 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
 
       var $el = $(e.target).closest('.gt-notification-action');
-      var type = $el.data('notification-type');
-
-      console.log($el);
+      var notification = $el.data('notification');
 
       $el.remove();
 
-      this.notifications.push(type);
-      this.ui.actions.find('.gt-add-notification').show();
+      var $btn = $('.gt-add-notification[data-notification="' + notification + '"]');
+
+      $btn.show();
     },
 
     startDrawing: function (e) {
