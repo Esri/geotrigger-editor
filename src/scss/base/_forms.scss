@@ -40,17 +40,17 @@
     white-space: normal;
   }
 
-  label {
-    margin:0;
-    width:100%;
-    display: block;
-    white-space: nowrap;
-    @include clearfix;
-    margin: 0 0 1.5em;
-    &.no-margin {
-      margin: 0;
-    }
-  }
+  // label {
+  //   margin:0;
+  //   width:100%;
+  //   display: block;
+  //   white-space: nowrap;
+  //   @include clearfix;
+  //   margin: 0 0 1.5em;
+  //   &.no-margin {
+  //     margin: 0;
+  //   }
+  // }
 
   input, select, textarea {
     @include box-sizing(border-box);
@@ -81,15 +81,15 @@
   input[type='month'],
   input[type='time'],
   input[type='week'],
-  textarea{
+  textarea {
     @include box-sizing(border-box);
-    @include transition(all 100ms linear);
+    // @include transition(all 100ms linear);
     @include border-radius(3px);
     font-size: 1em;
     border: 1px solid $light-gray;
     display: inline-block;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    // margin-top: 1em;
+    // margin-bottom: 1em;
     outline: none;
     outline-offset: 0;
     padding: 0.5em 0.25em;

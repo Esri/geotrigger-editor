@@ -1,3 +1,313 @@
+var GeotriggerEditor = new Backbone.Marionette.Application();
+
+GeotriggerEditor.addInitializer(function(options) {
+  var el = options && options.el ? options.el : '#gt-editor';
+  var layout = this.regions = new this.Layouts.Main();
+
+  this.addRegions({ mainRegion: el });
+  this.mainRegion.show(layout);
+});
+
+
+this["GeotriggerEditor"] = this["GeotriggerEditor"] || {};
+this["GeotriggerEditor"]["Templates"] = this["GeotriggerEditor"]["Templates"] || {};
+
+this["GeotriggerEditor"]["Templates"]["controls"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"gt-drawer-controls\">\n  <a href=\"#list\" class=\"gt-tool gt-tool-list active gt-tooltip\"><span>List</span></a>\n  <!-- <a href=\"#new\" class=\"gt-tool gt-tool-create gt-tooltip\"><span>Create</span></a> -->\n</div>\n<div class=\"gt-tool-controls\">\n  <button class=\"gt-tool gt-tool-polygon gt-tooltip\"><span>Polygon</span></button>\n  <button class=\"gt-tool gt-tool-radius gt-tooltip\"><span>Radius</span></button>\n</div>";
+  });
+
+this["GeotriggerEditor"]["Templates"]["empty"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"gt-panel-top-bar\">\n  <a href=\"#\" class=\"gt-panel-top-bar-button gt-new-trigger\"></a>\n  <h3>No Geotriggers</h3>\n  <a href=\"#\" class=\"gt-panel-top-bar-button gt-close-drawer\"></a>\n</div>\n\n<div class=\"gt-panel-no-triggers\">\n  <h5>This application doesn't have any Geotriggers yet.</h5>\n   <a href=\"#new\" class=\"gt-tool gt-tool-create gt-button gt-button-green\">Create A New Geotrigger</a>\n</div>\n\n<ul class=\"gt-tool-descriptions\">\n  <li class=\"gt-tool-description\">\n    <span class=\"gt-icon gt-icon-create\"></span>\n    <h5><a class=\"gt-tool gt-tool-create\"href=\"#\">New Geotrigger Tool</a></h5>\n    <p>Create a new Geotrigger by first entering it's information, than defining an area on the map.</p>\n  </li>\n\n  <li class=\"gt-tool-description\">\n    <span class=\"gt-icon gt-icon-polygon\"></span>\n    <h5><a class=\"gt-tool gt-tool-polygon\"href=\"#\">Polygon Tool</a></h5>\n    <p>Click to start drawing on the map, creating each point of a polygon. Click on the first point to close the shape and enter the Geotrigger information.</p>\n  </li>\n\n  <li class=\"gt-tool-description\">\n    <span class=\"gt-icon gt-icon-radius\"></span>\n    <h5><a class=\"gt-tool gt-tool-radius\"href=\"#\">Radius Tool</a></h5>\n    <p>Select a point on the map, than hold and drag to define a radius around that point. You can edit this radius later, if you want.</p>\n  </li>\n\n  <!-- <li class=\"gt-tool-description\">\n    <span class=\"gt-icon gt-icon-drivetime\"></span>\n    <h5><a class=\"gt-tool gt-tool-drivetime\"href=\"#\">Drivetime Tool</a></h5>\n    <p>Drop a marker on the map, and then enter your desired drive time from that marker. We'll compute that polygon for you.</p>\n  </li> -->\n</ul>\n\n";
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/callbackUrl"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div data-action=\"callbackUrl\" class='gt-property'>\n  <div class=\"gt-property-header\">\n    notify this URL\n    <a class=\"gt-remove-action gt-delete-icon\"></a>\n  </div>\n\n  <div class=\"gt-property-item\">\n    <input class='gt-input-fill' type='text' name='action[callbackUrl]' placeholder='http://' value='"
+    + escapeExpression(((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.callbackUrl)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n  </div>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/data"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div data-notification='data' class='gt-property-item gt-notification-action'>\n  <label class=\"gt-notification-left\" for='action[notification][data]'>\n    <span class='gt-label-left'>some data:</span>\n  </label>\n\n  <div class=\"gt-notification-center\">\n    <textarea class='gt-input' name='action[notification][data]' placeholder='{ \"your\": \"data\" }'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.data)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea>\n  </div>\n\n  <div class='gt-notification-right'>\n    <a class=\"gt-remove-notification gt-delete-icon\"></a>\n  </div>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/icon"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div data-notification='icon' class='gt-property-item gt-notification-action'>\n  <label class=\"gt-notification-left\" for='action[notification][icon]'>\n    <span class='gt-label-left'>an icon:</span>\n  </label>\n\n  <div class='gt-notification-center'>\n    <input class='gt-input' type='text' name='action[notification][icon]' placeholder='icon' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.icon)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n  </div>\n\n  <div class='gt-notification-right'>\n    <a class=\"gt-remove-notification gt-delete-icon\"></a>\n  </div>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div data-action=\"notification\" class=\"gt-property\">\n  <div class=\"gt-property-header\">\n    send a notification to the device with..\n    <a class=\"gt-remove-action gt-delete-icon\"></a>\n  </div>\n\n  <div class=\"gt-notification-actions\"></div>\n\n  <div class=\"gt-property-item gt-btn-group\">\n    <button data-notification=\"text\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-notification\">&#043; a message</button>\n    <button data-notification=\"url\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-notification\">&#043; a URL</button>\n    <button data-notification=\"data\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-notification\">&#043; some data</button>\n    <button data-notification=\"icon\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-notification\">&#043; an icon</button>\n    <button data-notification=\"sound\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-notification\">&#043; a sound</button>\n  </div>\n</div>";
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/sound"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div data-notification='sound' class='gt-property-item gt-notification-action'>\n  <label class=\"gt-notification-left\" for='action[notification][sound]'>\n    <span class='gt-label-left'>a sound:</span>\n  </label>\n\n  <div class='gt-notification-center'>\n    <input class='gt-input' type='text' name='action[notification][sound]' placeholder='sound' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.sound)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n  </div>\n\n  <div class='gt-notification-right'>\n    <a class=\"gt-remove-notification gt-delete-icon\"></a>\n  </div>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/text"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div data-notification='text' class='gt-property-item gt-notification-action'>\n  <label class=\"gt-notification-left\" for='action[notification][text]'>\n    <span class='gt-label-left'>a message:</span>\n  </label>\n\n  <div class='gt-notification-center'>\n    <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</textarea>\n  </div>\n\n  <div class='gt-notification-right'>\n    <a class=\"gt-remove-notification gt-delete-icon\"></a>\n  </div>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/notification/url"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div data-notification='url' class='gt-property-item gt-notification-action'>\n  <label class=\"gt-notification-left\" for='action[notification][url]'>\n    <span class='gt-label-left'>a URL:</span>\n  </label>\n\n  <div class='gt-notification-center'>\n    <input class='gt-input' type='text' name='action[notification][url]' placeholder='http://' value='"
+    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.url)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n  </div>\n\n  <div class='gt-notification-right'>\n    <a class=\"gt-remove-notification gt-delete-icon\"></a>\n  </div>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/actions/trackingProfile"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, stack2, options, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  
+  return "\n      <option value=\"fine\">[3] fine</option>\n      <option value=\"adaptive\">[2] adaptive</option>\n      <option value=\"rough\">[1] rough</option>\n      <option value=\"off\">[0] off</option>\n      ";
+  }
+
+  buffer += "<div data-action=\"trackingProfile\" class=\"gt-property\">\n  <div class=\"gt-property-header\">\n    change the device's tracking profile\n    <a class=\"gt-remove-action gt-delete-icon\"></a>\n  </div>\n\n  <div class=\"gt-property-item\">\n    <select class=\"gt-select-full\" name=\"action[trackingProfile]\">\n      ";
+  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data};
+  stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n    </select>\n  </div>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["form/index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, stack2, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function";
+
+function program1(depth0,data) {
+  
+  
+  return "Edit";
+  }
+
+function program3(depth0,data) {
+  
+  
+  return "Create";
+  }
+
+function program5(depth0,data) {
+  
+  
+  return "\n              <option value='enter'>enters</option>\n              <option value='leave'>leaves</option>\n              ";
+  }
+
+function program7(depth0,data) {
+  
+  
+  return "\n              <option value='polygon'>polygon</option>\n              <option value='radius'>circle</option>\n              ";
+  }
+
+function program9(depth0,data) {
+  
+  
+  return " gt-hide";
+  }
+
+function program11(depth0,data) {
+  
+  
+  return "\n      <button class='gt-button gt-button-blue gt-submit'>Update</button>\n      <ul class='gt-edit-controls'>\n        <li>\n          <a class='gt-reset-delete' href='#'>&#x2716;</a>\n        </li>\n        <li>\n          <button class='gt-item-delete gt-button-delete'></button>\n        </li>\n      </ul>\n      ";
+  }
+
+function program13(depth0,data) {
+  
+  
+  return "\n      <button class='gt-button gt-button-blue gt-submit'>Save</button>\n      ";
+  }
+
+  buffer += "<div class='gt-panel-top-bar'>\n  <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>\n  <h3>";
+  stack1 = helpers['if'].call(depth0, depth0.triggerId, {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</h3>\n  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n</div>\n\n<div class='gt-panel-content'>\n  <form class='gt-form gt-form-edit'>\n\n    <section class='gt-form-section gt-conditions'>\n      <div class=\"gt-property\">\n        <div class=\"gt-property-header\">When a device tagged..</div>\n\n        <div class=\"gt-property-item\">\n          <textarea class='gt-input' name='tags' placeholder='enter tags'>";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.tagList || depth0.tagList),stack1 ? stack1.call(depth0, depth0.tags, options) : helperMissing.call(depth0, "tagList", depth0.tags, options)))
+    + "</textarea>\n        </div>\n\n        <div class=\"gt-property-item\">\n            <select name='condition[direction]' class='gt-direction'>\n              ";
+  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data};
+  stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n            </select>\n\n            <span class=\"gt-conjunction\">a</span>\n\n            <select name='geometry-type' class='gt-input-right'>\n              ";
+  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data};
+  stack2 = ((stack1 = helpers.selectShape || depth0.selectShape),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "selectShape", depth0.condition, options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n            </select>\n        </div>\n      </div>\n    </section>\n\n    <section class=\"gt-form-section gt-actions\"></section>\n\n    <section class=\"gt-form-section gt-action-toggles\">\n      <button data-action=\"notification\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; send a notification</button>\n      <button data-action=\"callbackUrl\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; post to a callback URL</button>\n      <button data-action=\"trackingProfile\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; change the tracking profile</button>\n    </section>\n\n    <section class=\"gt-form-section gt-title-wrapper\">\n      <button class=\"gt-button gt-button-light-gray gt-button-small gt-add-title";
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\">&#043; add a title</button>\n\n      <div class='gt-title gt-property";
+  stack2 = helpers.unless.call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "'>\n        <div class=\"gt-property-header\">\n          Title\n          <a class=\"gt-remove-title gt-delete-icon\"></a>\n        </div>\n\n        <div class=\"gt-property-item\">\n          <input class='gt-input-fill' type='text' name='properties[title]' placeholder='Geotrigger Title' value='"
+    + escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "'>\n        </div>\n      </div>\n    </section>\n\n    <section class='gt-form-section gt-submit-wrapper'>\n      ";
+  stack2 = helpers['if'].call(depth0, depth0.triggerId, {hash:{},inverse:self.program(13, program13, data),fn:self.program(11, program11, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n    </section>\n  </form>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["item"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+
+function program1(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n      <span>"
+    + escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</span>\n    ";
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1, options;
+  buffer += "\n      <span>";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.defaultTitle || depth0.defaultTitle),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "defaultTitle", depth0.condition, options)))
+    + "</span>\n    ";
+  return buffer;
+  }
+
+function program5(depth0,data) {
+  
+  var stack1;
+  return escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1));
+  }
+
+function program7(depth0,data) {
+  
+  var stack1, options;
+  options = {hash:{},data:data};
+  return escapeExpression(((stack1 = helpers.defaultTitle || depth0.defaultTitle),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "defaultTitle", depth0.condition, options)));
+  }
+
+  buffer += "<span class='gt-item-edit gt-icon ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.actionIcon || depth0.actionIcon),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo), options) : helperMissing.call(depth0, "actionIcon", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.geo), options)))
+    + " gt-icon-polygon'></span>\n<h5>\n  <a class='gt-item-edit' href='#";
+  if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/edit'>\n    ";
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n  </a>\n</h5>\n<div class='gt-item-toolbar'>\n  <a class='gt-edit-icon' href='#";
+  if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "/edit'></a>\n  <a class='gt-delete-icon' href='#'></a>\n</div>\n<div class='gt-tags'>\n  <strong>Tags</strong><span>:</span> ";
+  options = {hash:{},data:data};
+  stack2 = ((stack1 = helpers.tagLinks || depth0.tagLinks),stack1 ? stack1.call(depth0, depth0.tags, options) : helperMissing.call(depth0, "tagLinks", depth0.tags, options));
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "\n</div>\n<div class='gt-id'>\n  <strong>ID</strong><span>:</span> ";
+  if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "\n</div>\n<div class='gt-list-delete'>\n  <h5>Delete ";
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
+  if(stack2 || stack2 === 0) { buffer += stack2; }
+  buffer += "?</h5>\n  <button class='gt-confirm-delete gt-button-small gt-button-delete'>Delete</button>\n  <button class='gt-cancel-delete gt-button-small gt-button gt-button-gray'>Cancel</button>\n</div>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["list"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class='gt-list-header gt-hide'>\n  <div class='gt-panel-top-bar'>\n    <a href='#new' class='gt-button gt-button-blue gt-tool-create'>Create</a>\n    <h3 class='gt-panel-top-bar-left'>List <span class=\"gt-trigger-count\">(";
+  if (stack1 = helpers.count) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.count; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1)
+    + ")</span></h3>\n    <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n  </div>\n  </div>\n  <div class='gt-search'>\n    <input type='search' placeholder='Search'><a href=\"#list\" class=\"gt-icon-clear\"></a>\n  </div>\n<ul class='gt-results'></ul>";
+  return buffer;
+  });
+
+this["GeotriggerEditor"]["Templates"]["main"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div id='gt-controls-region'></div>\n<div id='gt-content'>\n  <div id='gt-drawer-region'></div>\n  <div id='gt-map-region'></div>\n  <div id='gt-notes-region'></div>\n</div>\n";
+  });
+
+this["GeotriggerEditor"]["Templates"]["notification"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<button class='gt-close'>&times;</button> ";
+  if (stack1 = helpers.message) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = depth0.message; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
+  buffer += escapeExpression(stack1);
+  return buffer;
+  });
+
 // Console-polyfill. MIT license.
 // https://github.com/paulmillr/console-polyfill
 // Make it safe to do console.log() always.
@@ -14,7 +324,7 @@
   while (method = methods.pop()) { con[method] = con[method] || dummy; }
 })(window.console = window.console || {});
 
-(function(Handlebars, $) {
+(function(App, Handlebars, $) {
 
   Handlebars.registerHelper('select', function(value, options) {
     // Create a select element
@@ -41,10 +351,12 @@
     // Populate it with the option HTML
     select.innerHTML = options.fn(this);
 
-    if (value.geo.geojson) {
-      select.value = 'polygon';
-    } else {
-      select.value = 'radius';
+    if (value && value.geo) {
+      if (value.geo.geojson) {
+        select.value = 'polygon';
+      } else {
+        select.value = 'radius';
+      }
     }
 
     // Find the selected node, if it exists, add the selected attribute to it
@@ -55,12 +367,32 @@
     return select.innerHTML;
   });
 
-  Handlebars.registerHelper('actionIcon', function(action) {
+  Handlebars.registerHelper('actionIcon', function(action, shape) {
+    var classes = '';
     if (action === 'enter') {
-      return 'gt-icon-enter';
+      classes += 'gt-icon-enter ';
     } else if (action === 'leave') {
-      return 'gt-icon-exit';
+      classes += 'gt-icon-exit ';
     }
+    if (shape.geojson) {
+      classes += 'gt-icon-polygon ';
+    }
+    if (shape.distance) {
+      classes += 'gt-icon-radius ';
+    }
+    return classes;
+  });
+
+  Handlebars.registerHelper('defaultTitle', function(trigger) {
+    var title = '' + trigger.direction;
+    if (trigger.geo.distance){
+      title += ' ' + trigger.geo.distance + ' meter radius';
+    } else if (trigger.geo.geojson && trigger.geo.geojson.coordinates) {
+      var sides = trigger.geo.geojson.coordinates[0].length - 1;
+      title += ' ' + sides + ' sided polygon';
+    }
+    title = title.charAt(0).toUpperCase() + title.slice(1);
+    return title;
   });
 
   Handlebars.registerHelper('unlessDefaultTag', function(conditional, options) {
@@ -87,6 +419,10 @@
 
   Handlebars.registerHelper('tagLinks', function(tags, options) {
     if (tags && tags.length) {
+      if (tags.length === 1 &&
+          tags[0].indexOf('trigger:') === 0) {
+        return '<strong>none</strong>';
+      }
       var output = [];
       for (var i=0;i<tags.length;i++) {
         if (tags[i].indexOf('trigger:') !== 0) {
@@ -95,11 +431,11 @@
       }
       return output.join(', ');
     } else {
-      return '';
+      return '<strong>none</strong>';
     }
   });
 
-}(Handlebars, $));
+}(GeotriggerEditor, Handlebars, $));
 
 (function($) {
   return $.fn.serializeObject = function() {
@@ -1979,186 +2315,6 @@ return function underscoreDeepExtend (obj) {
   _.mixin({deepExtend: underscoreDeepExtend(_)});
 })();
 
-var GeotriggerEditor = new Backbone.Marionette.Application();
-
-GeotriggerEditor.addInitializer(function(options) {
-  var el = options && options.el ? options.el : '#gt-editor';
-  var layout = this.regions = new this.Layouts.Main();
-
-  this.addRegions({ mainRegion: el });
-  this.mainRegion.show(layout);
-});
-
-
-this["GeotriggerEditor"] = this["GeotriggerEditor"] || {};
-this["GeotriggerEditor"]["Templates"] = this["GeotriggerEditor"]["Templates"] || {};
-
-this["GeotriggerEditor"]["Templates"]["controls"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
-
-
-  return "<div class=\"gt-drawer-controls\">\n  <a href=\"#list\" class=\"gt-tool gt-tool-list active gt-tooltip\"><span>List</span></a>\n  <!-- <a href=\"#new\" class=\"gt-tool gt-tool-create gt-tooltip\"><span>Create</span></a> -->\n</div>\n<div class=\"gt-tool-controls\">\n  <button class=\"gt-tool gt-tool-polygon gt-tooltip\"><span>Polygon</span></button>\n  <button class=\"gt-tool gt-tool-radius gt-tooltip\"><span>Radius</span></button>\n</div>";
-  });
-
-this["GeotriggerEditor"]["Templates"]["drawers"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
-
-
-  return "<div class=\"gt-panel gt-panel-list\"></div>\n<div class=\"gt-panel gt-panel-edit\"></div>\n<div class=\"gt-panel gt-panel-new\"></div>";
-  });
-
-this["GeotriggerEditor"]["Templates"]["edit"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, stack2, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this, functionType="function";
-
-function program1(depth0,data) {
-  
-  
-  return "\n        <option value='enter'>enters</option>\n        <option value='leave'>leaves</option>\n        ";
-  }
-
-function program3(depth0,data) {
-  
-  
-  return "\n        <option value='polygon'>polygon</option>\n        <option value='radius'>circle</option>\n        ";
-  }
-
-function program5(depth0,data) {
-  
-  
-  return "\n        <option value='notification'>send the device a message</option>\n        <option value='callbackUrl'>post to a server</option>\n        <option value='trackingProfile'>change tracking profile</option>\n        ";
-  }
-
-function program7(depth0,data) {
-  
-  
-  return "\n          <option value='fine'>fine</option>\n          <option value='adaptive'>adaptive</option>\n          <option value='rough'>rough</option>\n          <option value='off'>off</option>\n          ";
-  }
-
-  buffer += "<div class='gt-panel-top-bar'>\n  <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>\n  <h3>Edit</h3>\n  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n</div>\n\n<div class='gt-panel-content'>\n  <form class='gt-form gt-form-edit'>\n    <section class='gt-form-section'>\n      <label for='tags'>\n        <span>When a device tagged</span>\n        <input type='text' name='tags' placeholder='enter tags' class='gt-tag-input' value='";
-  options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.tagList || depth0.tagList),stack1 ? stack1.call(depth0, depth0.tags, options) : helperMissing.call(depth0, "tagList", depth0.tags, options)))
-    + "'>\n      </label>\n\n      <select name='condition[direction]' class='gt-event'>\n        ";
-  options = {hash:{},inverse:self.noop,fn:self.program(1, program1, data),data:data};
-  stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options));
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n      </select>\n\n      <span>a</span>\n\n      <select name='geometry-type' class='gt-geometry-type'>\n        ";
-  options = {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data};
-  stack2 = ((stack1 = helpers.selectShape || depth0.selectShape),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "selectShape", depth0.condition, options));
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n      </select>\n\n      <span>, </span>\n\n      <select class='gt-action-selector'>\n        ";
-  options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data};
-  stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, depth0.action, options) : helperMissing.call(depth0, "select", depth0.action, options));
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n      </select>\n      <span>:</span>\n\n      <label class='gt-action gt-action-notification' for='message'>\n        <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'>"
-    + escapeExpression(((stack1 = ((stack1 = ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.notification)),stack1 == null || stack1 === false ? stack1 : stack1.text)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</textarea>\n      </label>\n\n      <label class='gt-action gt-action-callbackUrl gt-hide' for='url'>\n        <input type='text' name='action[callbackUrl]' placeholder='url (optional)'>\n      </label>\n\n      <label class='gt-action gt-action-trackingProfile gt-hide' for='url'>\n        <span>to</span>\n        <select class='gt-action-profile-selector' name='action[trackingProfile]'>\n          ";
-  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data};
-  stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.action),stack1 == null || stack1 === false ? stack1 : stack1.trackingProfile), options));
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n        </select>\n      </label>\n\n      <label for='title'>\n        Nickname (optional):\n        <input type='text' name='properties[title]' placeholder='Title' class='gt-trigger-title-input' value='"
-    + escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "'>\n      </label>\n    </section>\n\n    <section class='gt-form-section'>\n      <button class='gt-button gt-button-blue gt-submit'>Update</button>\n      <ul class='gt-edit-controls'>\n        <li>\n          <a class='gt-reset-delete' href='#'>&#x2716;</a>\n        </li>\n        <li>\n          <button class='gt-item-delete gt-button-delete'></button>\n        </li>\n      </ul>\n    </section>\n  </form>\n</div>";
-  return buffer;
-  });
-
-this["GeotriggerEditor"]["Templates"]["empty"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
-
-
-  return "<div class=\"gt-panel-top-bar\">\n  <a href=\"#\" class=\"gt-panel-top-bar-button gt-new-trigger\"></a>\n  <h3>No Geotriggers</h3>\n  <a href=\"#\" class=\"gt-panel-top-bar-button gt-close-drawer\"></a>\n</div>\n\n<div class=\"gt-panel-no-triggers\">\n  <h5>This application doesn't have any Geotriggers yet.</h5>\n   <a href=\"#new\" class=\"gt-tool gt-tool-create gt-button gt-button-green\">Create A New Trigger</a>\n</div>\n\n<ul class=\"gt-tool-descriptions\">\n  <li class=\"gt-tool-description\">\n    <span class=\"gt-icon gt-icon-create\"></span>\n    <h5><a class=\"gt-tool gt-tool-create\"href=\"#\">New Geotrigger Tool</a></h5>\n    <p>Create a new Geotrigger by first entering it's information, than defining an area on the map.</p>\n  </li>\n\n  <li class=\"gt-tool-description\">\n    <span class=\"gt-icon gt-icon-polygon\"></span>\n    <h5><a class=\"gt-tool gt-tool-polygon\"href=\"#\">Polygon Tool</a></h5>\n    <p>Click to start drawing on the map, creating each point of a polygon. Click on the first point to close the shape and enter the Geotrigger information.</p>\n  </li>\n\n  <li class=\"gt-tool-description\">\n    <span class=\"gt-icon gt-icon-radius\"></span>\n    <h5><a class=\"gt-tool gt-tool-radius\"href=\"#\">Radius Tool</a></h5>\n    <p>Select a point on the map, than hold and drag to define a radius around that point. You can edit this radius later, if you want.</p>\n  </li>\n\n  <!-- <li class=\"gt-tool-description\">\n    <span class=\"gt-icon gt-icon-drivetime\"></span>\n    <h5><a class=\"gt-tool gt-tool-drivetime\"href=\"#\">Drivetime Tool</a></h5>\n    <p>Drop a marker on the map, and then enter your desired drive time from that marker. We'll compute that polygon for you.</p>\n  </li> -->\n</ul>\n\n";
-  });
-
-this["GeotriggerEditor"]["Templates"]["item"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
-
-function program1(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n    <span>";
-  if (stack1 = helpers.triggerId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.triggerId; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "</span>\n    ";
-  return buffer;
-  }
-
-function program3(depth0,data) {
-  
-  var buffer = "", stack1;
-  buffer += "\n    <span>"
-    + escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "</span>\n    ";
-  return buffer;
-  }
-
-  buffer += "<span class='gt-item-edit gt-icon ";
-  options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.actionIcon || depth0.actionIcon),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options) : helperMissing.call(depth0, "actionIcon", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options)))
-    + " gt-icon-polygon'></span>\n<h5>\n  <a class='gt-item-edit' href='#";
-  if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
-  else { stack2 = depth0.triggerId; stack2 = typeof stack2 === functionType ? stack2.apply(depth0) : stack2; }
-  buffer += escapeExpression(stack2)
-    + "/edit'>\n    ";
-  stack2 = helpers.unless.call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n  </a>\n</h5>\n<div class='gt-tags'>\n  Tags: ";
-  options = {hash:{},data:data};
-  stack2 = ((stack1 = helpers.tagLinks || depth0.tagLinks),stack1 ? stack1.call(depth0, depth0.tags, options) : helperMissing.call(depth0, "tagLinks", depth0.tags, options));
-  if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</div>\n<ul class='gt-item-controls'>\n  <li><a class='gt-reset-delete' href='#'>&#x2716;</a></li>\n  <li><button class='gt-item-delete gt-button-small gt-button-delete'></button></li>\n</ul>";
-  return buffer;
-  });
-
-this["GeotriggerEditor"]["Templates"]["list"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
-
-
-  return "<div class='gt-list-header gt-hide'>\n  <div class='gt-panel-top-bar'>\n    <a href='#new' class='gt-button gt-button-blue gt-tool-create'>Create</a>\n    <h3 class='gt-panel-top-bar-left'>List</h3>\n    <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n  </div>\n  </div>\n  <div class='gt-search'>\n    <input type='search'></input>\n  </div>\n<ul class='gt-results'></ul>";
-  });
-
-this["GeotriggerEditor"]["Templates"]["main"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
-
-
-  return "<div id='gt-controls-region'></div>\n<div id='gt-content'>\n  <div id='gt-drawer-region'></div>\n  <div id='gt-map-region'></div>\n  <div id='gt-notes-region'></div>\n</div>\n";
-  });
-
-this["GeotriggerEditor"]["Templates"]["new"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
-
-
-  return "<div class='gt-panel-top-bar'>\n  <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>\n  <h3>Create</h3>\n  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n</div>\n\n<div class='gt-panel-content'>\n  <form class='gt-form gt-form-new'>\n    <section class='gt-form-section'>\n      <label for='tags'>\n        <span>When a device tagged</span>\n        <input type='text' name='setTags' placeholder='tag 1, tag 2..' class='gt-tag-input'>\n      </label>\n\n      <select name='condition[direction]' class='gt-event'>\n        <option value='enter' selected>enters</option>\n        <option value='leave'>leaves</option>\n      </select>\n\n      <span>a</span>\n\n      <select name='geometry-type' class='gt-geometry-type'>\n        <option value='polygon' selected>polygon</option>\n        <option value='radius'>circle</option>\n      </select>\n\n      <span>, </span>\n\n      <!-- <input type='text' name='radius' class='gt-radius'> -->\n\n      <!-- <button class='gt-button gt-button-clear gt-add-action'>add an action</button> -->\n\n      <select class='gt-action-selector'>\n        <option value='notification' selected>send the device a message</option>\n        <option value='callbackUrl'>post to a server</option>\n        <option value='trackingProfile'>change tracking profile</option>\n      </select>\n      <span>:</span>\n\n      <label class='gt-action gt-action-notification' for='message'>\n        <textarea class='gt-action-message-box' name='action[notification][text]' placeholder='message'></textarea>\n      </label>\n\n      <label class='gt-action gt-action-callbackUrl gt-hide' for='url'>\n        <input type='text' name='action[callbackUrl]' placeholder='url (optional)'>\n      </label>\n\n      <label class='gt-action gt-action-trackingProfile gt-hide' for='url'>\n        <span>to</span>\n        <select class='gt-action-profile-selector' name='action[trackingProfile]'>\n          <option disabled='disabled' selected>choose a tracking profile</option>\n          <option value='fine'>fine</option>\n          <option value='adaptive'>adaptive</option>\n          <option value='rough'>rough</option>\n          <option value='off'>off</option>\n        </select>\n      </label>\n\n      <!--\n      <label for='date'>\n        This will start\n        <select class='gt-date-start'>\n          <option value='now'>now</option>\n          <option value='future'>in the future</option>\n        </select>\n        and persist\n        <select class='gt-date-end'>\n          <option value='never'>indefinitely</option>\n          <option value='future'>until a future date</option>\n        </select>\n      </label>\n      -->\n\n      <label for='title'>\n        Nickname (optional):\n        <input type='text' name='properties[title]' placeholder='Title' class='gt-trigger-title-input'>\n      </label>\n    </section>\n\n    <section class='gt-form-section'>\n      <button class='gt-button gt-button-blue gt-submit'>Submit</button>\n      <!-- <ul class='gt-edit-controls'>\n        <li>\n          <input type='reset' class='gt-item-clear gt-button-clear' value='Reset'>\n        </li>\n      </ul> -->\n    </section>\n  </form>\n</div>";
-  });
-
-this["GeotriggerEditor"]["Templates"]["notification"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
-
-
-  buffer += "<button class='gt-close'>&times;</button> ";
-  if (stack1 = helpers.message) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = depth0.message; stack1 = typeof stack1 === functionType ? stack1.apply(depth0) : stack1; }
-  buffer += escapeExpression(stack1);
-  return buffer;
-  });
-
 GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
 
   API.addInitializer(function(options){
@@ -2448,14 +2604,14 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     start: function() {
       this.setup();
 
-      App.vent.trigger('notify', 'Triggers loading');
+      App.vent.trigger('notify', 'Loading Geotriggers');
 
       App.collections.triggers.fetch({
         reset: true,
         success: function() {
           App.vent.trigger('notify:clear');
           Backbone.history.start();
-          if (App.config.fitOnLoad) {
+          if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
             App.execute('map:fit');
           }
         }
@@ -2530,15 +2686,17 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
     index: function() {
       App.vent.trigger('index');
-
       App.regions.drawer.close();
     },
 
     list: function(term) {
       if (!App.regions.drawer.$el || !App.regions.drawer.$el.has('.gt-list').length) {
         App.vent.trigger('trigger:list');
-        var view = new App.Views.List({ collection: App.collections.triggers });
+        var model = new Backbone.Model({ count: App.collections.triggers.length });
+        var view = new App.Views.List({ model: model, collection: App.collections.triggers });
         App.regions.drawer.show(view);
+      } else if (!term) {
+        App.vent.trigger('trigger:list:reset');
       }
 
       if (term) {
@@ -2550,7 +2708,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     new: function() {
       App.vent.trigger('trigger:new');
 
-      var view = new App.Views.New();
+      var view = new App.Views.Form();
       App.regions.drawer.show(view);
 
       App.vent.trigger('trigger:new:ready');
@@ -2562,7 +2720,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       if (!model) {
         this.notFound();
       } else {
-        var view = new App.Views.Edit({ model: model });
+        var view = new App.Views.Form({ model: model });
         App.regions.drawer.show(view);
         App.vent.trigger('trigger:edit', triggerId);
       }
@@ -2665,6 +2823,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       // L.Icon.Default.imagePath = App.config.imagePath;
       App.map = this.map = L.map(options.el).setView(App.config.map.center, App.config.map.zoom);
       this.map.zoomControl.setPosition('topright');
+
       L.esri.basemapLayer(App.config.map.basemap).addTo(App.map);
 
       this.Layers.start();
@@ -2792,6 +2951,40 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
   // Trigger Model
   // -------------
 
+  // private functions
+
+  function processError(error) {
+    // default message
+    var msg = "Error creating trigger";
+
+    // regexable error string
+    var str = JSON.stringify(error);
+
+    // out of range (polygons constructed over the dateline)
+    if (null !== str.match("Coordinate values are out of range")) {
+      msg = "Coordinate values are out of range";
+    }
+
+    // not found (trying to update a deleted trigger)
+    if (null !== str.match("no triggers found")) {
+      msg = "Deleted triggers can't be updated";
+    }
+
+    // intersects (polygons that intersect themselves)
+    if (null !== str.match("Error performing intersection")) {
+      msg = "Polygons can't intersect themselves";
+    }
+
+    // no message (invalid message property)
+    if (null !== str.match("message:Not a valid parameter for this request")) {
+      msg = "Notifications must have a valid message";
+    }
+
+    return msg;
+  }
+
+  // the model itself
+
   Models.Trigger = Backbone.Model.extend({
 
     idAttribute: 'triggerId',
@@ -2801,26 +2994,13 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
       console.log('sync:' + method);
 
       var triggerId = this.get('triggerId');
+      var params;
 
       var callback = _.bind(function(error, response) {
         if (error) {
-          var message = "Error creating trigger";
-
-          // polygons constructed over the dateline
-          var outOfRange = JSON.stringify(error).match('Coordinate values are out of range');
-          if (outOfRange) {
-            message = "Coordinate values are out of range";
-          }
-
-          // polygons that intersect themselves
-          var intersects = JSON.stringify(error).match('Error performing intersection');
-          if (intersects) {
-            message = "Polygons can't intersect themselves";
-          }
-
           App.vent.trigger('notify', {
             type: 'error',
-            message: message
+            message: processError(error)
           });
 
           if (options && options.error) {
@@ -2833,6 +3013,7 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
               timeout: 3500
             });
           }
+
           if (options && options.success) {
             options.success(response);
           }
@@ -2843,22 +3024,42 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
         case 'read':
           App.API.session.request('trigger/list', { 'triggerIds': [ triggerId ] }, callback);
           break;
+
         case 'create':
-          App.API.session.request('trigger/create', model.toJSON(), callback);
+          params = {
+            'properties' : this.get('properties'),
+            'condition'  : this.get('condition'),
+            'action'     : this.get('action'),
+            'setTags'    : this.get('tags')
+          };
+          App.API.session.request('trigger/create', params, callback);
           break;
+
         case 'update':
-          var params = {
-            'properties': this.get('properties'),
-            'triggerIds': triggerId,
-            'condition': this.get('condition'),
-            'action': this.get('action'),
-            'setTags': this.get('tags')
+          params = {
+            'properties' : this.get('properties'),
+            'triggerIds' : triggerId,
+            'condition'  : this.get('condition'),
+            'action'     : this.get('action'),
+            'setTags'    : this.get('tags')
           };
           App.API.session.request('trigger/update', params, callback);
           break;
+
         case 'delete':
           App.API.session.request('trigger/delete', { 'triggerIds': triggerId }, callback);
           break;
+
+        default:
+          throw new Error('Unsupported method: ' + method);
+      }
+    },
+
+    parse: function(response) {
+      if (response.triggers) {
+        return response.triggers;
+      } else {
+        return response;
       }
     }
 
@@ -2903,51 +3104,6 @@ GeotriggerEditor.module('Collections', function(Collections, App, Backbone, Mari
 
     parse: function(response) {
       return response.triggers;
-    }
-  });
-
-});
-
-
-GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, $, _) {
-
-  // Layout Drawer View
-  // ------------------
-  //
-  // not currently in use
-
-  Layouts.Drawers = Backbone.Marionette.Layout.extend({
-    template: App.Templates['drawers'],
-    className: 'gt-panel-wrap',
-
-    events: {},
-
-    regions: {
-      'list'   : '.gt-panel-list',
-      'edit'   : '.gt-panel-edit',
-      'create' : '.gt-panel-new'
-    },
-
-    initialize: function() {
-      this.listenTo(App.vent, 'trigger:list', this.showList);
-      this.listenTo(App.vent, 'trigger:edit', this.showEdit);
-      this.listenTo(App.vent, 'trigger:new', this.showNew);
-    },
-
-    showList: function() {
-      var view = new App.Views.List({ collection: App.collections.triggers });
-      this.list.show(view);
-    },
-
-    showEdit: function(triggerId) {
-      var model = App.collections.triggers.get(triggerId);
-      var view = new App.Views.Edit({ model: model });
-      this.edit.show(view);
-    },
-
-    showNew: function() {
-      var view = new App.Views.New();
-      this.create.show(view);
     }
   });
 
@@ -3102,48 +3258,231 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
 GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
-  // Trigger Edit View
+  // Trigger Form View
   // -----------------
   //
   // Populates the edit trigger form with a preexisting trigger and handles updates.
-  //
-  // @TODO: decouple shape from view (get rid of `restoreShape`)
 
-  Views.Edit = Marionette.ItemView.extend({
-    template: App.Templates['edit'],
-    className: 'gt-edit gt-panel',
+  Views.Form = Marionette.ItemView.extend({
+    template: App.Templates['form/index'],
+    className: 'gt-panel',
 
     events: {
+      // edit events
       'change .gt-geometry-type'      : 'startDrawing',
-      'change .gt-action-selector'    : 'toggleActions',
+
+      // form events
+      'click .gt-add-title'           : 'addTitle',
+      'click .gt-remove-title'        : 'removeTitle',
+
+      'click .gt-add-action'          : 'addAction',
+      'click .gt-remove-action'       : 'removeAction',
+
+      'click .gt-add-notification'    : 'addNotification',
+      'click .gt-remove-notification' : 'removeNotification',
+
+      // submit events
       'click .gt-submit'              : 'parseForm',
+
+      // delete events
       'click .gt-item-delete'         : 'confirmDelete',
       'click .gt-reset-delete'        : 'resetDelete',
       'click .gt-item-confirm-delete' : 'destroyModel'
     },
 
     ui: {
-      'actions'    : '.gt-action',
-      'form'       : 'form',
-      'deleteItem' : '.gt-item-delete',
-      'confirm'    : '.gt-item-confirm-delete',
-      'reset'      : '.gt-reset-delete'
+      'actions'         : '.gt-actions',
+      'addAction'       : '.gt-add-action',
+      'form'            : 'form',
+      'deleteItem'      : '.gt-item-delete',
+      'confirm'         : '.gt-item-confirm-delete',
+      'reset'           : '.gt-reset-delete'
     },
 
     onShow: function() {
+      this.buildForm();
+
       this.listenTo(App.vent, 'draw:new', this.parseShape);
+    },
+
+    buildForm: function() {
+      if (!this.model) {
+        this.buildNewForm();
+      } else {
+        this.buildEditForm();
+      }
+    },
+
+    buildNewForm: function() {
+      var data = this.serializeData();
+
+      var actionsHtml = '';
+      var noteHtml = '';
+
+      // get shape from map
+      this.parseShape();
+
+      // add default action (notification.text)
+      actionsHtml = App.Templates['form/actions/notification/index'](data);
+      noteHtml = App.Templates['form/actions/notification/text'](data);
+
+      var $action = $('.gt-add-action[data-action="notification"]');
+      $action.hide();
+
+      var $notification = $('.gt-add-notification[data-notification="text"]');
+      $notification.hide();
+
+      this.ui.actions.html(actionsHtml);
+      this.ui.actions.find('.gt-notification-actions').html(noteHtml);
+    },
+
+    buildEditForm: function() {
+      var currentActions = this.model.get('action');
+      var data = this.serializeData();
+
+      var actionsHtml = '';
+      var noteHtml = '';
+
+      var prop;
+
+      // build actions:
+
+      // notification
+      if (currentActions.hasOwnProperty('notification')) {
+        actionsHtml += App.Templates['form/actions/notification/index'](data);
+        this.$el.find('.gt-add-action[data-action="notification"').hide();
+
+        for (prop in currentActions.notification) {
+          if (currentActions.notification.hasOwnProperty(prop)) {
+            noteHtml += App.Templates['form/actions/notification/' + prop](data);
+          }
+        }
+      }
+
+      // callback URL
+      if (currentActions.hasOwnProperty('callbackUrl')) {
+        actionsHtml += App.Templates['form/actions/callbackUrl'](data);
+        this.$el.find('.gt-add-action[data-action="callbackUrl"').hide();
+      }
+
+      // tracking profile
+      if (currentActions.hasOwnProperty('trackingProfile')) {
+        actionsHtml += App.Templates['form/actions/trackingProfile'](data);
+        this.$el.find('.gt-add-action[data-action="trackingProfile"').hide();
+      }
+
+      this.ui.actions.html(actionsHtml);
+
+      if (noteHtml !== '') {
+        this.ui.actions.find('.gt-notification-actions').html(noteHtml);
+        // panic
+        for (prop in currentActions.notification) {
+          if (currentActions.notification.hasOwnProperty(prop)) {
+            var $notification = this.$el.find('.gt-add-notification[data-notification="' + prop + '"]');
+            $notification.hide();
+          }
+        }
+      }
+    },
+
+    addTitle: function(e) {
+      if (e && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      $(e.target).addClass('gt-hide');
+      this.$el.find('.gt-title').removeClass('gt-hide');
+    },
+
+    removeTitle: function(e) {
+      if (e && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      $(e.target).closest('.gt-property').addClass('gt-hide');
+      $('input[name="properties[title]"]').val('');
+      this.$el.find('.gt-add-title').removeClass('gt-hide');
+    },
+
+    addAction: function(e) {
+      var $el, action;
+
+      if (typeof e === 'object' && e.preventDefault) {
+        e.preventDefault();
+        $el = $(e.target);
+        action = $el.data('action');
+      } else if (typeof e === 'string') {
+        action = e;
+        $el = this.$el.find(".gt-add-action[data-action='" + action + "']");
+      }
+
+      if (action === 'notification') {
+        this.ui.actions.append(App.Templates['form/actions/notification/index']({}));
+        this.ui.actions.find('.gt-notification-actions').html(App.Templates['form/actions/notification/text']({}));
+        this.$el.find('.gt-add-notification[data-notification="text"]').hide();
+      } else {
+        this.ui.actions.append(App.Templates['form/actions/' + action]({}));
+      }
+
+      $el.hide();
+    },
+
+    removeAction: function(e) {
+      var $el, action;
+
+      if (typeof e === 'object' && e.preventDefault) {
+        e.preventDefault();
+        $el = $(e.target).closest('.gt-property');
+        action = $el.data('action');
+      } else if (typeof e === 'string') {
+        action = e;
+        $el = this.$el.find(".gt-property[data-action='" + action + "']");
+      }
+
+      $el.remove();
+
+      var $btn = $('.gt-add-action[data-action="' + action + '"]');
+
+      $btn.show();
+    },
+
+    addNotification: function(e) {
+      if (e && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      var $el = $(e.target);
+      var notification = $el.data('notification');
+
+      this.ui.actions.find('.gt-notification-actions').append(App.Templates['form/actions/notification/' + notification]({}));
+
+      $el.hide();
+    },
+
+    removeNotification: function(e) {
+      if (e && e.preventDefault) {
+        e.preventDefault();
+      }
+
+      var $el = $(e.target).closest('.gt-notification-action');
+      var notification = $el.data('notification');
+
+      $el.remove();
+
+      var $btn = $('.gt-add-notification[data-notification="' + notification + '"]');
+
+      $btn.show();
     },
 
     startDrawing: function (e) {
       var tool = $(e.target).val();
-      // App.execute('draw:clear');
       App.vent.trigger('draw:enable', tool);
-    },
-
-    toggleActions: function(e) {
-      var action = $(e.target).val();
-      this.ui.actions.hide();
-      this.$el.find('.gt-action-' + action).show();
+      // @TODO: radius input
+      // if (tool === 'radius') {
+      //   this.ui.form.find('[name="radius"]').show();
+      // } else {
+      //   this.ui.form.find('[name="radius"]').hide();
+      // }
     },
 
     parseShape: function() {
@@ -3181,14 +3520,37 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
           tags[i] = tags[i].trim();
         }
         data.tags = tags;
+      } else {
+        // at least one tag required
       }
 
-      if (data) { // @TODO: validate
-        this.updateTrigger(data);
+      if (data.condition && data.condition.geo) {
+
+      } else {
+        // condition and condition.geo required
+      }
+
+      if (data.action) {
+        // tracking profile
+        if (!data.action.trackingProfile ||
+            data.action.trackingProfile === '---') {
+          data.action.trackingProfile = null;
+        }
+
+        // callback URL
+        if (!data.action.callbackUrl) {
+          data.action.callbackUrl = null;
+        }
+      } else {
+        // at least one action required
+      }
+
+      if (data && data.tags && data.condition && data.action) {
+        this.createOrUpdateTrigger(data);
       }
     },
 
-    updateTrigger: function(data) {
+    createOrUpdateTrigger: function(data) {
       var layer = App.request('draw:layer');
 
       if (layer instanceof L.Circle) {
@@ -3204,9 +3566,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         };
       }
 
-      data.triggerId = this.model.get('triggerId');
-
-      App.vent.trigger('trigger:update', data);
+      if (!this.model) {
+        App.vent.trigger('trigger:create', data);
+      } else {
+        data.triggerId = this.model.get('triggerId');
+        App.vent.trigger('trigger:update', data);
+      }
     },
 
     confirmDelete: function(e) {
@@ -3242,17 +3607,17 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-result',
 
     events: {
-      'click'                         : 'editItem',
+      'click .gt-item-edit'           : 'editItem',
       'click .gt-tags'                : 'tagsClick',
-      'click .gt-item-delete'         : 'confirmDelete',
-      'click .gt-reset-delete'        : 'resetDelete',
-      'click .gt-item-confirm-delete' : 'destroyModel',
+      'click .gt-delete-icon'         : 'confirmDelete',
+      'click .gt-cancel-delete'       : 'resetDelete',
+      'click .gt-confirm-delete'      : 'destroyModel',
       'mouseover'                     : 'focusShape',
       'mouseout'                      : 'unfocusShape'
     },
 
     ui: {
-      'deleteItem' : '.gt-item-delete',
+      'deleteItem' : '.gt-list-delete',
       'confirm'    : '.gt-item-confirm-delete',
       'reset'      : '.gt-reset-delete'
     },
@@ -3277,15 +3642,13 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     confirmDelete: function(e) {
       e.preventDefault();
       e.stopPropagation();
-      this.ui.deleteItem.addClass('gt-item-confirm-delete');
-      this.ui.reset.addClass('gt-reset-flyout');
+      this.ui.deleteItem.addClass('gt-visible');
     },
 
     resetDelete: function(e) {
       e.preventDefault();
       e.stopPropagation();
-      this.ui.deleteItem.removeClass('gt-item-confirm-delete');
-      this.ui.reset.removeClass('gt-reset-flyout');
+      this.ui.deleteItem.removeClass('gt-visible');
     },
 
     destroyModel: function(e) {
@@ -3328,23 +3691,29 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     emptyView: Views.Empty,
 
     events: {
-      'keyup .gt-search' : 'filter'
+      'keyup .gt-search'     : 'filter'
     },
 
     ui: {
-      'header'  : '.gt-list-header',
-      'search'  : '.gt-search input',
-      'results' : '.gt-results'
+      'header'     : '.gt-list-header',
+      'search'     : '.gt-search input',
+      'results'    : '.gt-results'
     },
 
     onShow: function() {
-      this.headerCheck();
-      this.listenTo(this.collection, 'change reset add remove', this.headerCheck);
+      this.refresh();
+      this.listenTo(this.collection, 'change reset add remove', this.refresh);
       this.listenTo(App.vent, 'trigger:list:search', this.search);
+      this.listenTo(App.vent, 'trigger:list:reset', this.clearFilter);
     },
 
-    headerCheck: function() {
-      if (!this.collection.length) {
+    refresh: function() {
+      var count = this.collection.length;
+      this.model.set('count', count);
+
+      this.render();
+
+      if (!count) {
         this.ui.header.addClass('gt-hide');
       } else {
         this.ui.header.removeClass('gt-hide');
@@ -3356,18 +3725,23 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.filter();
     },
 
+    clearFilter: function() {
+      this.ui.search.val('');
+      this.$el.removeClass('gt-filtering');
+    },
+
     filter: function(e) {
       var value = this.ui.search.val();
 
       if (!value.length) {
-        this.ui.results.removeClass('gt-filtering');
+        this.$el.removeClass('gt-filtering');
         if (Backbone.history.fragment !== 'list') {
           App.router.navigate('list', { trigger: false });
         }
       } else if (typeof e !== 'undefined' && e.keyCode === 13) {
         App.router.navigate('list?q=' + encodeURIComponent(value).replace(/%20/g, '+'), { trigger: true });
       } else {
-        this.ui.results.addClass('gt-filtering');
+        this.$el.addClass('gt-filtering');
 
         var list = this.ui.results.find('.gt-result');
         var arr = this.ui.search.val().split(/\s+/);
@@ -3376,10 +3750,12 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
         list.each(function(){
           var item = $(this);
-          var tags  = item.find('.gt-tags a');
+          var tags = item.find('.gt-tags a');
           var text = '';
 
           text += item.find('.gt-item-edit span').text();
+          text += item.find('.gt-id').text();
+          text += item.find('.gt-item-details span').text();
 
           tags.each(function(){
             text += $(this).text();
@@ -3521,118 +3897,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
           }
         }
       });
-    }
-  });
-
-});
-
-GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
-
-  // Trigger New View
-  // ----------------
-  //
-  // Handles the new trigger form.
-  //
-  // @TODO: merge with edit view as behavior is near-identical
-  //        (or come up with inheritance scheme)
-
-  Views.New = Marionette.ItemView.extend({
-    template: App.Templates['new'],
-    className: 'gt-new gt-panel',
-
-    events: {
-      'change .gt-geometry-type'   : 'startDrawing',
-      'change .gt-action-selector' : 'toggleActions',
-      'click .gt-submit'           : 'parseForm'
-    },
-
-    ui: {
-      'actions' : '.gt-action',
-      'form'    : 'form'
-    },
-
-    onShow: function(options) {
-      this.parseShape();
-      this.listenTo(App.vent, 'draw:new', this.parseShape);
-    },
-
-    startDrawing: function(e) {
-      var tool = $(e.target).val();
-      // App.execute('draw:clear');
-      App.vent.trigger('draw:enable', tool);
-      // @TODO: radius input
-      // if (tool === 'radius') {
-      //   this.ui.form.find('[name="radius"]').show();
-      // } else {
-      //   this.ui.form.find('[name="radius"]').hide();
-      // }
-    },
-
-    toggleActions: function(e) {
-      var action = $(e.target).val();
-      this.ui.actions.hide();
-      this.$el.find('.gt-action-' + action).show();
-    },
-
-    parseShape: function() {
-      var layer = App.request('draw:layer');
-      window.layer = layer;
-      var direction = this.ui.form.find('[name="condition[direction]"]');
-      var geometry = this.ui.form.find('[name="geometry-type"]');
-      // var radius = this.ui.form.find('[name="radius"]'); // @TODO: radius
-      switch (true) {
-        case (layer instanceof L.Polygon):
-          if (direction.val() === null) {
-            direction.val('enter');
-          }
-          geometry.val('polygon');
-          break;
-        case (layer instanceof L.Circle):
-          if (direction.val() === null) {
-            direction.val('enter');
-          }
-          geometry.val('radius');
-          // radius.show().val(Math.round(layer.getRadius())); // @TODO: radius
-          break;
-      }
-    },
-
-    parseForm: function(e) {
-      e.preventDefault();
-      var data = this.ui.form.serializeObject();
-      data = App.util.removeEmptyStrings(data);
-
-      if (data.tags) {
-        var tags = data.tags;
-        tags = tags.split(',');
-        for (var i=tags.length-1;i>0;i--) {
-          tags[i] = tags[i].trim();
-        }
-        data.tags = tags;
-      }
-
-      if (data) { // @TODO: validate
-        this.createTrigger(data);
-      }
-    },
-
-    createTrigger: function(data) {
-      var layer = App.request('draw:layer');
-
-      if (layer instanceof L.Circle) {
-        var latlng = layer.getLatLng();
-        data.condition.geo = {
-          'latitude': latlng.lat,
-          'longitude': latlng.lng,
-          'distance': layer.getRadius()
-        };
-      } else {
-        data.condition.geo = {
-          'geojson': layer.toGeoJSON()
-        };
-      }
-
-      App.vent.trigger('trigger:create', data);
     }
   });
 
