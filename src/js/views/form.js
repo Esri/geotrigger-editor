@@ -92,7 +92,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // notification
       if (currentActions.hasOwnProperty('notification')) {
         actionsHtml += App.Templates['form/actions/notification/index'](data);
-        this.$el.find('.gt-add-action[data-action="notification"').hide();
+        this.$el.find('.gt-add-action[data-action="notification"]').hide();
 
         for (prop in currentActions.notification) {
           if (currentActions.notification.hasOwnProperty(prop)) {
@@ -110,7 +110,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // tracking profile
       if (currentActions.hasOwnProperty('trackingProfile')) {
         actionsHtml += App.Templates['form/actions/trackingProfile'](data);
-        this.$el.find('.gt-add-action[data-action="trackingProfile"').hide();
+        this.$el.find('.gt-add-action[data-action="trackingProfile"]').hide();
       }
 
       this.ui.actions.html(actionsHtml);
