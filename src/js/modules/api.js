@@ -9,11 +9,17 @@ GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
         throw new Error('GeotriggerEditor requires a `credentials` object with `clientId` and `clientSecret` properties');
       }
 
-      this.session = new Geotriggers.Session({
-        clientId: options.credentials.clientId, // required or session - this is the application id from developers.arcigs.com
-        clientSecret: options.credentials.clientSecret, // optional - this will authenticate as your application with full permissions
-        persistSession: false // optional - will attempt to persist the session and reload it on future page loads
-      });
+      var sessionOptions = {
+        clientId: options.credentials.clientId,
+        clientSecret: options.credentials.clientSecret,
+        persistSession: false
+      };
+
+      if (options.proxy) {
+        sessionOptions.proxy = options.proxy;
+      }
+
+      this.session = new Geotriggers.Session(sessionOptions);
 
     } catch (e) {
       console.error(e.name + ": " + e.message);

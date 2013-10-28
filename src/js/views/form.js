@@ -68,14 +68,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       actionsHtml = App.Templates['form/actions/notification/index'](data);
       noteHtml = App.Templates['form/actions/notification/text'](data);
 
-      var $action = $('.gt-add-action[data-action="notification"]');
-      $action.hide();
-
-      var $notification = $('.gt-add-notification[data-notification="text"]');
-      $notification.hide();
-
       this.ui.actions.html(actionsHtml);
       this.ui.actions.find('.gt-notification-actions').html(noteHtml);
+
+      this.$el.find('.gt-add-action[data-action="notification"]').hide();
+      this.$el.find('.gt-add-notification[data-notification="text"]').hide();
     },
 
     buildEditForm: function() {
@@ -92,7 +89,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // notification
       if (currentActions.hasOwnProperty('notification')) {
         actionsHtml += App.Templates['form/actions/notification/index'](data);
-        this.$el.find('.gt-add-action[data-action="notification"').hide();
+        this.$el.find('.gt-add-action[data-action="notification"]').hide();
 
         for (prop in currentActions.notification) {
           if (currentActions.notification.hasOwnProperty(prop)) {
@@ -110,7 +107,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // tracking profile
       if (currentActions.hasOwnProperty('trackingProfile')) {
         actionsHtml += App.Templates['form/actions/trackingProfile'](data);
-        this.$el.find('.gt-add-action[data-action="trackingProfile"').hide();
+        this.$el.find('.gt-add-action[data-action="trackingProfile"]').hide();
       }
 
       this.ui.actions.html(actionsHtml);
@@ -142,7 +139,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
 
       $(e.target).closest('.gt-property').addClass('gt-hide');
-      $('input[name="properties[title]"]').val('');
+      this.$el.find('input[name="properties[title]"]').val('');
       this.$el.find('.gt-add-title').removeClass('gt-hide');
     },
 
@@ -183,9 +180,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       $el.remove();
 
-      var $btn = $('.gt-add-action[data-action="' + action + '"]');
-
-      $btn.show();
+      this.$el.find('.gt-add-action[data-action="' + action + '"]').show();
     },
 
     addNotification: function(e) {
@@ -211,9 +206,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       $el.remove();
 
-      var $btn = $('.gt-add-notification[data-notification="' + notification + '"]');
-
-      $btn.show();
+      this.$el.find('.gt-add-notification[data-notification="' + notification + '"]').show();
     },
 
     startDrawing: function (e) {
