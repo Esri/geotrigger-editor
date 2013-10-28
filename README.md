@@ -11,6 +11,23 @@ White-label client-side editor for creating and editing Geotriggers.
 
 ## Instructions
 
+### Installation
+
+The Geotrigger Editor is a client-side only application, **but** if you need to serve browsers that don't support CORS, you'll need to use a proxy. On the client side, just be sure to start the editor with a path to the proxy, like so:
+
+```js
+GeotriggerEditor.start({
+  el: '#gt-editor', // optional: defaults to '#gt-editor'
+  credentials: { // required
+    clientId: 'rcMNAPBoIn2M1JoI', // required
+    clientSecret: '77edd9c16dde46ad9a93b79c83229887' // required
+  },
+  proxy: '/proxy/'
+});
+```
+
+On the server side, you'll need a working proxy to forward API requests to `geotrigger.arcgis.com/*` and `arcgis.com/sharing/oauth2/*`. The `proxy.js` included in this repo shows how to do this using Node.js.
+
 ### Development Requirements
 
 To run the development environment, you will need the following:

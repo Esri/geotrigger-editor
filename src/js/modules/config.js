@@ -46,6 +46,7 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
     },
 
     fitOnLoad: true,
+    proxy: false,
 
     imagePath: '/images',
     sharedOptions: sharedOptions,
