@@ -13,20 +13,49 @@ White-label client-side editor for creating and editing Geotriggers.
 
 ### Installation
 
+#### Starting the Editor
+
+```js
+GeotriggerEditor.start({
+  el: '#gt-editor', // optional: defaults to '#gt-editor'
+  credentials: { // required
+    clientId: 'XXXXXX', // required
+    clientSecret: 'XXXXXX' // required
+  },
+  proxy: '/proxy/' // optional, defaults to false
+});
+```
+
+Lots more configuration options, look at `src/js/modules/config.js` to see them all.
+
+##### Todo
+
+More docs
+
+#### Proxy
+
 The Geotrigger Editor is a client-side only application, **but** if you need to serve browsers that don't support CORS, you'll need to use a proxy. On the client side, just be sure to start the editor with a path to the proxy, like so:
 
 ```js
 GeotriggerEditor.start({
   el: '#gt-editor', // optional: defaults to '#gt-editor'
   credentials: { // required
-    clientId: 'rcMNAPBoIn2M1JoI', // required
-    clientSecret: '77edd9c16dde46ad9a93b79c83229887' // required
+    clientId: 'XXXXXX', // required
+    clientSecret: 'XXXXXX' // required
   },
   proxy: '/proxy/'
 });
 ```
 
 On the server side, you'll need a working proxy to forward API requests to `geotrigger.arcgis.com/*` and `arcgis.com/sharing/oauth2/*`. The `proxy.js` included in this repo shows how to do this using Node.js.
+
+## Issues
+
+Find a bug or want to request a new feature? Please let us know by submitting an [issue](https://github.com/geoloqi/geotrigger-editor/issues).
+
+## Contributing
+
+Esri welcomes contributions from anyone and everyone. Please see our [guidelines for contributing](https://github.com/esri/contributing).
 
 ### Development Requirements
 
@@ -67,14 +96,6 @@ Testing requires PhantomJS to be running. You can install it with homebrew (`bre
   This task will build the production version of the editor into the `dist` folder.
 
 The `default` grunt task is `dev`.
-
-## Issues
-
-Find a bug or want to request a new feature? Please let us know by submitting an [issue](https://github.com/geoloqi/geotrigger-editor/issues).
-
-## Contributing
-
-Esri welcomes contributions from anyone and everyone. Please see our [guidelines for contributing](https://github.com/esri/contributing).
 
 ## Licensing
 
