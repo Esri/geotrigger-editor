@@ -13,7 +13,6 @@
 
 }(this, function() {
 
-  var version           = "0.0.3";
   var geotriggersUrl    = "https://geotrigger.arcgis.com/";
   var tokenUrl          = "https://arcgis.com/sharing/oauth2/token";
   var registerDeviceUrl = "https://arcgis.com/sharing/oauth2/registerDevice";
@@ -42,6 +41,7 @@
   }
 
   function Session(options){
+    this._queue = [];
     this._requestQueue = [];
     this._events = {};
 
@@ -51,7 +51,8 @@
       geotriggersUrl: geotriggersUrl,
       tokenUrl: tokenUrl,
       registerDeviceUrl: registerDeviceUrl,
-      automaticRegistation: true
+      automaticRegistation: true,
+      proxy: false
     };
 
     // set application id
@@ -119,7 +120,7 @@
       if(response.deviceToken){
         this.refreshToken = response.deviceToken.refresh_token;
         this.token = response.deviceToken.access_token;
-        this.deviceId = response.device.device;
+        this.deviceId = response.device.deviceId;
       } else {
         this.refreshToken = response.refresh_token;
         this.token = response.access_token;
@@ -127,6 +128,10 @@
 
       if(this.persistSession){
         this.persist();
+      }
+
+      while(this._queue.length){
+        this._queue.shift().apply(this);
       }
 
       while(this._requestQueue.length){
@@ -177,6 +182,16 @@
     }
   };
 
+  Session.prototype.queue = function(fn) {
+    if (!this.token) {
+      this._queue.push(fn);
+      this.refresh();
+      return;
+    }
+
+    fn.apply(this);
+  };
+
   Session.prototype.request = function(method, params, callback){
     var args = Array.prototype.slice.apply(arguments);
     var json;
@@ -190,6 +205,9 @@
     // create the url for the request
     var url = (geotriggersRequest) ? this.geotriggersUrl + method : method;
 
+    if (this.proxy) {
+      url = this.proxy + url;
+    }
 
     if(typeof params === "function"){
       callback = params;

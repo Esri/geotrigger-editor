@@ -43,8 +43,6 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
 
     // override sync method to use geotrigger API
     sync: function(method, model, options) {
-      console.log('sync:' + method);
-
       var triggerId = this.get('triggerId');
       var params;
 

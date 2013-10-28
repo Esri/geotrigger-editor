@@ -27,7 +27,8 @@
     "cucumber": "latest",
     "matchdep": "~0.1.2",
     "wd": "0.0.32",
-    "grunt-contrib-handlebars": "~0.5.10"
+    "grunt-contrib-handlebars": "~0.5.10",
+    "request": "~2.27.0"
   },
   "author": "Esri Portland R&D Center <portland@esri.com>",
   "contributors": [
@@ -46,6 +47,10 @@
     {
       "name": "Nikolas Wise",
       "email": "nwise@esri.com"
+    },
+    {
+      "name": "Jerry Sievert",
+      "email": "code@legitimatesounding.com"
     }
   ],
   "license": "BSD",
