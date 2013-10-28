@@ -9,6 +9,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
     _setup: function(options) {
       // L.Icon.Default.imagePath = App.config.imagePath;
+      L.esri.get = L.esri.RequestHandlers.JSONP;
       App.map = this.map = L.map(options.el).setView(App.config.map.center, App.config.map.zoom);
       this.map.zoomControl.setPosition('topright');
 
