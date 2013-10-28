@@ -3,13 +3,13 @@ var http = require('http');
 var metaserve = require('metaserve')('.');
 
 http.createServer(function(req, res) {
-    if (req.url.match(/^\/proxy/)) {
-        // Handle the custom route
-        return proxy(req, res);
-    } else {
-        // Fall back to metaserve
-        metaserve(req, res);
-    }
+  if (req.url.match(/^\/proxy/)) {
+    // Handle the custom route
+    return proxy(req, res);
+  } else {
+    // Fall back to metaserve
+    metaserve(req, res);
+  }
 }).listen(8080);
 
 function notFound (res) {
