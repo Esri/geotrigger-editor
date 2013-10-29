@@ -20,12 +20,6 @@ function notFound (res) {
 function proxy (req, res) {
   var url = req.url;
 
-  console.log('url: ' + url);
-
-  req.on('data', function(chunk){
-    console.log(chunk.toString(),'\n\n\n');
-  });
-
   var test = {
     proxy: /^\/proxy\/(.+)$/,
     hosts: /^https?:\/\/(geotrigger\.)?arcgis\.com\//
@@ -47,7 +41,7 @@ function proxy (req, res) {
   var headers = req.headers;
   var method = req.method;
 
-  console.log(headers, method);
+  console.log(method + ' ' + url);
 
   if (!headers['content-type']) {
     if (matchProxy[1].match(/geotrigger\.arcgis\.com\//)) {
