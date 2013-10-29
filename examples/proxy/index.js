@@ -1,6 +1,6 @@
 var request = require('request');
 var http = require('http');
-var metaserve = require('metaserve')('.');
+var metaserve = require('metaserve')('../../');
 
 http.createServer(function(req, res) {
   if (req.url.match(/^\/proxy/)) {
@@ -47,7 +47,7 @@ function proxy (req, res) {
   var headers = req.headers;
   var method = req.method;
 
-  console.log(headers, method,'\n\n\n');
+  console.log(headers, method);
 
   if (!headers['content-type']) {
     if (matchProxy[1].match(/geotrigger\.arcgis\.com\//)) {
