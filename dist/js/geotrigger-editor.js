@@ -2318,23 +2318,24 @@ return function underscoreDeepExtend (obj) {
 GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
 
   API.addInitializer(function(options){
-    try {
-      if (!options ||
-          !options.credentials ||
-          !options.credentials.clientId ||
-          !options.credentials.clientSecret) {
-        throw new Error('GeotriggerEditor requires a `credentials` object with `clientId` and `clientSecret` properties');
-      }
-
-      this.session = new Geotriggers.Session({
-        clientId: options.credentials.clientId, // required or session - this is the application id from developers.arcigs.com
-        clientSecret: options.credentials.clientSecret, // optional - this will authenticate as your application with full permissions
-        persistSession: false // optional - will attempt to persist the session and reload it on future page loads
-      });
-
-    } catch (e) {
-      console.error(e.name + ": " + e.message);
+    if (!options ||
+        !options.credentials ||
+        !options.credentials.clientId ||
+        !options.credentials.clientSecret) {
+      throw new Error('GeotriggerEditor requires a `credentials` object with `clientId` and `clientSecret` properties');
     }
+
+    var sessionOptions = {
+      clientId: options.credentials.clientId,
+      clientSecret: options.credentials.clientSecret,
+      persistSession: false
+    };
+
+    if (options.proxy) {
+      sessionOptions.proxy = options.proxy;
+    }
+
+    this.session = new Geotriggers.Session(sessionOptions);
   });
 
 });
@@ -2387,6 +2388,7 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
     },
 
     fitOnLoad: true,
+    proxy: false,
 
     imagePath: '/images',
     sharedOptions: sharedOptions,
@@ -2705,7 +2707,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       }
     },
 
-    new: function() {
+    'new': function() {
       App.vent.trigger('trigger:new');
 
       var view = new App.Views.Form();
@@ -2821,6 +2823,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
     _setup: function(options) {
       // L.Icon.Default.imagePath = App.config.imagePath;
+      L.esri.get = L.esri.RequestHandlers.JSONP;
       App.map = this.map = L.map(options.el).setView(App.config.map.center, App.config.map.zoom);
       this.map.zoomControl.setPosition('topright');
 
@@ -2991,8 +2994,6 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
 
     // override sync method to use geotrigger API
     sync: function(method, model, options) {
-      console.log('sync:' + method);
-
       var triggerId = this.get('triggerId');
       var params;
 
@@ -3326,14 +3327,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       actionsHtml = App.Templates['form/actions/notification/index'](data);
       noteHtml = App.Templates['form/actions/notification/text'](data);
 
-      var $action = $('.gt-add-action[data-action="notification"]');
-      $action.hide();
-
-      var $notification = $('.gt-add-notification[data-notification="text"]');
-      $notification.hide();
-
       this.ui.actions.html(actionsHtml);
       this.ui.actions.find('.gt-notification-actions').html(noteHtml);
+
+      this.$el.find('.gt-add-action[data-action="notification"]').hide();
+      this.$el.find('.gt-add-notification[data-notification="text"]').hide();
     },
 
     buildEditForm: function() {
@@ -3400,7 +3398,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
 
       $(e.target).closest('.gt-property').addClass('gt-hide');
-      $('input[name="properties[title]"]').val('');
+      this.$el.find('input[name="properties[title]"]').val('');
       this.$el.find('.gt-add-title').removeClass('gt-hide');
     },
 
@@ -3441,9 +3439,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       $el.remove();
 
-      var $btn = $('.gt-add-action[data-action="' + action + '"]');
-
-      $btn.show();
+      this.$el.find('.gt-add-action[data-action="' + action + '"]').show();
     },
 
     addNotification: function(e) {
@@ -3469,9 +3465,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       $el.remove();
 
-      var $btn = $('.gt-add-notification[data-notification="' + notification + '"]');
-
-      $btn.show();
+      this.$el.find('.gt-add-notification[data-notification="' + notification + '"]').show();
     },
 
     startDrawing: function (e) {

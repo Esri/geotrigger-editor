@@ -17744,12 +17744,11 @@ Handlebars.template = Handlebars.VM.template;
 
 }(this, function() {
 
-  var version           = "0.0.3";
   var geotriggersUrl    = "https://geotrigger.arcgis.com/";
   var tokenUrl          = "https://arcgis.com/sharing/oauth2/token";
   var registerDeviceUrl = "https://arcgis.com/sharing/oauth2/registerDevice";
   var exports           = {};
-  var IS_IE             = typeof XDomainRequest !== "undefined";
+  var CORS              = !!(window.XMLHttpRequest && 'withCredentials' in new XMLHttpRequest());
 
   if (!Function.prototype.bind) {
     Function.prototype.bind = function (oThis) {
@@ -17773,6 +17772,7 @@ Handlebars.template = Handlebars.VM.template;
   }
 
   function Session(options){
+    this._queue = [];
     this._requestQueue = [];
     this._events = {};
 
@@ -17782,12 +17782,17 @@ Handlebars.template = Handlebars.VM.template;
       geotriggersUrl: geotriggersUrl,
       tokenUrl: tokenUrl,
       registerDeviceUrl: registerDeviceUrl,
-      automaticRegistation: true
+      automaticRegistation: true,
+      proxy: false
     };
 
     // set application id
     if(!options || !options.clientId) {
       throw new Error("Geotriggers.Session requires an `clientId` or a `session` parameter.");
+    }
+
+    if(!options.proxy && !CORS) {
+      throw new Error("This browser does not support CORS and a proxy has not been set.");
     }
 
     // merge defaults and options into `this`
@@ -17850,7 +17855,7 @@ Handlebars.template = Handlebars.VM.template;
       if(response.deviceToken){
         this.refreshToken = response.deviceToken.refresh_token;
         this.token = response.deviceToken.access_token;
-        this.deviceId = response.device.device;
+        this.deviceId = response.device.deviceId;
       } else {
         this.refreshToken = response.refresh_token;
         this.token = response.access_token;
@@ -17858,6 +17863,10 @@ Handlebars.template = Handlebars.VM.template;
 
       if(this.persistSession){
         this.persist();
+      }
+
+      while(this._queue.length){
+        this._queue.shift().apply(this);
       }
 
       while(this._requestQueue.length){
@@ -17908,6 +17917,16 @@ Handlebars.template = Handlebars.VM.template;
     }
   };
 
+  Session.prototype.queue = function(fn) {
+    if (!this.token) {
+      this._queue.push(fn);
+      this.refresh();
+      return;
+    }
+
+    fn.apply(this);
+  };
+
   Session.prototype.request = function(method, params, callback){
     var args = Array.prototype.slice.apply(arguments);
     var json;
@@ -17921,6 +17940,9 @@ Handlebars.template = Handlebars.VM.template;
     // create the url for the request
     var url = (geotriggersRequest) ? this.geotriggersUrl + method : method;
 
+    if (this.proxy) {
+      url = this.proxy + url;
+    }
 
     if(typeof params === "function"){
       callback = params;
@@ -17987,18 +18009,8 @@ Handlebars.template = Handlebars.VM.template;
       }
     }.bind(this);
 
-    // use XDomainRequest (ie8) or XMLHttpRequest (standard)
-    if (IS_IE) {
-      httpRequest = new XDomainRequest();
-      httpRequest.onload = handleSuccessfulResponse;
-      httpRequest.onerror = handleErrorResponse;
-      httpRequest.ontimeout = handleErrorResponse;
-    } else if (typeof XMLHttpRequest !== "undefined") {
-      httpRequest = new XMLHttpRequest();
-      httpRequest.onreadystatechange = handleStateChange;
-    } else {
-      throw new Error("This browser does not support XMLHttpRequest or XDomainRequest");
-    }
+    httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = handleStateChange;
 
     var body;
 
@@ -18011,10 +18023,7 @@ Handlebars.template = Handlebars.VM.template;
     }
 
     httpRequest.open("POST", url);
-
-    if(!IS_IE){
-      httpRequest.setRequestHeader('Content-Type', (geotriggersRequest) ? 'application/json' : 'application/x-www-form-urlencoded');
-    }
+    httpRequest.setRequestHeader('Content-Type', (geotriggersRequest) ? 'application/json' : 'application/x-www-form-urlencoded');
     httpRequest.send(body);
 
   };
