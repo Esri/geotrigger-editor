@@ -34,6 +34,7 @@
 #gt-content {
   @include full;
   left: 70px;
+  z-index: 0;
 
   &.gt-active {
     #gt-drawer-region {
@@ -51,7 +52,7 @@
   @include full;
   max-width:600px;
   min-width:400px;
-  z-index:2;
+  z-index: 2;
   right: auto;
   width: 0;
   display: none;
@@ -61,6 +62,7 @@
   @include full;
   left: auto;
   width: 100%;
+  z-index: 1;
 }
 
 #gt-map {
