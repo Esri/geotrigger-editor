@@ -1,15 +1,15 @@
 var request = require('request');
 var http = require('http');
-var metaserve = require('metaserve')('.');
+var metaserve = require('metaserve')('../../');
 
 http.createServer(function(req, res) {
-    if (req.url.match(/^\/proxy/)) {
-        // Handle the custom route
-        return proxy(req, res);
-    } else {
-        // Fall back to metaserve
-        metaserve(req, res);
-    }
+  if (req.url.match(/^\/proxy/)) {
+    // Handle the custom route
+    return proxy(req, res);
+  } else {
+    // Fall back to metaserve
+    metaserve(req, res);
+  }
 }).listen(8080);
 
 function notFound (res) {
@@ -40,6 +40,16 @@ function proxy (req, res) {
 
   var headers = req.headers;
   var method = req.method;
+
+  console.log(method + ' ' + url);
+
+  if (!headers['content-type']) {
+    if (matchProxy[1].match(/geotrigger\.arcgis\.com\//)) {
+      headers['content-type'] = 'application/json';
+    } else {
+      headers['content-type'] = 'application/x-www-form-urlencoded';
+    }
+  }
 
   delete headers.host;
 

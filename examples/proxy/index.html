@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ArcGIS Geotrigger Editor</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../../vendor/css/leaflet.css">
+  <link rel="stylesheet" href="../../vendor/css/esri-leaflet.min.css">
+  <link rel="stylesheet" href="../../vendor/css/leaflet.draw.css">
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="../../vendor/css/leaflet.ie.css">
+    <link rel="stylesheet" href="../../vendor/css/leaflet.draw.ie.css">
+  <![endif]-->
+  <!-- Base Styles -->
+  <link rel="stylesheet" href="../../dist/css/geotrigger-editor.css">
+  <!-- Theme Styles-->
+  <!-- <link rel="stylesheet" href="../../dist/css/themes/mint/mint.css"> -->
+  <!--[if lte IE 8]>
+    <script src="../../vendor/html5shiv.js"></script>
+  <![endif]-->
+
+  <style>
+  html, body {
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+  }
+  #gt-editor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  </style>
+</head>
+<body>
+  <div id="gt-editor"></div>
+
+  <script src="../../dist/js/geotrigger-editor.dependencies.js"></script>
+  <script src="../../dist/js/geotrigger-editor.js"></script>
+  <script>
+    $(function(){
+      GeotriggerEditor.start({
+        el: '#gt-editor', // optional: defaults to '#gt-editor'
+        credentials: { // required
+          clientId: 'rcMNAPBoIn2M1JoI', // required
+          clientSecret: '77edd9c16dde46ad9a93b79c83229887' // required
+        },
+        proxy: '/proxy/'
+      });
+    });
+  </script>
+</body>
+</html>

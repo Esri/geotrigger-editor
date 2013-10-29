@@ -17,7 +17,7 @@
   var tokenUrl          = "https://arcgis.com/sharing/oauth2/token";
   var registerDeviceUrl = "https://arcgis.com/sharing/oauth2/registerDevice";
   var exports           = {};
-  var IS_IE             = typeof XDomainRequest !== "undefined";
+  var CORS              = !!(window.XMLHttpRequest && 'withCredentials' in new XMLHttpRequest());
 
   if (!Function.prototype.bind) {
     Function.prototype.bind = function (oThis) {
@@ -58,6 +58,10 @@
     // set application id
     if(!options || !options.clientId) {
       throw new Error("Geotriggers.Session requires an `clientId` or a `session` parameter.");
+    }
+
+    if(!options.proxy && !CORS) {
+      throw new Error("This browser does not support CORS and a proxy has not been set.");
     }
 
     // merge defaults and options into `this`
@@ -274,18 +278,8 @@
       }
     }.bind(this);
 
-    // use XDomainRequest (ie8) or XMLHttpRequest (standard)
-    if (IS_IE) {
-      httpRequest = new XDomainRequest();
-      httpRequest.onload = handleSuccessfulResponse;
-      httpRequest.onerror = handleErrorResponse;
-      httpRequest.ontimeout = handleErrorResponse;
-    } else if (typeof XMLHttpRequest !== "undefined") {
-      httpRequest = new XMLHttpRequest();
-      httpRequest.onreadystatechange = handleStateChange;
-    } else {
-      throw new Error("This browser does not support XMLHttpRequest or XDomainRequest");
-    }
+    httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = handleStateChange;
 
     var body;
 
@@ -298,10 +292,7 @@
     }
 
     httpRequest.open("POST", url);
-
-    if(!IS_IE){
-      httpRequest.setRequestHeader('Content-Type', (geotriggersRequest) ? 'application/json' : 'application/x-www-form-urlencoded');
-    }
+    httpRequest.setRequestHeader('Content-Type', (geotriggersRequest) ? 'application/json' : 'application/x-www-form-urlencoded');
     httpRequest.send(body);
 
   };
