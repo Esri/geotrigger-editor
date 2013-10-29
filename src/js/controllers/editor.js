@@ -135,7 +135,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       }
     },
 
-    new: function() {
+    'new': function() {
       App.vent.trigger('trigger:new');
 
       var view = new App.Views.Form();
