@@ -11,24 +11,28 @@
 }
 
 .gt-tool {
+  background-color: $darker-gray;
+  border: none;
+  border-top: 1px solid $dark-gray;
+  border-bottom: 1px solid $darkest-gray;
+  color: $white;
   cursor: pointer;
-  border:none;
-  width:0;
-  height:0;
-  background-color:$darker-gray;
-  color:$white;
-  display:block;
+  display: block;
+  height: 0;
+  opacity: 0.7;
   padding: 30px 35px;
-  opacity:0.7;
-  position:relative;
+  width: 0;
+  position: relative;
+  overflow: visible;
+
   @include transition(opacity 200ms linear);
-  border-top:1px solid $dark-gray;
-  border-bottom:1px solid $darkest-gray;
+
   &.gt-tool-list {background:url('../img/icons/list.png') no-repeat center center transparent;}
   &.gt-tool-create {background:url('../img/icons/create.png') no-repeat center center transparent;}
   &.gt-tool-polygon {background:url('../img/icons/polygon.png') no-repeat center center transparent;}
   &.gt-tool-radius {background:url('../img/icons/radius.png') no-repeat center center transparent;}
   &.gt-tool-drivetime {background:url('../img/icons/drivetime.png') no-repeat center center transparent;}
+
   @include retina-display {
     &.gt-tool-list {background:url('../img/icons/list2x.png') no-repeat center center transparent; background-size: 24px;}
     &.gt-tool-create {background:url('../img/icons/create2x.png') no-repeat center center transparent; background-size: 24px;}
@@ -36,6 +40,7 @@
     &.gt-tool-radius {background:url('../img/icons/radius2x.png') no-repeat center center transparent; background-size: 24px;}
     &.gt-tool-drivetime {background:url('../img/icons/drivetime2x.png') no-repeat center center transparent; background-size: 24px;}
   }
+
   &:before {
     content:"";
     position: absolute;
