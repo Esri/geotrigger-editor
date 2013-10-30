@@ -13,3 +13,11 @@
   while (prop = properties.pop()) { con[prop] = con[prop] || empty; }
   while (method = methods.pop()) { con[method] = con[method] || dummy; }
 })(window.console = window.console || {});
+
+// string polyfill
+// http://jsperf.com/trim-polyfill
+if (typeof String.prototype.trim !== 'function') {
+  String.prototype.trim = function () {
+    return this.replace(/^\s+|\s+$/g, '');
+  }
+}
