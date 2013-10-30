@@ -2,43 +2,39 @@
 
   Handlebars.registerHelper('select', function(value, options) {
     // Create a select element
-    var select = document.createElement('select');
+    var select = $('<select>');
 
     // Populate it with the option HTML
-    select.innerHTML = options.fn(this);
+    select.html(options.fn(this));
 
     // Set the value
-    select.value = value;
+    select.find('option[value="' + value + '"]').attr('selected', 'selected');
 
     // Find the selected node, if it exists, add the selected attribute to it
-    if (select.children[select.selectedIndex]) {
-      select.children[select.selectedIndex].setAttribute('selected', 'selected');
-    }
 
-    return select.innerHTML;
+    return select.html();
   });
 
   Handlebars.registerHelper('selectShape', function(value, options) {
     // Create a select element
-    var select = document.createElement('select');
+    var select = $('<select>');
 
     // Populate it with the option HTML
-    select.innerHTML = options.fn(this);
+    select.html(options.fn(this));
+
+    var option;
 
     if (value && value.geo) {
       if (value.geo.geojson) {
-        select.value = 'polygon';
+        option = 'polygon';
       } else {
-        select.value = 'radius';
+        option = 'radius';
       }
     }
 
-    // Find the selected node, if it exists, add the selected attribute to it
-    if (select.children[select.selectedIndex]) {
-      select.children[select.selectedIndex].setAttribute('selected', 'selected');
-    }
+    select.find('option[value="' + option + '"]').attr('selected', 'selected');
 
-    return select.innerHTML;
+    return select.html();
   });
 
   Handlebars.registerHelper('actionIcon', function(action, shape) {

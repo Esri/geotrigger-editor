@@ -101,7 +101,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // callback URL
       if (currentActions.hasOwnProperty('callbackUrl')) {
         actionsHtml += App.Templates['form/actions/callbackUrl'](data);
-        this.$el.find('.gt-add-action[data-action="callbackUrl"').hide();
+        this.$el.find('.gt-add-action[data-action="callbackUrl"]').hide();
       }
 
       // tracking profile
