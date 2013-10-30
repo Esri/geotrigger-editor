@@ -9,9 +9,10 @@
     @include box-shadow(0 0 12px rgba(0,0,0,0.2));
     padding: 14px 20px;
     margin-top: -21px;
-    margin-left: 56px;
+    left: 80px;
     width: auto;
     white-space: nowrap;
+    background-color: $dark-gray;
     background-color: rgba(0,0,0,.8);
     position:absolute;
     &:before {
