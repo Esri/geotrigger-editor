@@ -23,6 +23,7 @@
       border: 8px solid transparent;
       border-right-color: $black; // fallback
       border-right-color: rgba(0,0,0,.8);
+      border-left: none;
       position:absolute;
       left: -8px;
       top: 50%;
@@ -36,5 +37,3 @@
     }
   }
 }
-
-
