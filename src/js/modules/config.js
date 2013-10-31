@@ -42,7 +42,8 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
     map: {
       basemap: 'Streets',
       center: [45.516484, -122.676339],
-      zoom: 12
+      zoom: 12,
+      options: {}
     },
 
     fitOnLoad: true,

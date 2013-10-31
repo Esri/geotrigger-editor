@@ -44,4 +44,12 @@ GeotriggerEditor.module('util', function(util, App, Backbone, Marionette, $, _) 
     return obj;
   };
 
+  util.isObject = function (obj) {
+    return Object.prototype.toString.call(obj) === '[object Object]';
+  };
+
+  util.isArray = function (obj) {
+    return Object.prototype.toString.call(obj) === '[object Array]';
+  };
+
 });
