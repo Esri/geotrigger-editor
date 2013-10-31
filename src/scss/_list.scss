@@ -126,14 +126,12 @@
     overflow: hidden;
     line-height: 1.5em;
     vertical-align: top;
-    padding-bottom: 0.5em;
-    margin-bottom:0;
+    padding-bottom: 0.25em;
+    margin-bottom: 0;
     margin-right: 64px;
     a {
       color: $dark-gray;
       text-decoration: none;
-      width:100%;
-      display: block;
       @include transition(color 100ms linear);
       &:hover {
         color: $blue;
