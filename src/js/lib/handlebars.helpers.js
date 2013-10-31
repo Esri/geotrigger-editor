@@ -37,6 +37,20 @@
     return select.html();
   });
 
+  Handlebars.registerHelper('shape', function(value, options) {
+    var str = '';
+
+    if (value && value.geo) {
+      if (value.geo.geojson) {
+        str = 'polygon';
+      } else {
+        str = 'radius';
+      }
+    }
+
+    return str;
+  });
+
   Handlebars.registerHelper('actionIcon', function(action, shape) {
     var classes = '';
     if (action === 'enter') {
