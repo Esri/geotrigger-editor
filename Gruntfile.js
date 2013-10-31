@@ -224,9 +224,13 @@ module.exports = function(grunt) {
     clean: {
       dist: {
         src: [
-          'dist/img/',
           'dist/css/',
           'dist/js/'
+        ]
+      },
+      img: {
+        src: [
+          'dist/img/'
         ]
       },
       dev: {
@@ -294,7 +298,11 @@ module.exports = function(grunt) {
     'compass:dist',
     'handlebars',
     'concat:dist',
-    'uglify:dist',
+    'uglify:dist'
+  ]);
+
+  grunt.registerTask('build_img', [
+    'clean:img',
     'smushit'
   ]);
 
