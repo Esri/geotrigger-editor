@@ -9,11 +9,23 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
     _setup: function(options) {
       // L.Icon.Default.imagePath = App.config.imagePath;
-      L.esri.get = L.esri.RequestHandlers.JSONP;
+
+      // force L.esri to use JSONP if proxy is set
+      if (options.proxy) {
+        L.esri.get = L.esri.RequestHandlers.JSONP;
+      }
+
       App.map = this.map = L.map(options.el).setView(App.config.map.center, App.config.map.zoom);
+
       this.map.zoomControl.setPosition('topright');
 
-      L.esri.basemapLayer(App.config.map.basemap).addTo(App.map);
+      if (App.util.isArray(App.config.map.basemaps)) {
+        for (var i = 0; i < App.config.map.basemaps.length; i++) {
+          L.esri.basemapLayer(App.config.map.basemaps[i], App.config.map.options).addTo(App.map);
+        }
+      } else {
+        L.esri.basemapLayer(App.config.map.basemap, App.config.map.options).addTo(App.map);
+      }
 
       this.Layers.start();
       this._eventBindings();

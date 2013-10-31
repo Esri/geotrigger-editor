@@ -222,24 +222,30 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     parseShape: function() {
       var layer = App.request('draw:layer');
-      window.layer = layer;
       var direction = this.ui.form.find('[name="condition[direction]"]');
       var geometry = this.ui.form.find('[name="geometry-type"]');
+      var shape = this.ui.form.find('.gt-shape-indicator');
+      var sections = this.ui.form.find('.gt-form-section');
       // var radius = this.ui.form.find('[name="radius"]'); // @TODO: radius
-      switch (true) {
-        case (layer instanceof L.Polygon):
-          if (direction.val() === null) {
-            direction.val('enter');
-          }
-          geometry.val('polygon');
-          break;
-        case (layer instanceof L.Circle):
-          if (direction.val() === null) {
-            direction.val('enter');
-          }
-          geometry.val('radius');
-          // radius.show().val(Math.round(layer.getRadius())); // @TODO: radius
-          break;
+
+      if (direction.val() === null) {
+        direction.val('enter');
+      }
+
+      if (layer instanceof L.Polygon) {
+        geometry.val('polygon');
+        shape.text('a polygon');
+        sections.show();
+      }
+      else if (layer instanceof L.Circle) {
+        geometry.val('radius');
+        shape.text('a radius');
+        // radius.show().val(Math.round(layer.getRadius())); // @TODO: radius
+        sections.show();
+      }
+      else {
+        sections.filter(':not(:first-child)').hide();
+        // this.$el.find('.gt-form-section:not(:first-child)').hide();
       }
     },
 
