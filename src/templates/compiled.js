@@ -122,7 +122,7 @@ function program1(depth0,data) {
 this["GeotriggerEditor"]["Templates"]["form/index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, stack2, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function";
+  var buffer = "", stack1, stack2, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, self=this, functionType="function";
 
 function program1(depth0,data) {
   
@@ -144,23 +144,33 @@ function program5(depth0,data) {
 
 function program7(depth0,data) {
   
-  
-  return "\n              <option value='polygon'>polygon</option>\n              <option value='radius'>circle</option>\n              ";
+  var buffer = "", stack1, options;
+  buffer += "\n            <span class=\"gt-shape-indicator\">a ";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.shape || depth0.shape),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "shape", depth0.condition, options)))
+    + "</span>\n            ";
+  return buffer;
   }
 
 function program9(depth0,data) {
   
   
-  return " gt-hide";
+  return "\n            <span class=\"gt-shape-indicator\">a...</span>\n            ";
   }
 
 function program11(depth0,data) {
   
   
-  return "\n      <button class='gt-button gt-button-blue gt-submit'>Update</button>\n      <ul class='gt-edit-controls'>\n        <li>\n          <a class='gt-reset-delete' href='#'>&#x2716;</a>\n        </li>\n        <li>\n          <button class='gt-item-delete gt-button-delete'></button>\n        </li>\n      </ul>\n      ";
+  return " gt-hide";
   }
 
 function program13(depth0,data) {
+  
+  
+  return "\n      <button class='gt-button gt-button-blue gt-submit'>Update</button>\n      <ul class='gt-edit-controls'>\n        <li>\n          <a class='gt-reset-delete' href='#'>&#x2716;</a>\n        </li>\n        <li>\n          <button class='gt-item-delete gt-button-delete'></button>\n        </li>\n      </ul>\n      ";
+  }
+
+function program15(depth0,data) {
   
   
   return "\n      <button class='gt-button gt-button-blue gt-submit'>Save</button>\n      ";
@@ -176,20 +186,22 @@ function program13(depth0,data) {
   options = {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data};
   stack2 = ((stack1 = helpers.select || depth0.select),stack1 ? stack1.call(depth0, ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options) : helperMissing.call(depth0, "select", ((stack1 = depth0.condition),stack1 == null || stack1 === false ? stack1 : stack1.direction), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n            </select>\n\n            <span class=\"gt-conjunction\">a</span>\n\n            <select name='geometry-type' class='gt-input-right'>\n              ";
-  options = {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data};
-  stack2 = ((stack1 = helpers.selectShape || depth0.selectShape),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "selectShape", depth0.condition, options));
+  buffer += "\n            </select>\n\n            ";
+  stack2 = helpers['if'].call(depth0, depth0.condition, {hash:{},inverse:self.program(9, program9, data),fn:self.program(7, program7, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n            </select>\n        </div>\n      </div>\n    </section>\n\n    <section class=\"gt-form-section gt-actions\"></section>\n\n    <section class=\"gt-form-section gt-action-toggles\">\n      <button data-action=\"notification\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; send a notification</button>\n      <button data-action=\"callbackUrl\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; post to a callback URL</button>\n      <button data-action=\"trackingProfile\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; change the tracking profile</button>\n    </section>\n\n    <section class=\"gt-form-section gt-title-wrapper\">\n      <button class=\"gt-button gt-button-light-gray gt-button-small gt-add-title";
-  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
+  buffer += "\n            <input name=\"geometry-type\" type=\"hidden\" value=\"";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.shape || depth0.shape),stack1 ? stack1.call(depth0, depth0.condition, options) : helperMissing.call(depth0, "shape", depth0.condition, options)))
+    + "\">\n        </div>\n      </div>\n    </section>\n\n    <section class=\"gt-form-section gt-actions\"></section>\n\n    <section class=\"gt-form-section gt-action-toggles\">\n      <button data-action=\"notification\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; send a notification</button>\n      <button data-action=\"callbackUrl\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; post to a callback URL</button>\n      <button data-action=\"trackingProfile\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; change the tracking profile</button>\n    </section>\n\n    <section class=\"gt-form-section gt-title-wrapper\">\n      <button class=\"gt-button gt-button-light-gray gt-button-small gt-add-title";
+  stack2 = helpers['if'].call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\">&#043; add a title</button>\n\n      <div class='gt-title gt-property";
-  stack2 = helpers.unless.call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.noop,fn:self.program(9, program9, data),data:data});
+  stack2 = helpers.unless.call(depth0, ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "'>\n        <div class=\"gt-property-header\">\n          Title\n          <a class=\"gt-remove-title gt-delete-icon\"></a>\n        </div>\n\n        <div class=\"gt-property-item\">\n          <input class='gt-input-fill' type='text' name='properties[title]' placeholder='Geotrigger Title' value='"
     + escapeExpression(((stack1 = ((stack1 = depth0.properties),stack1 == null || stack1 === false ? stack1 : stack1.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "'>\n        </div>\n      </div>\n    </section>\n\n    <section class='gt-form-section gt-submit-wrapper'>\n      ";
-  stack2 = helpers['if'].call(depth0, depth0.triggerId, {hash:{},inverse:self.program(13, program13, data),fn:self.program(11, program11, data),data:data});
+  stack2 = helpers['if'].call(depth0, depth0.triggerId, {hash:{},inverse:self.program(15, program15, data),fn:self.program(13, program13, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n    </section>\n  </form>\n</div>";
   return buffer;

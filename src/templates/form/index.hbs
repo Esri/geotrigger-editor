@@ -23,14 +23,12 @@
               {{/select}}
             </select>
 
-            <span class="gt-conjunction">a</span>
-
-            <select name='geometry-type' class='gt-input-right'>
-              {{#selectShape condition}}
-              <option value='polygon'>polygon</option>
-              <option value='radius'>circle</option>
-              {{/selectShape}}
-            </select>
+            {{#if condition}}
+            <span class="gt-shape-indicator">a {{shape condition}}</span>
+            {{else}}
+            <span class="gt-shape-indicator">a...</span>
+            {{/if}}
+            <input name="geometry-type" type="hidden" value="{{shape condition}}">
         </div>
       </div>
     </section>
