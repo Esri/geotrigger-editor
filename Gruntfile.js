@@ -27,8 +27,6 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'dist/js/<%= pkg.name %>.dependencies.min.js': [
-            'vendor/json2.js',
-            'vendor/jquery-1.10.2.js',
             'vendor/underscore.js',
             'vendor/backbone.js',
             'vendor/backbone.marionette.js',
@@ -140,8 +138,6 @@ module.exports = function(grunt) {
       dev: {
         files: {
           'dev/js/<%= pkg.name %>.dependencies.js': [
-            'vendor/json2.js',
-            'vendor/jquery-1.10.2.js',
             'vendor/underscore.js',
             'vendor/backbone.js',
             'vendor/backbone.marionette.js',
@@ -166,8 +162,6 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'dist/js/<%= pkg.name %>.dependencies.js': [
-            'vendor/json2.js',
-            'vendor/jquery-1.10.2.js',
             'vendor/underscore.js',
             'vendor/backbone.js',
             'vendor/backbone.marionette.js',
