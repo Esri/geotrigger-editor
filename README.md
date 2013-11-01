@@ -18,6 +18,7 @@ White-label client-side editor for creating and editing Geotrigger rules.
 * The built JavaScript and CSS files are available in both expanded and minified versions in `dist/js` and `dist/css` respectively.
 * All icon images used by the Editor are in `dist/img`.
 * The `dist/index.html` file shows the easiest way to get the editor running in a browser.
+* If you need to support IE 8/9, you're going to need a server-side [proxy](#proxy).
 
 **Dependencies**:
 
@@ -113,6 +114,12 @@ The `proxy` option should be an absolute path to the proxy server endpoint (star
 #### Server
 
 On the server side, you'll need a working proxy to forward API requests to `geotrigger.arcgis.com/*` and `arcgis.com/sharing/oauth2/*` and return the response back to the browser. `/examples/proxy/` shows how to do this using Node.js.
+
+---
+
+### Browser Support
+
+The Geotrigger Editor is tested against the latest versions of Chrome, Firefox, Safari, and Internet Explorer versions 8, 9, and 10.
 
 ---
 
