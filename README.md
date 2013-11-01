@@ -125,8 +125,6 @@ The Geotrigger Editor is tested against the latest versions of Chrome, Firefox, 
 
 ### Developing & Building
 
-If you want to run or build the Geotrigger Editor from source, here's some info for you!
-
 To run the development environment, you will need the following:
 
 1. [Node.js](http://nodejs.org/)
