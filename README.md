@@ -1,6 +1,6 @@
 # ArcGIS Geotrigger Editor
 
-White-label client-side editor for creating and editing Geotrigger rules.
+White-label client-side editor for creating and editing Geotrigger rules. If you're new to the ArcGIS Geotrigger Service, check out the [documentation](http://esri.github.io/geotrigger-docs/).
 
 ## Features
 
@@ -124,8 +124,6 @@ The Geotrigger Editor is tested against the latest versions of Chrome, Firefox, 
 ---
 
 ### Developing & Building
-
-If you want to run or build the Geotrigger Editor from source, here's some info for you!
 
 To run the development environment, you will need the following:
 
