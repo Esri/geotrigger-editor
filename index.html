@@ -19,6 +19,12 @@
     <script src="vendor/html5shiv.js"></script>
   <![endif]-->
 
+  <!-- @TODO: move to geotrigger-editor.dependencies.ie.js -->
+  <!--[if lte IE 8]>
+    <script src="vendor/json2.js"></script>
+    <script src="vendor/html5shiv.js"></script>
+  <![endif]-->
+
   <style>
   html, body {
     padding: 0;
@@ -37,10 +43,13 @@
 <body>
   <div id="gt-editor"></div>
 
-  <!-- dependencies -->
+  <!-- vendor dependencies offloaded to CDN -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+
+  <!-- local vendor dependencies -->
   <script src="dev/js/geotrigger-editor.dependencies.js"></script>
 
-  <!-- editor -->
+  <!-- editor app -->
   <script src="dev/js/geotrigger-editor.js"></script>
 
   <!-- initializer -->

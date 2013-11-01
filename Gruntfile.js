@@ -27,8 +27,6 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'dist/js/<%= pkg.name %>.dependencies.min.js': [
-            'vendor/json2.js',
-            'vendor/jquery-1.10.2.js',
             'vendor/underscore.js',
             'vendor/backbone.js',
             'vendor/backbone.marionette.js',
@@ -77,11 +75,18 @@ module.exports = function(grunt) {
 
     compass: {
       // Production
-      dist: {
+      distmin: {
         options: {
           sassDir: 'src/scss',
           cssDir: 'dist/css',
           environment: 'production'
+        }
+      },
+      dist: {
+        options: {
+          sassDir: 'src/scss',
+          cssDir: 'dist/css',
+          noLineComments: true
         }
       },
       // Development
@@ -90,6 +95,13 @@ module.exports = function(grunt) {
           sassDir: 'src/scss',
           cssDir: 'dev/css'
         }
+      }
+    },
+
+    rename: {
+      distmin: {
+        src: 'dist/css/geotrigger-editor.css',
+        dest: 'dist/css/geotrigger-editor.min.css'
       }
     },
 
@@ -126,8 +138,6 @@ module.exports = function(grunt) {
       dev: {
         files: {
           'dev/js/<%= pkg.name %>.dependencies.js': [
-            'vendor/json2.js',
-            'vendor/jquery-1.10.2.js',
             'vendor/underscore.js',
             'vendor/backbone.js',
             'vendor/backbone.marionette.js',
@@ -152,8 +162,6 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'dist/js/<%= pkg.name %>.dependencies.js': [
-            'vendor/json2.js',
-            'vendor/jquery-1.10.2.js',
             'vendor/underscore.js',
             'vendor/backbone.js',
             'vendor/backbone.marionette.js',
@@ -295,6 +303,8 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'test',
     'clean:dist',
+    'compass:distmin',
+    'rename:distmin',
     'compass:dist',
     'handlebars',
     'concat:dist',
