@@ -20,14 +20,15 @@
 
   input[type="search"] {
     @include box-sizing(border-box);
-    background: url(../img/icons/search2.png) no-repeat 4px center $white;
+    background: url(../img/icons/search.png) no-repeat 4px center $white;
     padding: 0.75em 0.66em 0.75em 32px;
 
     @include retina-display {
-      background: url(../img/icons/search22x.png) no-repeat 4px center $white;
+      background: url(../img/icons/search@2x.png) no-repeat 4px center $white;
       background-size: 24px;
     }
   }
+
   .gt-icon-clear {
     background: url('../img/icons/delete.png') no-repeat center center transparent;
     background-size: 16px;
@@ -40,8 +41,7 @@
     right: 2.6em;
 
     @include retina-display {
-      background: url('../img/icons/delete@2x.png') no-repeat center center transparent;
-      background-size: 16px;
+      background-image: url('../img/icons/delete@2x.png');
     }
   }
 }
@@ -79,35 +79,36 @@
   }
 
   .gt-icon-enter {
-    width:48px;
-    height:48px;
-    display:inline-block;
-    float: left;
+    background: transparent no-repeat center center;
+    background-size: 36px;
     cursor: pointer;
+    display: inline-block;
+    float: left;
+    height: 48px;
     margin-top: 6px;
     margin-left: -48px;
-    background: url('../img/icons/enter-polygon.png') no-repeat center center transparent;
-    background-size: 36px;
-    &.gt-icon-polygon {background: url('../img/icons/enter-polygon.png') no-repeat center center transparent;}
-    &.gt-icon-radius {background: url('../img/icons/enter-radius.png') no-repeat center center transparent;}
-    &.gt-icon-drivetime{background: url('../img/icons/enter-drivetime.png') no-repeat center center transparent;}
+    width: 48px;
+
+    &.gt-icon-polygon { background-image: url('../img/icons/enter-polygon.png'); }
+    &.gt-icon-radius  { background-image: url('../img/icons/enter-radius.png'); }
+
     @include retina-display {
-      background: url('../img/icons/enter-polygon2x.png') no-repeat center center transparent; background-size: 36px;
-      &.gt-icon-polygon {background: url('../img/icons/enter-polygon2x.png') no-repeat center center transparent; background-size: 36px;}
-      &.gt-icon-radius {background: url('../img/icons/enter-radius2x.png') no-repeat center center transparent; background-size: 36px;}
-      &.gt-icon-drivetime{background: url('../img/icons/enter-drivetime2x.png') no-repeat center center transparent; background-size: 36px;}
+      background-image: url('../img/icons/enter-polygon2x.png');
+
+      &.gt-icon-polygon { background-image: url('../img/icons/enter-polygon@2x.png'); }
+      &.gt-icon-radius  { background-image: url('../img/icons/enter-radius@2x.png'); }
     }
   }
 
   .gt-icon-exit {
     @extend .gt-icon-enter;
-    &.gt-icon-polygon {background: url('../img/icons/exit-polygon.png') no-repeat center center transparent;}
-    &.gt-icon-radius {background: url('../img/icons/exit-radius.png') no-repeat center center transparent;}
-    &.gt-icon-drivetime{background: url('../img/icons/exit-drivetime.png') no-repeat center center transparent;}
+
+    &.gt-icon-polygon { background-image: url('../img/icons/exit-polygon.png'); }
+    &.gt-icon-radius  { background-image: url('../img/icons/exit-radius.png'); }
+
     @include retina-display {
-      &.gt-icon-polygon {background: url('../img/icons/exit-polygon2x.png') no-repeat center center transparent; background-size: 36px;}
-      &.gt-icon-radius {background: url('../img/icons/exit-radius2x.png') no-repeat center center transparent; background-size: 36px;}
-      &.gt-icon-drivetime{background: url('../img/icons/exit-drivetime2x.png') no-repeat center center transparent; background-size: 36px;}
+      &.gt-icon-polygon { background-image: url('../img/icons/exit-polygon@2x.png'); }
+      &.gt-icon-radius  { background-image: url('../img/icons/exit-radius@2x.png'); }
     }
   }
 
@@ -339,12 +340,14 @@
     top: 50%;
     margin-top: -20px;
   }
-  .gt-icon-polygon {background:url('../img/icons/polygon-dark.png') no-repeat center center;}
-  .gt-icon-radius {background:url('../img/icons/radius-dark.png') no-repeat center center;}
-  .gt-icon-create {background:url('../img/icons/create-dark.png') no-repeat center center;}
+
+  .gt-icon-polygon { background: url('../img/icons/polygon-dark.png') no-repeat center center; }
+  .gt-icon-radius  { background: url('../img/icons/radius-dark.png') no-repeat center center; }
+  .gt-icon-create  { background: url('../img/icons/create-dark.png') no-repeat center center; }
+
   @include retina-display {
-    .gt-icon-polygon {background:url('../img/icons/polygon-dark2x.png') no-repeat center center; background-size:24px;}
-    .gt-icon-radius {background:url('../img/icons/radius-dark2x.png') no-repeat center center; background-size:24px;}
-    .gt-icon-create {background:url('../img/icons/create-dark2x.png') no-repeat center center; background-size:24px;}
+    .gt-icon-polygon { background: url('../img/icons/polygon-dark@2x.png') no-repeat center center; background-size:24px; }
+    .gt-icon-radius  { background: url('../img/icons/radius-dark@2x.png') no-repeat center center; background-size:24px; }
+    .gt-icon-create  { background: url('../img/icons/create-dark@2x.png') no-repeat center center; background-size:24px; }
   }
 }
