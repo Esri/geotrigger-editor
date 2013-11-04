@@ -44,34 +44,34 @@
 }
 
 .gt-panel-top-bar-button {
-  width:62px;
-  height:62px;
-  float:left;
+  background: transparent no-repeat center center;
+  background-size: 24px;
+  display: inline-block;
+  float: left;
+  height: 62px;
+  width: 62px;
+
   @include box-sizing(border-box);
-  display:inline-block;
-  background:$white;
   @include transition(background-color 100ms linear);
+
   &.gt-close-drawer {
-    float:right;
-    background:url('../img/icons/x.png') no-repeat center center transparent;
-    @include retina-display(){background:url('../img/icons/x2x.png') no-repeat center center transparent; background-size: 24px;}
+    background-image: url('../img/icons/x.png');
     border-left: 1px solid $lighter-gray;
+    float: right;
+
     @include retina-display() {
-      background: url('../img/icons/x2x.png') no-repeat center center transparent;
-      background-size: 24px;
+      background-image: url('../img/icons/x@2x.png');
     }
   }
+
   &.gt-back-to-list {
-    float:left;
-    background:url('../img/icons/left-arrow.png') no-repeat center center transparent;
-    border-right:1px solid $lighter-gray;
-    @include retina-display(){background:url('../img/icons/left-arrow2x.png') no-repeat center center transparent; background-size: 24px;}
-  }
-  &.gt-new-trigger {
-    @extend .gt-back-to-list;
-    background:url('../img/icons/create.png') no-repeat center center transparent;
+    background-image: url('../img/icons/left-arrow.png');
     border-right: 1px solid $lighter-gray;
-    @include retina-display(){background:url('../img/icons/create2x.png') no-repeat center center transparent; background-size: 24px;}
+    float: left;
+
+    @include retina-display() {
+      background-image: url('../img/icons/left-arrow@2x.png');
+    }
   }
 }
 
