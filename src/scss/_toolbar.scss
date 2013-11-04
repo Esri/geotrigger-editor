@@ -1,17 +1,19 @@
 /* - - - - - - - - - - Left Toolbar - - - - - - - - - - */
 #gt-controls-region {
-  position:absolute;
-  z-index:3;
-  width:70px;
-  top:0;
-  bottom:0;
-  background:$darker-gray;
-  left:0;
-  border-right:1px solid $darkest-gray;
+  background: $darker-gray;
+  border-right: 1px solid $darkest-gray;
+  width: 70px;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
 }
 
 .gt-tool {
-  background-color: $darker-gray;
+  background: no-repeat center center transparent;
+  background-size: 24px;
   border: none;
   border-top: 1px solid $dark-gray;
   border-bottom: 1px solid $darkest-gray;
@@ -20,48 +22,46 @@
   display: block;
   height: 0;
   opacity: 0.7;
-  padding: 30px 35px;
-  width: 0;
-  position: relative;
   overflow: visible;
+  padding: 30px 35px;
+  position: relative;
+  width: 0;
 
   @include transition(opacity 200ms linear);
 
-  &.gt-tool-list {background:url('../img/icons/list.png') no-repeat center center transparent;}
-  &.gt-tool-create {background:url('../img/icons/create.png') no-repeat center center transparent;}
-  &.gt-tool-polygon {background:url('../img/icons/polygon.png') no-repeat center center transparent;}
-  &.gt-tool-radius {background:url('../img/icons/radius.png') no-repeat center center transparent;}
-  &.gt-tool-drivetime {background:url('../img/icons/drivetime.png') no-repeat center center transparent;}
+  &.gt-tool-list      { background-image: url('../img/icons/list.png'); }
+  &.gt-tool-create    { background-image: url('../img/icons/create.png'); }
+  &.gt-tool-polygon   { background-image: url('../img/icons/polygon.png'); }
+  &.gt-tool-radius    { background-image: url('../img/icons/radius.png'); }
 
   @include retina-display {
-    &.gt-tool-list {background:url('../img/icons/list2x.png') no-repeat center center transparent; background-size: 24px;}
-    &.gt-tool-create {background:url('../img/icons/create2x.png') no-repeat center center transparent; background-size: 24px;}
-    &.gt-tool-polygon {background:url('../img/icons/polygon2x.png') no-repeat center center transparent; background-size: 24px;}
-    &.gt-tool-radius {background:url('../img/icons/radius2x.png') no-repeat center center transparent; background-size: 24px;}
-    &.gt-tool-drivetime {background:url('../img/icons/drivetime2x.png') no-repeat center center transparent; background-size: 24px;}
+    &.gt-tool-list      { background-image: url('../img/icons/list@2x.png'); }
+    &.gt-tool-create    { background-image: url('../img/icons/create@2x.png'); }
+    &.gt-tool-polygon   { background-image: url('../img/icons/polygon@2x.png'); }
+    &.gt-tool-radius    { background-image: url('../img/icons/radius@2x.png'); }
   }
 
   &:before {
-    content:"";
+    content: "";
+    opacity: 0;
+    padding: 0;
+
     position: absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    padding:0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
     @include background-image(radial-gradient(100% 100%, rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%));
-    opacity:0;
   }
+
   &:hover {
-    opacity:1;
-    &:before{
-      opacity:0.3;
-    }
+    opacity: 1;
+    &:before { opacity: 0.3; }
   }
+
   &.gt-active {
-    opacity:1;
-    &:before {
-      opacity:1;
-    }
+    opacity: 1;
+    &:before { opacity: 1; }
   }
 }
