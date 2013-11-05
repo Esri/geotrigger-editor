@@ -18,7 +18,7 @@
 .gt-delete-icon {
   @extend .gt-edit-icon;
 
-  background: url('../img/icons/trash.png') no-repeat center center transparent;
+  background-image: url('../img/icons/trash.png');
   margin-left: 6px;
 
   @include retina-display { background-image: url('../img/icons/trash@2x.png'); }
