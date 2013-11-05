@@ -359,7 +359,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         data.condition.geo = {
           'latitude': latlng.lat,
           'longitude': latlng.lng,
-          'distance': layer.getRadius()
+          'distance': Math.round(layer.getRadius())
         };
       }
 
