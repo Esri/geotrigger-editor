@@ -42,7 +42,6 @@ module.exports = function(grunt) {
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
             'src/js/models/*.js',
-            'src/js/layouts/*.js',
             'src/js/views/*.js'
           ]
         }
@@ -120,7 +119,6 @@ module.exports = function(grunt) {
       },
       files: [
         'src/js/controllers/*.js',
-        'src/js/layouts/*.js',
         'src/js/models/*.js',
         'src/js/modules/*.js',
         'src/js/views/*.js',
@@ -151,7 +149,6 @@ module.exports = function(grunt) {
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
             'src/js/models/*.js',
-            'src/js/layouts/*.js',
             'src/js/views/*.js'
           ]
         }
@@ -174,7 +171,6 @@ module.exports = function(grunt) {
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
             'src/js/models/*.js',
-            'src/js/layouts/*.js',
             'src/js/views/*.js'
           ]
         }
@@ -185,7 +181,6 @@ module.exports = function(grunt) {
       generic: {
         src: [
           'src/js/controllers/*.js',
-          'src/js/layouts/*.js',
           'src/js/models/*.js',
           'src/js/modules/*.js',
           'src/js/views/*.js',
