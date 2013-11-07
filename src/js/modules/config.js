@@ -1,5 +1,12 @@
 GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $, _) {
 
+  this.startWithParent = false;
+
+  // App Configuration
+  // -----------------
+
+  // default shape options
+
   var sharedOptions = {
     showArea: false,
     shapeOptions: {
@@ -38,7 +45,12 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
     }
   };
 
+  // default configuration
+
   var defaults = {
+
+    credentials: {},
+
     map: {
       basemap: 'Streets',
       center: [45.516484, -122.676339],
@@ -52,12 +64,18 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
     imagePath: '/images',
     sharedOptions: sharedOptions,
     editOptions: editOptions,
-    highlightOptions: highlightOptions
+    highlightOptions: highlightOptions,
+
+    persistSession: true
 
   };
 
-  Config.addInitializer(function(options) {
+  // merge options into defaults on initialization
+
+  function setup (options) {
     App.config = _.deepExtend(defaults, options);
-  });
+  }
+
+  Config.addInitializer(setup);
 
 });
