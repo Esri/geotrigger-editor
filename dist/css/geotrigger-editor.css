@@ -320,7 +320,7 @@ h5 {
 }
 
 .gt-delete-icon {
-  background: url("../img/icons/trash.png") no-repeat center center transparent;
+  background-image: url("../img/icons/trash.png");
   margin-left: 6px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {

@@ -42,8 +42,6 @@ module.exports = function(grunt) {
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
             'src/js/models/*.js',
-            'src/js/collections/*.js',
-            'src/js/layouts/*.js',
             'src/js/views/*.js'
           ]
         }
@@ -120,9 +118,7 @@ module.exports = function(grunt) {
         'boss': true
       },
       files: [
-        'src/js/collections/*.js',
         'src/js/controllers/*.js',
-        'src/js/layouts/*.js',
         'src/js/models/*.js',
         'src/js/modules/*.js',
         'src/js/views/*.js',
@@ -153,8 +149,6 @@ module.exports = function(grunt) {
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
             'src/js/models/*.js',
-            'src/js/collections/*.js',
-            'src/js/layouts/*.js',
             'src/js/views/*.js'
           ]
         }
@@ -177,8 +171,6 @@ module.exports = function(grunt) {
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
             'src/js/models/*.js',
-            'src/js/collections/*.js',
-            'src/js/layouts/*.js',
             'src/js/views/*.js'
           ]
         }
@@ -188,9 +180,7 @@ module.exports = function(grunt) {
     complexity: {
       generic: {
         src: [
-          'src/js/collections/*.js',
           'src/js/controllers/*.js',
-          'src/js/layouts/*.js',
           'src/js/models/*.js',
           'src/js/modules/*.js',
           'src/js/views/*.js',

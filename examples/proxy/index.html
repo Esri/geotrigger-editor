@@ -96,11 +96,11 @@
 
         var config = {
           el: '#gt-editor',
-          credentials: {
+          session: {
             clientId: $('#client-id').val(),
-            clientSecret: $('#client-secret').val()
-          },
-          proxy: '/proxy/'
+            clientSecret: $('#client-secret').val(),
+            proxy: '/proxy/'
+          }
         };
 
         $(this).remove();
