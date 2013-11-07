@@ -49,7 +49,7 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
 
   var defaults = {
 
-    credentials: {},
+    session: {},
 
     map: {
       basemap: 'Streets',
@@ -59,14 +59,11 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
     },
 
     fitOnLoad: true,
-    proxy: false,
 
     imagePath: '/images',
     sharedOptions: sharedOptions,
     editOptions: editOptions,
-    highlightOptions: highlightOptions,
-
-    persistSession: true
+    highlightOptions: highlightOptions
 
   };
 

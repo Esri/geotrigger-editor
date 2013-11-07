@@ -1,11 +1,11 @@
 var GeotriggerEditor = new Backbone.Marionette.Application();
 
 GeotriggerEditor.addInitializer(function(options) {
-  var el = options && options.el ? options.el : '#gt-editor';
-  var layout = this.regions = new this.Layouts.Main();
-
-  this.addRegions({ mainRegion: el });
-  this.mainRegion.show(layout);
+  this.Config.start(options);
+  this.API.start();
+  this.regions = new this.Layouts.Main();
+  this.addRegions({ mainRegion: this.config.el });
+  this.mainRegion.show(this.regions);
 });
 
 
@@ -2348,30 +2348,34 @@ return function underscoreDeepExtend (obj) {
 
 GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
 
-  API.addInitializer(function(options){
-    if (!options ||
-        !options.credentials ||
-        !options.credentials.clientId ||
-        !options.credentials.clientSecret) {
-      throw new Error('GeotriggerEditor requires a `credentials` object with `clientId` and `clientSecret` properties');
+  this.startWithParent = false;
+
+  // Geotrigger API
+  // --------------
+
+  function createSession () {
+    if (!App.config.session ||
+        !App.config.session.clientId ||
+        !App.config.session.clientSecret) {
+      throw new Error('GeotriggerEditor requires a `session` object with `clientId` and `clientSecret` properties');
     }
 
-    var sessionOptions = {
-      clientId: options.credentials.clientId,
-      clientSecret: options.credentials.clientSecret,
-      persistSession: false
-    };
+    this.session = new Geotriggers.Session(App.config.session);
+  }
 
-    if (options.proxy) {
-      sessionOptions.proxy = options.proxy;
-    }
-
-    this.session = new Geotriggers.Session(sessionOptions);
-  });
+  API.addInitializer(createSession);
 
 });
 
+
 GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $, _) {
+
+  this.startWithParent = false;
+
+  // App Configuration
+  // -----------------
+
+  // default shape options
 
   var sharedOptions = {
     showArea: false,
@@ -2411,7 +2415,12 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
     }
   };
 
+  // default configuration
+
   var defaults = {
+
+    session: {},
+
     map: {
       basemap: 'Streets',
       center: [45.516484, -122.676339],
@@ -2420,7 +2429,6 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
     },
 
     fitOnLoad: true,
-    proxy: false,
 
     imagePath: '/images',
     sharedOptions: sharedOptions,
@@ -2429,11 +2437,16 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
 
   };
 
-  Config.addInitializer(function(options) {
+  // merge options into defaults on initialization
+
+  function setup (options) {
     App.config = _.deepExtend(defaults, options);
-  });
+  }
+
+  Config.addInitializer(setup);
 
 });
+
 
 GeotriggerEditor.module('util', function(util, App, Backbone, Marionette, $, _) {
 
@@ -2636,8 +2649,8 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
   var Controller = function() {
     App.collections = App.collections || {};
-    App.collections.triggers = new App.Collections.Triggers();
-    App.collections.notifications = new App.Collections.Notifications();
+    App.collections.triggers = new App.Models.Triggers();
+    App.collections.notifications = new App.Models.Notifications();
   };
 
   _.extend(Controller.prototype, {
@@ -2865,7 +2878,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       // L.Icon.Default.imagePath = App.config.imagePath;
 
       // force L.esri to use JSONP if proxy is set
-      if (options.proxy) {
+      if (App.config.session.proxy) {
         L.esri.get = L.esri.RequestHandlers.JSONP;
       }
 
@@ -2873,11 +2886,15 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
       this.map.zoomControl.setPosition('topright');
 
+      // allow multiple basemaps
       if (App.util.isArray(App.config.map.basemaps)) {
         for (var i = 0; i < App.config.map.basemaps.length; i++) {
           L.esri.basemapLayer(App.config.map.basemaps[i], App.config.map.options).addTo(App.map);
         }
-      } else {
+      }
+
+      // default to one basemap
+      else {
         L.esri.basemapLayer(App.config.map.basemap, App.config.map.options).addTo(App.map);
       }
 
@@ -2972,7 +2989,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       }
 
       return circle;
-    },
+    }
   });
 
   // Map Initializer
@@ -2997,6 +3014,13 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
       'message': 'everything\'s fine'
     }
 
+  });
+
+  // Notification Collection
+  // -----------------------
+
+  Models.Notifications = Backbone.Collection.extend({
+    model: Models.Notification
   });
 
 });
@@ -3118,26 +3142,11 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
 
   });
 
-});
-
-GeotriggerEditor.module('Collections', function(Collections, App, Backbone, Marionette, $, _) {
-
-  // Notifications Collection
-  // ------------------------
-
-  Collections.Notifications = Backbone.Collection.extend({
-    model: App.Models.Notification
-  });
-
-});
-
-GeotriggerEditor.module('Collections', function(Collections, App, Backbone, Marionette, $, _) {
-
   // Trigger Collection
   // ------------------
 
-  Collections.Triggers = Backbone.Collection.extend({
-    model: App.Models.Trigger,
+  Models.Triggers = Backbone.Collection.extend({
+    model: Models.Trigger,
 
     fetch: function(options) {
       var callback = _.bind(function(error, response) {
@@ -3161,27 +3170,6 @@ GeotriggerEditor.module('Collections', function(Collections, App, Backbone, Mari
   });
 
 });
-
-
-GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, $, _) {
-
-  // Layout Drawer View
-  // ------------------
-
-  Layouts.Main = Backbone.Marionette.Layout.extend({
-    template: App.Templates['main'],
-    id: 'gt-regions',
-
-    regions: {
-      'controls' : '#gt-controls-region',
-      'drawer'   : '#gt-drawer-region',
-      'map'      : '#gt-map-region',
-      'notes'    : '#gt-notes-region'
-    }
-  });
-
-});
-
 
 GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 
@@ -3670,7 +3658,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         data.condition.geo = {
           'latitude': latlng.lat,
           'longitude': latlng.lng,
-          'distance': layer.getRadius()
+          'distance': Math.round(layer.getRadius())
         };
       }
 
@@ -3904,6 +3892,26 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
   });
 
 });
+
+GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, $, _) {
+
+  // Layout Drawer View
+  // ------------------
+
+  Layouts.Main = Backbone.Marionette.Layout.extend({
+    template: App.Templates['main'],
+    id: 'gt-regions',
+
+    regions: {
+      'controls' : '#gt-controls-region',
+      'drawer'   : '#gt-drawer-region',
+      'map'      : '#gt-map-region',
+      'notes'    : '#gt-notes-region'
+    }
+  });
+
+});
+
 
 GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
 

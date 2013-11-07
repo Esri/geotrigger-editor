@@ -60,7 +60,7 @@ The Editor is a [Backbone.Marionette](https://github.com/marionettejs/backbone.m
 ```js
 GeotriggerEditor.start({
   el: '#gt-editor', // optional: defaults to '#gt-editor'
-  credentials: { // required
+  session: { // required
     clientId: 'XXXXXX', // required
     clientSecret: 'XXXXXX' // required
   }
@@ -75,12 +75,16 @@ The `options` parameter is an object that can contain the following configuratio
 
 The `el` option represents the HTML element the Geotrigger Editor will be attached to. Upon initialization, it should be an empty `<div>`. The default setting is `#gt-editor` (`el` can be omitted if this element exists).
 
-#### `credentials`
+#### `session`
 
-The `credentials` object is required to authenticate with ArcGIS and interact with the Geotrigger Service. It has two required properties:
+The `session` object is required to authenticate with ArcGIS and interact with the Geotrigger Service. It has two required properties:
 
 * `clientId` your ArcGIS application's client ID
 * `clientSecret`: your ArcGIS application's client secret
+
+The client ID and secret are required in order for the Geotrigger Service to grant editing rights to the user for the associated application.
+
+It can take all of the same properties as those outlined in the geotriggers.js [config options](https://github.com/Esri/geotriggers-js#config-options).
 
 #### more
 
@@ -101,7 +105,7 @@ On the client side, just be sure to start the editor with a path to the proxy, l
 ```js
 GeotriggerEditor.start({
   el: '#gt-editor', // optional: defaults to '#gt-editor'
-  credentials: { // required
+  session: { // required
     clientId: 'XXXXXX', // required
     clientSecret: 'XXXXXX' // required
   },
