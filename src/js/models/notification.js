@@ -12,4 +12,11 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
 
   });
 
+  // Notification Collection
+  // -----------------------
+
+  Models.Notifications = Backbone.Collection.extend({
+    model: Models.Notification
+  });
+
 });
