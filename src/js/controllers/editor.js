@@ -24,8 +24,8 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
   var Controller = function() {
     App.collections = App.collections || {};
-    App.collections.triggers = new App.Collections.Triggers();
-    App.collections.notifications = new App.Collections.Notifications();
+    App.collections.triggers = new App.Models.Triggers();
+    App.collections.notifications = new App.Models.Notifications();
   };
 
   _.extend(Controller.prototype, {
