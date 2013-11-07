@@ -11,7 +11,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       // L.Icon.Default.imagePath = App.config.imagePath;
 
       // force L.esri to use JSONP if proxy is set
-      if (App.config.proxy) {
+      if (App.config.session.proxy) {
         L.esri.get = L.esri.RequestHandlers.JSONP;
       }
 

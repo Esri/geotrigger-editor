@@ -6,20 +6,13 @@ GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
   // --------------
 
   function createSession () {
-    if (!App.config.credentials ||
-        !App.config.credentials.clientId ||
-        !App.config.credentials.clientSecret) {
-      throw new Error('GeotriggerEditor requires a `credentials` object with `clientId` and `clientSecret` properties');
+    if (!App.config.session ||
+        !App.config.session.clientId ||
+        !App.config.session.clientSecret) {
+      throw new Error('GeotriggerEditor requires a `session` object with `clientId` and `clientSecret` properties');
     }
 
-    var sessionOptions = {
-      clientId: App.config.credentials.clientId,
-      clientSecret: App.config.credentials.clientSecret,
-      persistSession: App.config.persistSession,
-      proxy: App.config.proxy
-    };
-
-    this.session = new Geotriggers.Session(sessionOptions);
+    this.session = new Geotriggers.Session(App.config.session);
   }
 
   API.addInitializer(createSession);
