@@ -42,8 +42,8 @@ These dependencies can be included individually, but for convenience they have b
 
 ```html
 <!--[if lte IE 8]>
-  <script src="../vendor/json2.js"></script>
-  <script src="../vendor/html5shiv.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
 <![endif]-->
 ```
 
