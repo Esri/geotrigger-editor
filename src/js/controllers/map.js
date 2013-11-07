@@ -11,7 +11,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       // L.Icon.Default.imagePath = App.config.imagePath;
 
       // force L.esri to use JSONP if proxy is set
-      if (options.proxy) {
+      if (App.config.session.proxy) {
         L.esri.get = L.esri.RequestHandlers.JSONP;
       }
 
@@ -19,11 +19,15 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
       this.map.zoomControl.setPosition('topright');
 
+      // allow multiple basemaps
       if (App.util.isArray(App.config.map.basemaps)) {
         for (var i = 0; i < App.config.map.basemaps.length; i++) {
           L.esri.basemapLayer(App.config.map.basemaps[i], App.config.map.options).addTo(App.map);
         }
-      } else {
+      }
+
+      // default to one basemap
+      else {
         L.esri.basemapLayer(App.config.map.basemap, App.config.map.options).addTo(App.map);
       }
 
@@ -118,7 +122,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       }
 
       return circle;
-    },
+    }
   });
 
   // Map Initializer
