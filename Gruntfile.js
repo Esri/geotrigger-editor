@@ -27,12 +27,7 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'dist/js/<%= pkg.name %>.dependencies.min.js': [
-            'vendor/underscore.js',
-            'vendor/backbone.js',
-            'vendor/backbone.marionette.js',
-            'vendor/handlebars.js',
             'vendor/geotriggers.js',
-            'vendor/leaflet.js',
             'vendor/esri-leaflet.js'
           ],
           'dist/js/<%= pkg.name %>.min.js': [
@@ -134,12 +129,7 @@ module.exports = function(grunt) {
       dev: {
         files: {
           'dev/js/<%= pkg.name %>.dependencies.js': [
-            'vendor/underscore.js',
-            'vendor/backbone.js',
-            'vendor/backbone.marionette.js',
-            'vendor/handlebars.js',
             'vendor/geotriggers.js',
-            'vendor/leaflet.js',
             'vendor/esri-leaflet.js'
           ],
           'dev/js/<%= pkg.name %>.js': [
@@ -156,12 +146,7 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'dist/js/<%= pkg.name %>.dependencies.js': [
-            'vendor/underscore.js',
-            'vendor/backbone.js',
-            'vendor/backbone.marionette.js',
-            'vendor/handlebars.js',
             'vendor/geotriggers.js',
-            'vendor/leaflet.js',
             'vendor/esri-leaflet.js'
           ],
           'dist/js/<%= pkg.name %>.js': [

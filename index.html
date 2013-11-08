@@ -4,24 +4,22 @@
   <meta charset="UTF-8">
   <title>ArcGIS Geotrigger Editor</title>
 
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
-
-  <link rel="stylesheet" href="vendor/css/leaflet.css">
+  <!-- style dependencies -->
+  <link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600'>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.min.css">
   <link rel="stylesheet" href="vendor/css/esri-leaflet.min.css">
   <link rel="stylesheet" href="vendor/css/leaflet.draw.css">
 
+  <!-- legacy support -->
   <!--[if lte IE 8]>
-    <link rel="stylesheet" href="vendor/css/leaflet.ie.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.ie.min.css">
     <link rel="stylesheet" href="vendor/css/leaflet.draw.ie.css">
   <![endif]-->
 
   <!-- Base Styles -->
   <link rel="stylesheet" href="dev/css/geotrigger-editor.css">
 
-  <!-- Theme Styles-->
-  <!-- <link rel="stylesheet" href="dev/css/themes/mint/mint.css"> -->
-
-  <!-- @TODO: move to geotrigger-editor.dependencies.ie.js -->
+  <!-- legacy support -->
   <!--[if lte IE 8]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
@@ -47,6 +45,11 @@
 
   <!-- vendor dependencies offloaded to CDN -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/1.1.0-bundled/backbone.marionette.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.runtime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.js"></script>
 
   <!-- local vendor dependencies -->
   <script src="dev/js/geotrigger-editor.dependencies.js"></script>
