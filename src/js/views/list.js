@@ -95,7 +95,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     emptyView: Views.Empty,
 
     events: {
-      'keyup .gt-search'     : 'filter'
+      'keyup .gt-search'     : 'filter',
+      'click .gt-icon-clear' : 'clearFilter'
     },
 
     ui: {
