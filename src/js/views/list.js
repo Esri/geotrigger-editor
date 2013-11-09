@@ -36,7 +36,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     editItem: function() {
       var id = this.model.get('triggerId');
-      App.router.navigate(id + '/edit', { trigger: true });
+      App.router.navigate('edit/' + id, { trigger: true });
     },
 
     tagsClick: function(e) {
@@ -143,7 +143,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
           App.router.navigate('list', { trigger: false });
         }
       } else if (typeof e !== 'undefined' && e.keyCode === 13) {
-        App.router.navigate('list?q=' + encodeURIComponent(value).replace(/%20/g, '+'), { trigger: true });
+        var route = 'list/' + encodeURIComponent(value).replace(/%20/g, '+');
+        App.router.navigate(route, { trigger: true });
       } else {
         this.$el.addClass('gt-filtering');
 
