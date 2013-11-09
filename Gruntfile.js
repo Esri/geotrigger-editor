@@ -26,10 +26,6 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/js/<%= pkg.name %>.dependencies.min.js': [
-            'vendor/geotriggers.js',
-            'vendor/esri-leaflet.js'
-          ],
           'dist/js/<%= pkg.name %>.min.js': [
             'src/js/app.js',
             'src/templates/compiled.js',
@@ -128,10 +124,6 @@ module.exports = function(grunt) {
       },
       dev: {
         files: {
-          'dev/js/<%= pkg.name %>.dependencies.js': [
-            'vendor/geotriggers.js',
-            'vendor/esri-leaflet.js'
-          ],
           'dev/js/<%= pkg.name %>.js': [
             'src/js/app.js',
             'src/templates/compiled.js',
@@ -145,10 +137,6 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'dist/js/<%= pkg.name %>.dependencies.js': [
-            'vendor/geotriggers.js',
-            'vendor/esri-leaflet.js'
-          ],
           'dist/js/<%= pkg.name %>.js': [
             'src/js/app.js',
             'src/templates/compiled.js',
