@@ -9,9 +9,9 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     appRoutes: {
       '': 'index',
       'list': 'list',
-      'list?q=:term': 'list',
+      'list/:term': 'list',
       'new': 'new',
-      ':id/edit': 'edit',
+      'edit/:id': 'edit',
       '*notfound': 'notFound'
     }
   });
@@ -22,11 +22,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
   // Control the workflow and logic that exists at the application
   // level, above the implementation detail of views and models
 
-  var Controller = function() {
-    App.collections = App.collections || {};
-    App.collections.triggers = new App.Models.Triggers();
-    App.collections.notifications = new App.Models.Notifications();
-  };
+  var Controller = function() {};
 
   _.extend(Controller.prototype, {
 
@@ -40,7 +36,10 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
         reset: true,
         success: function() {
           App.vent.trigger('notify:clear');
+
+          // don't start history until triggers have been fetched
           Backbone.history.start();
+
           if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
             App.execute('map:fit');
           }
@@ -204,8 +203,17 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
   // existing geotriggers and displaying them.
 
   Editor.addInitializer(function() {
+    // initialize collections
+    App.collections = App.collections || {};
+    App.collections.triggers = new App.Models.Triggers();
+    App.collections.notifications = new App.Models.Notifications();
+
+    // initialize controller
     var controller = new Controller();
+
+    // initialize router
     App.router = new Router({ controller: controller });
+
     controller.start();
   });
 

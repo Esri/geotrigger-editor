@@ -38,7 +38,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
 
       this._shape.on('click', _.bind(function(){
-        App.router.navigate(this.model.id + '/edit', { trigger: true });
+        App.router.navigate('edit/' + this.model.id, { trigger: true });
       }, this));
 
       this._shape.on('mouseover', _.bind(function(){

@@ -22,23 +22,21 @@ White-label client-side editor for creating and editing Geotrigger rules.
 
 **Dependencies**:
 
-The Geotrigger Editor has some external dependencies, namely:
+The Geotrigger Editor has some external dependencies:
 
-* jQuery
-* Underscore
-* Backbone
-* Backbone.Marionette
-* Geotriggers.js
-* Leaflet
-* Esri-Leaflet
-* Handlebars
+* jQuery [1.10.2](https://github.com/jquery/jquery/releases/tag/1.10.2) (CDN: [Google](//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js), [jQuery](http://codeorigin.jquery.com/jquery-1.10.2.min.js))
+* Underscore [1.5.2](https://github.com/jashkenas/underscore/releases/tag/1.5.2) (CDN: [cdnjs](//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js))
+* Backbone [1.1.0](https://github.com/jashkenas/backbone/releases/tag/1.1.0) (CDN: [cdnjs](//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js))
+* Backbone.Marionette [1.1.0](https://github.com/marionettejs/backbone.marionette/releases/tag/v1.1.0) (bundled) (CDN: [cdnjs](//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/1.1.0-bundled/backbone.marionette.min.js))
+* Handlebars [1.1.2](https://github.com/wycats/handlebars.js/releases/tag/v1.1.2) (runtime only) (CDN: [cdnjs](//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.runtime.min.js))
+* Leaflet [0.6.4](https://github.com/Leaflet/Leaflet/releases/tag/v0.6.4) (CDN: [leaflet](http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js), [cdnjs](//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.js))
+* Leaflet.draw [0.2.2](https://github.com/Leaflet/Leaflet.draw/releases/tag/0.2.2)
+* Geotriggers.js [0.0.4](https://github.com/Esri/geotriggers-js)
+* Esri-Leaflet [0.0.1-rc.2](https://github.com/Esri/esri-leaflet/releases/tag/v0.0.1-rc.2)
 
-If you plan to support legacy browsers (IE 8), you'll also need [html5shiv](https://github.com/aFarkas/html5shiv) and [json2](https://github.com/douglascrockford/JSON-js).
+We recommend loading dependencies from a CDN when possible. All dependencies are hosted on CDNs with the exception of Leaflet.draw, Geotriggers.js and Esri-Leaflet, which you'll need to host yourself.
 
-These dependencies can be included individually, but for convenience they have been bundled together as `dist/geotrigger-editor.dependencies.js` (minified: `dist/geotrigger-editor.dependencies.min.js`), with two exceptions:
-
-* jQuery which we recommend loading from a CDN (either [Google Hosted Libraries](https://developers.google.com/speed/libraries/devguide#jquery) or [jQuery CDN](http://codeorigin.jquery.com/))
-* html5shiv and json2, which should be included separately in a conditional comment, like so:
+If you plan to support legacy browsers (IE 8), you'll also need [html5shiv](https://github.com/aFarkas/html5shiv) and [json2](https://github.com/douglascrockford/JSON-js), which can be included with a conditional comment like so:
 
 ```html
 <!--[if lte IE 8]>
@@ -48,6 +46,10 @@ These dependencies can be included individually, but for convenience they have b
 ```
 
 You can take a look at the source of `dist/index.html` for an example of how to easily include all the necessary files.
+
+**Browser Support**:
+
+The Geotrigger Editor is tested against the latest versions of Chrome, Firefox, Safari, and Internet Explorer versions 8, 9, and 10. IE 8 & 9 only work with a [proxy](#proxy).
 
 ---
 
@@ -118,12 +120,6 @@ The `proxy` option should be an absolute path to the proxy server endpoint (star
 #### Server
 
 On the server side, you'll need a working proxy to forward API requests to `geotrigger.arcgis.com/*` and `arcgis.com/sharing/oauth2/*` and return the response back to the browser. `/examples/proxy/` shows how to do this using Node.js.
-
----
-
-### Browser Support
-
-The Geotrigger Editor is tested against the latest versions of Chrome, Firefox, Safari, and Internet Explorer versions 8, 9, and 10.
 
 ---
 
