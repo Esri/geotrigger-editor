@@ -37,6 +37,10 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
     _eventBindings: function() {
       App.commands.setHandler('map:fit', _.bind(function(){
+        if (this.Layers.main.getLayers().length === 0) {
+          return;
+        }
+
         var bounds = this.Layers.main.getBounds();
         var drawerWidth = this.getDrawerWidth();
 
