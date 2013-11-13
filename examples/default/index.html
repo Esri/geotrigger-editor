@@ -27,21 +27,17 @@
 
   <style>
   html, body {
-    background: #ddd;
     padding: 0;
     margin: 0;
     line-height: 1;
   }
-  #site-header {
-    background: #466;
-    height: 50px;
-    border-bottom: 1px solid #355;
-    border-bottom: 1px solid rgba(50,100,100,.5);
-  }
-  h1 {
-    color: #fff;
-    font: 100 22px/1 "Open Sans", Arial, Helvetica, sans;
-    padding: 12px 0 0 24px;
+  /* some basic style to make the editor a full width & height web application */
+  #gt-editor {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
   }
   #example {
     padding: 24px;
@@ -57,20 +53,9 @@
     padding: 10px;
     width: 100%;
   }
-  #gt-editor {
-    position: absolute;
-    top: 50px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
   </style>
 </head>
 <body>
-  <header id="site-header">
-    <h1>ArcGIS Geotrigger Editor</h1>
-  </header>
-
   <div id="gt-editor">
     <form id="example">
       <input id="client-id" type="text" placeholder="Client ID">
@@ -105,8 +90,7 @@
           el: '#gt-editor',
           session: {
             clientId: $('#client-id').val(),
-            clientSecret: $('#client-secret').val(),
-            proxy: '/proxy/'
+            clientSecret: $('#client-secret').val()
           }
         };
 
