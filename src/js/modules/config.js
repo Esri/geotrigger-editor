@@ -49,6 +49,8 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
 
   var defaults = {
 
+    el: '#gt-editor',
+
     session: {},
 
     map: {

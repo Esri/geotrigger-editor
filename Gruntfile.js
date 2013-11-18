@@ -42,7 +42,11 @@ module.exports = function(grunt) {
     watch: {
       scripts: {
         files: [
-          'src/js/**/*.js',
+          'src/js/controllers/*.js',
+          'src/js/models/*.js',
+          'src/js/modules/*.js',
+          'src/js/views/*.js',
+          'src/js/app.js',
           'src/scss/**/*.scss',
           'src/img/**/*.jpg',
           'src/img/**/*.png',
@@ -52,7 +56,6 @@ module.exports = function(grunt) {
           'jshint',
           'clean:dev',
           'compass:dev',
-          'copy:dev',
           'handlebars',
           'concat:dev'
         ]
@@ -82,7 +85,7 @@ module.exports = function(grunt) {
       dev: {
         options: {
           sassDir: 'src/scss',
-          cssDir: 'dev/css'
+          cssDir: 'src/css'
         }
       }
     },
@@ -124,7 +127,7 @@ module.exports = function(grunt) {
       },
       dev: {
         files: {
-          'dev/js/<%= pkg.name %>.js': [
+          'src/js/geotrigger-editor.js': [
             'src/js/app.js',
             'src/templates/compiled.js',
             'src/js/lib/*.js',
@@ -157,7 +160,7 @@ module.exports = function(grunt) {
           'src/js/models/*.js',
           'src/js/modules/*.js',
           'src/js/views/*.js',
-          'src/js/*.js',
+          'src/js/app.js',
           'tasks/grunt-complexity.js'
         ],
         options: {
@@ -179,19 +182,6 @@ module.exports = function(grunt) {
       }
     },
 
-    copy: {
-      dev: {
-        files: [{
-          expand: true,
-          cwd: 'src/',
-          src: [
-            'img/**'
-          ],
-          dest: 'dev/'
-        }]
-      }
-    },
-
     clean: {
       dist: {
         src: [
@@ -206,9 +196,8 @@ module.exports = function(grunt) {
       },
       dev: {
         src: [
-          'dev/img/',
-          'dev/css/',
-          'dev/js/'
+          'src/css/geotrigger-editor.css',
+          'src/js/geotrigger-editor.js'
         ]
       }
     },
@@ -256,7 +245,6 @@ module.exports = function(grunt) {
     'jshint',
     'clean:dev',
     'compass:dev',
-    'copy:dev',
     'handlebars',
     'concat:dev',
     'connect:dev',

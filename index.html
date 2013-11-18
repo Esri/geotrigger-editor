@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Geotrigger Editor</title>
+
+  <!-- css: dependencies -->
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.min.css">
+  <link rel="stylesheet" href="vendor/Leaflet.draw/dist/leaflet.draw.css">
+
+  <!-- css: legacy support -->
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.ie.min.css">
+    <link rel="stylesheet" href="vendor/Leaflet.draw/dist/leaflet.draw.ie.css">
+  <![endif]-->
+
+  <!-- css: main -->
+  <link rel="stylesheet" href="src/css/geotrigger-editor.css">
+
+  <!-- js: legacy support -->
+  <!--[if lte IE 8]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
+  <![endif]-->
+
+  <style>
+    html, body {
+      background: #ddd;
+      padding: 0;
+      margin: 0;
+      line-height: 1;
+    }
+    #site-header {
+      background: #466;
+      height: 50px;
+      border-bottom: 1px solid #355;
+      border-bottom: 1px solid rgba(50,100,100,.5);
+      font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    }
+    #site-header h1 {
+      color: #fff;
+      float: left;
+      font-size: 22px;
+      font-weight: 100;
+      padding: 12px 0 0 24px;
+    }
+    .clear-session {
+      display: none;
+      float: right;
+      font-size: 12px;
+      font-weight: 400;
+      color: turquoise;
+      cursor: pointer;
+      padding: 18px 24px 0 0;
+      text-decoration: none;
+    }
+    .clear-session:hover {
+      text-decoration: underline;
+    }
+    #example {
+      display: none;
+      padding: 24px;
+      width: 300px;
+
+      position: absolute;
+      top: 50px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+    #example input {
+      background: #eee;
+      font-family: "Open Sans", Arial, Helvetica, sans;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 16px;
+      padding: 10px;
+      width: 100%;
+    }
+    #gt-editor {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <header id="site-header">
+    <h1>Geotrigger Editor</h1>
+    <a class="clear-session">&times; clear session</a>
+  </header>
+
+  <form id="example">
+    <input id="client-id" type="text" placeholder="Client ID">
+    <input id="client-secret" type="text" placeholder="Client Secret">
+    <button class="gt-button gt-button-green">Engage</button>
+  </form>
+
+  <div id="gt-editor"></div>
+
+  <!-- js: cdn dependencies -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.runtime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.js"></script>
+
+  <!-- js: local dependencies -->
+  <script src="vendor/backbone.marionette/lib/backbone.marionette.min.js"></script>
+  <script src="vendor/Leaflet.draw/dist/leaflet.draw.js"></script>
+  <script src="vendor/geotriggers-js/geotriggers.js"></script>
+  <script src="vendor/esri-leaflet/dist/esri-leaflet.js"></script>
+
+  <!-- js: main -->
+  <script src="src/js/geotrigger-editor.js"></script>
+
+  <!-- js: initializer -->
+  <script>
+    // https://gist.github.com/ngoldman/7533774
+    function findLocalItems (query) {
+      var results = [];
+      for (i in localStorage) {
+        if (localStorage.hasOwnProperty(i)) {
+          if (i.match(query) || (!query && typeof i === 'string')) {
+            value = JSON.parse(localStorage.getItem(i));
+            results.push({key:i,val:value});
+          }
+        }
+      }
+      return results;
+    }
+
+    function init() {
+      var config = {
+        session: {}
+      };
+
+      // get geotrigger application items from localStorage
+      var items = findLocalItems('geotriggers_application_');
+
+      // just use the first one for now
+      var item = items[0];
+
+      function bindClearSession () {
+        $('.clear-session').on('click', function(e){
+          e.preventDefault();
+          GeotriggerEditor.closeRegions();
+          $(this).hide();
+          $('#gt-editor').hide();
+          bindForm();
+          $('#example').show();
+
+          localStorage.removeItem(item.key);
+        }).show();
+      }
+
+      function bindForm () {
+        $('#example').submit(function(e){
+          e.preventDefault();
+
+          config.session.clientId = $('#client-id').val();
+          config.session.clientSecret = $('#client-secret').val();
+
+          $(this).hide();
+          $('#gt-editor').show();
+
+          GeotriggerEditor.start(config);
+          bindClearSession();
+        });
+      }
+
+      if (item && item.val && item.val.clientId && item.val.clientSecret) {
+        config.session.clientId = item.val.clientId;
+        config.session.clientSecret = item.val.clientSecret;
+
+        $('#gt-editor').show();
+
+        GeotriggerEditor.start(config);
+        bindClearSession();
+      } else {
+        bindForm();
+        $('#example').show();
+      }
+    }
+
+    $(init);
+  </script>
+</body>
+</html>

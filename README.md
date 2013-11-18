@@ -17,7 +17,7 @@ A client-side web application for creating and editing Geotrigger rules.
 * The `dist` folder contains all the files you need to include the Geotrigger Editor in your project.
 * The built JavaScript and CSS files are available in both expanded and minified versions in `dist/js` and `dist/css` respectively.
 * All icon images used by the Editor are in `dist/img`.
-* The `dist/index.html` file shows the easiest way to get the editor running in a browser.
+* The `index.html` file in the root of repository shows the easiest way to get the editor running in a browser.
 * If you need to support IE 8/9, you're going to need a server-side [proxy](#proxy).
 
 **Dependencies**:
@@ -45,7 +45,7 @@ If you plan to support legacy browsers (IE 8), you'll also need [html5shiv](http
 <![endif]-->
 ```
 
-You can take a look at the source of `dist/index.html` for an example of how to easily include all the necessary files.
+You can take a look at the source of `index.html` in the root of the repository for an example of how to easily include all the necessary files.
 
 **Browser Support**:
 
@@ -61,7 +61,6 @@ The Editor is a [Backbone.Marionette](https://github.com/marionettejs/backbone.m
 
 ```js
 GeotriggerEditor.start({
-  el: '#gt-editor', // optional: defaults to '#gt-editor'
   session: { // required
     clientId: 'XXXXXX', // required
     clientSecret: 'XXXXXX', // required
@@ -70,13 +69,11 @@ GeotriggerEditor.start({
 });
 ```
 
+The Editor requires an empty `#gt-editor` element in the DOM to attach to, e.g. `<div id="gt-editor"></div>`. See `index.html` in the root of the repository for an example.
+
 **Configuration Options**
 
 The `options` parameter is an object that can contain the following configuration options:
-
-#### `el`
-
-The `el` option represents the HTML element the Geotrigger Editor will be attached to. Upon initialization, it should be an empty `<div>`. The default setting is `#gt-editor` (`el` can be omitted if this element exists).
 
 #### `session`
 
@@ -107,12 +104,11 @@ On the client side, just be sure to start the editor with a path to the proxy, l
 
 ```js
 GeotriggerEditor.start({
-  el: '#gt-editor', // optional: defaults to '#gt-editor'
   session: { // required
     clientId: 'XXXXXX', // required
     clientSecret: 'XXXXXX' // required
-  },
-  proxy: '/proxy/'
+    proxy: '/proxy/'
+  }
 });
 ```
 
@@ -139,11 +135,12 @@ Once Node.js is installed, you can install the Grunt command line interface by r
 
 #### Local Setup
 
-Clone the repository, `cd` into it, then run `npm install`.
+1. Clone the repository and `cd` into the `geotrigger-editor` directory.
+`. Run `npm install`, `git submodule init`, and `git submodule update` to install dependencies.
 
 #### Working locally
 
-You'll need an HTTP server to serve files from the root of the repository. The `grunt dev` task takes care of building all source files to a temporary `dev` folder, watching local files for changes, and running a local server for you at http://localhost:8080 (see the `Grunt Tasks` section for more information).
+You'll need an HTTP server to serve files from the root of the repository. The `grunt dev` task takes care of building all source files to temporary files ignored by git (`src/js/geotrigger-editor.js` and `src/css/geotrigger-editor.css`, watching local files for changes, and running a local server for you at http://localhost:8080 (see the `Grunt Tasks` section for more information).
 
 #### Testing locally
 
@@ -153,7 +150,7 @@ Testing requires PhantomJS to be running. You can install it with homebrew (`bre
 
 ##### 1. `grunt dev`
 
-This task will clean out the dev folder and build out all the necessary files for development, run a server at `localhost:8080`, then continuously watch for changes in the `src` directory until you end the process.
+This task will rebuild temporary files for development, run a server at `localhost:8080`, then continuously watch for changes in the `src` directory until you end the process. The `index.html` file in the root of the repository is already set up to use these files.
 
 ##### 2. `grunt test`
 
