@@ -1,0 +1,3 @@
+[submodule "vendor/backbone.marionette"]
+	path = vendor/backbone.marionette
+	url = https://github.com/marionettejs/backbone.marionette
