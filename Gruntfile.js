@@ -254,6 +254,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'test',
     'clean:dist',
+    'build_img',
     'compass:distmin',
     'rename:distmin',
     'compass:dist',
