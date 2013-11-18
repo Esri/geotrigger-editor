@@ -30,7 +30,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     start: function() {
       this.setup();
 
-      App.vent.trigger('notify', 'Loading Geotriggers');
+      App.vent.trigger('notify', 'Getting triggers');
 
       App.collections.triggers.fetch({
         fetch: true,
@@ -148,18 +148,22 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       var model = this.getTrigger(triggerId);
 
       if (!model) {
-        this.notFound();
+        App.vent.trigger('notify', {
+          type: 'error',
+          message: 'That trigger doesn\'t exist!'
+        });
       } else {
         var view = new App.Views.Form({ model: model });
         App.regions.drawer.show(view);
         App.vent.trigger('trigger:edit', triggerId);
+        view.parseShape();
       }
     },
 
     notFound: function() {
       App.vent.trigger('notify', {
         type: 'error',
-        message: '404: Not Found'
+        message: 'Couldn\'t find page: "' + Backbone.history.fragment + '"'
       });
     },
 
