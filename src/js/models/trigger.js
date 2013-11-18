@@ -123,13 +123,13 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
 
     fetch: function(options) {
       var callback = _.bind(function(error, response) {
-        if(options.reset){
+        if(options && options.reset){
           this.reset(this.parse(response));
         } else {
           this.set(this.parse(response));
         }
 
-        if (options.success) {
+        if (options && options.success) {
           options.success(this, this.parse(response), options);
         }
       }, this);
