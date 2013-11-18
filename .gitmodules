@@ -4,3 +4,6 @@
 [submodule "vendor/Leaflet.draw"]
 	path = vendor/Leaflet.draw
 	url = https://github.com/Leaflet/Leaflet.draw
+[submodule "vendor/esri-leaflet"]
+	path = vendor/esri-leaflet
+	url = https://github.com/Esri/esri-leaflet
