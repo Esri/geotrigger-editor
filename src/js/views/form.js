@@ -87,26 +87,26 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       // build actions:
 
       // notification
-      if (currentActions.hasOwnProperty('notification')) {
+      if ('undefined' !== typeof currentActions['notification']) {
         actionsHtml += App.Templates['form/actions/notification/index'](data);
         this.ui.form.find('.gt-add-action[data-action="notification"]').hide();
 
         // build notification form elements if they exist
         for (prop in currentActions.notification) {
-          if (currentActions.notification.hasOwnProperty(prop)) {
+          if ('undefined' !== typeof currentActions.notification[prop]) {
             noteHtml += App.Templates['form/actions/notification/' + prop](data);
           }
         }
       }
 
       // callback URL
-      if (currentActions.hasOwnProperty('callbackUrl')) {
+      if ('undefined' !== typeof currentActions['callbackUrl']) {
         actionsHtml += App.Templates['form/actions/callbackUrl'](data);
         this.ui.form.find('.gt-add-action[data-action="callbackUrl"]').hide();
       }
 
       // tracking profile
-      if (currentActions.hasOwnProperty('trackingProfile')) {
+      if ('undefined' !== typeof currentActions['trackingProfile']) {
         actionsHtml += App.Templates['form/actions/trackingProfile'](data);
         this.ui.form.find('.gt-add-action[data-action="trackingProfile"]').hide();
       }
@@ -120,7 +120,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
         // hide add buttons for properties that already exist
         for (prop in currentActions.notification) {
-          if (currentActions.notification.hasOwnProperty(prop)) {
+          if ('undefined' !== typeof currentActions.notification[prop]) {
             var $notification = this.ui.form.find('.gt-add-notification[data-notification="' + prop + '"]');
             $notification.hide();
           }
@@ -257,6 +257,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     parseShape: function() {
+      var lat, lng, rad;
+
       // get layer data
       var layer = App.request('draw:layer');
 
@@ -265,7 +267,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       var geometry = this.ui.form.find('[name="geometry-type"]');
       var shape = this.ui.form.find('.gt-shape-indicator');
       var sections = this.ui.form.find('.gt-form-section');
-      // var radius = this.ui.form.find('[name="radius"]'); // @TODO: radius
 
       // default direction to enter if it's not already set
       if (direction.val() === null) {
@@ -274,16 +275,20 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       // layer is polygon
       if (layer instanceof L.Polygon) {
+        lat = Math.round(layer.getCenter().lat * 10000) / 10000;
+        lng = Math.round(layer.getCenter().lng * 10000) / 10000;
         geometry.val('polygon');
-        shape.text('a polygon');
+        shape.text('a polygon around ' + lat + ', ' + lng);
         sections.show();
       }
 
       // layer is radius
       else if (layer instanceof L.Circle) {
+        lat = Math.round(layer.getLatLng().lat * 10000) / 10000;
+        lng = Math.round(layer.getLatLng().lng * 10000) / 10000;
+        rad = Math.round(layer.getRadius());
         geometry.val('radius');
-        shape.text('a radius');
-        // radius.show().val(Math.round(layer.getRadius())); // @TODO: radius
+        shape.text('a ' + rad + 'm radius around ' + lat + ', ' + lng);
         sections.show();
       }
 
