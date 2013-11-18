@@ -17,8 +17,8 @@ A client-side web application for creating and editing Geotrigger rules.
 * The `dist` folder contains all the files you need to include the Geotrigger Editor in your project.
 * The built JavaScript and CSS files are available in both expanded and minified versions in `dist/js` and `dist/css` respectively.
 * All icon images used by the Editor are in `dist/img`.
-* The `index.html` file in the root of repository shows the easiest way to get the editor running in a browser.
-* If you need to support IE 8/9, you're going to need a server-side [proxy](#proxy).
+* The files in `examples/default` show the easiest way to get the editor running in a browser.
+* If you need to support IE 8/9, you're going to need a server-side [proxy](#proxy). The files in `examples/proxy` show a quick way to do this using node.js.
 
 **Dependencies**:
 
@@ -45,7 +45,7 @@ If you plan to support legacy browsers (IE 8), you'll also need [html5shiv](http
 <![endif]-->
 ```
 
-You can take a look at the source of `index.html` in the root of the repository for an example of how to easily include all the necessary files.
+You can take a look at `examples/default` for an example of how to easily include all the necessary files.
 
 **Browser Support**:
 
@@ -69,7 +69,7 @@ GeotriggerEditor.start({
 });
 ```
 
-The Editor requires an empty `#gt-editor` element in the DOM to attach to, e.g. `<div id="gt-editor"></div>`. See `index.html` in the root of the repository for an example.
+The Editor requires an empty `#gt-editor` element in the DOM to attach to, e.g. `<div id="gt-editor"></div>`. See `examples/default` for an example.
 
 **Configuration Options**
 

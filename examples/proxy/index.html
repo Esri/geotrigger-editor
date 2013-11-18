@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Geotrigger Editor</title>
+
+  <!-- css: dependencies -->
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.min.css">
+  <link rel="stylesheet" href="../../vendor/Leaflet.draw/dist/leaflet.draw.css">
+
+  <!-- css: legacy support -->
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.ie.min.css">
+    <link rel="stylesheet" href="../../vendor/Leaflet.draw/dist/leaflet.draw.ie.css">
+  <![endif]-->
+
+  <!-- css: main -->
+  <link rel="stylesheet" href="../../dist/css/geotrigger-editor.css">
+
+  <!-- js: legacy support -->
+  <!--[if lte IE 8]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
+  <![endif]-->
+
+  <style>
+  html, body {
+    background: #ddd;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+  }
+  #site-header {
+    background: #466;
+    height: 50px;
+    border-bottom: 1px solid #355;
+    border-bottom: 1px solid rgba(50,100,100,.5);
+  }
+  h1 {
+    color: #fff;
+    font: 100 22px/1 "Open Sans", Arial, Helvetica, sans;
+    padding: 12px 0 0 24px;
+  }
+  #example {
+    padding: 24px;
+    width: 300px;
+  }
+  #example input {
+    background: #eee;
+    font-family: "Open Sans", Arial, Helvetica, sans;
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+  }
+  #gt-editor {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  </style>
+</head>
+<body>
+  <header id="site-header">
+    <h1>Geotrigger Editor</h1>
+  </header>
+
+  <div id="gt-editor">
+    <form id="example">
+      <input id="client-id" type="text" placeholder="Client ID">
+      <input id="client-secret" type="text" placeholder="Client Secret">
+      <button class="gt-button gt-button-green">Engage</button>
+    </form>
+  </div>
+
+  <!-- js: cdn dependencies -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.runtime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.js"></script>
+
+  <!-- js: local dependencies -->
+  <script src="../../vendor/backbone.marionette/lib/backbone.marionette.min.js"></script>
+  <script src="../../vendor/Leaflet.draw/dist/leaflet.draw.js"></script>
+  <script src="../../vendor/geotriggers-js/geotriggers.js"></script>
+  <script src="../../vendor/esri-leaflet/dist/esri-leaflet.js"></script>
+
+  <!-- js: main -->
+  <script src="../../dist/js/geotrigger-editor.js"></script>
+
+  <!-- js: initializer -->
+  <script>
+    $(function(){
+      $('#example').submit(function(e){
+        e.preventDefault();
+
+        var config = {
+          session: {
+            clientId: $('#client-id').val(),
+            clientSecret: $('#client-secret').val(),
+            proxy: '/proxy/'
+          }
+        };
+
+        $(this).remove();
+
+        GeotriggerEditor.start(config);
+      });
+    });
+  </script>
+</body>
+</html>
