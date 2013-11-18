@@ -9,59 +9,65 @@
   bottom: 0;
   left: 0;
   z-index: 3;
-}
 
-.gt-tool {
-  background: no-repeat center center transparent;
-  background-size: 24px;
-  border: none;
-  border-top: 1px solid $dark-gray;
-  border-bottom: 1px solid $darkest-gray;
-  color: $white;
-  cursor: pointer;
-  display: block;
-  height: 0;
-  opacity: 0.7;
-  overflow: visible;
-  padding: 30px 35px;
-  position: relative;
-  width: 0;
+  .gt-tool {
+    background: no-repeat center center transparent;
+    background-size: 24px;
+    border: none;
+    border-top: 1px solid $dark-gray;
+    border-bottom: 1px solid $darkest-gray;
+    color: $white;
+    cursor: pointer;
+    display: block;
+    height: 0;
+    opacity: 0.7;
+    overflow: visible;
+    padding: 30px 35px;
+    position: relative;
+    width: 0;
 
-  @include transition(opacity 200ms linear);
+    @include transition(opacity 200ms linear);
 
-  &.gt-tool-list      { background-image: url('../img/icons/list.png'); }
-  &.gt-tool-create    { background-image: url('../img/icons/create.png'); }
-  &.gt-tool-polygon   { background-image: url('../img/icons/polygon.png'); }
-  &.gt-tool-radius    { background-image: url('../img/icons/radius.png'); }
+    &.gt-tool-list      { background-image: url('../img/icons/list.png'); }
+    &.gt-tool-create    { background-image: url('../img/icons/create.png'); }
+    &.gt-tool-polygon   { background-image: url('../img/icons/polygon.png'); }
+    &.gt-tool-radius    { background-image: url('../img/icons/radius.png'); }
 
-  @include retina-display {
-    &.gt-tool-list      { background-image: url('../img/icons/list@2x.png'); }
-    &.gt-tool-create    { background-image: url('../img/icons/create@2x.png'); }
-    &.gt-tool-polygon   { background-image: url('../img/icons/polygon@2x.png'); }
-    &.gt-tool-radius    { background-image: url('../img/icons/radius@2x.png'); }
-  }
+    @include retina-display {
+      &.gt-tool-list      { background-image: url('../img/icons/list@2x.png'); }
+      &.gt-tool-create    { background-image: url('../img/icons/create@2x.png'); }
+      &.gt-tool-polygon   { background-image: url('../img/icons/polygon@2x.png'); }
+      &.gt-tool-radius    { background-image: url('../img/icons/radius@2x.png'); }
+    }
 
-  &:before {
-    content: "";
-    opacity: 0;
-    padding: 0;
+    &:before {
+      content: "";
+      opacity: 0;
+      padding: 0;
 
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
 
-    @include background-image(radial-gradient(100% 100%, rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%));
-  }
+      @include background-image(radial-gradient(100% 100%, rgba(0,0,0,0) 0%,rgba(0,0,0,0.3) 100%));
+    }
 
-  &:hover {
-    opacity: 1;
-    &:before { opacity: 0.3; }
-  }
+    &:hover {
+      opacity: 1;
 
-  &.gt-active {
-    opacity: 1;
-    &:before { opacity: 1; }
+      &:before {
+        opacity: 0.3;
+      }
+    }
+
+    &.gt-active {
+      opacity: 1;
+
+      &:before {
+        opacity: 1;
+      }
+    }
   }
 }

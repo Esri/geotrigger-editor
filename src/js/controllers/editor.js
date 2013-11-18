@@ -10,7 +10,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       '': 'index',
       'list': 'list',
       'list/:term': 'list',
-      'new': 'new',
+      'new': 'create',
       'edit/:id': 'edit',
       '*notfound': 'notFound'
     }
@@ -30,17 +30,22 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     start: function() {
       this.setup();
 
-      App.vent.trigger('notify', 'Loading Geotriggers');
+      App.vent.trigger('notify', 'Getting triggers');
 
       App.collections.triggers.fetch({
+        fetch: true,
         reset: true,
-        success: function() {
+        success: function (model, response, options) {
           App.vent.trigger('notify:clear');
 
           // don't start history until triggers have been fetched
           Backbone.history.start();
 
-          if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
+          if (response && response.length === 0) {
+            App.router.navigate('list', { trigger: true });
+          }
+
+          else if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
             App.execute('map:fit');
           }
         }
@@ -134,7 +139,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       }
     },
 
-    'new': function() {
+    create: function() {
       App.vent.trigger('trigger:new');
 
       var view = new App.Views.Form();
@@ -147,28 +152,35 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       var model = this.getTrigger(triggerId);
 
       if (!model) {
-        this.notFound();
+        App.vent.trigger('notify', {
+          type: 'error',
+          message: 'That trigger doesn\'t exist!'
+        });
       } else {
         var view = new App.Views.Form({ model: model });
         App.regions.drawer.show(view);
         App.vent.trigger('trigger:edit', triggerId);
+        view.parseShape();
       }
     },
 
     notFound: function() {
       App.vent.trigger('notify', {
         type: 'error',
-        message: '404: Not Found'
+        message: 'Couldn\'t find page: "' + Backbone.history.fragment + '"'
       });
     },
 
     // crud
 
     createTrigger: function(triggerData) {
-      App.collections.triggers.once('add', function(data){
-        App.router.navigate('list', { trigger: true });
+      App.execute('draw:clear');
+      App.collections.triggers.create(triggerData, {
+        // wait: true, // wait is broken in backbone 1.1.0
+        success: function() {
+          App.router.navigate('list', { trigger: true });
+        }
       });
-      App.collections.triggers.create(triggerData, { wait: true });
     },
 
     getTrigger: function(id) {
