@@ -1,6 +1,6 @@
 # Geotrigger Editor
 
-White-label client-side editor for creating and editing Geotrigger rules.
+A client-side web application for creating and editing Geotrigger rules.
 
 ## Features
 
