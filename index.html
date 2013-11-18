@@ -38,12 +38,14 @@
       border-bottom: 1px solid rgba(50,100,100,.5);
       font-family: "Open Sans", Arial, Helvetica, sans-serif;
     }
-    #site-header h1 {
-      color: #fff;
+    h1 {
+      color: #333;
+      text-align: center;
+      width: 100%;
       float: left;
       font-size: 22px;
       font-weight: 100;
-      padding: 12px 0 0 24px;
+      padding: 12px 0 24px 0;
     }
     .clear-session {
       display: none;
@@ -59,15 +61,17 @@
       text-decoration: underline;
     }
     #example {
+      background: #fff;
       display: none;
       padding: 24px;
-      width: 300px;
+      margin: auto;
+      width: 400px;
 
-      position: absolute;
+      position: relative;
       top: 50px;
-      right: 0;
-      bottom: 0;
-      left: 0;
+    }
+    #example p {
+      line-height: 1.7em;
     }
     #example input {
       background: #eee;
@@ -77,8 +81,32 @@
       border-radius: 3px;
       font-size: 16px;
       padding: 10px;
-      width: 100%;
+      margin: 12px auto;
+      width: 376px;
     }
+    #example button {
+      width: 188px;
+    }
+    #example a {
+      color: #1a9b81;
+      text-align: center;
+      display: inline-block;
+      width: 188px;
+    }
+    #example a:hover {
+      color: #136f5d;
+    }
+    #example ul {
+      padding-top: 24px;
+      list-style-type: none;
+    }
+    #example li {
+      margin-bottom: 12px;
+    }
+    #example li a {
+      text-align: left;
+    }
+
     #gt-editor {
       display: none;
       position: absolute;
@@ -91,14 +119,29 @@
 </head>
 <body>
   <header id="site-header">
-    <h1>Geotrigger Editor</h1>
     <a class="clear-session">&times; clear session</a>
   </header>
 
+
   <form id="example">
+    <h1>Geotrigger Editor</h1>
+    <p>The Geotrigger Editor is a visual editor for ArcGIS Geotrigger Service applications. Using only your Client ID and Secret (acquired from developers.arcgis.com) you too can visually edit your Geotrigger Service applications!</p>
     <input id="client-id" type="text" placeholder="Client ID">
     <input id="client-secret" type="text" placeholder="Client Secret">
     <button class="gt-button gt-button-green">Engage</button>
+    <a href="https://developers.arcgis.com/en/applications/">What's This?</a>
+
+    <ul>
+      <li>
+        <a href="https://github.com/Esri/geotrigger-editor/blob/master/README.md">Read the Documentation</a>
+      </li>
+      <li>
+        <a href="https://github.com/Esri/geotrigger-editor">Fork it on Github</a>
+      </li>
+      <li>
+        <a href="/">ArcGIS for Developers</a>
+      </li>
+    </ul>
   </form>
 
   <div id="gt-editor"></div>
