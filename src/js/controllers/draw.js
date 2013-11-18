@@ -21,49 +21,41 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
     },
 
     _eventBindings: function() {
-      App.vent.on('draw:new', function(layer) {
-        this.editLayer(layer);
-      }, this);
+      App.vent.on('draw:new', this.editLayer, this);
+      App.vent.on('index trigger:list trigger:edit', this.clear, this);
+      App.vent.on('trigger:new:ready', this.panToNewTrigger, this);
+      App.vent.on('trigger:edit', this.panToTrigger, this);
+      App.vent.on('draw:enable', this.enableTool, this);
+      App.vent.on('draw:disable', this.disableTool, this);
 
-      App.vent.on('index trigger:list trigger:edit', function(){
-        this.clear();
-      }, this);
+      App.map.on('draw:created', this.broadcastLayer);
 
-      App.vent.on('trigger:new:ready', function() {
-        var layer = App.request('draw:layer');
-        if (layer){
-          App.Map.panToLayer(layer);
-        }
-      }, this);
+      App.reqres.setHandler('draw:layer', this.getEditLayer, this);
+      App.commands.setHandler('draw:clear', this.clear, this);
+    },
 
-      App.vent.on('trigger:edit', function(triggerId) {
-        var layer = this.newShape(triggerId);
-        this.editLayer(layer);
+    panToNewTrigger: function() {
+      var layer = App.request('draw:layer');
+      if (layer) {
         App.Map.panToLayer(layer);
-      }, this);
+      }
+    },
 
-      App.map.on('draw:created', function(e) {
-        var type = e.layerType;
-        var layer = e.layer;
+    panToTrigger: function (triggerId) {
+      var layer = this.newShape(triggerId);
+      this.editLayer(layer);
+      App.Map.panToLayer(layer);
+    },
 
-        App.vent.trigger('draw:new', layer);
-      });
+    broadcastLayer: function (e) {
+      var type = e.layerType;
+      var layer = e.layer;
 
-      App.reqres.setHandler('draw:layer', _.bind(function(){
-        return App.Map.Layers.edit.getLayers()[0];
-      }, this));
+      App.vent.trigger('draw:new', layer);
+    },
 
-      App.commands.setHandler('draw:clear', _.bind(function(){
-        this.clear();
-      }, this));
-
-      App.vent.on('draw:enable', _.bind(function(tool){
-        this.enableTool(tool);
-      }, this));
-
-      App.vent.on('draw:disable', _.bind(function(tool){
-        this.disableTool(tool);
-      }, this));
+    getEditLayer: function() {
+      return App.Map.Layers.edit.getLayers()[0];
     },
 
     newShape: function(triggerId) {
