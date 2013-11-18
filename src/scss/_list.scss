@@ -300,14 +300,21 @@
 
 /* - - - - - - - - - - No Triggers - Getting Started - - - - - - - - - - */
 .gt-panel-no-triggers {
-  width:100%;
-  padding:1em 2em 1em 2em;
-  border-bottom:1px solid $light-gray;
-  @include box-sizing(border-box);
+  background: $green;
+  border-bottom: 1px solid $light-gray;
   overflow:hidden;
-  position:relative;
+  padding: 1em 2em 1em 2em;
+  position: relative;
   text-align: center;
+  width: 100%;
+
+  @include box-sizing(border-box);
+
+  h5 {
+    color: $white;
+  }
 }
+
 .gt-tool-description {
   width:100%;
   padding:1em 2em 1em 60px;
