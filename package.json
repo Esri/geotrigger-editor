@@ -54,6 +54,5 @@
       "email": "code@legitimatesounding.com"
     }
   ],
-  "license": "BSD",
-  "dependencies": {}
+  "license": "Apache 2.0"
 }
