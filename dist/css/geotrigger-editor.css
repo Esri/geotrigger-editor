@@ -384,8 +384,7 @@ h5 {
   left: 0;
   z-index: 3;
 }
-
-.gt-tool {
+#gt-controls-region .gt-tool {
   background: no-repeat center center transparent;
   background-size: 24px;
   border: none;
@@ -405,33 +404,33 @@ h5 {
   -o-transition: opacity 200ms linear;
   transition: opacity 200ms linear;
 }
-.gt-tool.gt-tool-list {
+#gt-controls-region .gt-tool.gt-tool-list {
   background-image: url("../img/icons/list.png");
 }
-.gt-tool.gt-tool-create {
+#gt-controls-region .gt-tool.gt-tool-create {
   background-image: url("../img/icons/create.png");
 }
-.gt-tool.gt-tool-polygon {
+#gt-controls-region .gt-tool.gt-tool-polygon {
   background-image: url("../img/icons/polygon.png");
 }
-.gt-tool.gt-tool-radius {
+#gt-controls-region .gt-tool.gt-tool-radius {
   background-image: url("../img/icons/radius.png");
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
-  .gt-tool.gt-tool-list {
+  #gt-controls-region .gt-tool.gt-tool-list {
     background-image: url("../img/icons/list@2x.png");
   }
-  .gt-tool.gt-tool-create {
+  #gt-controls-region .gt-tool.gt-tool-create {
     background-image: url("../img/icons/create@2x.png");
   }
-  .gt-tool.gt-tool-polygon {
+  #gt-controls-region .gt-tool.gt-tool-polygon {
     background-image: url("../img/icons/polygon@2x.png");
   }
-  .gt-tool.gt-tool-radius {
+  #gt-controls-region .gt-tool.gt-tool-radius {
     background-image: url("../img/icons/radius@2x.png");
   }
 }
-.gt-tool:before {
+#gt-controls-region .gt-tool:before {
   content: "";
   opacity: 0;
   padding: 0;
@@ -446,16 +445,16 @@ h5 {
   background-image: -o-radial-gradient(100% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
   background-image: radial-gradient(100% 100%, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
 }
-.gt-tool:hover {
+#gt-controls-region .gt-tool:hover {
   opacity: 1;
 }
-.gt-tool:hover:before {
+#gt-controls-region .gt-tool:hover:before {
   opacity: 0.3;
 }
-.gt-tool.gt-active {
+#gt-controls-region .gt-tool.gt-active {
   opacity: 1;
 }
-.gt-tool.gt-active:before {
+#gt-controls-region .gt-tool.gt-active:before {
   opacity: 1;
 }
 
@@ -830,7 +829,7 @@ h5 {
   background-color: #333333;
 }
 .gt-list-delete h5 {
-  margin-top: 2.2em;
+  margin-top: 1em;
   margin-left: 0.25em;
   display: inline-block;
   color: white;
@@ -846,7 +845,7 @@ h5 {
 .gt-list-delete button {
   font-size: 14px;
   margin-right: 0.5em;
-  margin-top: 2.2em;
+  margin-top: 1em;
   position: absolute;
   top: 0;
   right: 0;
@@ -924,15 +923,19 @@ h5 {
 
 /* - - - - - - - - - - No Triggers - Getting Started - - - - - - - - - - */
 .gt-panel-no-triggers {
-  width: 100%;
-  padding: 1em 2em 1em 2em;
+  background: #1a9b81;
   border-bottom: 1px solid #dddddd;
+  overflow: hidden;
+  padding: 1em 2em 1em 2em;
+  position: relative;
+  text-align: center;
+  width: 100%;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
+}
+.gt-panel-no-triggers h5 {
+  color: white;
 }
 
 .gt-tool-description {
@@ -1024,7 +1027,7 @@ h5 {
 .gt-form select.gt-direction {
   display: block;
   float: left;
-  width: 40%;
+  width: 25%;
 }
 .gt-form select.gt-geometry-type {
   display: block;
@@ -1082,7 +1085,7 @@ h5 {
   display: block;
   float: left;
   padding-top: .6em;
-  width: 57%;
+  width: 72%;
   padding-left: 3%;
 }
 .gt-form .gt-property .gt-property-header {
@@ -1139,18 +1142,26 @@ h5 {
 
 #gt-notes-region {
   height: auto;
+  margin: 0;
+  pointer-events: none;
+  width: 60%;
   z-index: 2;
-  position: relative;
-  margin: 0 auto;
-  width: 300px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
 }
 
 .gt-active #gt-notes-region {
-  padding-left: 40%;
+  left: 40%;
 }
 
 .gt-notification-list {
+  float: left;
   list-style-type: none;
+  padding: .5em 3.5em 0 1em;
+  pointer-events: auto;
+  width: 300px;
 }
 
 .gt-notification {
