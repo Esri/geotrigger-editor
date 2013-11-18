@@ -7,3 +7,6 @@
 [submodule "vendor/esri-leaflet"]
 	path = vendor/esri-leaflet
 	url = https://github.com/Esri/esri-leaflet
+[submodule "vendor/geotriggers-js"]
+	path = vendor/geotriggers-js
+	url = https://github.com/Esri/geotriggers-js/
