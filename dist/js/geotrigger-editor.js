@@ -916,13 +916,17 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       App.collections.triggers.fetch({
         fetch: true,
         reset: true,
-        success: function() {
+        success: function (model, response, options) {
           App.vent.trigger('notify:clear');
 
           // don't start history until triggers have been fetched
           Backbone.history.start();
 
-          if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
+          if (response && response.length === 0) {
+            App.router.navigate('list', { trigger: true });
+          }
+
+          else if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
             App.execute('map:fit');
           }
         }
