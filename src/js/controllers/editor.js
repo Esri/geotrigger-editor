@@ -10,7 +10,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       '': 'index',
       'list': 'list',
       'list/:term': 'list',
-      'new': 'new',
+      'new': 'create',
       'edit/:id': 'edit',
       '*notfound': 'notFound'
     }
@@ -33,6 +33,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       App.vent.trigger('notify', 'Loading Geotriggers');
 
       App.collections.triggers.fetch({
+        fetch: true,
         reset: true,
         success: function() {
           App.vent.trigger('notify:clear');
@@ -134,7 +135,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       }
     },
 
-    'new': function() {
+    create: function() {
       App.vent.trigger('trigger:new');
 
       var view = new App.Views.Form();
@@ -165,10 +166,13 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     // crud
 
     createTrigger: function(triggerData) {
-      App.collections.triggers.once('add', function(data){
-        App.router.navigate('list', { trigger: true });
+      App.execute('draw:clear');
+      App.collections.triggers.create(triggerData, {
+        // wait: true, // wait is broken in backbone 1.1.0
+        success: function() {
+          App.router.navigate('list', { trigger: true });
+        }
       });
-      App.collections.triggers.create(triggerData, { wait: true });
     },
 
     getTrigger: function(id) {
