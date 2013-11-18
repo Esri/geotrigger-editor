@@ -1,7 +1,7 @@
 {
   "name": "geotrigger-editor",
   "version": "0.0.0",
-  "description": "ArcGIS Geotrigger Editor",
+  "description": "Geotrigger Editor",
   "private": true,
   "main": "src/geotrigger-editor.js",
   "scripts": {
