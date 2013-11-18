@@ -1,4 +1,4 @@
-# ArcGIS Geotrigger Editor
+# Geotrigger Editor
 
 White-label client-side editor for creating and editing Geotrigger rules.
 
@@ -64,7 +64,8 @@ GeotriggerEditor.start({
   el: '#gt-editor', // optional: defaults to '#gt-editor'
   session: { // required
     clientId: 'XXXXXX', // required
-    clientSecret: 'XXXXXX' // required
+    clientSecret: 'XXXXXX', // required
+    proxy: '/path/to/proxy' // required if you need to support IE 8/9
   }
 });
 ```
@@ -81,7 +82,7 @@ The `el` option represents the HTML element the Geotrigger Editor will be attach
 
 The `session` object is required to authenticate with ArcGIS and interact with the Geotrigger Service. It has two required properties:
 
-* `clientId` your ArcGIS application's client ID
+* `clientId`: your ArcGIS application's client ID
 * `clientSecret`: your ArcGIS application's client secret
 
 The client ID and secret are required in order for the Geotrigger Service to grant editing rights to the user for the associated application.
@@ -192,5 +193,5 @@ limitations under the License.
 
 A copy of the license is available in the repository's [license.txt](https://raw.github.com/geoloqi/geotrigger-editor/master/LICENSE) file.
 
-[](Esri Tags: ArcGIS Geotrigger Editor Geolocation Web Mobile)
+[](Esri Tags: Geotrigger Editor Geolocation Web Mobile Browser HTML5)
 [](Esri Language: JavaScript)
