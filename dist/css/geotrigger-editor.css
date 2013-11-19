@@ -936,6 +936,8 @@ h5 {
 }
 .gt-panel-no-triggers h5 {
   color: white;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 .gt-tool-description {
