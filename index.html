@@ -25,53 +25,79 @@
   <![endif]-->
 
   <style>
+    html {
+      background: #9CA5AD; /* Old browsers */
+      background: -moz-linear-gradient(top, #596a72 0%, #9ca5ad 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#596a72), color-stop(100%,#9ca5ad)); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, #596a72 0%,#9ca5ad 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, #596a72 0%,#9ca5ad 100%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(top, #596a72 0%,#9ca5ad 100%); /* IE10+ */
+      background: linear-gradient(to bottom, #596a72 0%,#9ca5ad 100%); /* W3C */
+      height: 100%;
+    }
     html, body {
-      background: #ddd;
       padding: 0;
       margin: 0;
       line-height: 1;
     }
     #site-header {
-      background: #466;
+      background: #3E494F;
       height: 50px;
       border-bottom: 1px solid #355;
       border-bottom: 1px solid rgba(50,100,100,.5);
       font-family: "Open Sans", Arial, Helvetica, sans-serif;
     }
-    h1 {
-      color: #333;
-      text-align: center;
-      width: 100%;
+    #site-header h1 {
+      display: none;
+      color: #fff;
       float: left;
       font-size: 22px;
       font-weight: 100;
-      padding: 12px 0 24px 0;
+      padding: 12px 0 0 24px;
     }
-    .clear-session {
-      display: none;
+    .nav-right {
+      list-style: none;
       float: right;
+      padding: 18px 24px 0 0;
+    }
+    .nav-right li {
+      display: inline-block;
+      float: left;
+    }
+    .nav-right a {
       font-size: 12px;
       font-weight: 400;
       color: turquoise;
       cursor: pointer;
-      padding: 18px 24px 0 0;
       text-decoration: none;
     }
-    .clear-session:hover {
+    .nav-right a:hover {
       text-decoration: underline;
+    }
+    .clear-session {
+      display: none;
+
     }
     #example {
       background: #fff;
       display: none;
       padding: 24px;
-      margin: auto;
+      margin: 50px auto 0;
       width: 400px;
 
       position: relative;
-      top: 50px;
+    }
+    #example h2 {
+      color: #333;
+      text-align: center;
+      width: 100%;
+      font-size: 22px;
+      font-weight: 100;
+      padding: 12px 0 24px 0;
     }
     #example p {
       line-height: 1.7em;
+      margin-bottom: 1.7em;
     }
     #example input {
       background: #eee;
@@ -106,7 +132,6 @@
     #example li a {
       text-align: left;
     }
-
     #gt-editor {
       display: none;
       position: absolute;
@@ -119,27 +144,33 @@
 </head>
 <body>
   <header id="site-header">
-    <a class="clear-session">&times; clear session</a>
+    <h1>Geotrigger Editor</h1>
+    <ul class="nav-right">
+      <li>
+        <a class="clear-session">&times; clear session</a>
+      </li>
+    </ul>
   </header>
 
-
   <form id="example">
-    <h1>Geotrigger Editor</h1>
+    <h2>Geotrigger Editor</h2>
     <p>The Geotrigger Editor is a visual editor for ArcGIS Geotrigger Service applications. Using only your Client ID and Secret (acquired from developers.arcgis.com) you too can visually edit your Geotrigger Service applications!</p>
     <input id="client-id" type="text" placeholder="Client ID">
     <input id="client-secret" type="text" placeholder="Client Secret">
     <button class="gt-button gt-button-green">Engage</button>
-    <a href="https://developers.arcgis.com/en/applications/">What's This?</a>
-
+    <a href="https://developers.arcgis.com/en/geotrigger-service/guide/geotrigger-editor/">What's This?</a>
     <ul>
       <li>
         <a href="https://github.com/Esri/geotrigger-editor/blob/master/README.md">Read the Documentation</a>
       </li>
       <li>
-        <a href="https://github.com/Esri/geotrigger-editor">Fork it on Github</a>
+        <a href="https://github.com/Esri/geotrigger-editor">View the Github project</a>
       </li>
       <li>
-        <a href="/">ArcGIS for Developers</a>
+        <a href="https://github.com/Esri/geotrigger-editor/tree/master/examples">See some Examples</a>
+      </li>
+      <li>
+        <a href="http://developers.arcgis.com">Visit ArcGIS for Developers</a>
       </li>
     </ul>
   </form>
@@ -180,7 +211,27 @@
 
     function init() {
       var config = {
-        session: {}
+        session: { // required
+          // clientId: 'XXXXXX', // required
+          // clientSecret: 'XXXXXX', // required
+          // proxy: '/path/to/proxy/' // optional, default false (required for IE8/9)
+        }
+        // the following are optional, defaults are in src/js/modules/config.js
+        // map: {
+        //   center: [0, 0],
+        //   zoom: 2,
+        //   basemap: 'Streets', // default 'Streets'
+        //   basemaps: ['Gray','GrayLabels'], // overrides `basemap`
+        //   options: {
+        //     opacity: 0.7, // default 1
+        //     detectRetina: true // default false
+        //   }
+        // },
+        // fitOnLoad: false, // default true
+        // imagePath: '/images', // default '/images'
+        // sharedOptions: {},
+        // editOptions: {},
+        // highlightOptions: {}
       };
 
       // get geotrigger application items from localStorage
@@ -192,13 +243,9 @@
       function bindClearSession () {
         $('.clear-session').on('click', function(e){
           e.preventDefault();
-          GeotriggerEditor.closeRegions();
-          $(this).hide();
-          $('#gt-editor').hide();
-          bindForm();
-          $('#example').show();
 
-          localStorage.removeItem(item.key);
+          GeotriggerEditor.API.session.destroy();
+          window.location.reload(true);
         }).show();
       }
 
@@ -211,6 +258,7 @@
 
           $(this).hide();
           $('#gt-editor').show();
+          $('#site-header h1').show();
 
           GeotriggerEditor.start(config);
           bindClearSession();
@@ -222,6 +270,7 @@
         config.session.clientSecret = item.val.clientSecret;
 
         $('#gt-editor').show();
+        $('#site-header h1').show();
 
         GeotriggerEditor.start(config);
         bindClearSession();
