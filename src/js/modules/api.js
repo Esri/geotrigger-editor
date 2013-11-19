@@ -12,7 +12,7 @@ GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
       throw new Error('GeotriggerEditor requires a `session` object with `clientId` and `clientSecret` properties');
     }
 
-    this.session = new Geotriggers.Session(App.config.session);
+    this.session = new Geotrigger.Session(App.config.session);
   }
 
   API.addInitializer(createSession);
