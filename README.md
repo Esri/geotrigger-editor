@@ -12,7 +12,17 @@ A client-side web application for creating and editing Geotrigger rules.
 
 ### Installation
 
-**TL;DR**:
+**tl;dr**:
+
+Clone it and get it running locally using this one line:
+
+```sh
+git clone git@github.com:Esri/geotrigger-editor.git && cd geotrigger-editor && npm install && git submodule init && git submodule update && npm install grunt-cli -g && grunt
+```
+
+This will clone the editor repo, cd into it, run npm install, initialize and update submodules, install grunt-cli globally, and serve the editor at http://localhost:8080.
+
+**Basics**:
 
 * The `dist` folder contains all the files you need to include the Geotrigger Editor in your project.
 * The built JavaScript and CSS files are available in both expanded and minified versions in `dist/js` and `dist/css` respectively.
@@ -31,10 +41,10 @@ The Geotrigger Editor has some external dependencies:
 * Handlebars [1.1.2](https://github.com/wycats/handlebars.js/releases/tag/v1.1.2) (runtime only) (CDN: [cdnjs](//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.runtime.min.js))
 * Leaflet [0.6.4](https://github.com/Leaflet/Leaflet/releases/tag/v0.6.4) (CDN: [leaflet](http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js), [cdnjs](//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.js))
 * Leaflet.draw [0.2.2](https://github.com/Leaflet/Leaflet.draw/releases/tag/0.2.2)
-* Geotriggers.js [0.0.4](https://github.com/Esri/geotriggers-js)
+* Geotrigger.js [0.0.4](https://github.com/Esri/geotrigger-js)
 * Esri-Leaflet [0.0.1-rc.2](https://github.com/Esri/esri-leaflet/releases/tag/v0.0.1-rc.2)
 
-We recommend loading dependencies from a CDN when possible. All dependencies are hosted on CDNs with the exception of Backbone.Marionette, Leaflet.draw, Geotriggers.js and Esri-Leaflet, which you'll need to host yourself.
+We recommend loading dependencies from a CDN when possible. All dependencies are hosted on CDNs with the exception of Backbone.Marionette, Leaflet.draw, Geotrigger.js and Esri-Leaflet, which you'll need to host yourself.
 
 Note that though there is a version of Backbone.Marionette on CDNjs, it's currently out of date (1.1.0). You'll need the most recent version of Marionette (>= 1.2.3) as it fixes issues related to breaking changes in Backbone 1.1.0.
 
@@ -86,7 +96,7 @@ The `session` object is required to authenticate with ArcGIS and interact with t
 
 The client ID and secret are required in order for the Geotrigger Service to grant editing rights to the user for the associated application.
 
-It can take all of the same properties as those outlined in the geotriggers.js [config options](https://github.com/Esri/geotriggers-js#config-options).
+It can take all of the same properties as those outlined in the geotrigger.js [config options](https://github.com/Esri/geotrigger-js#config-options).
 
 #### more
 
