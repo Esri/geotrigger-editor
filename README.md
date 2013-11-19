@@ -34,7 +34,9 @@ The Geotrigger Editor has some external dependencies:
 * Geotriggers.js [0.0.4](https://github.com/Esri/geotriggers-js)
 * Esri-Leaflet [0.0.1-rc.2](https://github.com/Esri/esri-leaflet/releases/tag/v0.0.1-rc.2)
 
-We recommend loading dependencies from a CDN when possible. All dependencies are hosted on CDNs with the exception of Backbone.Marionette, Leaflet.draw, Geotriggers.js and Esri-Leaflet, which you'll need to host yourself. Note that although a version of Backbone.Marionette exists on CDNjs, but that version is out of date. You'll need the most recent version of Marionette as it fixes issues related to breaking changes in Backbone 1.1.0.
+We recommend loading dependencies from a CDN when possible. All dependencies are hosted on CDNs with the exception of Backbone.Marionette, Leaflet.draw, Geotriggers.js and Esri-Leaflet, which you'll need to host yourself.
+
+Note that though there is a version of Backbone.Marionette on CDNjs, it's currently out of date (1.1.0). You'll need the most recent version of Marionette (>= 1.2.3) as it fixes issues related to breaking changes in Backbone 1.1.0.
 
 If you plan to support legacy browsers (IE 8), you'll also need [html5shiv](https://github.com/aFarkas/html5shiv) and [json2](https://github.com/douglascrockford/JSON-js), which can be included with a conditional comment like so:
 
@@ -136,7 +138,7 @@ Once Node.js is installed, you can install the Grunt command line interface by r
 #### Local Setup
 
 1. Clone the repository and `cd` into the `geotrigger-editor` directory.
-`. Run `npm install`, `git submodule init`, and `git submodule update` to install dependencies.
+1. Run `npm install`, `git submodule init`, and `git submodule update` to install dependencies.
 
 #### Working locally
 
@@ -154,7 +156,7 @@ This task will rebuild temporary files for development, run a server at `localho
 
 ##### 2. `grunt test`
 
-This task will start a test server at `localhost:8081`, then run the jshint, complexity, and cucumber tasks to see if the code does not smell.
+This task will start a test server at `localhost:8081`, then run the jshint, complexity, and cucumber tasks to see if the code does not smell. **not yet implemented**
 
 ##### 3. `grunt build`
 
