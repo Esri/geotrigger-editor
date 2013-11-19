@@ -12,16 +12,6 @@ A client-side web application for creating and editing Geotrigger rules.
 
 ### Installation
 
-**tl;dr**:
-
-Clone it and get it running locally using this one line:
-
-```sh
-git clone git@github.com:Esri/geotrigger-editor.git && cd geotrigger-editor && npm install && git submodule init && git submodule update && npm install grunt-cli -g && grunt
-```
-
-This will clone the editor repo, cd into it, run npm install, initialize and update submodules, install grunt-cli globally, and serve the editor at http://localhost:8080.
-
 **Basics**:
 
 * The `dist` folder contains all the files you need to include the Geotrigger Editor in your project.
@@ -138,6 +128,7 @@ To run the development environment, you will need the following:
 
 1. [Node.js](http://nodejs.org/)
 1. [Grunt](http://gruntjs.com/)
+1. [Ruby](https://www.ruby-lang.org/en/downloads/) and [Compass](http://compass-style.org/install/) (to compile SASS)
 
 To install `node` on your system follow [these instructions](https://github.com/joyent/node/wiki/Installation#installing-without-building).
 
