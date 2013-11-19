@@ -42,13 +42,13 @@
     }
     #site-header {
       background: #3E494F;
+      display: none;
       height: 50px;
       border-bottom: 1px solid #355;
       border-bottom: 1px solid rgba(50,100,100,.5);
       font-family: "Open Sans", Arial, Helvetica, sans-serif;
     }
     #site-header h1 {
-      display: none;
       color: #fff;
       float: left;
       font-size: 22px;
@@ -58,14 +58,14 @@
     .nav-right {
       list-style: none;
       float: right;
-      padding: 18px 24px 0 0;
+      padding: 16px 24px 0 0;
     }
     .nav-right li {
       display: inline-block;
       float: left;
     }
     .nav-right a {
-      font-size: 12px;
+      font-size: 15px;
       font-weight: 400;
       color: turquoise;
       cursor: pointer;
@@ -258,7 +258,7 @@
 
           $(this).hide();
           $('#gt-editor').show();
-          $('#site-header h1').show();
+          $('#site-header').show();
 
           GeotriggerEditor.start(config);
           bindClearSession();
@@ -270,7 +270,7 @@
         config.session.clientSecret = item.val.clientSecret;
 
         $('#gt-editor').show();
-        $('#site-header h1').show();
+        $('#site-header').show();
 
         GeotriggerEditor.start(config);
         bindClearSession();
