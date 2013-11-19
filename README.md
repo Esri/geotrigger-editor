@@ -142,9 +142,9 @@ Once Node.js is installed, you can install the Grunt command line interface by r
 
 #### Working locally
 
-You'll need an HTTP server to serve files from the root of the repository. The `grunt dev` task takes care of building all source files to temporary files ignored by git (`src/js/geotrigger-editor.js` and `src/css/geotrigger-editor.css`, watching local files for changes, and running a local server for you at http://localhost:8080 (see the `Grunt Tasks` section for more information).
+You'll need an HTTP server to serve files from the root of the repository. The `grunt dev` task takes care of building all source files to temporary files ignored by git (`src/js/geotrigger-editor.js` and `src/css/geotrigger-editor.css`), watching local files for changes, and running a local server for you at http://localhost:8080 (see the `Grunt Tasks` section for more information).
 
-#### Testing locally
+#### Testing locally (todo)
 
 Testing requires PhantomJS to be running. You can install it with homebrew (`brew install phantomjs`), and get it started by running `phantomjs --webdriver=4444`. The local server should already be running too. The `grunt test` task takes care of the latter part (see `Grunt Tasks` below).
 
