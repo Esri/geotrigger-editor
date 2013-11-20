@@ -108,7 +108,7 @@ On the client side, just be sure to start the editor with a path to the proxy, l
 GeotriggerEditor.start({
   session: { // required
     clientId: 'XXXXXX', // required
-    clientSecret: 'XXXXXX' // required
+    clientSecret: 'XXXXXX', // required
     proxy: '/proxy/'
   }
 });
@@ -155,9 +155,9 @@ Testing requires PhantomJS to be running. You can install it with homebrew (`bre
 
 This task will rebuild temporary files for development, run a server at `localhost:8080`, then continuously watch for changes in the `src` directory until you end the process. The `index.html` file in the root of the repository is already set up to use these files.
 
-##### 2. `grunt test`
+##### 2. `grunt test` **not yet implemented**
 
-This task will start a test server at `localhost:8081`, then run the jshint, complexity, and cucumber tasks to see if the code does not smell. **not yet implemented**
+This task will start a test server at `localhost:8081`, then run the jshint, complexity, and cucumber tasks to see if the code does not smell.
 
 ##### 3. `grunt build`
 
