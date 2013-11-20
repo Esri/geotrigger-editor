@@ -1,15 +1,15 @@
 {
   "name": "geotrigger-editor",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Geotrigger Editor",
-  "private": true,
   "main": "src/geotrigger-editor.js",
+  "homepage": "https://github.com/Esri/geotrigger-editor",
   "scripts": {
     "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:geoloqi/geotrigger-editor.git"
+    "url": "git@github.com:Esri/geotrigger-editor.git"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

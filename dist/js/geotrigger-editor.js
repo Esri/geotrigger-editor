@@ -1,3 +1,8 @@
+/*! geotrigger-editor - v0.1.0 - 2013-11-19
+*   https://github.com/Esri/geotrigger-editor
+*   Copyright (c) 2013 Environmental Systems Research Institute, Inc.
+*   Apache 2.0 License */
+
 var GeotriggerEditor = new Backbone.Marionette.Application();
 
 GeotriggerEditor.addInitializer(function(options) {
@@ -624,7 +629,7 @@ GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
       throw new Error('GeotriggerEditor requires a `session` object with `clientId` and `clientSecret` properties');
     }
 
-    this.session = new Geotriggers.Session(App.config.session);
+    this.session = new Geotrigger.Session(App.config.session);
   }
 
   API.addInitializer(createSession);
@@ -1095,7 +1100,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
   //
   // Get the Editor up and running by initializing the mediator
   // when the the application is started, pulling in all of the
-  // existing geotriggers and displaying them.
+  // existing triggers and displaying them.
 
   Editor.addInitializer(function() {
     // initialize collections
