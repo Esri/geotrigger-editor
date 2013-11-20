@@ -4,9 +4,10 @@ A client-side web application for creating and editing Geotrigger rules.
 
 ## Features
 
-* Create, edit and delete Geotrigger rules from your browser using a dynamic form.
-* Search for Geotrigger rules by tag, nickname, ID or property.
-* Draw shapes directly on the map to create a new Geotrigger rule.
+* **Draw** trigger boundaries on a map
+* **List** all of an application's triggers
+* **Create**, **Edit** and **Delete** trigger conditions, actions, and boundaries
+* **Search** for triggers by tag, title, or ID
 
 ## Instructions
 
@@ -169,7 +170,7 @@ This task will build the production version of the editor's image assets into th
 
 ## Issues
 
-Find a bug or want to request a new feature? Please let us know by submitting an [issue](https://github.com/geoloqi/geotrigger-editor/issues).
+Find a bug or want to request a new feature? Please let us know by submitting an [issue](https://github.com/Esri/geotrigger-editor/issues).
 
 ## Contributing
 
@@ -191,7 +192,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-A copy of the license is available in the repository's [license.txt](https://raw.github.com/geoloqi/geotrigger-editor/master/LICENSE) file.
+A copy of the license is available in the repository's [license.txt](https://raw.github.com/Esri/geotrigger-editor/master/LICENSE) file.
 
 [](Esri Tags: Geotrigger Editor Geolocation Web Mobile Browser HTML5)
 [](Esri Language: JavaScript)
