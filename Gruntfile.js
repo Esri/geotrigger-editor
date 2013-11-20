@@ -21,7 +21,10 @@ module.exports = function(grunt) {
 
     uglify: {
       options: {
-        banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+        '*   <%= pkg.homepage %>\n' +
+        '*   Copyright (c) <%= grunt.template.today("yyyy") %> Environmental Systems Research Institute, Inc.\n' +
+        '*   Apache 2.0 License */\n\n',
         report: 'gzip'
       },
       dist: {
@@ -122,6 +125,10 @@ module.exports = function(grunt) {
 
     concat: {
       options: {
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+        '*   <%= pkg.homepage %>\n' +
+        '*   Copyright (c) <%= grunt.template.today("yyyy") %> Environmental Systems Research Institute, Inc.\n' +
+        '*   Apache 2.0 License */\n\n',
         // define a string to put between each file in the concatenated output
         separator: '\n\n'
       },
