@@ -78,6 +78,11 @@
       display: none;
 
     }
+    .cors-warning {
+      padding: 20px;
+      background: #eee;
+      border-radius: 5px;
+    }
     #example {
       background: #fff;
       display: none;
@@ -115,12 +120,14 @@
     }
     #example a {
       color: #1a9b81;
-      text-align: center;
-      display: inline-block;
-      width: 188px;
     }
     #example a:hover {
       color: #136f5d;
+    }
+    #example .what {
+      text-align: center;
+      display: inline-block;
+      width: 188px;
     }
     #example ul {
       padding-top: 24px;
@@ -140,6 +147,9 @@
       bottom: 0;
       left: 0;
     }
+    .hide {
+      display: none !important;
+    }
   </style>
 </head>
 <body>
@@ -154,11 +164,18 @@
 
   <form id="example">
     <h2>Geotrigger Editor</h2>
+
     <p>The Geotrigger Editor is a visual editor for ArcGIS Geotrigger Service applications. Using only your Client ID and Secret (acquired from developers.arcgis.com) you too can visually edit your Geotrigger Service applications!</p>
-    <input id="client-id" type="text" placeholder="Client ID">
-    <input id="client-secret" type="text" placeholder="Client Secret">
-    <button class="gt-button gt-button-green">Engage</button>
-    <a href="https://developers.arcgis.com/en/geotrigger-service/guide/geotrigger-editor/">What's This?</a>
+
+    <p class="cors-warning hide">This application requires a browser with <a href="http://caniuse.com/cors">CORS</a> support. If you want to use the editor, you can either view this site with a newer browser or host the application yourself using a <a href="https://github.com/Esri/geofaker-js#browser">proxy</a>.
+
+    <div class="engage hide">
+      <input id="client-id" type="text" placeholder="Client ID">
+      <input id="client-secret" type="text" placeholder="Client Secret">
+      <button class="gt-button gt-button-green">Engage</button>
+      <a class="what" href="https://developers.arcgis.com/en/geotrigger-service/guide/geotrigger-editor/">What's This?</a>
+    </div>
+
     <ul>
       <li>
         <a href="https://github.com/Esri/geotrigger-editor/blob/master/README.md">Read the Documentation</a>
@@ -167,7 +184,7 @@
         <a href="https://github.com/Esri/geotrigger-editor">View the Github project</a>
       </li>
       <li>
-        <a href="https://github.com/Esri/geotrigger-editor/tree/master/examples">See some Examples</a>
+        <a href="https://developers.arcgis.com/en/geotrigger-service/">Learn about the Geotrigger Service</a>
       </li>
       <li>
         <a href="http://developers.arcgis.com">Visit ArcGIS for Developers</a>
@@ -195,7 +212,31 @@
 
   <!-- js: initializer -->
   <script>
-    // https://gist.github.com/ngoldman/7533774
+  (function(){
+    var config = {
+      session: { // required
+        // clientId: 'XXXXXX', // required
+        // clientSecret: 'XXXXXX', // required
+        // proxy: '/path/to/proxy/' // optional, default false (required for IE8/9)
+      }
+      // the following are optional, defaults are in src/js/modules/config.js
+      // map: {
+      //   center: [0, 0],
+      //   zoom: 2,
+      //   basemap: 'Streets', // default 'Streets'
+      //   basemaps: ['Gray','GrayLabels'], // overrides `basemap`
+      //   options: {
+      //     opacity: 0.7, // default 1
+      //     detectRetina: true // default false
+      //   }
+      // },
+      // fitOnLoad: false, // default true
+      // imagePath: '/images', // default '/images'
+      // sharedOptions: {},
+      // editOptions: {},
+      // highlightOptions: {}
+    };
+
     function findLocalItems (query) {
       var results = [];
       for (i in localStorage) {
@@ -209,61 +250,48 @@
       return results;
     }
 
+    function bindClearSession () {
+      $('.clear-session').on('click', function(e){
+        e.preventDefault();
+
+        GeotriggerEditor.API.session.destroy();
+        window.location.reload(true);
+      }).show();
+    }
+
+    function bindForm () {
+      $('#example').submit(function(e){
+        e.preventDefault();
+
+        config.session.clientId = $('#client-id').val();
+        config.session.clientSecret = $('#client-secret').val();
+
+        $(this).hide();
+        $('#gt-editor').show();
+        $('#site-header').show();
+
+        GeotriggerEditor.start(config);
+        bindClearSession();
+      });
+    }
+
     function init() {
-      var config = {
-        session: { // required
-          // clientId: 'XXXXXX', // required
-          // clientSecret: 'XXXXXX', // required
-          // proxy: '/path/to/proxy/' // optional, default false (required for IE8/9)
-        }
-        // the following are optional, defaults are in src/js/modules/config.js
-        // map: {
-        //   center: [0, 0],
-        //   zoom: 2,
-        //   basemap: 'Streets', // default 'Streets'
-        //   basemaps: ['Gray','GrayLabels'], // overrides `basemap`
-        //   options: {
-        //     opacity: 0.7, // default 1
-        //     detectRetina: true // default false
-        //   }
-        // },
-        // fitOnLoad: false, // default true
-        // imagePath: '/images', // default '/images'
-        // sharedOptions: {},
-        // editOptions: {},
-        // highlightOptions: {}
-      };
+
+      var CORS = !!(window.XMLHttpRequest && 'withCredentials' in new XMLHttpRequest());
+
+      if (CORS) {
+        $('.engage').removeClass('hide');
+      } else {
+        $('#example').show();
+        $('.cors-warning').removeClass('hide');
+        return;
+      }
 
       // get geotrigger application items from localStorage
       var items = findLocalItems('geotriggers_application_');
 
       // just use the first one for now
       var item = items[0];
-
-      function bindClearSession () {
-        $('.clear-session').on('click', function(e){
-          e.preventDefault();
-
-          GeotriggerEditor.API.session.destroy();
-          window.location.reload(true);
-        }).show();
-      }
-
-      function bindForm () {
-        $('#example').submit(function(e){
-          e.preventDefault();
-
-          config.session.clientId = $('#client-id').val();
-          config.session.clientSecret = $('#client-secret').val();
-
-          $(this).hide();
-          $('#gt-editor').show();
-          $('#site-header').show();
-
-          GeotriggerEditor.start(config);
-          bindClearSession();
-        });
-      }
 
       if (item && item.val && item.val.clientId && item.val.clientSecret) {
         config.session.clientId = item.val.clientId;
@@ -281,6 +309,7 @@
     }
 
     $(init);
+  })();
   </script>
 </body>
 </html>
