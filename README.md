@@ -32,7 +32,7 @@ The Geotrigger Editor has some external dependencies:
 * Handlebars [1.1.2](https://github.com/wycats/handlebars.js/releases/tag/v1.1.2) (runtime only) (CDN: [cdnjs](//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.runtime.min.js))
 * Leaflet [0.6.4](https://github.com/Leaflet/Leaflet/releases/tag/v0.6.4) (CDN: [leaflet](http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js), [cdnjs](//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.js))
 * Leaflet.draw [0.2.2](https://github.com/Leaflet/Leaflet.draw/releases/tag/0.2.2)
-* Geotrigger.js [0.1.2](https://github.com/Esri/geotrigger-js)
+* Geotrigger.js [0.1.4](https://github.com/Esri/geotrigger-js)
 * Esri-Leaflet [0.0.1-rc.2](https://github.com/Esri/esri-leaflet/releases/tag/v0.0.1-rc.2)
 
 We recommend loading dependencies from a CDN when possible. All dependencies are hosted on CDNs with the exception of Backbone.Marionette, Leaflet.draw, Geotrigger.js and Esri-Leaflet, which you'll need to host yourself.
