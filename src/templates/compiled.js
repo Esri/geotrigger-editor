@@ -262,11 +262,15 @@ function program7(depth0,data) {
   options = {hash:{},data:data};
   stack2 = ((stack1 = helpers.tagLinks || (depth0 && depth0.tagLinks)),stack1 ? stack1.call(depth0, (depth0 && depth0.tags), options) : helperMissing.call(depth0, "tagLinks", (depth0 && depth0.tags), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</div>\n<div class='gt-id'>\n  <strong>ID</strong><span>:</span> ";
+  buffer += "\n</div>\n<div class='gt-id'>\n  <strong>ID</strong><span>:</span> <a href=\"#list/";
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = (depth0 && depth0.triggerId); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
   buffer += escapeExpression(stack2)
-    + "\n</div>\n<div class='gt-list-delete'>\n  <h5>Delete ";
+    + "\">";
+  if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = (depth0 && depth0.triggerId); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</a>\n</div>\n<div class='gt-list-delete'>\n  <h5>Delete ";
   stack2 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.properties)),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "?</h5>\n  <button class='gt-confirm-delete gt-button-small gt-button-delete'>Delete</button>\n  <button class='gt-cancel-delete gt-button-small gt-button gt-button-gray'>Cancel</button>\n</div>";
