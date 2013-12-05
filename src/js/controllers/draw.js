@@ -64,10 +64,22 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       var geo = model.get('condition').geo;
       var shape;
 
-      if (geo.geojson) {
-        shape = App.Map.polygon(geo.geojson, App.config.editOptions.shapeOptions, false).getLayers()[0];
-      } else {
+      // circle
+      if (geo.distance) {
         shape = App.Map.circle(geo, App.config.editOptions.shapeOptions, false);
+      }
+
+      // polygon
+      else if (geo.geojson) {
+        shape = App.Map.polygon(geo.geojson, App.config.editOptions.shapeOptions, false).getLayers()[0];
+      }
+
+      // invalid shape
+      else {
+        if (console && console.error) {
+          console.error('invalid geo data', geo);
+        }
+        return;
       }
 
       return shape;

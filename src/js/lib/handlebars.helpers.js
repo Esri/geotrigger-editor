@@ -25,10 +25,10 @@
     var option;
 
     if (value && value.geo) {
-      if (value.geo.geojson) {
-        option = 'polygon';
-      } else {
+      if (value.geo.distance) {
         option = 'radius';
+      } else if (value.geo.geojson) {
+        option = 'polygon';
       }
     }
 
@@ -41,10 +41,10 @@
     var str = '';
 
     if (value && value.geo) {
-      if (value.geo.geojson) {
-        str = 'polygon';
-      } else {
+      if (value.geo.distance) {
         str = 'radius';
+      } else if (value.geo.geojson) {
+        str = 'polygon';
       }
     }
 

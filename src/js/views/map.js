@@ -31,10 +31,22 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       this.removeShape();
 
-      if (geo.geojson) {
-        this._shape = App.Map.polygon(geo.geojson);
-      } else {
+      // circle
+      if (geo.distance) {
         this._shape = App.Map.circle(geo);
+      }
+
+      // polygon
+      else if (geo.geojson) {
+        this._shape = App.Map.polygon(geo.geojson);
+      }
+
+      // invalid shape
+      else {
+        if (console && console.error) {
+          console.error('invalid geo data', geo);
+        }
+        return;
       }
 
       this._shape.on('click', _.bind(function(){
