@@ -25,7 +25,8 @@ module.exports = function(grunt) {
         '*   <%= pkg.homepage %>\n' +
         '*   Copyright (c) <%= grunt.template.today("yyyy") %> Environmental Systems Research Institute, Inc.\n' +
         '*   Apache 2.0 License */\n\n',
-        report: 'gzip'
+        report: 'gzip',
+        enclose: {}
       },
       dist: {
         files: {
@@ -135,26 +136,30 @@ module.exports = function(grunt) {
       dev: {
         files: {
           'src/js/geotrigger-editor.js': [
+            'src/js/header.js',
             'src/js/app.js',
             'src/templates/compiled.js',
             'src/js/lib/*.js',
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
             'src/js/models/*.js',
-            'src/js/views/*.js'
+            'src/js/views/*.js',
+            'src/js/footer.js'
           ]
         }
       },
       dist: {
         files: {
           'dist/js/<%= pkg.name %>.js': [
+            'src/js/header.js',
             'src/js/app.js',
             'src/templates/compiled.js',
             'src/js/lib/*.js',
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
             'src/js/models/*.js',
-            'src/js/views/*.js'
+            'src/js/views/*.js',
+            'src/js/footer.js'
           ]
         }
       }
