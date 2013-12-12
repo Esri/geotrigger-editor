@@ -44,3 +44,6 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+# project specific
+src/templates/compiled.js
