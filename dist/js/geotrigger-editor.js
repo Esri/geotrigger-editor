@@ -1,9 +1,11 @@
-/*! geotrigger-editor - v0.1.0 - 2013-11-19
+/*! geotrigger-editor - v0.1.1 - 2013-12-11
 *   https://github.com/Esri/geotrigger-editor
 *   Copyright (c) 2013 Environmental Systems Research Institute, Inc.
 *   Apache 2.0 License */
 
-var GeotriggerEditor = new Backbone.Marionette.Application();
+!(function(){
+
+this.GeotriggerEditor = new Backbone.Marionette.Application();
 
 GeotriggerEditor.addInitializer(function(options) {
   this.Config.start(options);
@@ -195,7 +197,7 @@ function program15(depth0,data) {
   buffer += "<div class='gt-panel-top-bar'>\n  <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>\n  <h3>";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.triggerId), {hash:{},inverse:self.program(3, program3, data),fn:self.program(1, program1, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "</h3>\n  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n</div>\n\n<div class='gt-panel-content'>\n  <form class='gt-form gt-form-edit'>\n\n    <section class='gt-form-section gt-conditions'>\n      <div class=\"gt-property\">\n        <div class=\"gt-property-header\">When a device tagged..</div>\n\n        <div class=\"gt-property-item\">\n          <textarea class='gt-input' name='tags' placeholder='enter tags'>";
+  buffer += "</h3>\n  <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>\n</div>\n\n<div class='gt-panel-content'>\n  <form class='gt-form gt-form-edit'>\n\n    <section class='gt-form-section gt-conditions'>\n      <div class=\"gt-property\">\n        <div class=\"gt-property-header\">When a device with one of the following tags..</div>\n\n        <div class=\"gt-property-item\">\n          <textarea class='gt-input' name='tags' placeholder='enter any number of tags separated by commas'>";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.tagList || (depth0 && depth0.tagList)),stack1 ? stack1.call(depth0, (depth0 && depth0.tags), options) : helperMissing.call(depth0, "tagList", (depth0 && depth0.tags), options)))
     + "</textarea>\n        </div>\n\n        <div class=\"gt-property-item\">\n            <select name='condition[direction]' class='gt-direction'>\n              ";
@@ -278,11 +280,15 @@ function program7(depth0,data) {
   options = {hash:{},data:data};
   stack2 = ((stack1 = helpers.tagLinks || (depth0 && depth0.tagLinks)),stack1 ? stack1.call(depth0, (depth0 && depth0.tags), options) : helperMissing.call(depth0, "tagLinks", (depth0 && depth0.tags), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n</div>\n<div class='gt-id'>\n  <strong>ID</strong><span>:</span> ";
+  buffer += "\n</div>\n<div class='gt-id'>\n  <strong>ID</strong><span>:</span> <a href=\"#list/";
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = (depth0 && depth0.triggerId); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
   buffer += escapeExpression(stack2)
-    + "\n</div>\n<div class='gt-list-delete'>\n  <h5>Delete ";
+    + "\">";
+  if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
+  else { stack2 = (depth0 && depth0.triggerId); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
+  buffer += escapeExpression(stack2)
+    + "</a>\n</div>\n<div class='gt-list-delete'>\n  <h5>Delete ";
   stack2 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.properties)),stack1 == null || stack1 === false ? stack1 : stack1.title), {hash:{},inverse:self.program(7, program7, data),fn:self.program(5, program5, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "?</h5>\n  <button class='gt-confirm-delete gt-button-small gt-button-delete'>Delete</button>\n  <button class='gt-cancel-delete gt-button-small gt-button gt-button-gray'>Cancel</button>\n</div>";
@@ -352,10 +358,10 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     var option;
 
     if (value && value.geo) {
-      if (value.geo.geojson) {
-        option = 'polygon';
-      } else {
+      if (value.geo.distance) {
         option = 'radius';
+      } else if (value.geo.geojson) {
+        option = 'polygon';
       }
     }
 
@@ -368,10 +374,10 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     var str = '';
 
     if (value && value.geo) {
-      if (value.geo.geojson) {
-        str = 'polygon';
-      } else {
+      if (value.geo.distance) {
         str = 'radius';
+      } else if (value.geo.geojson) {
+        str = 'polygon';
       }
     }
 
@@ -842,10 +848,22 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       var geo = model.get('condition').geo;
       var shape;
 
-      if (geo.geojson) {
-        shape = App.Map.polygon(geo.geojson, App.config.editOptions.shapeOptions, false).getLayers()[0];
-      } else {
+      // circle
+      if (geo.distance) {
         shape = App.Map.circle(geo, App.config.editOptions.shapeOptions, false);
+      }
+
+      // polygon
+      else if (geo.geojson) {
+        shape = App.Map.polygon(geo.geojson, App.config.editOptions.shapeOptions, false).getLayers()[0];
+      }
+
+      // invalid shape
+      else {
+        if (console && console.error) {
+          console.error('invalid geo data', geo);
+        }
+        return;
       }
 
       return shape;
@@ -2240,10 +2258,22 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       this.removeShape();
 
-      if (geo.geojson) {
-        this._shape = App.Map.polygon(geo.geojson);
-      } else {
+      // circle
+      if (geo.distance) {
         this._shape = App.Map.circle(geo);
+      }
+
+      // polygon
+      else if (geo.geojson) {
+        this._shape = App.Map.polygon(geo.geojson);
+      }
+
+      // invalid shape
+      else {
+        if (console && console.error) {
+          console.error('invalid geo data', geo);
+        }
+        return;
       }
 
       this._shape.on('click', _.bind(function(){
@@ -2384,3 +2414,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     tagName: 'ul'
   });
 });
+
+
+})();
