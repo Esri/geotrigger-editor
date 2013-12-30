@@ -2,6 +2,8 @@
 
 ## master (in development)
 * better template compression
+* trigger form validation
+* proper JSON parsing for notification data ([#180](https://github.com/Esri/geotrigger-editor/issues/180))
 
 ## v0.1.1
 * wrap trigger IDs in search link on list ([#168](https://github.com/Esri/geotrigger-editor/issues/168))

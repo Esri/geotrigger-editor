@@ -304,6 +304,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         e.preventDefault();
       }
 
+      var i;
+      var errors = [];
       var data = this.ui.form.serializeObject();
 
       // clean data
@@ -313,21 +315,59 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       if (data.tags) {
         var tags = data.tags;
         tags = tags.split(',');
-        for (var i=tags.length-1;i>0;i--) {
+        for (i = tags.length - 1; i >= 0; i--) {
           tags[i] = tags[i].trim();
         }
         data.tags = tags;
       } else {
         // at least one tag required
+        errors.push('at least one tag is required');
       }
 
       // condition validation
-      if (!data.condition || !data.condition.geo) {
-        // condition and condition.geo required
+      if (data.condition) {
+        // get layer data
+        var layer = App.request('draw:layer');
+
+        // layer is polygon
+        if (layer instanceof L.Polygon) {
+          data.condition.geo = {
+            'geojson': layer.toGeoJSON()
+          };
+        }
+
+        // layer is radius
+        else if (layer instanceof L.Circle) {
+          var latlng = layer.getLatLng();
+          data.condition.geo = {
+            'latitude': latlng.lat,
+            'longitude': latlng.lng,
+            'distance': Math.round(layer.getRadius())
+          };
+        }
+
+        // something went horribly wrong!
+        else {
+          errors.push('missing trigger shape');
+        }
+      } else {
+        errors.push('direction for trigger condition is required');
       }
 
       // action validation
       if (data.action) {
+        if (!data.action.notification) {
+          data.action.notification = null;
+        } else {
+          if (data.action.notification.data) {
+            try {
+              data.action.notification.data = JSON.parse(data.action.notification.data);
+            } catch (error) {
+              errors.push('notification data must be valid JSON');
+            }
+          }
+        }
+
         // tracking profile
         if (!data.action.trackingProfile) {
           data.action.trackingProfile = null;
@@ -339,40 +379,23 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         }
       } else {
         // at least one action required
+        errors.push('at least one action required');
       }
 
-      // create or update if all requirements have been satisfied
-      if (data && data.tags && data.condition && data.action) {
+      if (errors.length > 0) {
+        for (i = errors.length - 1; i >= 0; i--) {
+          console.log(i, errors[i]);
+          App.vent.trigger('notify', {
+            type: 'error',
+            message: errors[i]
+          });
+        }
+      } else {
         this.createOrUpdateTrigger(data);
       }
     },
 
     createOrUpdateTrigger: function(data) {
-      // get layer data
-      var layer = App.request('draw:layer');
-
-      // layer is polygon
-      if (layer instanceof L.Polygon) {
-        data.condition.geo = {
-          'geojson': layer.toGeoJSON()
-        };
-      }
-
-      // layer is radius
-      else if (layer instanceof L.Circle) {
-        var latlng = layer.getLatLng();
-        data.condition.geo = {
-          'latitude': latlng.lat,
-          'longitude': latlng.lng,
-          'distance': Math.round(layer.getRadius())
-        };
-      }
-
-      // something went horribly wrong!
-      else {
-        throw new Error('Invalid layer data');
-      }
-
       // create new trigger
       if (!this.model) {
         App.vent.trigger('trigger:create', data);
