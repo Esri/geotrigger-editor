@@ -1,6 +1,6 @@
 # Geotrigger Editor Changelog
 
-## master (in development)
+## v0.1.2
 * better template compression
 * trigger form validation
 * proper JSON parsing for notification data ([#180](https://github.com/Esri/geotrigger-editor/issues/180))
