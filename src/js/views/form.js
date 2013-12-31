@@ -14,8 +14,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     events: {
       // form events
-      'click .gt-add-title'           : 'addTitle',
-      'click .gt-remove-title'        : 'removeTitle',
+      'click .gt-add-trigger-id'      : 'addTriggerId',
+      'click .gt-remove-trigger-id'   : 'removeTriggerId',
 
       'click .gt-add-action'          : 'addAction',
       'click .gt-remove-action'       : 'removeAction',
@@ -128,7 +128,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    addTitle: function(e) {
+    addTriggerId: function(e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -138,10 +138,10 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       $(e.target).addClass('gt-hide');
 
       // show title form element
-      this.$el.find('.gt-title').removeClass('gt-hide');
+      this.$el.find('.gt-trigger-id').removeClass('gt-hide');
     },
 
-    removeTitle: function(e) {
+    removeTriggerId: function(e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -154,7 +154,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.form.find('input[name="properties[title]"]').val('');
 
       // show add title button
-      this.ui.form.find('.gt-add-title').removeClass('gt-hide');
+      this.ui.form.find('.gt-add-trigger-id').removeClass('gt-hide');
     },
 
     addAction: function(e) {
@@ -384,7 +384,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
       if (errors.length > 0) {
         for (i = errors.length - 1; i >= 0; i--) {
-          console.log(i, errors[i]);
           App.vent.trigger('notify', {
             type: 'error',
             message: errors[i]

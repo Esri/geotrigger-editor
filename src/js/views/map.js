@@ -50,7 +50,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
 
       this._shape.on('click', _.bind(function(){
-        App.router.navigate('edit/' + this.model.id, { trigger: true });
+        App.router.navigate('edit/' + this.model.get('triggerId'), { trigger: true });
       }, this));
 
       this._shape.on('mouseover', _.bind(function(){
@@ -107,19 +107,19 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     },
 
     hideShape: function(triggerId) {
-      var model = App.collections.triggers.get(triggerId);
+      var model = App.collections.triggers.findWhere({'triggerId':triggerId});
       var view = this.children.findByModel(model);
       view.removeShape();
     },
 
     focusShape: function(triggerId) {
-      var model = App.collections.triggers.get(triggerId);
+      var model = App.collections.triggers.findWhere({'triggerId':triggerId});
       var view = this.children.findByModel(model);
       view.focusShape();
     },
 
     unfocusShape: function(triggerId) {
-      var model = App.collections.triggers.get(triggerId);
+      var model = App.collections.triggers.findWhere({'triggerId':triggerId});
       var view = this.children.findByModel(model);
       view.unfocusShape();
     },

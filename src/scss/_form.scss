@@ -47,7 +47,7 @@
     margin: 0;
   }
 
-  .gt-title-wrapper {
+  .gt-trigger-id-wrapper {
     border-top: 1px solid #efefef;
     margin: 0 0 1em;
     padding: 1em 0 0;
@@ -113,7 +113,7 @@
       @include border-radius(3px 3px 0 0);
       background-color: $lighter-gray;
       .gt-remove-action,
-      .gt-remove-title {
+      .gt-remove-trigger-id {
         cursor: pointer;
         float: right;
       }

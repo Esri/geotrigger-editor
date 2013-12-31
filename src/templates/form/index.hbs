@@ -1,6 +1,6 @@
 <div class='gt-panel-top-bar'>
   <a href='#list' class='gt-panel-top-bar-button gt-back-to-list'></a>
-  <h3>{{#if triggerId}}Edit{{else}}Create{{/if}}</h3>
+  <h3>{{#if triggerId}}{{triggerId}}{{else}}Create{{/if}}</h3>
   <a href='#' class='gt-panel-top-bar-button gt-close-drawer'></a>
 </div>
 
@@ -41,20 +41,22 @@
       <button data-action="trackingProfile" class="gt-button gt-button-light-gray gt-button-small gt-add-action">&#043; change the tracking profile</button>
     </section>
 
-    <section class="gt-form-section gt-title-wrapper">
-      <button class="gt-button gt-button-light-gray gt-button-small gt-add-title{{#if properties.title}} gt-hide{{/if}}">&#043; add a title</button>
+    {{#unless triggerId}}
+    <section class="gt-form-section gt-trigger-id-wrapper">
+      <button class="gt-button gt-button-light-gray gt-button-small gt-add-trigger-id">&#043; custom trigger ID</button>
 
-      <div class='gt-title gt-property{{#unless properties.title}} gt-hide{{/unless}}'>
+      <div class='gt-trigger-id gt-property gt-hide'>
         <div class="gt-property-header">
-          Title
-          <a class="gt-remove-title gt-delete-icon"></a>
+          Trigger ID
+          <a class="gt-remove-trigger-id gt-delete-icon"></a>
         </div>
 
         <div class="gt-property-item">
-          <input class='gt-input-fill' type='text' name='properties[title]' placeholder='Geotrigger Title' value='{{properties.title}}'>
+          <input class='gt-input-fill' type='text' name='triggerId' placeholder='custom trigger ID' value='{{triggerId}}'>
         </div>
       </div>
     </section>
+    {{/unless}}
 
     <section class='gt-form-section gt-submit-wrapper'>
       {{#if triggerId}}

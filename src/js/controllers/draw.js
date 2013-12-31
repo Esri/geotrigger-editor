@@ -44,7 +44,12 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
     panToTrigger: function (triggerId) {
       var layer = this.newShape(triggerId);
       this.editLayer(layer);
-      App.Map.panToLayer(layer);
+      if (App._zoomToLayer) {
+        delete App._zoomToLayer;
+        App.Map.zoomToLayer(layer);
+      } else {
+        App.Map.panToLayer(layer);
+      }
     },
 
     broadcastLayer: function (e) {
@@ -59,7 +64,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
     },
 
     newShape: function(triggerId) {
-      var model = App.collections.triggers.get(triggerId);
+      var model = App.collections.triggers.findWhere({'triggerId':triggerId});
       var id = model.get('triggerId');
       var geo = model.get('condition').geo;
       var shape;
