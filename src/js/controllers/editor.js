@@ -198,6 +198,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       });
       var model = App.collections.triggers.findWhere({'triggerId':triggerData.triggerId});
       model.set(triggerData);
+      model.set('id', model.get('triggerId')); // hack to ensure proper method
       model.save();
     },
 
@@ -207,6 +208,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
           App.router.navigate('list', { trigger: true });
         }
       });
+      model.set('id', model.get('triggerId')); // hack to ensure proper method
       model.destroy();
     }
   });
