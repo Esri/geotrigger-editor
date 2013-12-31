@@ -51,6 +51,10 @@
     return str;
   });
 
+  Handlebars.registerHelper('stringify', function(value) {
+    return JSON.stringify(value);
+  });
+
   Handlebars.registerHelper('actionIcon', function(action, shape) {
     var classes = '';
     if (action === 'enter') {

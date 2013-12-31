@@ -30,7 +30,11 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     start: function() {
       this.setup();
 
-      App.vent.trigger('notify', 'Getting triggers');
+      App.vent.trigger('notify', 'Fetching application data..');
+
+      if (window.location.hash.match('edit')) {
+        App._zoomToLayer = true;
+      }
 
       App.collections.triggers.fetch({
         fetch: true,
@@ -184,7 +188,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     },
 
     getTrigger: function(id) {
-      var model = App.collections.triggers.get(id);
+      var model = App.collections.triggers.findWhere({'triggerId':id});
       return model;
     },
 
@@ -192,7 +196,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       App.collections.triggers.once('change', function(data){
         App.router.navigate('list', { trigger: true });
       });
-      var model = App.collections.triggers.get(triggerData.triggerId);
+      var model = App.collections.triggers.findWhere({'triggerId':triggerData.triggerId});
       model.set(triggerData);
       model.save();
     },

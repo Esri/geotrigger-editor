@@ -39,8 +39,6 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
 
   Models.Trigger = Backbone.Model.extend({
 
-    idAttribute: 'triggerId',
-
     // override sync method to use geotrigger API
     sync: function(method, model, options) {
       var triggerId = this.get('triggerId');
@@ -82,6 +80,9 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
             'action'     : this.get('action'),
             'setTags'    : this.get('tags')
           };
+          if (triggerId) {
+            params.triggerId = triggerId;
+          }
           App.API.session.request('trigger/create', params, callback);
           break;
 

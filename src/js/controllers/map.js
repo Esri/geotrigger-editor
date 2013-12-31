@@ -86,6 +86,16 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       }
     },
 
+    zoomToLayer: function(layer) {
+      var bounds = layer.getBounds();
+      var drawerWidth = this.getDrawerWidth();
+
+      this.map.fitBounds(bounds, {
+        animate: false,
+        paddingTopLeft: [drawerWidth, 0]
+      });
+    },
+
     removeShape: function(shape) {
       this.map.removeLayer(shape);
     },

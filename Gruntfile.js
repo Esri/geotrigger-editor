@@ -218,6 +218,11 @@ module.exports = function(grunt) {
       compile: {
         options: {
           namespace: 'GeotriggerEditor.Templates',
+          processContent: function(content, filepath) {
+            content = content.replace(/^[\x20\t]+/mg, '').replace(/[\x20\t]+$/mg, '');
+            content = content.replace(/^[\r\n]+/, '').replace(/[\r\n]*$/, '\n');
+            return content;
+          },
           processName: function(filePath) {
             console.log(filePath);
             var process = filePath.split('src/templates/')[1];
