@@ -1,4 +1,4 @@
-/*! geotrigger-editor - v0.1.2 - 2013-12-30
+/*! geotrigger-editor - v0.1.2 - 2013-12-31
 *   https://github.com/Esri/geotrigger-editor
 *   Copyright (c) 2013 Environmental Systems Research Institute, Inc.
 *   Apache 2.0 License */
@@ -1083,6 +1083,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       });
       var model = App.collections.triggers.findWhere({'triggerId':triggerData.triggerId});
       model.set(triggerData);
+      model.set('id', model.get('triggerId')); // hack to ensure proper method
       model.save();
     },
 
@@ -1092,6 +1093,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
           App.router.navigate('list', { trigger: true });
         }
       });
+      model.set('id', model.get('triggerId')); // hack to ensure proper method
       model.destroy();
     }
   });
