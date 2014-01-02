@@ -239,7 +239,7 @@
 
     function findLocalItems (query) {
       var results = [];
-      for (i in localStorage) {
+      for (var i in localStorage) {
         if (localStorage.hasOwnProperty(i)) {
           if (i.match(query) || (!query && typeof i === 'string')) {
             value = JSON.parse(localStorage.getItem(i));
