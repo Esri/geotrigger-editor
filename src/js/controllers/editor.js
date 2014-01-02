@@ -8,9 +8,10 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
   var Router = Marionette.AppRouter.extend({
     appRoutes: {
       '': 'index',
-      'list': 'list',
+      'list(/)': 'list',
       'list/:term': 'list',
-      'new': 'create',
+      'new(/)': 'create',
+      'edit(/)': 'redirect',
       'edit/:id': 'edit',
       '*notfound': 'notFound'
     }
@@ -166,6 +167,10 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
         App.vent.trigger('trigger:edit', triggerId);
         view.parseShape();
       }
+    },
+
+    redirect: function() {
+      App.router.navigate('', {trigger: true, replace: true});
     },
 
     notFound: function() {
