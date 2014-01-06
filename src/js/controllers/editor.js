@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Editor', function (Editor, App, Backbone, Marionette, $, _) {
 
   // Editor Router
   // ---------------
@@ -23,12 +23,12 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
   // Control the workflow and logic that exists at the application
   // level, above the implementation detail of views and models
 
-  var Controller = function() {};
+  var Controller = function () {};
 
   _.extend(Controller.prototype, {
 
     // initialization
-    start: function() {
+    start: function () {
       this.setup();
 
       App.vent.trigger('notify', 'Fetching application data..');
@@ -47,20 +47,21 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
           Backbone.history.start();
 
           if (response && response.length === 0) {
-            App.router.navigate('list', { trigger: true });
-          }
-
-          else if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
+            App.router.navigate('list', {
+              trigger: true
+            });
+          } else if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
             App.execute('map:fit');
           }
         }
       });
 
-      App.vent.on('draw:new', function(options){
+      App.vent.on('draw:new', function (options) {
         if (Backbone.history.fragment === 'new' ||
-            Backbone.history.fragment.match('edit')) {
-        } else {
-          App.router.navigate('new', { trigger: true });
+          Backbone.history.fragment.match('edit')) {} else {
+          App.router.navigate('new', {
+            trigger: true
+          });
         }
       }, this);
 
@@ -71,44 +72,46 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
     // setup
 
-    setup: function() {
+    setup: function () {
       this.setupMap();
       this.setupDrawer();
       this.setupControls();
       this.setupNotifications();
     },
 
-    setupMap: function() {
-      var view = new App.Views.Map({ collection: App.collections.triggers });
+    setupMap: function () {
+      var view = new App.Views.Map({
+        collection: App.collections.triggers
+      });
       App.regions.map.show(view);
     },
 
-    setupDrawer: function() {
+    setupDrawer: function () {
       var drawer = App.regions.drawer;
       var content = App.mainRegion.$el.find('#gt-content');
 
-      drawer.on('show', function(){
+      drawer.on('show', function () {
         content.addClass('gt-active');
       });
 
-      drawer.on('close', function(){
+      drawer.on('close', function () {
         content.removeClass('gt-active');
       });
     },
 
-    setupControls: function() {
+    setupControls: function () {
       var view = new App.Views.Controls();
       App.regions.controls.show(view);
     },
 
-    setupNotifications: function() {
+    setupNotifications: function () {
       var view = new App.Views.NotificationList({
         collection: App.collections.notifications
       });
 
       App.regions.notes.show(view);
 
-      App.vent.on('notify', function(options){
+      App.vent.on('notify', function (options) {
         if (typeof options === 'string') {
           options = {
             type: 'info',
@@ -123,28 +126,33 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
     // routes
 
-    index: function() {
+    index: function () {
       App.vent.trigger('index');
       App.regions.drawer.close();
     },
 
-    list: function(term) {
+    list: function (term) {
       if (!App.regions.drawer.$el || !App.regions.drawer.$el.has('.gt-list').length) {
         App.vent.trigger('trigger:list');
-        var model = new Backbone.Model({ count: App.collections.triggers.length });
-        var view = new App.Views.List({ model: model, collection: App.collections.triggers });
+        var model = new Backbone.Model({
+          count: App.collections.triggers.length
+        });
+        var view = new App.Views.List({
+          model: model,
+          collection: App.collections.triggers
+        });
         App.regions.drawer.show(view);
       } else if (!term) {
         App.vent.trigger('trigger:list:reset');
       }
 
       if (term) {
-        term = decodeURIComponent(term.replace(/\+/g,'%20'));
+        term = decodeURIComponent(term.replace(/\+/g, '%20'));
         App.vent.trigger('trigger:list:search', term);
       }
     },
 
-    create: function() {
+    create: function () {
       App.vent.trigger('trigger:new');
 
       var view = new App.Views.Form();
@@ -153,7 +161,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       App.vent.trigger('trigger:new:ready');
     },
 
-    edit: function(triggerId) {
+    edit: function (triggerId) {
       var model = this.getTrigger(triggerId);
 
       if (!model) {
@@ -162,18 +170,23 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
           message: 'That trigger doesn\'t exist!'
         });
       } else {
-        var view = new App.Views.Form({ model: model });
+        var view = new App.Views.Form({
+          model: model
+        });
         App.regions.drawer.show(view);
         App.vent.trigger('trigger:edit', triggerId);
         view.parseShape();
       }
     },
 
-    redirect: function() {
-      App.router.navigate('', {trigger: true, replace: true});
+    redirect: function () {
+      App.router.navigate('', {
+        trigger: true,
+        replace: true
+      });
     },
 
-    notFound: function() {
+    notFound: function () {
       App.vent.trigger('notify', {
         type: 'error',
         message: 'Couldn\'t find page: "' + Backbone.history.fragment + '"'
@@ -182,35 +195,45 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
     // crud
 
-    createTrigger: function(triggerData) {
+    createTrigger: function (triggerData) {
       App.execute('draw:clear');
       App.collections.triggers.create(triggerData, {
         // wait: true, // wait is broken in backbone 1.1.0
-        success: function() {
-          App.router.navigate('list', { trigger: true });
+        success: function () {
+          App.router.navigate('list', {
+            trigger: true
+          });
         }
       });
     },
 
-    getTrigger: function(id) {
-      var model = App.collections.triggers.findWhere({'triggerId':id});
+    getTrigger: function (id) {
+      var model = App.collections.triggers.findWhere({
+        'triggerId': id
+      });
       return model;
     },
 
-    updateTrigger: function(triggerData) {
-      App.collections.triggers.once('change', function(data){
-        App.router.navigate('list', { trigger: true });
+    updateTrigger: function (triggerData) {
+      App.collections.triggers.once('change', function (data) {
+        App.router.navigate('list', {
+          trigger: true
+        });
       });
-      var model = App.collections.triggers.findWhere({'triggerId':triggerData.triggerId});
+      var model = App.collections.triggers.findWhere({
+        'triggerId': triggerData.triggerId
+      });
       model.set(triggerData);
       model.set('id', model.get('triggerId')); // hack to ensure proper method
       model.save();
     },
 
-    deleteTrigger: function(model) {
-      App.collections.triggers.once('remove', function(data){
+    deleteTrigger: function (model) {
+      App.collections.triggers.once('remove', function (data) {
         if (Backbone.history.fragment.match('edit')) {
-          App.router.navigate('list', { trigger: true });
+          App.router.navigate('list', {
+            trigger: true
+          });
         }
       });
       model.set('id', model.get('triggerId')); // hack to ensure proper method
@@ -225,7 +248,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
   // when the the application is started, pulling in all of the
   // existing triggers and displaying them.
 
-  Editor.addInitializer(function() {
+  Editor.addInitializer(function () {
     // initialize collections
     App.collections = App.collections || {};
     App.collections.triggers = new App.Models.Triggers();
@@ -235,7 +258,9 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     var controller = new Controller();
 
     // initialize router
-    App.router = new Router({ controller: controller });
+    App.router = new Router({
+      controller: controller
+    });
 
     controller.start();
   });

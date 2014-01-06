@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Layouts', function (Layouts, App, Backbone, Marionette, $, _) {
 
   // Layout Drawer View
   // ------------------
@@ -8,10 +8,10 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
     id: 'gt-regions',
 
     regions: {
-      'controls' : '#gt-controls-region',
-      'drawer'   : '#gt-drawer-region',
-      'map'      : '#gt-map-region',
-      'notes'    : '#gt-notes-region'
+      'controls': '#gt-controls-region',
+      'drawer': '#gt-drawer-region',
+      'map': '#gt-map-region',
+      'notes': '#gt-notes-region'
     }
   });
 

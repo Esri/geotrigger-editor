@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Map.Draw', function (Draw, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -12,7 +12,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       radius: null
     },
 
-    _setup: function() {
+    _setup: function () {
       // Initialize new Draw Handlers
       this._tools.polygon = new L.Draw.Polygon(App.map, App.config.editOptions);
       this._tools.radius = new L.Draw.Circle(App.map, App.config.editOptions);
@@ -20,7 +20,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       this._eventBindings();
     },
 
-    _eventBindings: function() {
+    _eventBindings: function () {
       App.vent.on('draw:new', this.editLayer, this);
       App.vent.on('index trigger:list trigger:edit', this.clear, this);
       App.vent.on('trigger:new:ready', this.panToNewTrigger, this);
@@ -34,7 +34,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       App.commands.setHandler('draw:clear', this.clear, this);
     },
 
-    panToNewTrigger: function() {
+    panToNewTrigger: function () {
       var layer = App.request('draw:layer');
       if (layer) {
         App.Map.panToLayer(layer);
@@ -59,12 +59,14 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       App.vent.trigger('draw:new', layer);
     },
 
-    getEditLayer: function() {
+    getEditLayer: function () {
       return App.Map.Layers.edit.getLayers()[0];
     },
 
-    newShape: function(triggerId) {
-      var model = App.collections.triggers.findWhere({'triggerId':triggerId});
+    newShape: function (triggerId) {
+      var model = App.collections.triggers.findWhere({
+        'triggerId': triggerId
+      });
       var id = model.get('triggerId');
       var geo = model.get('condition').geo;
       var shape;
@@ -90,22 +92,22 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       return shape;
     },
 
-    editLayer: function(layer) {
+    editLayer: function (layer) {
       this.clear();
       layer.editing.enable();
       App.Map.Layers.edit.addLayer(layer);
     },
 
-    clear: function() {
+    clear: function () {
       App.Map.Layers.edit.clearLayers();
     },
 
-    enableTool: function(name) {
+    enableTool: function (name) {
       this.disableTool();
       this._tools[name].enable();
     },
 
-    disableTool: function(name) {
+    disableTool: function (name) {
       for (var i in this._tools) {
         if (typeof name === 'undefined' || i === name) {
           this._tools[i].disable();
@@ -118,7 +120,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
   // Draw Layer initializer
   // ----------------------
 
-  Draw.addInitializer(function() {
+  Draw.addInitializer(function () {
     this._setup();
   });
 

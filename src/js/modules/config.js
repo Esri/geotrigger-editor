@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Config', function (Config, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -71,7 +71,7 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
 
   // merge options into defaults on initialization
 
-  function setup (options) {
+  function setup(options) {
     App.config = _.deepExtend(defaults, options);
   }
 

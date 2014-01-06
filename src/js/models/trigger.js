@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Models', function (Models, App, Backbone, Marionette, $, _) {
 
   // Trigger Model
   // -------------
@@ -40,11 +40,11 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
   Models.Trigger = Backbone.Model.extend({
 
     // override sync method to use geotrigger API
-    sync: function(method, model, options) {
+    sync: function (method, model, options) {
       var triggerId = this.get('triggerId');
       var params;
 
-      var callback = _.bind(function(error, response) {
+      var callback = _.bind(function (error, response) {
         if (error) {
           App.vent.trigger('notify', {
             type: 'error',
@@ -69,44 +69,48 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
       }, this);
 
       switch (method) {
-        case 'read':
-          App.API.session.request('trigger/list', { 'triggerIds': [ triggerId ] }, callback);
-          break;
+      case 'read':
+        App.API.session.request('trigger/list', {
+          'triggerIds': [triggerId]
+        }, callback);
+        break;
 
-        case 'create':
-          params = {
-            'properties' : this.get('properties'),
-            'condition'  : this.get('condition'),
-            'action'     : this.get('action'),
-            'setTags'    : this.get('tags')
-          };
-          if (triggerId) {
-            params.triggerId = triggerId;
-          }
-          App.API.session.request('trigger/create', params, callback);
-          break;
+      case 'create':
+        params = {
+          'properties': this.get('properties'),
+          'condition': this.get('condition'),
+          'action': this.get('action'),
+          'setTags': this.get('tags')
+        };
+        if (triggerId) {
+          params.triggerId = triggerId;
+        }
+        App.API.session.request('trigger/create', params, callback);
+        break;
 
-        case 'update':
-          params = {
-            'properties' : this.get('properties'),
-            'triggerIds' : triggerId,
-            'condition'  : this.get('condition'),
-            'action'     : this.get('action'),
-            'setTags'    : this.get('tags')
-          };
-          App.API.session.request('trigger/update', params, callback);
-          break;
+      case 'update':
+        params = {
+          'properties': this.get('properties'),
+          'triggerIds': triggerId,
+          'condition': this.get('condition'),
+          'action': this.get('action'),
+          'setTags': this.get('tags')
+        };
+        App.API.session.request('trigger/update', params, callback);
+        break;
 
-        case 'delete':
-          App.API.session.request('trigger/delete', { 'triggerIds': triggerId }, callback);
-          break;
+      case 'delete':
+        App.API.session.request('trigger/delete', {
+          'triggerIds': triggerId
+        }, callback);
+        break;
 
-        default:
-          throw new Error('Unsupported method: ' + method);
+      default:
+        throw new Error('Unsupported method: ' + method);
       }
     },
 
-    parse: function(response) {
+    parse: function (response) {
       if (response.triggers) {
         return response.triggers;
       } else {
@@ -122,9 +126,9 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
   Models.Triggers = Backbone.Collection.extend({
     model: Models.Trigger,
 
-    fetch: function(options) {
-      var callback = _.bind(function(error, response) {
-        if(options && options.reset){
+    fetch: function (options) {
+      var callback = _.bind(function (error, response) {
+        if (options && options.reset) {
           this.reset(this.parse(response));
         } else {
           this.set(this.parse(response));
@@ -138,7 +142,7 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
       App.API.session.request('trigger/list', callback);
     },
 
-    parse: function(response) {
+    parse: function (response) {
       return response.triggers;
     }
   });
