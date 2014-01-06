@@ -7,7 +7,7 @@ A client-side web application for creating and editing Geotrigger rules.
 * **Draw** trigger boundaries on a map
 * **List** all of an application's triggers
 * **Create**, **Edit** and **Delete** trigger conditions, actions, and boundaries
-* **Search** for triggers by tag, title, or ID
+* **Search** for triggers by tag or ID
 
 ## Instructions
 

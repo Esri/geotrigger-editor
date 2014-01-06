@@ -15,9 +15,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'click .gt-tags'                : 'tagsClick',
       'click .gt-delete-icon'         : 'confirmDelete',
       'click .gt-cancel-delete'       : 'resetDelete',
-      'click .gt-confirm-delete'      : 'destroyModel',
-      'mouseover'                     : 'focusShape',
-      'mouseout'                      : 'unfocusShape'
+      'click .gt-confirm-delete'      : 'destroyModel'
     },
 
     ui: {
@@ -28,6 +26,16 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     modelEvents: {
       'change': 'modelChanged'
+    },
+
+    onShow: function() {
+      var id = this.model.get('triggerId');
+
+      this.$el.hover(function(){
+        App.vent.trigger('trigger:focus', id);
+      }, function(){
+        App.vent.trigger('trigger:unfocus', id);
+      });
     },
 
     modelChanged: function() {
@@ -59,16 +67,6 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       e.preventDefault();
       e.stopPropagation();
       App.vent.trigger('trigger:destroy', this.model);
-    },
-
-    focusShape: function(){
-      var id = this.model.get('triggerId');
-      App.vent.trigger('trigger:focus', id);
-    },
-
-    unfocusShape: function(){
-      var id = this.model.get('triggerId');
-      App.vent.trigger('trigger:unfocus', id);
     }
   });
 
@@ -156,14 +154,11 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
         list.each(function(){
           var item = $(this);
-          var tags = item.find('.gt-tags a');
           var text = '';
 
-          text += item.find('.gt-item-edit span').text();
           text += item.find('.gt-id').text();
-          text += item.find('.gt-item-details span').text();
 
-          tags.each(function(){
+          item.find('.gt-tags a').each(function(){
             text += $(this).text();
           });
 
