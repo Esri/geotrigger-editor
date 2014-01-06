@@ -179,7 +179,7 @@ module.exports = function(grunt) {
           // jsLintXML: 'report.xml', // create XML JSLint-like report
           // checkstyleXML: 'checkstyle.xml', // create checkstyle report
           errorsOnly: false, // show only maintainability errors
-          cyclomatic: 10,
+          cyclomatic: 15,
           halstead: 30,
           maintainability: 80
         }
@@ -244,6 +244,49 @@ module.exports = function(grunt) {
         ],
         dest: 'dist/img'
       }
+    },
+
+    jsbeautifier: {
+      format: {
+        files: {
+          src: [
+            'src/js/**/*.js', '!src/js/lib/*.*',
+            'src/templates/*.hbs'
+          ]
+        },
+        options: {
+          html: {
+            fileTypes: ['.hbs'],
+            braceStyle: 'collapse',
+            indentChar: ' ',
+            indentScripts: 'keep',
+            indentSize: 2,
+            maxPreserveNewlines: 2,
+            preserveNewlines: true,
+            unformatted: ['a', 'sub', 'sup', 'b', 'i', 'u', 'span', 'strong', 'em'],
+            wrapLineLength: 0
+          },
+          js: {
+            braceStyle: 'collapse',
+            breakChainedMethods: false,
+            e4x: false,
+            evalCode: false,
+            indentChar: " ",
+            indentLevel: 0,
+            indentSize: 2,
+            indentWithTabs: false,
+            jslintHappy: true,
+            keepArrayIndentation: false,
+            keepFunctionIndentation: false,
+            maxPreserveNewlines: 2,
+            preserveNewlines: true,
+            spaceBeforeConditional: true,
+            spaceInParen: false,
+            unescapeStrings: false,
+            wrapLineLength: 0
+          }
+        }
+      }
     }
   });
 
@@ -256,6 +299,10 @@ module.exports = function(grunt) {
     'jshint',
     'complexity',
     'cucumberjs'
+  ]);
+
+  grunt.registerTask('format', [
+    'jsbeautifier:format'
   ]);
 
   grunt.registerTask('dev', [
