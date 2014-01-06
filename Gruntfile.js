@@ -247,14 +247,15 @@ module.exports = function(grunt) {
     },
 
     jsbeautifier: {
-      format: {
+      verify: {
         files: {
           src: [
-            'src/js/**/*.js', '!src/js/lib/*.*',
+            'src/js/**/*.js', '!src/js/lib/*.*', '!src/js/geotrigger-editor.js',
             'src/templates/*.hbs'
           ]
         },
-        options: {
+        options : {
+          mode: 'VERIFY_ONLY',
           html: {
             fileTypes: ['.hbs'],
             braceStyle: 'collapse',
@@ -285,7 +286,48 @@ module.exports = function(grunt) {
             unescapeStrings: false,
             wrapLineLength: 0
           }
-        }
+        },
+      },
+      format: {
+        files: {
+          src: [
+            'src/js/**/*.js', '!src/js/lib/*.*', '!src/js/geotrigger-editor.js',
+            'src/templates/*.hbs'
+          ]
+        },
+        options: {
+          mode: 'VERIFY_AND_WRITE',
+          html: {
+            fileTypes: ['.hbs'],
+            braceStyle: 'collapse',
+            indentChar: ' ',
+            indentScripts: 'keep',
+            indentSize: 2,
+            maxPreserveNewlines: 2,
+            preserveNewlines: true,
+            unformatted: ['a', 'sub', 'sup', 'b', 'i', 'u', 'span', 'strong', 'em'],
+            wrapLineLength: 0
+          },
+          js: {
+            braceStyle: 'collapse',
+            breakChainedMethods: false,
+            e4x: false,
+            evalCode: false,
+            indentChar: " ",
+            indentLevel: 0,
+            indentSize: 2,
+            indentWithTabs: false,
+            jslintHappy: true,
+            keepArrayIndentation: false,
+            keepFunctionIndentation: false,
+            maxPreserveNewlines: 2,
+            preserveNewlines: true,
+            spaceBeforeConditional: true,
+            spaceInParen: false,
+            unescapeStrings: false,
+            wrapLineLength: 0
+          }
+        },
       }
     }
   });
@@ -299,6 +341,12 @@ module.exports = function(grunt) {
     'jshint',
     'complexity',
     'cucumberjs'
+  ]);
+
+  grunt.registerTask('verify', [
+    'jshint',
+    'complexity',
+    'jsbeautifier:verify'
   ]);
 
   grunt.registerTask('format', [
