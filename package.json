@@ -1,6 +1,6 @@
 {
   "name": "geotrigger-editor",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Geotrigger Editor",
   "main": "src/geotrigger-editor.js",
   "homepage": "https://github.com/Esri/geotrigger-editor",

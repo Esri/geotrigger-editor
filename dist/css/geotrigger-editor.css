@@ -503,10 +503,13 @@ h5 {
   border-bottom: 1px solid #efefef;
 }
 .gt-panel-top-bar h3 {
-  display: inline-block;
-  vertical-align: middle;
   line-height: normal;
-  padding-left: 12px;
+  margin-right: 62px;
+  overflow: hidden;
+  padding: .65em 12px 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: auto;
 }
 .gt-panel-top-bar h3.gt-panel-top-bar-left {
   padding-left: 32px;
@@ -542,7 +545,9 @@ h5 {
 .gt-panel-top-bar-button.gt-close-drawer {
   background-image: url("../img/icons/x.png");
   border-left: 1px solid #efefef;
-  float: right;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   .gt-panel-top-bar-button.gt-close-drawer {
@@ -692,7 +697,7 @@ h5 {
   display: inline-block;
   float: left;
   height: 48px;
-  margin-top: 6px;
+  margin-top: 2px;
   margin-left: -48px;
   width: 48px;
 }
@@ -756,35 +761,29 @@ h5 {
 .gt-result h5 a:hover {
   color: #2683d6;
 }
-.gt-result .gt-item-details {
-  display: none;
-}
-.gt-result .gt-item-details.gt-item-details-visible {
-  display: block;
-}
 
-.gt-tags, .gt-id {
+.gt-tags {
   display: block;
   font-size: 0.9em;
   line-height: 1.5em;
   padding: 0 52px .25em 8px;
 }
-.gt-tags strong, .gt-id strong {
+.gt-tags strong {
   font-weight: 600;
   font-variant: small-caps;
   text-transform: lowercase;
 }
-.gt-tags span, .gt-id span {
+.gt-tags span {
   font-size: 10px;
   padding-left: 1px;
 }
-.gt-tags a, .gt-id a {
+.gt-tags a {
   border: none;
   color: #666666;
   margin-left: 3px;
   text-decoration: none;
 }
-.gt-tags a:hover, .gt-id a:hover {
+.gt-tags a:hover {
   color: #2683d6;
 }
 

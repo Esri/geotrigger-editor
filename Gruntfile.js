@@ -254,7 +254,7 @@ module.exports = function(grunt) {
             'src/templates/*.hbs'
           ]
         },
-        options : {
+        options: {
           mode: 'VERIFY_ONLY',
           html: {
             fileTypes: ['.hbs'],
@@ -286,7 +286,7 @@ module.exports = function(grunt) {
             unescapeStrings: false,
             wrapLineLength: 0
           }
-        },
+        }
       },
       format: {
         files: {
@@ -327,7 +327,7 @@ module.exports = function(grunt) {
             unescapeStrings: false,
             wrapLineLength: 0
           }
-        },
+        }
       }
     }
   });
