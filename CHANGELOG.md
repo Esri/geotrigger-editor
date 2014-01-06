@@ -6,6 +6,7 @@
 * bump geotrigger-js to v0.1.5
 * fix highlight issue for list items
 * make some routes (list, new, edit) more forgiving with trailing slashes
+* add beautifier tasks (`grunt verify` & `grunt format`), format js & templates
 
 ## v0.1.2
 * better template compression
