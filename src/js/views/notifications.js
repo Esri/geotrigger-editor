@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Notification View
   // -----------------
@@ -14,7 +14,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'click .gt-close': 'destroyNotification'
     },
 
-    render: function() {
+    render: function () {
       Marionette.ItemView.prototype.render.apply(this, arguments);
 
       var type = this.model.get('type') || 'info';
@@ -23,18 +23,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.listenTo(App.vent, 'notify:clear', this.destroyNotification);
     },
 
-    onShow: function() {
+    onShow: function () {
       this.$el.fadeIn();
       var timeout = this.model.get('timeout');
       if (typeof timeout === 'number') {
-        setTimeout(_.bind(function() {
+        setTimeout(_.bind(function () {
           this.destroyNotification();
         }, this), timeout);
       }
     },
 
-    destroyNotification: function() {
-      this.$el.fadeOut(_.bind(function(){
+    destroyNotification: function () {
+      this.$el.fadeOut(_.bind(function () {
         this.model.destroy();
       }, this));
     }

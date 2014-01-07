@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Map', function (Map, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -7,7 +7,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
   _.extend(Map, {
 
-    _setup: function(options) {
+    _setup: function (options) {
       // L.Icon.Default.imagePath = App.config.imagePath;
 
       // force L.esri to use JSONP if proxy is set
@@ -35,8 +35,8 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       this._eventBindings();
     },
 
-    _eventBindings: function() {
-      App.commands.setHandler('map:fit', _.bind(function(){
+    _eventBindings: function () {
+      App.commands.setHandler('map:fit', _.bind(function () {
         if (this.Layers.main.getLayers().length === 0) {
           return;
         }
@@ -51,18 +51,18 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       }, this));
     },
 
-    getDrawerWidth: function() {
+    getDrawerWidth: function () {
       var $content = App.mainRegion.$el.find('#gt-content');
       var $drawer = $content.find('#gt-drawer-region');
 
-      if ($content.hasClass('gt-active')){
+      if ($content.hasClass('gt-active')) {
         return $drawer.width();
       } else {
         return 0;
       }
     },
 
-    panToLayer: function(layer) {
+    panToLayer: function (layer) {
       var latlng;
 
       if (layer.getLatLng) {
@@ -86,7 +86,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       }
     },
 
-    zoomToLayer: function(layer) {
+    zoomToLayer: function (layer) {
       var bounds = layer.getBounds();
       var drawerWidth = this.getDrawerWidth();
 
@@ -96,22 +96,22 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       });
     },
 
-    removeShape: function(shape) {
+    removeShape: function (shape) {
       this.map.removeLayer(shape);
     },
 
-    focusShape: function(shape) {
+    focusShape: function (shape) {
       shape.setStyle(App.config.highlightOptions.shapeOptions);
     },
 
-    unfocusShape: function(shape) {
+    unfocusShape: function (shape) {
       shape.setStyle(App.config.sharedOptions.shapeOptions);
     },
 
-    polygon: function(geo, shapeOptions, add) {
+    polygon: function (geo, shapeOptions, add) {
       shapeOptions = shapeOptions || App.config.sharedOptions.shapeOptions;
       var polygon = new L.GeoJSON(geo, {
-        style: function(feature) {
+        style: function (feature) {
           return shapeOptions;
         }
       });
@@ -123,7 +123,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       return polygon;
     },
 
-    circle: function(geo, shapeOptions, add) {
+    circle: function (geo, shapeOptions, add) {
       shapeOptions = shapeOptions || App.config.sharedOptions.shapeOptions;
       var circle = L.circle(
         [geo.latitude, geo.longitude],
@@ -142,7 +142,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
   // Map Initializer
   // ---------------
 
-  Map.addInitializer(function(options) {
+  Map.addInitializer(function (options) {
     this._setup(options);
     this.Draw.start();
   });

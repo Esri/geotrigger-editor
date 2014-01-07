@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Trigger Form View
   // -----------------
@@ -14,34 +14,34 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     events: {
       // form events
-      'click .gt-add-trigger-id'      : 'addTriggerId',
-      'click .gt-remove-trigger-id'   : 'removeTriggerId',
+      'click .gt-add-trigger-id': 'addTriggerId',
+      'click .gt-remove-trigger-id': 'removeTriggerId',
 
-      'click .gt-add-action'          : 'addAction',
-      'click .gt-remove-action'       : 'removeAction',
+      'click .gt-add-action': 'addAction',
+      'click .gt-remove-action': 'removeAction',
 
-      'click .gt-add-notification'    : 'addNotification',
-      'click .gt-remove-notification' : 'removeNotification',
+      'click .gt-add-notification': 'addNotification',
+      'click .gt-remove-notification': 'removeNotification',
 
       // submit events
-      'click .gt-submit'              : 'parseForm',
+      'click .gt-submit': 'parseForm',
 
       // delete events
-      'click .gt-item-delete'         : 'confirmDelete',
-      'click .gt-reset-delete'        : 'resetDelete',
-      'click .gt-item-confirm-delete' : 'destroyModel'
+      'click .gt-item-delete': 'confirmDelete',
+      'click .gt-reset-delete': 'resetDelete',
+      'click .gt-item-confirm-delete': 'destroyModel'
     },
 
     ui: {
-      'actions'         : '.gt-actions',
-      'addAction'       : '.gt-add-action',
-      'form'            : 'form',
-      'deleteItem'      : '.gt-item-delete',
-      'confirm'         : '.gt-item-confirm-delete',
-      'reset'           : '.gt-reset-delete'
+      'actions': '.gt-actions',
+      'addAction': '.gt-add-action',
+      'form': 'form',
+      'deleteItem': '.gt-item-delete',
+      'confirm': '.gt-item-confirm-delete',
+      'reset': '.gt-reset-delete'
     },
 
-    onShow: function() {
+    onShow: function () {
       if (!this.model) {
         this.buildNewForm();
       } else {
@@ -51,7 +51,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.listenTo(App.vent, 'draw:new', this.parseShape);
     },
 
-    buildNewForm: function() {
+    buildNewForm: function () {
       var data = this.serializeData();
 
       var actionsHtml = '';
@@ -73,7 +73,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.form.find('.gt-add-notification[data-notification="text"]').hide();
     },
 
-    buildEditForm: function() {
+    buildEditForm: function () {
       // get current actions
       var currentActions = this.model.get('action');
 
@@ -128,7 +128,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    addTriggerId: function(e) {
+    addTriggerId: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -141,7 +141,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.$el.find('.gt-trigger-id').removeClass('gt-hide');
     },
 
-    removeTriggerId: function(e) {
+    removeTriggerId: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -157,7 +157,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.form.find('.gt-add-trigger-id').removeClass('gt-hide');
     },
 
-    addAction: function(e) {
+    addAction: function (e) {
       var $el, action, actionHtml, noteHtml;
 
       // expects to be invoked by a DOM event by default
@@ -200,7 +200,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       $el.hide();
     },
 
-    removeAction: function(e) {
+    removeAction: function (e) {
       var $el, action;
 
       // expects to be invoked by a DOM event by default
@@ -223,7 +223,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.form.find('.gt-add-action[data-action="' + action + '"]').show();
     },
 
-    addNotification: function(e) {
+    addNotification: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -240,7 +240,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       $el.hide();
     },
 
-    removeNotification: function(e) {
+    removeNotification: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -256,7 +256,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.form.find('.gt-add-notification[data-notification="' + notification + '"]').show();
     },
 
-    parseShape: function() {
+    parseShape: function () {
       var lat, lng, rad;
 
       // get layer data
@@ -298,7 +298,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    parseForm: function(e) {
+    parseForm: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -394,7 +394,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    createOrUpdateTrigger: function(data) {
+    createOrUpdateTrigger: function (data) {
       // create new trigger
       if (!this.model) {
         App.vent.trigger('trigger:create', data);
@@ -407,7 +407,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    confirmDelete: function(e) {
+    confirmDelete: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -418,7 +418,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.reset.addClass('gt-reset-flyout-right');
     },
 
-    resetDelete: function(e) {
+    resetDelete: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -429,7 +429,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.reset.removeClass('gt-reset-flyout-right');
     },
 
-    destroyModel: function(e) {
+    destroyModel: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();

@@ -1,5 +1,13 @@
 # Geotrigger Editor Changelog
 
+## v0.1.3
+* fix CSS issue causing IDs not to display in title area on edit ([#186](https://github.com/Esri/geotrigger-editor/issues/186))
+* bump esri-leaflet to v0.0.1-beta.3
+* bump geotrigger-js to v0.1.5
+* fix highlight issue for list items
+* make some routes (list, new, edit) more forgiving with trailing slashes
+* add beautifier tasks (`grunt verify` & `grunt format`), format js & templates
+
 ## v0.1.2
 * better template compression
 * trigger form validation

@@ -1,11 +1,11 @@
-GeotriggerEditor.module('util', function(util, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('util', function (util, App, Backbone, Marionette, $, _) {
 
   // Utility Functions
   // -----------------
   //
   // General purpose helper functions.
 
-  util.removeEmptyStrings = function(obj) {
+  util.removeEmptyStrings = function (obj) {
     for (var key in obj) {
 
       // value is empty string
@@ -16,11 +16,11 @@ GeotriggerEditor.module('util', function(util, App, Backbone, Marionette, $, _) 
       // value is array with only empty strings
       if (obj[key] instanceof Array) {
         var empty = true;
-        for(var i = 0; i < obj[key].length; i++) {
-            if(obj[key][i] !== '') {
-              empty = false;
-              break;
-            }
+        for (var i = 0; i < obj[key].length; i++) {
+          if (obj[key][i] !== '') {
+            empty = false;
+            break;
+          }
         }
         if (empty) {
           delete obj[key];

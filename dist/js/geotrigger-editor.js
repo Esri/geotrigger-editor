@@ -1,17 +1,20 @@
-/*! geotrigger-editor - v0.1.2 - 2013-12-31
+/*! geotrigger-editor - v0.1.3 - 2014-01-06
 *   https://github.com/Esri/geotrigger-editor
-*   Copyright (c) 2013 Environmental Systems Research Institute, Inc.
+*   Copyright (c) 2014 Environmental Systems Research Institute, Inc.
 *   Apache 2.0 License */
 
-!(function(){
+!(function () {
+
 
 this.GeotriggerEditor = new Backbone.Marionette.Application();
 
-GeotriggerEditor.addInitializer(function(options) {
+GeotriggerEditor.addInitializer(function (options) {
   this.Config.start(options);
   this.API.start();
   this.regions = new this.Layouts.Main();
-  this.addRegions({ mainRegion: this.config.el });
+  this.addRegions({
+    mainRegion: this.config.el
+  });
   this.mainRegion.show(this.regions);
 });
 
@@ -25,7 +28,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"gt-drawer-controls\">\n<a href=\"#list\" class=\"gt-tool gt-tool-list active gt-tooltip\"><span>List</span></a>\n</div>\n<div class=\"gt-tool-controls\">\n<button class=\"gt-tool gt-tool-polygon gt-tooltip\"><span>New Polygon Tool</span></button>\n<button class=\"gt-tool gt-tool-radius gt-tooltip\"><span>New Radius Tool</span></button>\n</div>\n";
+  return "<div class=\"gt-drawer-controls\">\n<a href=\"#list\" class=\"gt-tool gt-tool-list active gt-tooltip\">\n<span>List</span>\n</a>\n</div>\n<div class=\"gt-tool-controls\">\n<button class=\"gt-tool gt-tool-polygon gt-tooltip\">\n<span>New Polygon Tool</span>\n</button>\n<button class=\"gt-tool gt-tool-radius gt-tooltip\">\n<span>New Radius Tool</span>\n</button>\n</div>\n";
   });
 
 this["GeotriggerEditor"]["Templates"]["empty"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -34,7 +37,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div class=\"gt-panel-top-bar\">\n<h3 class=\"gt-panel-top-bar-left\">List <span class=\"gt-trigger-count\"></span></h3>\n<a href=\"#\" class=\"gt-panel-top-bar-button gt-close-drawer\"></a>\n</div>\n\n<div class=\"gt-panel-no-triggers\">\n<h5>This application doesn't have any Geotrigger rules yet.</h5>\n</div>\n\n<ul class=\"gt-tool-descriptions\">\n<li class=\"gt-tool-description\">\n<span class=\"gt-icon gt-icon-create\"></span>\n<h5>Create a New Trigger</h5>\n<p>Create a new Geotrigger rule by first using one of the drawing tools, then defining its properties in the form that appears.</p>\n</li>\n\n<li class=\"gt-tool-description\">\n<span class=\"gt-icon gt-icon-polygon\"></span>\n<h5>Using the Polygon Tool</h5>\n<p>Click on the map to create each point of a polygon. Click on the first point you created to close the shape.</p>\n</li>\n\n<li class=\"gt-tool-description\">\n<span class=\"gt-icon gt-icon-radius\"></span>\n<h5>Using the Radius Tool</h5>\n<p>Click a point on the map, then hold and drag to define a radius around that point.</p>\n</li>\n</ul>\n";
+  return "<div class=\"gt-panel-top-bar\">\n<h3 class=\"gt-panel-top-bar-left\">List\n<span class=\"gt-trigger-count\"></span>\n</h3>\n<a href=\"#\" class=\"gt-panel-top-bar-button gt-close-drawer\"></a>\n</div>\n\n<div class=\"gt-panel-no-triggers\">\n<h5>This application doesn't have any Geotrigger rules yet.</h5>\n</div>\n\n<ul class=\"gt-tool-descriptions\">\n<li class=\"gt-tool-description\">\n<span class=\"gt-icon gt-icon-create\"></span>\n<h5>Create a New Trigger</h5>\n<p>Create a new Geotrigger rule by first using one of the drawing tools, then defining its properties in the form that appears.</p>\n</li>\n\n<li class=\"gt-tool-description\">\n<span class=\"gt-icon gt-icon-polygon\"></span>\n<h5>Using the Polygon Tool</h5>\n<p>Click on the map to create each point of a polygon. Click on the first point you created to close the shape.</p>\n</li>\n\n<li class=\"gt-tool-description\">\n<span class=\"gt-icon gt-icon-radius\"></span>\n<h5>Using the Radius Tool</h5>\n<p>Click a point on the map, then hold and drag to define a radius around that point.</p>\n</li>\n</ul>\n";
   });
 
 this["GeotriggerEditor"]["Templates"]["form/actions/callbackUrl"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
@@ -237,11 +240,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   buffer += "<span class='gt-item-edit gt-icon ";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.actionIcon || (depth0 && depth0.actionIcon)),stack1 ? stack1.call(depth0, ((stack1 = (depth0 && depth0.condition)),stack1 == null || stack1 === false ? stack1 : stack1.direction), ((stack1 = (depth0 && depth0.condition)),stack1 == null || stack1 === false ? stack1 : stack1.geo), options) : helperMissing.call(depth0, "actionIcon", ((stack1 = (depth0 && depth0.condition)),stack1 == null || stack1 === false ? stack1 : stack1.direction), ((stack1 = (depth0 && depth0.condition)),stack1 == null || stack1 === false ? stack1 : stack1.geo), options)))
-    + " gt-icon-polygon'></span>\n<h5>\n<a class='gt-item-edit' href='#edit/";
+    + "'></span>\n<h5>\n<a class='gt-item-edit' href='#edit/";
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = (depth0 && depth0.triggerId); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
   buffer += escapeExpression(stack2)
-    + "'>\n<span>";
+    + "'>\n<span class='gt-id'>";
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = (depth0 && depth0.triggerId); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
   buffer += escapeExpression(stack2)
@@ -249,10 +252,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (stack2 = helpers.triggerId) { stack2 = stack2.call(depth0, {hash:{},data:data}); }
   else { stack2 = (depth0 && depth0.triggerId); stack2 = typeof stack2 === functionType ? stack2.call(depth0, {hash:{},data:data}) : stack2; }
   buffer += escapeExpression(stack2)
-    + "'></a>\n<a class='gt-delete-icon' href='#'></a>\n</div>\n<div class='gt-id'>\n<strong>Condition</strong><span>:</span> ";
-  options = {hash:{},data:data};
-  buffer += escapeExpression(((stack1 = helpers.defaultTitle || (depth0 && depth0.defaultTitle)),stack1 ? stack1.call(depth0, (depth0 && depth0.condition), options) : helperMissing.call(depth0, "defaultTitle", (depth0 && depth0.condition), options)))
-    + "\n</div>\n<div class='gt-tags'>\n<strong>Tags</strong><span>:</span> ";
+    + "'></a>\n<a class='gt-delete-icon' href='#'></a>\n</div>\n<div class='gt-tags'>\n<strong>Tags:</strong> ";
   options = {hash:{},data:data};
   stack2 = ((stack1 = helpers.tagLinks || (depth0 && depth0.tagLinks)),stack1 ? stack1.call(depth0, (depth0 && depth0.tags), options) : helperMissing.call(depth0, "tagLinks", (depth0 && depth0.tags), options));
   if(stack2 || stack2 === 0) { buffer += stack2; }
@@ -270,11 +270,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div class=\"gt-list-header gt-hide\">\n<div class=\"gt-panel-top-bar\">\n<h3 class=\"gt-panel-top-bar-left\">List <span class=\"gt-trigger-count\">(";
+  buffer += "<div class=\"gt-list-header gt-hide\">\n<div class=\"gt-panel-top-bar\">\n<h3 class=\"gt-panel-top-bar-left\">\nList <span class=\"gt-trigger-count\">(";
   if (stack1 = helpers.count) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = (depth0 && depth0.count); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
   buffer += escapeExpression(stack1)
-    + ")</span></h3>\n<a href=\"#\" class=\"gt-panel-top-bar-button gt-close-drawer\"></a>\n</div>\n<div class=\"gt-search\">\n<input type=\"search\" placeholder=\"Search\"><a href=\"#list\" class=\"gt-icon-clear\"></a>\n</div>\n</div>\n<ul class=\"gt-results\"></ul>\n";
+    + ")</span>\n</h3>\n<a href=\"#\" class=\"gt-panel-top-bar-button gt-close-drawer\"></a>\n</div>\n<div class=\"gt-search\">\n<input type=\"search\" placeholder=\"Search\">\n<a href=\"#list\" class=\"gt-icon-clear\"></a>\n</div>\n</div>\n<ul class=\"gt-results\"></ul>\n";
   return buffer;
   });
 
@@ -293,11 +293,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<button class='gt-close'>&times;</button> ";
+  buffer += "<span class=\"gt-notification-message\">";
   if (stack1 = helpers.message) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = (depth0 && depth0.message); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
   buffer += escapeExpression(stack1)
-    + "\n";
+    + "</span>\n<button class='gt-close'>&times;</button>\n";
   return buffer;
   });
 
@@ -595,17 +595,15 @@ return function underscoreDeepExtend (obj) {
   _.mixin({deepExtend: underscoreDeepExtend(_)});
 })();
 
-GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('API', function (API, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
   // Geotrigger API
   // --------------
 
-  function createSession () {
-    if (!App.config.session ||
-        !App.config.session.clientId ||
-        !App.config.session.clientSecret) {
+  function createSession() {
+    if (!App.config.session || !App.config.session.clientId || !App.config.session.clientSecret) {
       throw new Error('GeotriggerEditor requires a `session` object with `clientId` and `clientSecret` properties');
     }
 
@@ -617,7 +615,7 @@ GeotriggerEditor.module('API', function(API, App, Backbone, Marionette, $, _) {
 });
 
 
-GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Config', function (Config, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -690,7 +688,7 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
 
   // merge options into defaults on initialization
 
-  function setup (options) {
+  function setup(options) {
     App.config = _.deepExtend(defaults, options);
   }
 
@@ -699,14 +697,14 @@ GeotriggerEditor.module('Config', function(Config, App, Backbone, Marionette, $,
 });
 
 
-GeotriggerEditor.module('util', function(util, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('util', function (util, App, Backbone, Marionette, $, _) {
 
   // Utility Functions
   // -----------------
   //
   // General purpose helper functions.
 
-  util.removeEmptyStrings = function(obj) {
+  util.removeEmptyStrings = function (obj) {
     for (var key in obj) {
 
       // value is empty string
@@ -717,11 +715,11 @@ GeotriggerEditor.module('util', function(util, App, Backbone, Marionette, $, _) 
       // value is array with only empty strings
       if (obj[key] instanceof Array) {
         var empty = true;
-        for(var i = 0; i < obj[key].length; i++) {
-            if(obj[key][i] !== '') {
-              empty = false;
-              break;
-            }
+        for (var i = 0; i < obj[key].length; i++) {
+          if (obj[key][i] !== '') {
+            empty = false;
+            break;
+          }
         }
         if (empty) {
           delete obj[key];
@@ -756,7 +754,7 @@ GeotriggerEditor.module('util', function(util, App, Backbone, Marionette, $, _) 
 });
 
 
-GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Map.Draw', function (Draw, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -770,7 +768,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       radius: null
     },
 
-    _setup: function() {
+    _setup: function () {
       // Initialize new Draw Handlers
       this._tools.polygon = new L.Draw.Polygon(App.map, App.config.editOptions);
       this._tools.radius = new L.Draw.Circle(App.map, App.config.editOptions);
@@ -778,7 +776,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       this._eventBindings();
     },
 
-    _eventBindings: function() {
+    _eventBindings: function () {
       App.vent.on('draw:new', this.editLayer, this);
       App.vent.on('index trigger:list trigger:edit', this.clear, this);
       App.vent.on('trigger:new:ready', this.panToNewTrigger, this);
@@ -792,7 +790,7 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       App.commands.setHandler('draw:clear', this.clear, this);
     },
 
-    panToNewTrigger: function() {
+    panToNewTrigger: function () {
       var layer = App.request('draw:layer');
       if (layer) {
         App.Map.panToLayer(layer);
@@ -817,12 +815,14 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       App.vent.trigger('draw:new', layer);
     },
 
-    getEditLayer: function() {
+    getEditLayer: function () {
       return App.Map.Layers.edit.getLayers()[0];
     },
 
-    newShape: function(triggerId) {
-      var model = App.collections.triggers.findWhere({'triggerId':triggerId});
+    newShape: function (triggerId) {
+      var model = App.collections.triggers.findWhere({
+        'triggerId': triggerId
+      });
       var id = model.get('triggerId');
       var geo = model.get('condition').geo;
       var shape;
@@ -848,22 +848,22 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
       return shape;
     },
 
-    editLayer: function(layer) {
+    editLayer: function (layer) {
       this.clear();
       layer.editing.enable();
       App.Map.Layers.edit.addLayer(layer);
     },
 
-    clear: function() {
+    clear: function () {
       App.Map.Layers.edit.clearLayers();
     },
 
-    enableTool: function(name) {
+    enableTool: function (name) {
       this.disableTool();
       this._tools[name].enable();
     },
 
-    disableTool: function(name) {
+    disableTool: function (name) {
       for (var i in this._tools) {
         if (typeof name === 'undefined' || i === name) {
           this._tools[i].disable();
@@ -876,14 +876,14 @@ GeotriggerEditor.module('Map.Draw', function(Draw, App, Backbone, Marionette, $,
   // Draw Layer initializer
   // ----------------------
 
-  Draw.addInitializer(function() {
+  Draw.addInitializer(function () {
     this._setup();
   });
 
 });
 
 
-GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Editor', function (Editor, App, Backbone, Marionette, $, _) {
 
   // Editor Router
   // ---------------
@@ -893,9 +893,10 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
   var Router = Marionette.AppRouter.extend({
     appRoutes: {
       '': 'index',
-      'list': 'list',
+      'list(/)': 'list',
       'list/:term': 'list',
-      'new': 'create',
+      'new(/)': 'create',
+      'edit(/)': 'redirect',
       'edit/:id': 'edit',
       '*notfound': 'notFound'
     }
@@ -907,12 +908,12 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
   // Control the workflow and logic that exists at the application
   // level, above the implementation detail of views and models
 
-  var Controller = function() {};
+  var Controller = function () {};
 
   _.extend(Controller.prototype, {
 
     // initialization
-    start: function() {
+    start: function () {
       this.setup();
 
       App.vent.trigger('notify', 'Fetching application data..');
@@ -931,20 +932,21 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
           Backbone.history.start();
 
           if (response && response.length === 0) {
-            App.router.navigate('list', { trigger: true });
-          }
-
-          else if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
+            App.router.navigate('list', {
+              trigger: true
+            });
+          } else if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
             App.execute('map:fit');
           }
         }
       });
 
-      App.vent.on('draw:new', function(options){
+      App.vent.on('draw:new', function (options) {
         if (Backbone.history.fragment === 'new' ||
-            Backbone.history.fragment.match('edit')) {
-        } else {
-          App.router.navigate('new', { trigger: true });
+          Backbone.history.fragment.match('edit')) {} else {
+          App.router.navigate('new', {
+            trigger: true
+          });
         }
       }, this);
 
@@ -955,44 +957,46 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
     // setup
 
-    setup: function() {
+    setup: function () {
       this.setupMap();
       this.setupDrawer();
       this.setupControls();
       this.setupNotifications();
     },
 
-    setupMap: function() {
-      var view = new App.Views.Map({ collection: App.collections.triggers });
+    setupMap: function () {
+      var view = new App.Views.Map({
+        collection: App.collections.triggers
+      });
       App.regions.map.show(view);
     },
 
-    setupDrawer: function() {
+    setupDrawer: function () {
       var drawer = App.regions.drawer;
       var content = App.mainRegion.$el.find('#gt-content');
 
-      drawer.on('show', function(){
+      drawer.on('show', function () {
         content.addClass('gt-active');
       });
 
-      drawer.on('close', function(){
+      drawer.on('close', function () {
         content.removeClass('gt-active');
       });
     },
 
-    setupControls: function() {
+    setupControls: function () {
       var view = new App.Views.Controls();
       App.regions.controls.show(view);
     },
 
-    setupNotifications: function() {
+    setupNotifications: function () {
       var view = new App.Views.NotificationList({
         collection: App.collections.notifications
       });
 
       App.regions.notes.show(view);
 
-      App.vent.on('notify', function(options){
+      App.vent.on('notify', function (options) {
         if (typeof options === 'string') {
           options = {
             type: 'info',
@@ -1007,28 +1011,33 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
     // routes
 
-    index: function() {
+    index: function () {
       App.vent.trigger('index');
       App.regions.drawer.close();
     },
 
-    list: function(term) {
+    list: function (term) {
       if (!App.regions.drawer.$el || !App.regions.drawer.$el.has('.gt-list').length) {
         App.vent.trigger('trigger:list');
-        var model = new Backbone.Model({ count: App.collections.triggers.length });
-        var view = new App.Views.List({ model: model, collection: App.collections.triggers });
+        var model = new Backbone.Model({
+          count: App.collections.triggers.length
+        });
+        var view = new App.Views.List({
+          model: model,
+          collection: App.collections.triggers
+        });
         App.regions.drawer.show(view);
       } else if (!term) {
         App.vent.trigger('trigger:list:reset');
       }
 
       if (term) {
-        term = decodeURIComponent(term.replace(/\+/g,'%20'));
+        term = decodeURIComponent(term.replace(/\+/g, '%20'));
         App.vent.trigger('trigger:list:search', term);
       }
     },
 
-    create: function() {
+    create: function () {
       App.vent.trigger('trigger:new');
 
       var view = new App.Views.Form();
@@ -1037,7 +1046,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
       App.vent.trigger('trigger:new:ready');
     },
 
-    edit: function(triggerId) {
+    edit: function (triggerId) {
       var model = this.getTrigger(triggerId);
 
       if (!model) {
@@ -1046,14 +1055,23 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
           message: 'That trigger doesn\'t exist!'
         });
       } else {
-        var view = new App.Views.Form({ model: model });
+        var view = new App.Views.Form({
+          model: model
+        });
         App.regions.drawer.show(view);
         App.vent.trigger('trigger:edit', triggerId);
         view.parseShape();
       }
     },
 
-    notFound: function() {
+    redirect: function () {
+      App.router.navigate('', {
+        trigger: true,
+        replace: true
+      });
+    },
+
+    notFound: function () {
       App.vent.trigger('notify', {
         type: 'error',
         message: 'Couldn\'t find page: "' + Backbone.history.fragment + '"'
@@ -1062,35 +1080,45 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
 
     // crud
 
-    createTrigger: function(triggerData) {
+    createTrigger: function (triggerData) {
       App.execute('draw:clear');
       App.collections.triggers.create(triggerData, {
         // wait: true, // wait is broken in backbone 1.1.0
-        success: function() {
-          App.router.navigate('list', { trigger: true });
+        success: function () {
+          App.router.navigate('list', {
+            trigger: true
+          });
         }
       });
     },
 
-    getTrigger: function(id) {
-      var model = App.collections.triggers.findWhere({'triggerId':id});
+    getTrigger: function (id) {
+      var model = App.collections.triggers.findWhere({
+        'triggerId': id
+      });
       return model;
     },
 
-    updateTrigger: function(triggerData) {
-      App.collections.triggers.once('change', function(data){
-        App.router.navigate('list', { trigger: true });
+    updateTrigger: function (triggerData) {
+      App.collections.triggers.once('change', function (data) {
+        App.router.navigate('list', {
+          trigger: true
+        });
       });
-      var model = App.collections.triggers.findWhere({'triggerId':triggerData.triggerId});
+      var model = App.collections.triggers.findWhere({
+        'triggerId': triggerData.triggerId
+      });
       model.set(triggerData);
       model.set('id', model.get('triggerId')); // hack to ensure proper method
       model.save();
     },
 
-    deleteTrigger: function(model) {
-      App.collections.triggers.once('remove', function(data){
+    deleteTrigger: function (model) {
+      App.collections.triggers.once('remove', function (data) {
         if (Backbone.history.fragment.match('edit')) {
-          App.router.navigate('list', { trigger: true });
+          App.router.navigate('list', {
+            trigger: true
+          });
         }
       });
       model.set('id', model.get('triggerId')); // hack to ensure proper method
@@ -1105,7 +1133,7 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
   // when the the application is started, pulling in all of the
   // existing triggers and displaying them.
 
-  Editor.addInitializer(function() {
+  Editor.addInitializer(function () {
     // initialize collections
     App.collections = App.collections || {};
     App.collections.triggers = new App.Models.Triggers();
@@ -1115,14 +1143,17 @@ GeotriggerEditor.module('Editor', function(Editor, App, Backbone, Marionette, $,
     var controller = new Controller();
 
     // initialize router
-    App.router = new Router({ controller: controller });
+    App.router = new Router({
+      controller: controller
+    });
 
     controller.start();
   });
 
 });
 
-GeotriggerEditor.module('Map.Layers', function(Layers, App, Backbone, Marionette, $, _) {
+
+GeotriggerEditor.module('Map.Layers', function (Layers, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -1131,7 +1162,7 @@ GeotriggerEditor.module('Map.Layers', function(Layers, App, Backbone, Marionette
 
   _.extend(Layers, {
 
-    _setup: function() {
+    _setup: function () {
       this.main = new L.FeatureGroup();
       App.map.addLayer(this.main);
 
@@ -1144,14 +1175,14 @@ GeotriggerEditor.module('Map.Layers', function(Layers, App, Backbone, Marionette
   // Layers initializer
   // ------------------
 
-  Layers.addInitializer(function() {
+  Layers.addInitializer(function () {
     this._setup();
   });
 
 });
 
 
-GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Map', function (Map, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -1160,7 +1191,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
 
   _.extend(Map, {
 
-    _setup: function(options) {
+    _setup: function (options) {
       // L.Icon.Default.imagePath = App.config.imagePath;
 
       // force L.esri to use JSONP if proxy is set
@@ -1188,8 +1219,8 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       this._eventBindings();
     },
 
-    _eventBindings: function() {
-      App.commands.setHandler('map:fit', _.bind(function(){
+    _eventBindings: function () {
+      App.commands.setHandler('map:fit', _.bind(function () {
         if (this.Layers.main.getLayers().length === 0) {
           return;
         }
@@ -1204,18 +1235,18 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       }, this));
     },
 
-    getDrawerWidth: function() {
+    getDrawerWidth: function () {
       var $content = App.mainRegion.$el.find('#gt-content');
       var $drawer = $content.find('#gt-drawer-region');
 
-      if ($content.hasClass('gt-active')){
+      if ($content.hasClass('gt-active')) {
         return $drawer.width();
       } else {
         return 0;
       }
     },
 
-    panToLayer: function(layer) {
+    panToLayer: function (layer) {
       var latlng;
 
       if (layer.getLatLng) {
@@ -1239,7 +1270,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       }
     },
 
-    zoomToLayer: function(layer) {
+    zoomToLayer: function (layer) {
       var bounds = layer.getBounds();
       var drawerWidth = this.getDrawerWidth();
 
@@ -1249,22 +1280,22 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       });
     },
 
-    removeShape: function(shape) {
+    removeShape: function (shape) {
       this.map.removeLayer(shape);
     },
 
-    focusShape: function(shape) {
+    focusShape: function (shape) {
       shape.setStyle(App.config.highlightOptions.shapeOptions);
     },
 
-    unfocusShape: function(shape) {
+    unfocusShape: function (shape) {
       shape.setStyle(App.config.sharedOptions.shapeOptions);
     },
 
-    polygon: function(geo, shapeOptions, add) {
+    polygon: function (geo, shapeOptions, add) {
       shapeOptions = shapeOptions || App.config.sharedOptions.shapeOptions;
       var polygon = new L.GeoJSON(geo, {
-        style: function(feature) {
+        style: function (feature) {
           return shapeOptions;
         }
       });
@@ -1276,7 +1307,7 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
       return polygon;
     },
 
-    circle: function(geo, shapeOptions, add) {
+    circle: function (geo, shapeOptions, add) {
       shapeOptions = shapeOptions || App.config.sharedOptions.shapeOptions;
       var circle = L.circle(
         [geo.latitude, geo.longitude],
@@ -1295,14 +1326,15 @@ GeotriggerEditor.module('Map', function(Map, App, Backbone, Marionette, $, _) {
   // Map Initializer
   // ---------------
 
-  Map.addInitializer(function(options) {
+  Map.addInitializer(function (options) {
     this._setup(options);
     this.Draw.start();
   });
 
 });
 
-GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $, _) {
+
+GeotriggerEditor.module('Models', function (Models, App, Backbone, Marionette, $, _) {
 
   // Notification Model
   // ------------------
@@ -1325,7 +1357,8 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
 
 });
 
-GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $, _) {
+
+GeotriggerEditor.module('Models', function (Models, App, Backbone, Marionette, $, _) {
 
   // Trigger Model
   // -------------
@@ -1367,11 +1400,11 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
   Models.Trigger = Backbone.Model.extend({
 
     // override sync method to use geotrigger API
-    sync: function(method, model, options) {
+    sync: function (method, model, options) {
       var triggerId = this.get('triggerId');
       var params;
 
-      var callback = _.bind(function(error, response) {
+      var callback = _.bind(function (error, response) {
         if (error) {
           App.vent.trigger('notify', {
             type: 'error',
@@ -1396,44 +1429,48 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
       }, this);
 
       switch (method) {
-        case 'read':
-          App.API.session.request('trigger/list', { 'triggerIds': [ triggerId ] }, callback);
-          break;
+      case 'read':
+        App.API.session.request('trigger/list', {
+          'triggerIds': [triggerId]
+        }, callback);
+        break;
 
-        case 'create':
-          params = {
-            'properties' : this.get('properties'),
-            'condition'  : this.get('condition'),
-            'action'     : this.get('action'),
-            'setTags'    : this.get('tags')
-          };
-          if (triggerId) {
-            params.triggerId = triggerId;
-          }
-          App.API.session.request('trigger/create', params, callback);
-          break;
+      case 'create':
+        params = {
+          'properties': this.get('properties'),
+          'condition': this.get('condition'),
+          'action': this.get('action'),
+          'setTags': this.get('tags')
+        };
+        if (triggerId) {
+          params.triggerId = triggerId;
+        }
+        App.API.session.request('trigger/create', params, callback);
+        break;
 
-        case 'update':
-          params = {
-            'properties' : this.get('properties'),
-            'triggerIds' : triggerId,
-            'condition'  : this.get('condition'),
-            'action'     : this.get('action'),
-            'setTags'    : this.get('tags')
-          };
-          App.API.session.request('trigger/update', params, callback);
-          break;
+      case 'update':
+        params = {
+          'properties': this.get('properties'),
+          'triggerIds': triggerId,
+          'condition': this.get('condition'),
+          'action': this.get('action'),
+          'setTags': this.get('tags')
+        };
+        App.API.session.request('trigger/update', params, callback);
+        break;
 
-        case 'delete':
-          App.API.session.request('trigger/delete', { 'triggerIds': triggerId }, callback);
-          break;
+      case 'delete':
+        App.API.session.request('trigger/delete', {
+          'triggerIds': triggerId
+        }, callback);
+        break;
 
-        default:
-          throw new Error('Unsupported method: ' + method);
+      default:
+        throw new Error('Unsupported method: ' + method);
       }
     },
 
-    parse: function(response) {
+    parse: function (response) {
       if (response.triggers) {
         return response.triggers;
       } else {
@@ -1449,9 +1486,9 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
   Models.Triggers = Backbone.Collection.extend({
     model: Models.Trigger,
 
-    fetch: function(options) {
-      var callback = _.bind(function(error, response) {
-        if(options && options.reset){
+    fetch: function (options) {
+      var callback = _.bind(function (error, response) {
+        if (options && options.reset) {
           this.reset(this.parse(response));
         } else {
           this.set(this.parse(response));
@@ -1465,14 +1502,15 @@ GeotriggerEditor.module('Models', function(Models, App, Backbone, Marionette, $,
       App.API.session.request('trigger/list', callback);
     },
 
-    parse: function(response) {
+    parse: function (response) {
       return response.triggers;
     }
   });
 
 });
 
-GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
+
+GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Controls View
   // -------------
@@ -1484,67 +1522,71 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-control-group',
 
     events: {
-      'click .gt-tool-list'       : 'toggleList',
-      'click .gt-tool-create'     : 'toggleNew',
-      'click .gt-tool-polygon'    : 'togglePolygon',
-      'click .gt-tool-radius'     : 'toggleRadius'
+      'click .gt-tool-list': 'toggleList',
+      'click .gt-tool-create': 'toggleNew',
+      'click .gt-tool-polygon': 'togglePolygon',
+      'click .gt-tool-radius': 'toggleRadius'
     },
 
     ui: {
-      'drawers' : '.gt-drawer-controls',
-      'tools'   : '.gt-tool-controls',
-      'list'    : '.gt-drawer-controls .gt-tool-list',
-      'create'  : '.gt-drawer-controls .gt-tool-create',
-      'polygon' : '.gt-tool-controls .gt-tool-polygon',
-      'radius'  : '.gt-tool-controls .gt-tool-radius',
-      'all'     : '.gt-tool'
+      'drawers': '.gt-drawer-controls',
+      'tools': '.gt-tool-controls',
+      'list': '.gt-drawer-controls .gt-tool-list',
+      'create': '.gt-drawer-controls .gt-tool-create',
+      'polygon': '.gt-tool-controls .gt-tool-polygon',
+      'radius': '.gt-tool-controls .gt-tool-radius',
+      'all': '.gt-tool'
     },
 
-    onRender: function() {
+    onRender: function () {
       this.listenTo(App.router, 'route', this.handleStateChange);
       this.listenTo(App.vent, 'draw:new', this.disableTool);
-      this.listenTo(App.vent, 'draw:enable', function(tool){
+      this.listenTo(App.vent, 'draw:enable', function (tool) {
         this.activate(tool);
       });
-      this.listenTo(App.vent, 'draw:disable', function(tool){
+      this.listenTo(App.vent, 'draw:disable', function (tool) {
         this.ui.tools.find('.gt-tool').removeClass('gt-active');
       });
     },
 
-    handleStateChange: function(route) {
+    handleStateChange: function (route) {
       this.clear('drawers');
       switch (route) {
-        case 'new':
-          this.activate('list');
-          break;
-        case 'edit':
-          this.activate('list');
-          break;
-        case 'list':
-          this.activate('list');
-          break;
+      case 'new':
+        this.activate('list');
+        break;
+      case 'edit':
+        this.activate('list');
+        break;
+      case 'list':
+        this.activate('list');
+        break;
       }
     },
 
     // drawers
 
-    toggleList: function(e) {
+    toggleList: function (e) {
       if (this.ui.list.hasClass('gt-active')) {
         e.preventDefault();
-        App.router.navigate('', { trigger: true });
+        App.router.navigate('', {
+          trigger: true
+        });
       }
     },
 
-    toggleNew: function(e) {
+    toggleNew: function (e) {
       if (this.ui.create.hasClass('gt-active')) {
         e.preventDefault();
-        App.router.navigate('', { trigger: true });
+        App.router.navigate('', {
+          trigger: true
+        });
       }
     },
 
     // tools
 
-    togglePolygon: function(e) {
+    togglePolygon: function (e) {
       if (this.ui.polygon.hasClass('gt-active')) {
         this.disableTool('polygon');
       } else {
@@ -1552,7 +1594,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    toggleRadius: function(e) {
+    toggleRadius: function (e) {
       if (this.ui.radius.hasClass('gt-active')) {
         this.disableTool('radius');
       } else {
@@ -1560,22 +1602,22 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    enableTool: function(tool) {
+    enableTool: function (tool) {
       this.disableTool();
       App.vent.trigger('draw:enable', tool);
     },
 
-    disableTool: function(tool) {
+    disableTool: function (tool) {
       App.vent.trigger('draw:disable', tool);
     },
 
     // helpers
 
-    activate: function(name) {
+    activate: function (name) {
       this.ui[name].addClass('gt-active');
     },
 
-    toggle: function(name) {
+    toggle: function (name) {
       if (name === 'list') {
         this.ui.list.toggleClass('gt-active');
         this.ui.create.removeClass('gt-active');
@@ -1585,7 +1627,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    clear: function(name) {
+    clear: function (name) {
       if (name === 'drawers') {
         this.ui.drawers.find('.gt-tool').removeClass('gt-active');
       } else if (name === 'tools') {
@@ -1598,7 +1640,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
 });
 
-GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
+
+GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Trigger Form View
   // -----------------
@@ -1614,34 +1657,34 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
     events: {
       // form events
-      'click .gt-add-trigger-id'      : 'addTriggerId',
-      'click .gt-remove-trigger-id'   : 'removeTriggerId',
+      'click .gt-add-trigger-id': 'addTriggerId',
+      'click .gt-remove-trigger-id': 'removeTriggerId',
 
-      'click .gt-add-action'          : 'addAction',
-      'click .gt-remove-action'       : 'removeAction',
+      'click .gt-add-action': 'addAction',
+      'click .gt-remove-action': 'removeAction',
 
-      'click .gt-add-notification'    : 'addNotification',
-      'click .gt-remove-notification' : 'removeNotification',
+      'click .gt-add-notification': 'addNotification',
+      'click .gt-remove-notification': 'removeNotification',
 
       // submit events
-      'click .gt-submit'              : 'parseForm',
+      'click .gt-submit': 'parseForm',
 
       // delete events
-      'click .gt-item-delete'         : 'confirmDelete',
-      'click .gt-reset-delete'        : 'resetDelete',
-      'click .gt-item-confirm-delete' : 'destroyModel'
+      'click .gt-item-delete': 'confirmDelete',
+      'click .gt-reset-delete': 'resetDelete',
+      'click .gt-item-confirm-delete': 'destroyModel'
     },
 
     ui: {
-      'actions'         : '.gt-actions',
-      'addAction'       : '.gt-add-action',
-      'form'            : 'form',
-      'deleteItem'      : '.gt-item-delete',
-      'confirm'         : '.gt-item-confirm-delete',
-      'reset'           : '.gt-reset-delete'
+      'actions': '.gt-actions',
+      'addAction': '.gt-add-action',
+      'form': 'form',
+      'deleteItem': '.gt-item-delete',
+      'confirm': '.gt-item-confirm-delete',
+      'reset': '.gt-reset-delete'
     },
 
-    onShow: function() {
+    onShow: function () {
       if (!this.model) {
         this.buildNewForm();
       } else {
@@ -1651,7 +1694,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.listenTo(App.vent, 'draw:new', this.parseShape);
     },
 
-    buildNewForm: function() {
+    buildNewForm: function () {
       var data = this.serializeData();
 
       var actionsHtml = '';
@@ -1673,7 +1716,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.form.find('.gt-add-notification[data-notification="text"]').hide();
     },
 
-    buildEditForm: function() {
+    buildEditForm: function () {
       // get current actions
       var currentActions = this.model.get('action');
 
@@ -1728,7 +1771,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    addTriggerId: function(e) {
+    addTriggerId: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -1741,7 +1784,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.$el.find('.gt-trigger-id').removeClass('gt-hide');
     },
 
-    removeTriggerId: function(e) {
+    removeTriggerId: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -1757,7 +1800,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.form.find('.gt-add-trigger-id').removeClass('gt-hide');
     },
 
-    addAction: function(e) {
+    addAction: function (e) {
       var $el, action, actionHtml, noteHtml;
 
       // expects to be invoked by a DOM event by default
@@ -1800,7 +1843,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       $el.hide();
     },
 
-    removeAction: function(e) {
+    removeAction: function (e) {
       var $el, action;
 
       // expects to be invoked by a DOM event by default
@@ -1823,7 +1866,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.form.find('.gt-add-action[data-action="' + action + '"]').show();
     },
 
-    addNotification: function(e) {
+    addNotification: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -1840,7 +1883,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       $el.hide();
     },
 
-    removeNotification: function(e) {
+    removeNotification: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -1856,7 +1899,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.form.find('.gt-add-notification[data-notification="' + notification + '"]').show();
     },
 
-    parseShape: function() {
+    parseShape: function () {
       var lat, lng, rad;
 
       // get layer data
@@ -1898,7 +1941,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    parseForm: function(e) {
+    parseForm: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -1994,7 +2037,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    createOrUpdateTrigger: function(data) {
+    createOrUpdateTrigger: function (data) {
       // create new trigger
       if (!this.model) {
         App.vent.trigger('trigger:create', data);
@@ -2007,7 +2050,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    confirmDelete: function(e) {
+    confirmDelete: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -2018,7 +2061,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.reset.addClass('gt-reset-flyout-right');
     },
 
-    resetDelete: function(e) {
+    resetDelete: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -2029,7 +2072,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.ui.reset.removeClass('gt-reset-flyout-right');
     },
 
-    destroyModel: function(e) {
+    destroyModel: function (e) {
       // expects to be invoked by a DOM event by default
       if (e && e.preventDefault) {
         e.preventDefault();
@@ -2042,7 +2085,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
 });
 
-GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
+
+GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Trigger List Item View
   // ----------------------
@@ -2055,64 +2099,64 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     className: 'gt-result',
 
     events: {
-      'click .gt-item-edit'           : 'editItem',
-      'click .gt-tags'                : 'tagsClick',
-      'click .gt-delete-icon'         : 'confirmDelete',
-      'click .gt-cancel-delete'       : 'resetDelete',
-      'click .gt-confirm-delete'      : 'destroyModel',
-      'mouseover'                     : 'focusShape',
-      'mouseout'                      : 'unfocusShape'
+      'click .gt-item-edit': 'editItem',
+      'click .gt-tags': 'tagsClick',
+      'click .gt-delete-icon': 'confirmDelete',
+      'click .gt-cancel-delete': 'resetDelete',
+      'click .gt-confirm-delete': 'destroyModel'
     },
 
     ui: {
-      'deleteItem' : '.gt-list-delete',
-      'confirm'    : '.gt-item-confirm-delete',
-      'reset'      : '.gt-reset-delete'
+      'deleteItem': '.gt-list-delete',
+      'confirm': '.gt-item-confirm-delete',
+      'reset': '.gt-reset-delete'
     },
 
     modelEvents: {
       'change': 'modelChanged'
     },
 
-    modelChanged: function() {
+    onShow: function () {
+      var id = this.model.get('triggerId');
+
+      this.$el.hover(function () {
+        App.vent.trigger('trigger:focus', id);
+      }, function () {
+        App.vent.trigger('trigger:unfocus', id);
+      });
+    },
+
+    modelChanged: function () {
       this.render();
     },
 
-    editItem: function() {
+    editItem: function () {
       var id = this.model.get('triggerId');
-      App.router.navigate('edit/' + id, { trigger: true });
+      App.router.navigate('edit/' + id, {
+        trigger: true
+      });
     },
 
-    tagsClick: function(e) {
+    tagsClick: function (e) {
       e.stopPropagation();
     },
 
-    confirmDelete: function(e) {
+    confirmDelete: function (e) {
       e.preventDefault();
       e.stopPropagation();
       this.ui.deleteItem.addClass('gt-visible');
     },
 
-    resetDelete: function(e) {
+    resetDelete: function (e) {
       e.preventDefault();
       e.stopPropagation();
       this.ui.deleteItem.removeClass('gt-visible');
     },
 
-    destroyModel: function(e) {
+    destroyModel: function (e) {
       e.preventDefault();
       e.stopPropagation();
       App.vent.trigger('trigger:destroy', this.model);
-    },
-
-    focusShape: function(){
-      var id = this.model.get('triggerId');
-      App.vent.trigger('trigger:focus', id);
-    },
-
-    unfocusShape: function(){
-      var id = this.model.get('triggerId');
-      App.vent.trigger('trigger:unfocus', id);
     }
   });
 
@@ -2139,24 +2183,24 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     emptyView: Views.Empty,
 
     events: {
-      'keyup .gt-search'     : 'filter',
-      'click .gt-icon-clear' : 'clearFilter'
+      'keyup .gt-search': 'filter',
+      'click .gt-icon-clear': 'clearFilter'
     },
 
     ui: {
-      'header'     : '.gt-list-header',
-      'search'     : '.gt-search input',
-      'results'    : '.gt-results'
+      'header': '.gt-list-header',
+      'search': '.gt-search input',
+      'results': '.gt-results'
     },
 
-    onShow: function() {
+    onShow: function () {
       this.refresh();
       this.listenTo(this.collection, 'change reset add remove', this.refresh);
       this.listenTo(App.vent, 'trigger:list:search', this.search);
       this.listenTo(App.vent, 'trigger:list:reset', this.clearFilter);
     },
 
-    refresh: function() {
+    refresh: function () {
       var count = this.collection.length;
       this.model.set('count', count);
 
@@ -2169,27 +2213,31 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       }
     },
 
-    search: function(term) {
+    search: function (term) {
       this.ui.search.val(term);
       this.filter();
     },
 
-    clearFilter: function() {
+    clearFilter: function () {
       this.ui.search.val('');
       this.$el.removeClass('gt-filtering');
     },
 
-    filter: function(e) {
+    filter: function (e) {
       var value = this.ui.search.val();
 
       if (!value.length) {
         this.$el.removeClass('gt-filtering');
         if (Backbone.history.fragment !== 'list') {
-          App.router.navigate('list', { trigger: false });
+          App.router.navigate('list', {
+            trigger: false
+          });
         }
       } else if (typeof e !== 'undefined' && e.keyCode === 13) {
         var route = 'list/' + encodeURIComponent(value).replace(/%20/g, '+');
-        App.router.navigate(route, { trigger: true });
+        App.router.navigate(route, {
+          trigger: true
+        });
       } else {
         this.$el.addClass('gt-filtering');
 
@@ -2198,16 +2246,13 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         var values = '(?=.*' + arr.join(')(?=.*') + ')';
         var regex = new RegExp(values, 'i');
 
-        list.each(function(){
+        list.each(function () {
           var item = $(this);
-          var tags = item.find('.gt-tags a');
           var text = '';
 
-          text += item.find('.gt-item-edit span').text();
           text += item.find('.gt-id').text();
-          text += item.find('.gt-item-details span').text();
 
-          tags.each(function(){
+          item.find('.gt-tags a').each(function () {
             text += $(this).text();
           });
 
@@ -2223,7 +2268,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
 });
 
-GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, $, _) {
+
+GeotriggerEditor.module('Layouts', function (Layouts, App, Backbone, Marionette, $, _) {
 
   // Layout Drawer View
   // ------------------
@@ -2233,17 +2279,17 @@ GeotriggerEditor.module('Layouts', function(Layouts, App, Backbone, Marionette, 
     id: 'gt-regions',
 
     regions: {
-      'controls' : '#gt-controls-region',
-      'drawer'   : '#gt-drawer-region',
-      'map'      : '#gt-map-region',
-      'notes'    : '#gt-notes-region'
+      'controls': '#gt-controls-region',
+      'drawer': '#gt-drawer-region',
+      'map': '#gt-map-region',
+      'notes': '#gt-notes-region'
     }
   });
 
 });
 
 
-GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Shape View
   // ----------
@@ -2256,7 +2302,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'change': 'render'
     },
 
-    render: function() {
+    render: function () {
       this.isClosed = false;
 
       this.triggerMethod('before:render', this);
@@ -2270,7 +2316,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       return this;
     },
 
-    renderShape: function() {
+    renderShape: function () {
       var id = this.model.get('triggerId');
       var geo = this.model.get('condition').geo;
 
@@ -2294,40 +2340,42 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
         return;
       }
 
-      this._shape.on('click', _.bind(function(){
-        App.router.navigate('edit/' + this.model.get('triggerId'), { trigger: true });
+      this._shape.on('click', _.bind(function () {
+        App.router.navigate('edit/' + this.model.get('triggerId'), {
+          trigger: true
+        });
       }, this));
 
-      this._shape.on('mouseover', _.bind(function(){
+      this._shape.on('mouseover', _.bind(function () {
         App.Map.focusShape(this._shape);
       }, this));
 
-      this._shape.on('mouseout', _.bind(function(){
+      this._shape.on('mouseout', _.bind(function () {
         App.Map.unfocusShape(this._shape);
       }, this));
 
     },
 
-    removeShape: function() {
+    removeShape: function () {
       if (this._shape) {
         App.Map.removeShape(this._shape);
         delete this._shape;
       }
     },
 
-    focusShape: function() {
+    focusShape: function () {
       if (this._shape) {
         App.Map.focusShape(this._shape);
       }
     },
 
-    unfocusShape: function() {
+    unfocusShape: function () {
       if (this._shape) {
         App.Map.unfocusShape(this._shape);
       }
     },
 
-    onClose: function() {
+    onClose: function () {
       this.removeShape();
     }
 
@@ -2342,8 +2390,10 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
     id: 'gt-map',
     itemView: Views.Shape,
 
-    onShow: function() {
-      App.Map.start({ el: this.el });
+    onShow: function () {
+      App.Map.start({
+        el: this.el
+      });
 
       this.listenTo(App.vent, 'trigger:edit', this.hideShape);
       this.listenTo(App.vent, 'index trigger:new trigger:list trigger:edit', this.restore);
@@ -2351,27 +2401,32 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.listenTo(App.vent, 'trigger:unfocus', this.unfocusShape);
     },
 
-    hideShape: function(triggerId) {
-      var model = App.collections.triggers.findWhere({'triggerId':triggerId});
+    hideShape: function (triggerId) {
+      var model = App.collections.triggers.findWhere({
+        'triggerId': triggerId
+      });
       var view = this.children.findByModel(model);
       view.removeShape();
     },
 
-    focusShape: function(triggerId) {
-      var model = App.collections.triggers.findWhere({'triggerId':triggerId});
+    focusShape: function (triggerId) {
+      var model = App.collections.triggers.findWhere({
+        'triggerId': triggerId
+      });
       var view = this.children.findByModel(model);
       view.focusShape();
     },
 
-    unfocusShape: function(triggerId) {
-      var model = App.collections.triggers.findWhere({'triggerId':triggerId});
+    unfocusShape: function (triggerId) {
+      var model = App.collections.triggers.findWhere({
+        'triggerId': triggerId
+      });
       var view = this.children.findByModel(model);
       view.unfocusShape();
     },
 
-
-    restore: function(id) {
-      this.children.each(function(child, index, arr){
+    restore: function (id) {
+      this.children.each(function (child, index, arr) {
         if (!child._shape) {
           var currentId = child.model.get('triggerId');
           if (!(id && currentId === id)) {
@@ -2384,7 +2439,8 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
 
 });
 
-GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _) {
+
+GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Notification View
   // -----------------
@@ -2400,7 +2456,7 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       'click .gt-close': 'destroyNotification'
     },
 
-    render: function() {
+    render: function () {
       Marionette.ItemView.prototype.render.apply(this, arguments);
 
       var type = this.model.get('type') || 'info';
@@ -2409,18 +2465,18 @@ GeotriggerEditor.module('Views', function(Views, App, Backbone, Marionette, $, _
       this.listenTo(App.vent, 'notify:clear', this.destroyNotification);
     },
 
-    onShow: function() {
+    onShow: function () {
       this.$el.fadeIn();
       var timeout = this.model.get('timeout');
       if (typeof timeout === 'number') {
-        setTimeout(_.bind(function() {
+        setTimeout(_.bind(function () {
           this.destroyNotification();
         }, this), timeout);
       }
     },
 
-    destroyNotification: function() {
-      this.$el.fadeOut(_.bind(function(){
+    destroyNotification: function () {
+      this.$el.fadeOut(_.bind(function () {
         this.model.destroy();
       }, this));
     }

@@ -21,10 +21,13 @@
   @include box-sizing(border-box);
   border-bottom:1px solid $lighter-gray;
   h3 {
-    display: inline-block;
-    vertical-align: middle;
     line-height: normal;
-    padding-left: 12px;
+    margin-right: 62px;
+    overflow: hidden;
+    padding: .65em 12px 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: auto;
     &.gt-panel-top-bar-left {
       padding-left: 32px;
     }
@@ -57,7 +60,9 @@
   &.gt-close-drawer {
     background-image: url('../img/icons/x.png');
     border-left: 1px solid $lighter-gray;
-    float: right;
+    position: absolute;
+    top: 0;
+    right: 0;
 
     @include retina-display() {
       background-image: url('../img/icons/x@2x.png');

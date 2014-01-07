@@ -85,7 +85,7 @@
     display: inline-block;
     float: left;
     height: 48px;
-    margin-top: 6px;
+    margin-top: 2px;
     margin-left: -48px;
     width: 48px;
 
@@ -139,13 +139,6 @@
       }
     }
   }
-
-  .gt-item-details {
-    display:none;
-    &.gt-item-details-visible {
-      display:block;
-    }
-  }
 }
 
 .gt-tags {
@@ -171,10 +164,6 @@
       color: $blue;
     }
   }
-}
-
-.gt-id {
-  @extend .gt-tags;
 }
 
 .gt-item-controls {

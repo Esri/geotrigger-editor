@@ -213,33 +213,37 @@
   <!-- js: initializer -->
   <script>
   (function(){
-    var config = {
-      session: { // required
-        // clientId: 'XXXXXX', // required
-        // clientSecret: 'XXXXXX', // required
-        // proxy: '/path/to/proxy/' // optional, default false (required for IE8/9)
-      }
-      // the following are optional, defaults are in src/js/modules/config.js
-      // map: {
-      //   center: [0, 0],
-      //   zoom: 2,
-      //   basemap: 'Streets', // default 'Streets'
-      //   basemaps: ['Gray','GrayLabels'], // overrides `basemap`
-      //   options: {
-      //     opacity: 0.7, // default 1
-      //     detectRetina: true // default false
-      //   }
-      // },
-      // fitOnLoad: false, // default true
-      // imagePath: '/images', // default '/images'
-      // sharedOptions: {},
-      // editOptions: {},
-      // highlightOptions: {}
-    };
+
+    var config = {};
+    config.session = {};
+
+    // var config = {
+    //   session: { // required
+    //     clientId: 'XXXXXX', // required
+    //     clientSecret: 'XXXXXX', // required
+    //     proxy: '/path/to/proxy/' // optional, default false (required for IE8/9)
+    //   }
+    //   the following are optional, defaults are in src/js/modules/config.js
+    //   map: {
+    //     center: [0, 0],
+    //     zoom: 2,
+    //     basemap: 'Streets', // default 'Streets'
+    //     basemaps: ['Gray','GrayLabels'], // overrides `basemap`
+    //     options: {
+    //       opacity: 0.7, // default 1
+    //       detectRetina: true // default false
+    //     }
+    //   },
+    //   fitOnLoad: false, // default true
+    //   imagePath: '/images', // default '/images'
+    //   sharedOptions: {},
+    //   editOptions: {},
+    //   highlightOptions: {}
+    // };
 
     function findLocalItems (query) {
       var results = [];
-      for (i in localStorage) {
+      for (var i in localStorage) {
         if (localStorage.hasOwnProperty(i)) {
           if (i.match(query) || (!query && typeof i === 'string')) {
             value = JSON.parse(localStorage.getItem(i));

@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Map.Layers', function(Layers, App, Backbone, Marionette, $, _) {
+GeotriggerEditor.module('Map.Layers', function (Layers, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -7,7 +7,7 @@ GeotriggerEditor.module('Map.Layers', function(Layers, App, Backbone, Marionette
 
   _.extend(Layers, {
 
-    _setup: function() {
+    _setup: function () {
       this.main = new L.FeatureGroup();
       App.map.addLayer(this.main);
 
@@ -20,7 +20,7 @@ GeotriggerEditor.module('Map.Layers', function(Layers, App, Backbone, Marionette
   // Layers initializer
   // ------------------
 
-  Layers.addInitializer(function() {
+  Layers.addInitializer(function () {
     this._setup();
   });
 

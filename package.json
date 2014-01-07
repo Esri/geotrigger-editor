@@ -1,6 +1,6 @@
 {
   "name": "geotrigger-editor",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Geotrigger Editor",
   "main": "src/geotrigger-editor.js",
   "homepage": "https://github.com/Esri/geotrigger-editor",
@@ -29,7 +29,8 @@
     "wd": "0.0.32",
     "grunt-contrib-handlebars": "~0.6.0",
     "request": "~2.27.0",
-    "grunt-rename": "~0.1.3"
+    "grunt-rename": "~0.1.3",
+    "grunt-jsbeautifier": "~0.2.6"
   },
   "author": "Esri Portland R&D Center <portland@esri.com>",
   "contributors": [
