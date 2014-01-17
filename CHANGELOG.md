@@ -1,5 +1,8 @@
 # Geotrigger Editor Changelog
 
+## master
+* bump leaflet to 0.7.1
+
 ## v0.1.3
 * fix CSS issue causing IDs not to display in title area on edit ([#186](https://github.com/Esri/geotrigger-editor/issues/186))
 * bump esri-leaflet to v0.0.1-beta.3

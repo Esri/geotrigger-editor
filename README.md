@@ -26,11 +26,11 @@ A client-side web application for creating and editing Geotrigger rules.
 The Geotrigger Editor has some external dependencies:
 
 * jQuery [1.10.2](https://github.com/jquery/jquery/releases/tag/1.10.2) (CDN: [Google](//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js), [jQuery](http://codeorigin.jquery.com/jquery-1.10.2.min.js))
-* Underscore [1.5.2](https://github.com/jashkenas/underscore/releases/tag/1.5.2) (CDN: [cdnjs](//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js))
-* Backbone [1.1.0](https://github.com/jashkenas/backbone/releases/tag/1.1.0) (CDN: [cdnjs](//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js))
+* Underscore [1.5.2](https://github.com/jashkenas/underscore/releases/tag/1.5.2) (CDN: [cdnjs](http://cdnjs.com/libraries/underscore.js/))
+* Backbone [1.1.0](https://github.com/jashkenas/backbone/releases/tag/1.1.0) (CDN: [cdnjs](http://cdnjs.com/libraries/backbone.js/))
 * Backbone.Marionette [1.2.3](http://marionettejs.com) (bundled with Backbone.BabySitter & Backbone.Wreqr)
-* Handlebars [1.1.2](https://github.com/wycats/handlebars.js/releases/tag/v1.1.2) (runtime only) (CDN: [cdnjs](//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.runtime.min.js))
-* Leaflet [0.6.4](https://github.com/Leaflet/Leaflet/releases/tag/v0.6.4) (CDN: [leaflet](http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js), [cdnjs](//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.js))
+* Handlebars [1.1.2](https://github.com/wycats/handlebars.js/releases/tag/v1.1.2) (runtime only) (CDN: [cdnjs](http://cdnjs.com/libraries/handlebars.js/))
+* Leaflet [0.7.1](https://github.com/Leaflet/Leaflet/releases/tag/v0.7.1) (CDN: [leaflet](http://leafletjs.com/download.html), [cdnjs](http://cdnjs.com/libraries/leaflet/))
 * Leaflet.draw [0.2.2](https://github.com/Leaflet/Leaflet.draw/releases/tag/0.2.2)
 * Geotrigger.js [0.1.5](https://github.com/Esri/geotrigger-js)
 * Esri-Leaflet [0.0.1-beta.3](https://github.com/Esri/esri-leaflet/tree/v0.0.1-beta.3)
