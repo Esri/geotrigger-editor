@@ -3,6 +3,8 @@
 ## master
 * bump leaflet to 0.7.1
 * bump handlebars to 1.3.0
+* bump marionette to 1.4.1
+* remove marionette from `vendor` and `.gitmodules`
 
 ## v0.1.3
 * fix CSS issue causing IDs not to display in title area on edit ([#186](https://github.com/Esri/geotrigger-editor/issues/186))
