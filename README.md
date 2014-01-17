@@ -29,7 +29,7 @@ The Geotrigger Editor has some external dependencies:
 * Underscore [1.5.2](https://github.com/jashkenas/underscore/releases/tag/1.5.2) (CDN: [cdnjs](http://cdnjs.com/libraries/underscore.js/))
 * Backbone [1.1.0](https://github.com/jashkenas/backbone/releases/tag/1.1.0) (CDN: [cdnjs](http://cdnjs.com/libraries/backbone.js/))
 * Backbone.Marionette [1.2.3](http://marionettejs.com) (bundled with Backbone.BabySitter & Backbone.Wreqr)
-* Handlebars [1.1.2](https://github.com/wycats/handlebars.js/releases/tag/v1.1.2) (runtime only) (CDN: [cdnjs](http://cdnjs.com/libraries/handlebars.js/))
+* Handlebars [1.3.0](https://github.com/wycats/handlebars.js/releases/tag/v1.3.0) (runtime only) (CDN: [cdnjs](http://cdnjs.com/libraries/handlebars.js/))
 * Leaflet [0.7.1](https://github.com/Leaflet/Leaflet/releases/tag/v0.7.1) (CDN: [leaflet](http://leafletjs.com/download.html), [cdnjs](http://cdnjs.com/libraries/leaflet/))
 * Leaflet.draw [0.2.2](https://github.com/Leaflet/Leaflet.draw/releases/tag/0.2.2)
 * Geotrigger.js [0.1.5](https://github.com/Esri/geotrigger-js)
