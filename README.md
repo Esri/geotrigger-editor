@@ -34,6 +34,7 @@ The Geotrigger Editor has some external dependencies:
 * Leaflet.draw [0.2.2](https://github.com/Leaflet/Leaflet.draw/releases/tag/0.2.2)
 * Geotrigger.js [0.1.5](https://github.com/Esri/geotrigger-js)
 * Esri-Leaflet [0.0.1-beta.3](https://github.com/Esri/esri-leaflet/tree/v0.0.1-beta.3)
+* Esri Leaflet Geocoder [0.0.1-alpha.2](https://github.com/Esri/esri-leaflet-geocoder/releases/tag/v0.0.1-alpha.2)
 
 We recommend loading dependencies from a CDN when possible. All dependencies are hosted on CDNs with the exception of Leaflet.draw, Geotrigger.js and Esri-Leaflet, which you'll need to host yourself.
 

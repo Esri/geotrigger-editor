@@ -6,6 +6,8 @@
 * bump marionette to 1.4.1
 * remove marionette from `vendor` and `.gitmodules`
 * fix CSS rules leaking into global scope
+* fix incorrectly filled callback URL & tracking profile fields after update
+* add geocoder control for fast map traversal ([#195](https://github.com/Esri/geotrigger-editor/issues/195))
 
 ## v0.1.3
 * fix CSS issue causing IDs not to display in title area on edit ([#186](https://github.com/Esri/geotrigger-editor/issues/186))
