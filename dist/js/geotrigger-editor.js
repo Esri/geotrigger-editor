@@ -1649,7 +1649,7 @@ GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, 
   // handles both new and edit views for triggers
   // (new) builds a blank form for a new trigger
   // (edit) populates the form with a preexisting trigger
-  // either way this view builds the object to be submitted to the API and handles client-side validation
+  // builds, validates, and submits trigger object to the API
 
   Views.Form = Marionette.ItemView.extend({
     template: App.Templates['form/index'],
@@ -1717,39 +1717,47 @@ GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, 
     },
 
     buildEditForm: function () {
-      // get current actions
       var currentActions = this.model.get('action');
-
-      // get data
       var data = this.serializeData();
-
       var actionsHtml = '';
       var noteHtml = '';
       var prop;
 
       // build actions:
 
-      // notification
-      if ('undefined' !== typeof currentActions['notification']) {
-        actionsHtml += App.Templates['form/actions/notification/index'](data);
-        this.ui.form.find('.gt-add-action[data-action="notification"]').hide();
+      function hasProp (obj, prop) {
+        return obj.hasOwnProperty(prop) &&
+               obj[prop] !== undefined &&
+               obj[prop] !== null;
+      }
 
+      var hasNotification = hasProp(currentActions, 'notification');
+
+      if (hasNotification) {
         // build notification form elements if they exist
         for (prop in currentActions.notification) {
-          if ('undefined' !== typeof currentActions.notification[prop]) {
+          if (hasProp(currentActions.notification, prop)) {
             noteHtml += App.Templates['form/actions/notification/' + prop](data);
           }
         }
+
+        // only add notification block if it has one or more filled properties
+        if (noteHtml !== '') {
+          actionsHtml += App.Templates['form/actions/notification/index'](data);
+          this.ui.form.find('.gt-add-action[data-action="notification"]').hide();
+        }
       }
 
-      // callback URL
-      if ('undefined' !== typeof currentActions['callbackUrl']) {
+      var hasCallbackURL = hasProp(currentActions, 'callbackUrl');
+
+      if (hasCallbackURL) {
         actionsHtml += App.Templates['form/actions/callbackUrl'](data);
         this.ui.form.find('.gt-add-action[data-action="callbackUrl"]').hide();
       }
 
-      // tracking profile
-      if ('undefined' !== typeof currentActions['trackingProfile']) {
+      var hasTrackingProfile = hasProp(currentActions, 'trackingProfile');
+
+      if (hasTrackingProfile) {
         actionsHtml += App.Templates['form/actions/trackingProfile'](data);
         this.ui.form.find('.gt-add-action[data-action="trackingProfile"]').hide();
       }
@@ -1763,7 +1771,7 @@ GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, 
 
         // hide add buttons for properties that already exist
         for (prop in currentActions.notification) {
-          if ('undefined' !== typeof currentActions.notification[prop]) {
+          if (hasProp(currentActions.notification, prop)) {
             var $notification = this.ui.form.find('.gt-add-notification[data-notification="' + prop + '"]');
             $notification.hide();
           }
