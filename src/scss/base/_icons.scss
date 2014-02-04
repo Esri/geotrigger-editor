@@ -1,25 +1,27 @@
-.gt-edit-icon {
-  background: url('../img/icons/settings.png') no-repeat center center transparent;
-  background-size: 16px;
-  display: inline-block;
-  height: 16px;
-  opacity: .8;
-  width: 16px;
+.gt-region {
+  .gt-edit-icon {
+    background: url('../img/icons/settings.png') no-repeat center center transparent;
+    background-size: 16px;
+    display: inline-block;
+    height: 16px;
+    opacity: .8;
+    width: 16px;
 
-  @include transition(opacity 100ms linear);
+    @include transition(opacity 100ms linear);
 
-  @include retina-display { background-image: url('../img/icons/settings@2x.png'); }
+    @include retina-display { background-image: url('../img/icons/settings@2x.png'); }
 
-  &:hover {
-    opacity: 1;
+    &:hover {
+      opacity: 1;
+    }
   }
-}
 
-.gt-delete-icon {
-  @extend .gt-edit-icon;
+  .gt-delete-icon {
+    @extend .gt-edit-icon;
 
-  background-image: url('../img/icons/trash.png');
-  margin-left: 6px;
+    background-image: url('../img/icons/trash.png');
+    margin-left: 6px;
 
-  @include retina-display { background-image: url('../img/icons/trash@2x.png'); }
+    @include retina-display { background-image: url('../img/icons/trash@2x.png'); }
+  }
 }

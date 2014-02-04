@@ -1,351 +1,353 @@
 /* - - - - - - - - - - Trigger List - - - - - - - - - - */
-.gt-list {
-  &.gt-filtering {
-    .gt-icon-clear {
-      display: inline-block;
-    }
-    .gt-result {
-      display: none;
-      &.gt-list-visible {
-        display: block;
+.gt-region {
+  .gt-list {
+    &.gt-filtering {
+      .gt-icon-clear {
+        display: inline-block;
+      }
+      .gt-result {
+        display: none;
+        &.gt-list-visible {
+          display: block;
+        }
       }
     }
   }
-}
 
-.gt-search {
-  @include box-sizing(border-box);
-  padding: 0.5em 2em;
-  position: relative;
-
-  input[type="search"] {
+  .gt-search {
     @include box-sizing(border-box);
-    background: url(../img/icons/search.png) no-repeat 4px center $white;
-    padding: 0.75em 0.66em 0.75em 32px;
+    padding: 0.5em 2em;
+    position: relative;
 
-    @include retina-display {
-      background: url(../img/icons/search@2x.png) no-repeat 4px center $white;
-      background-size: 24px;
+    input[type="search"] {
+      @include box-sizing(border-box);
+      background: url(../img/icons/search.png) no-repeat 4px center $white;
+      padding: 0.75em 0.66em 0.75em 32px;
+
+      @include retina-display {
+        background: url(../img/icons/search@2x.png) no-repeat 4px center $white;
+        background-size: 24px;
+      }
+    }
+
+    .gt-icon-clear {
+      background: url('../img/icons/delete.png') no-repeat center center transparent;
+      background-size: 16px;
+      display: none;
+      height: 16px;
+      margin-top: -8px;
+      width: 16px;
+      position: absolute;
+      top: 50%;
+      right: 2.6em;
+
+      @include retina-display {
+        background-image: url('../img/icons/delete@2x.png');
+      }
     }
   }
 
-  .gt-icon-clear {
-    background: url('../img/icons/delete.png') no-repeat center center transparent;
-    background-size: 16px;
-    display: none;
-    height: 16px;
-    margin-top: -8px;
-    width: 16px;
-    position: absolute;
-    top: 50%;
-    right: 2.6em;
-
-    @include retina-display {
-      background-image: url('../img/icons/delete@2x.png');
-    }
-  }
-}
-
-.gt-result-link {
-  background-color: $white;
-  text-decoration: none;
-  @include transition(background-color 200ms linear);
-  height:auto;
-  position:relative;
-  width:100%;
-  &:hover {
-    background-color: $lighter-gray;
-  }
-}
-
-.gt-results {
-  border-top: 1px solid $light-gray;
-}
-
-.gt-result {
-  @include box-sizing(border-box);
-  background: transparent;
-  border-bottom: 1px solid $light-gray;
-  padding: 1em 1em 1em 64px;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  &:hover {
-    background: $white;
-  }
-
-  .gt-item-edit {
-    cursor: pointer;
-  }
-
-  .gt-icon-enter {
-    background: transparent no-repeat center center;
-    background-size: 36px;
-    cursor: pointer;
-    display: inline-block;
-    float: left;
-    height: 48px;
-    margin-top: 2px;
-    margin-left: -48px;
-    width: 48px;
-
-    &.gt-icon-polygon { background-image: url('../img/icons/enter-polygon.png'); }
-    &.gt-icon-radius  { background-image: url('../img/icons/enter-radius.png'); }
-
-    @include retina-display {
-      background-image: url('../img/icons/enter-polygon2x.png');
-
-      &.gt-icon-polygon { background-image: url('../img/icons/enter-polygon@2x.png'); }
-      &.gt-icon-radius  { background-image: url('../img/icons/enter-radius@2x.png'); }
+  .gt-result-link {
+    background-color: $white;
+    text-decoration: none;
+    @include transition(background-color 200ms linear);
+    height:auto;
+    position:relative;
+    width:100%;
+    &:hover {
+      background-color: $lighter-gray;
     }
   }
 
-  .gt-icon-exit {
-    @extend .gt-icon-enter;
-
-    &.gt-icon-polygon { background-image: url('../img/icons/exit-polygon.png'); }
-    &.gt-icon-radius  { background-image: url('../img/icons/exit-radius.png'); }
-
-    @include retina-display {
-      &.gt-icon-polygon { background-image: url('../img/icons/exit-polygon@2x.png'); }
-      &.gt-icon-radius  { background-image: url('../img/icons/exit-radius@2x.png'); }
-    }
+  .gt-results {
+    border-top: 1px solid $light-gray;
   }
 
-  .gt-item-toolbar {
-    padding: 19px 19px 6px 6px;
-    text-align: right;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-
-  h5 {
-    padding-left: 8px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .gt-result {
+    @include box-sizing(border-box);
+    background: transparent;
+    border-bottom: 1px solid $light-gray;
+    padding: 1em 1em 1em 64px;
+    position: relative;
     overflow: hidden;
+    width: 100%;
+    &:hover {
+      background: $white;
+    }
+
+    .gt-item-edit {
+      cursor: pointer;
+    }
+
+    .gt-icon-enter {
+      background: transparent no-repeat center center;
+      background-size: 36px;
+      cursor: pointer;
+      display: inline-block;
+      float: left;
+      height: 48px;
+      margin-top: 2px;
+      margin-left: -48px;
+      width: 48px;
+
+      &.gt-icon-polygon { background-image: url('../img/icons/enter-polygon.png'); }
+      &.gt-icon-radius  { background-image: url('../img/icons/enter-radius.png'); }
+
+      @include retina-display {
+        background-image: url('../img/icons/enter-polygon2x.png');
+
+        &.gt-icon-polygon { background-image: url('../img/icons/enter-polygon@2x.png'); }
+        &.gt-icon-radius  { background-image: url('../img/icons/enter-radius@2x.png'); }
+      }
+    }
+
+    .gt-icon-exit {
+      @extend .gt-icon-enter;
+
+      &.gt-icon-polygon { background-image: url('../img/icons/exit-polygon.png'); }
+      &.gt-icon-radius  { background-image: url('../img/icons/exit-radius.png'); }
+
+      @include retina-display {
+        &.gt-icon-polygon { background-image: url('../img/icons/exit-polygon@2x.png'); }
+        &.gt-icon-radius  { background-image: url('../img/icons/exit-radius@2x.png'); }
+      }
+    }
+
+    .gt-item-toolbar {
+      padding: 19px 19px 6px 6px;
+      text-align: right;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    h5 {
+      padding-left: 8px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      line-height: 1.5em;
+      vertical-align: top;
+      padding-bottom: 0.25em;
+      margin-bottom: 0;
+      margin-right: 64px;
+      a {
+        color: $dark-gray;
+        text-decoration: none;
+        @include transition(color 100ms linear);
+        &:hover {
+          color: $blue;
+        }
+      }
+    }
+  }
+
+  .gt-tags {
+    display: block;
+    font-size: 0.9em;
     line-height: 1.5em;
-    vertical-align: top;
-    padding-bottom: 0.25em;
-    margin-bottom: 0;
-    margin-right: 64px;
+    padding: 0 52px .25em 8px;
+    strong {
+      font-weight: 600;
+      font-variant: small-caps;
+      text-transform: lowercase;
+    }
+    span {
+      font-size: 10px;
+      padding-left:1px;
+    }
     a {
-      color: $dark-gray;
+      border: none;
+      color: $gray;
+      margin-left: 3px;
       text-decoration: none;
-      @include transition(color 100ms linear);
       &:hover {
         color: $blue;
       }
     }
   }
-}
 
-.gt-tags {
-  display: block;
-  font-size: 0.9em;
-  line-height: 1.5em;
-  padding: 0 52px .25em 8px;
-  strong {
-    font-weight: 600;
-    font-variant: small-caps;
-    text-transform: lowercase;
-  }
-  span {
-    font-size: 10px;
-    padding-left:1px;
-  }
-  a {
-    border: none;
-    color: $gray;
-    margin-left: 3px;
-    text-decoration: none;
-    &:hover {
-      color: $blue;
-    }
-  }
-}
-
-.gt-item-controls {
-  width: 5.2em;
-  text-align: right;
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  margin-top: -12px;
-  li {
-    float: right;
-    list-style-type: none;
-    margin-right: 3px;
-    &:first-child {
-      padding-top: 0.45em;
-    }
-  }
-}
-
-.gt-edit-controls {
-  position: relative;
-  max-width: 14em;
-  float: left;
-  li {
-    list-style-type: none;
-    margin-top: 2px;
-    margin-right: 3px;
-    max-width: 6em;
-    float: left;
-  }
-}
-
-/* - - - - - - - - - - List Delete - - - - - - - - - - */
-.gt-list-delete {
-  display: none;
-  @include full();
-  background-color: $darker-gray;
-  h5 {
-    margin-top: 1em;
-    margin-left: 0.25em;
-    display: inline-block;
-    color: $white;
-    font-size: 16px;
-    margin-right: 0px;
-    white-space: normal;
-    width:100%;
-    @include box-sizing(border-box);
-    padding-right: 9em;
-  }
-  button {
-    font-size: 14px;
-    margin-right: 0.5em;
-    margin-top: 1em;
+  .gt-item-controls {
+    width: 5.2em;
+    text-align: right;
     position: absolute;
-    top: 0;
-    right: 0;
-    &.gt-cancel-delete {
-      right:4.7em;
-    }
-  }
-  &.gt-visible {
-    display:block;
-  }
-}
-
-/* - - - - - - - - - - Edit Delete - - - - - - - - - - */
-.gt-item-delete {
-  display: inline-block;
-  margin-top: 0;
-  &:before {
-    content: "Delete";
-  }
-}
-
-.gt-item-confirm-delete {
-  margin-top: 0;
-  background-color:$red;
-  border: 1px solid darken($red, 10%);
-  @include transition(background-color 20ms linear);
-  &:hover {
-    background-color: darken($red, 10%);
-  }
-  &:before {
-    content: "Sure?";
-  }
-}
-
-.gt-confirm-delete {
-  @extend .gt-item-confirm-delete;
-  &:before {
-    content: none;
-  }
-}
-
-.gt-reset-delete {
-  position: absolute;
-  text-decoration: none;
-  color: $gray;
-  visibility: hidden;
-  &.gt-reset-flyout {
-    left: 0;
-    top: 9px;
-    color: $gray;
-    visibility: visible;
-    display:block;
-    @include transition(transform 100ms ease-in);
-    &:hover {
-      color: $red;
-    }
-  }
-  &.gt-reset-flyout-right {
-    left: 6em;
-    margin-top: 16px;
-    color: $gray;
-    visibility: visible;
-    display:block;
-    @include transition(transform 100ms ease-in);
-    &:hover {
-      color: $red;
-    }
-  }
-}
-
-/* - - - - - - - - - - No Triggers - Getting Started - - - - - - - - - - */
-.gt-panel-no-triggers {
-  background: $green;
-  border-bottom: 1px solid $light-gray;
-  overflow:hidden;
-  padding: 1em 2em 1em 2em;
-  position: relative;
-  text-align: center;
-  width: 100%;
-
-  @include box-sizing(border-box);
-
-  h5 {
-    color: $white;
-    font-size: 16px;
-    font-weight: 400;
-  }
-}
-
-.gt-tool-description {
-  width:100%;
-  padding:1em 2em 1em 60px;
-  border-bottom:1px solid $light-gray;
-  @include box-sizing(border-box);
-  overflow:hidden;
-  position:relative;
-  h5 {
-    line-height: 1.5em;
-    vertical-align: top;
-    margin-bottom: 0.5em;
-    a {
-      color: $dark-gray;
-      text-decoration: none;
-      @include transition(color 100ms linear);
-      &:hover {
-        color: $green;
+    right: 8px;
+    top: 50%;
+    margin-top: -12px;
+    li {
+      float: right;
+      list-style-type: none;
+      margin-right: 3px;
+      &:first-child {
+        padding-top: 0.45em;
       }
     }
   }
-  p {
-    line-height: 1.25em;
+
+  .gt-edit-controls {
+    position: relative;
+    max-width: 14em;
+    float: left;
+    li {
+      list-style-type: none;
+      margin-top: 2px;
+      margin-right: 3px;
+      max-width: 6em;
+      float: left;
+    }
   }
-  .gt-icon {
-    width:40px;
-    height:40px;
-    display:inline-block;
+
+  /* - - - - - - - - - - List Delete - - - - - - - - - - */
+  .gt-list-delete {
+    display: none;
+    @include full();
+    background-color: $darker-gray;
+    h5 {
+      margin-top: 1em;
+      margin-left: 0.25em;
+      display: inline-block;
+      color: $white;
+      font-size: 16px;
+      margin-right: 0px;
+      white-space: normal;
+      width:100%;
+      @include box-sizing(border-box);
+      padding-right: 9em;
+    }
+    button {
+      font-size: 14px;
+      margin-right: 0.5em;
+      margin-top: 1em;
+      position: absolute;
+      top: 0;
+      right: 0;
+      &.gt-cancel-delete {
+        right:4.7em;
+      }
+    }
+    &.gt-visible {
+      display:block;
+    }
+  }
+
+  /* - - - - - - - - - - Edit Delete - - - - - - - - - - */
+  .gt-item-delete {
+    display: inline-block;
+    margin-top: 0;
+    &:before {
+      content: "Delete";
+    }
+  }
+
+  .gt-item-confirm-delete {
+    margin-top: 0;
+    background-color:$red;
+    border: 1px solid darken($red, 10%);
+    @include transition(background-color 20ms linear);
+    &:hover {
+      background-color: darken($red, 10%);
+    }
+    &:before {
+      content: "Sure?";
+    }
+  }
+
+  .gt-confirm-delete {
+    @extend .gt-item-confirm-delete;
+    &:before {
+      content: none;
+    }
+  }
+
+  .gt-reset-delete {
     position: absolute;
-    left: 10px;
-    top: 50%;
-    margin-top: -20px;
+    text-decoration: none;
+    color: $gray;
+    visibility: hidden;
+    &.gt-reset-flyout {
+      left: 0;
+      top: 9px;
+      color: $gray;
+      visibility: visible;
+      display:block;
+      @include transition(transform 100ms ease-in);
+      &:hover {
+        color: $red;
+      }
+    }
+    &.gt-reset-flyout-right {
+      left: 6em;
+      margin-top: 16px;
+      color: $gray;
+      visibility: visible;
+      display:block;
+      @include transition(transform 100ms ease-in);
+      &:hover {
+        color: $red;
+      }
+    }
   }
 
-  .gt-icon-polygon { background: url('../img/icons/polygon-dark.png') no-repeat center center; }
-  .gt-icon-radius  { background: url('../img/icons/radius-dark.png') no-repeat center center; }
-  .gt-icon-create  { background: url('../img/icons/create-dark.png') no-repeat center center; }
+  /* - - - - - - - - - - No Triggers - Getting Started - - - - - - - - - - */
+  .gt-panel-no-triggers {
+    background: $green;
+    border-bottom: 1px solid $light-gray;
+    overflow:hidden;
+    padding: 1em 2em 1em 2em;
+    position: relative;
+    text-align: center;
+    width: 100%;
 
-  @include retina-display {
-    .gt-icon-polygon { background: url('../img/icons/polygon-dark@2x.png') no-repeat center center; background-size:24px; }
-    .gt-icon-radius  { background: url('../img/icons/radius-dark@2x.png') no-repeat center center; background-size:24px; }
-    .gt-icon-create  { background: url('../img/icons/create-dark@2x.png') no-repeat center center; background-size:24px; }
+    @include box-sizing(border-box);
+
+    h5 {
+      color: $white;
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+
+  .gt-tool-description {
+    width:100%;
+    padding:1em 2em 1em 60px;
+    border-bottom:1px solid $light-gray;
+    @include box-sizing(border-box);
+    overflow:hidden;
+    position:relative;
+    h5 {
+      line-height: 1.5em;
+      vertical-align: top;
+      margin-bottom: 0.5em;
+      a {
+        color: $dark-gray;
+        text-decoration: none;
+        @include transition(color 100ms linear);
+        &:hover {
+          color: $green;
+        }
+      }
+    }
+    p {
+      line-height: 1.25em;
+    }
+    .gt-icon {
+      width:40px;
+      height:40px;
+      display:inline-block;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      margin-top: -20px;
+    }
+
+    .gt-icon-polygon { background: url('../img/icons/polygon-dark.png') no-repeat center center; }
+    .gt-icon-radius  { background: url('../img/icons/radius-dark.png') no-repeat center center; }
+    .gt-icon-create  { background: url('../img/icons/create-dark.png') no-repeat center center; }
+
+    @include retina-display {
+      .gt-icon-polygon { background: url('../img/icons/polygon-dark@2x.png') no-repeat center center; background-size:24px; }
+      .gt-icon-radius  { background: url('../img/icons/radius-dark@2x.png') no-repeat center center; background-size:24px; }
+      .gt-icon-create  { background: url('../img/icons/create-dark@2x.png') no-repeat center center; background-size:24px; }
+    }
   }
 }

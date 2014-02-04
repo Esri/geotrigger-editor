@@ -1,4 +1,4 @@
-/*! geotrigger-editor - v0.1.3 - 2014-01-06
+/*! geotrigger-editor - v0.1.3 - 2014-02-04
 *   https://github.com/Esri/geotrigger-editor
 *   Copyright (c) 2014 Environmental Systems Research Institute, Inc.
 *   Apache 2.0 License */
@@ -284,7 +284,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
 
 
-  return "<div id='gt-controls-region'></div>\n<div id='gt-content'>\n<div id='gt-drawer-region'></div>\n<div id='gt-map-region'></div>\n<div id='gt-notes-region'></div>\n</div>\n";
+  return "<div id='gt-controls-region' class='gt-region'></div>\n<div id='gt-content'>\n<div id='gt-drawer-region' class='gt-region'></div>\n<div id='gt-map-region'></div>\n<div id='gt-notes-region' class='gt-region'></div>\n</div>\n";
   });
 
 this["GeotriggerEditor"]["Templates"]["notification"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
