@@ -1203,6 +1203,12 @@ GeotriggerEditor.module('Map', function (Map, App, Backbone, Marionette, $, _) {
 
       this.map.zoomControl.setPosition('topright');
 
+      if (L.esri && L.esri.Controls && L.esri.Controls.Geosearch) {
+        var searchControl = new L.esri.Controls.Geosearch({
+          position: 'topright'
+        }).addTo(App.map);
+      }
+
       // allow multiple basemaps
       if (App.util.isArray(App.config.map.basemaps)) {
         for (var i = 0; i < App.config.map.basemaps.length; i++) {
@@ -1725,10 +1731,10 @@ GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, 
 
       // build actions:
 
-      function hasProp (obj, prop) {
+      function hasProp(obj, prop) {
         return obj.hasOwnProperty(prop) &&
-               obj[prop] !== undefined &&
-               obj[prop] !== null;
+          obj[prop] !== undefined &&
+          obj[prop] !== null;
       }
 
       var hasNotification = hasProp(currentActions, 'notification');

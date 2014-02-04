@@ -7,3 +7,6 @@
 [submodule "vendor/geotrigger-js"]
 	path = vendor/geotrigger-js
 	url = git@github.com:Esri/geotrigger-js.git
+[submodule "vendor/esri-leaflet-geocoder"]
+	path = vendor/esri-leaflet-geocoder
+	url = git@github.com:Esri/esri-leaflet-geocoder.git
