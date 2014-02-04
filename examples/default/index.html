@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <title>Geotrigger Editor</title>
 
+  <link rel="stylesheet" href="default.css">
+
   <!-- css: dependencies -->
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600">
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.1/leaflet.css">
@@ -22,41 +24,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
   <![endif]-->
-
-  <style>
-  html, body {
-    padding: 0;
-    margin: 0;
-    line-height: 1;
-  }
-  /* some basic style to make the editor a full width & height web application */
-  #gt-editor {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-  }
-  #example {
-    padding: 24px;
-    margin: auto;
-    width: 300px;
-  }
-  #example h1 {
-    margin: 20px 0;
-  }
-  #example input {
-    background: #eee;
-    font-family: "Open Sans", Arial, Helvetica, sans;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 16px;
-    margin-top: 12px;
-    padding: 10px;
-    width: 100%;
-  }
-  </style>
 </head>
 <body>
   <div id="gt-editor">
@@ -64,7 +31,7 @@
       <h1>Geotrigger Editor</h1>
       <input id="client-id" type="text" placeholder="Client ID">
       <input id="client-secret" type="text" placeholder="Client Secret">
-      <button class="gt-button gt-button-green">Engage</button>
+      <button class="engage">Engage</button>
     </form>
   </div>
 
