@@ -83,7 +83,6 @@ module.exports = function(grunt) {
       },
       dist: {
         options: {
-          raw: 'asset_cache_buster :none\n',
           sassDir: 'src/scss',
           cssDir: 'dist/css',
           imagesDir: 'dist/img/geotrigger-editor',
