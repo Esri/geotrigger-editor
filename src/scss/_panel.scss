@@ -59,24 +59,24 @@
     @include transition(background-color 100ms linear);
 
     &.gt-close-drawer {
-      background-image: url('../img/icons/x.png');
+      background-image: image-url('x.png');
       border-left: 1px solid $lighter-gray;
       position: absolute;
       top: 0;
       right: 0;
 
       @include retina-display() {
-        background-image: url('../img/icons/x@2x.png');
+        background-image: image-url('x@2x.png');
       }
     }
 
     &.gt-back-to-list {
-      background-image: url('../img/icons/left-arrow.png');
+      background-image: image-url('left-arrow.png');
       border-right: 1px solid $lighter-gray;
       float: left;
 
       @include retina-display() {
-        background-image: url('../img/icons/left-arrow@2x.png');
+        background-image: image-url('left-arrow@2x.png');
       }
     }
   }

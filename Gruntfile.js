@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         files: {
           'dist/js/<%= pkg.name %>.min.js': [
             'src/js/app.js',
-            'src/templates/compiled.js',
+            'tmp/templates.js',
             'src/js/lib/*.js',
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
@@ -75,21 +75,29 @@ module.exports = function(grunt) {
         options: {
           sassDir: 'src/scss',
           cssDir: 'dist/css',
-          environment: 'production'
+          imagesDir: 'dist/img/geotrigger-editor',
+          httpImagesPath: '/img/geotrigger-editor',
+          environment: 'production',
+          raw: 'asset_cache_buster :none\n'
         }
       },
       dist: {
         options: {
+          raw: 'asset_cache_buster :none\n',
           sassDir: 'src/scss',
           cssDir: 'dist/css',
-          noLineComments: true
+          imagesDir: 'dist/img/geotrigger-editor',
+          httpImagesPath: '/img/geotrigger-editor',
+          noLineComments: true,
+          raw: 'asset_cache_buster :none\n'
         }
       },
       // Development
       dev: {
         options: {
           sassDir: 'src/scss',
-          cssDir: 'src/css'
+          cssDir: 'tmp',
+          imagesDir: 'src/img'
         }
       }
     },
@@ -135,10 +143,10 @@ module.exports = function(grunt) {
       },
       dev: {
         files: {
-          'src/js/geotrigger-editor.js': [
+          'tmp/geotrigger-editor.js': [
             'src/js/header.js',
             'src/js/app.js',
-            'src/templates/compiled.js',
+            'tmp/templates.js',
             'src/js/lib/*.js',
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
@@ -153,7 +161,7 @@ module.exports = function(grunt) {
           'dist/js/<%= pkg.name %>.js': [
             'src/js/header.js',
             'src/js/app.js',
-            'src/templates/compiled.js',
+            'tmp/templates.js',
             'src/js/lib/*.js',
             'src/js/modules/*.js',
             'src/js/controllers/*.js',
@@ -208,8 +216,8 @@ module.exports = function(grunt) {
       },
       dev: {
         src: [
-          'src/css/geotrigger-editor.css',
-          'src/js/geotrigger-editor.js'
+          'tmp/geotrigger-editor.css',
+          'tmp/geotrigger-editor.js'
         ]
       }
     },
@@ -230,7 +238,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'src/templates/compiled.js': 'src/templates/**/*.hbs'
+          'tmp/templates.js': 'src/templates/**/*.hbs'
         }
       }
     },
@@ -242,7 +250,7 @@ module.exports = function(grunt) {
           'src/img/**/*.png',
           'src/img/**/*.jpg'
         ],
-        dest: 'dist/img'
+        dest: 'dist/img/geotrigger-editor'
       }
     },
 
@@ -365,7 +373,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'build_img',
     'compass:distmin',
     'rename:distmin',
     'compass:dist',
