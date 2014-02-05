@@ -28,16 +28,16 @@
 
     @include transition(opacity 200ms linear);
 
-    &.gt-tool-list      { background-image: url('../img/icons/list.png'); }
-    &.gt-tool-create    { background-image: url('../img/icons/create.png'); }
-    &.gt-tool-polygon   { background-image: url('../img/icons/polygon.png'); }
-    &.gt-tool-radius    { background-image: url('../img/icons/radius.png'); }
+    &.gt-tool-list      { background-image: image-url('list.png'); }
+    &.gt-tool-create    { background-image: image-url('create.png'); }
+    &.gt-tool-polygon   { background-image: image-url('polygon.png'); }
+    &.gt-tool-radius    { background-image: image-url('radius.png'); }
 
     @include retina-display {
-      &.gt-tool-list      { background-image: url('../img/icons/list@2x.png'); }
-      &.gt-tool-create    { background-image: url('../img/icons/create@2x.png'); }
-      &.gt-tool-polygon   { background-image: url('../img/icons/polygon@2x.png'); }
-      &.gt-tool-radius    { background-image: url('../img/icons/radius@2x.png'); }
+      &.gt-tool-list      { background-image: image-url('list@2x.png'); }
+      &.gt-tool-create    { background-image: image-url('create@2x.png'); }
+      &.gt-tool-polygon   { background-image: image-url('polygon@2x.png'); }
+      &.gt-tool-radius    { background-image: image-url('radius@2x.png'); }
     }
 
     &:before {

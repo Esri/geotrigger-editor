@@ -1,6 +1,6 @@
 .gt-region {
   .gt-edit-icon {
-    background: url('../img/icons/settings.png') no-repeat center center transparent;
+    background: image-url('settings.png') no-repeat center center transparent;
     background-size: 16px;
     display: inline-block;
     height: 16px;
@@ -9,7 +9,7 @@
 
     @include transition(opacity 100ms linear);
 
-    @include retina-display { background-image: url('../img/icons/settings@2x.png'); }
+    @include retina-display { background-image: image-url('settings@2x.png'); }
 
     &:hover {
       opacity: 1;
@@ -19,9 +19,9 @@
   .gt-delete-icon {
     @extend .gt-edit-icon;
 
-    background-image: url('../img/icons/trash.png');
+    background-image: image-url('trash.png');
     margin-left: 6px;
 
-    @include retina-display { background-image: url('../img/icons/trash@2x.png'); }
+    @include retina-display { background-image: image-url('trash@2x.png'); }
   }
 }
