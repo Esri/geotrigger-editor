@@ -6,9 +6,10 @@
 !(function () {
 
 
-this.GeotriggerEditor = new Backbone.Marionette.Application();
+this.Geotrigger = this.Geotrigger || {};
+this.Geotrigger.Editor = new Backbone.Marionette.Application();
 
-GeotriggerEditor.addInitializer(function (options) {
+Geotrigger.Editor.addInitializer(function (options) {
   this.Config.start(options);
   this.API.start();
   this.regions = new this.Layouts.Main();
@@ -19,10 +20,11 @@ GeotriggerEditor.addInitializer(function (options) {
 });
 
 
-this["GeotriggerEditor"] = this["GeotriggerEditor"] || {};
-this["GeotriggerEditor"]["Templates"] = this["GeotriggerEditor"]["Templates"] || {};
+this["Geotrigger"] = this["Geotrigger"] || {};
+this["Geotrigger"]["Editor"] = this["Geotrigger"]["Editor"] || {};
+this["Geotrigger"]["Editor"]["Templates"] = this["Geotrigger"]["Editor"]["Templates"] || {};
 
-this["GeotriggerEditor"]["Templates"]["controls"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["controls"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
@@ -31,7 +33,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return "<div class=\"gt-drawer-controls\">\n<a href=\"#list\" class=\"gt-tool gt-tool-list active gt-tooltip\">\n<span>List</span>\n</a>\n</div>\n<div class=\"gt-tool-controls\">\n<button class=\"gt-tool gt-tool-polygon gt-tooltip\">\n<span>New Polygon Tool</span>\n</button>\n<button class=\"gt-tool gt-tool-radius gt-tooltip\">\n<span>New Radius Tool</span>\n</button>\n</div>\n";
   });
 
-this["GeotriggerEditor"]["Templates"]["empty"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["empty"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
@@ -40,7 +42,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return "<div class=\"gt-panel-top-bar\">\n<h3 class=\"gt-panel-top-bar-left\">List\n<span class=\"gt-trigger-count\"></span>\n</h3>\n<a href=\"#\" class=\"gt-panel-top-bar-button gt-close-drawer\"></a>\n</div>\n\n<div class=\"gt-panel-no-triggers\">\n<h5>This application doesn't have any Geotrigger rules yet.</h5>\n</div>\n\n<ul class=\"gt-tool-descriptions\">\n<li class=\"gt-tool-description\">\n<span class=\"gt-icon gt-icon-create\"></span>\n<h5>Create a New Trigger</h5>\n<p>Create a new Geotrigger rule by first using one of the drawing tools, then defining its properties in the form that appears.</p>\n</li>\n\n<li class=\"gt-tool-description\">\n<span class=\"gt-icon gt-icon-polygon\"></span>\n<h5>Using the Polygon Tool</h5>\n<p>Click on the map to create each point of a polygon. Click on the first point you created to close the shape.</p>\n</li>\n\n<li class=\"gt-tool-description\">\n<span class=\"gt-icon gt-icon-radius\"></span>\n<h5>Using the Radius Tool</h5>\n<p>Click a point on the map, then hold and drag to define a radius around that point.</p>\n</li>\n</ul>\n";
   });
 
-this["GeotriggerEditor"]["Templates"]["form/actions/callbackUrl"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["form/actions/callbackUrl"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
@@ -52,7 +54,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["GeotriggerEditor"]["Templates"]["form/actions/notification/data"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["form/actions/notification/data"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
@@ -65,7 +67,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["GeotriggerEditor"]["Templates"]["form/actions/notification/icon"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["form/actions/notification/icon"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
@@ -77,7 +79,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["GeotriggerEditor"]["Templates"]["form/actions/notification/index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["form/actions/notification/index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
@@ -86,7 +88,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return "<div data-action=\"notification\" class=\"gt-property\">\n<div class=\"gt-property-header\">\nsend a notification to the device with..\n<a class=\"gt-remove-action gt-delete-icon\"></a>\n</div>\n\n<div class=\"gt-notification-actions\"></div>\n\n<div class=\"gt-property-item gt-btn-group\">\n<button data-notification=\"text\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-notification\">&#043; a message</button>\n<button data-notification=\"url\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-notification\">&#043; a URL</button>\n<button data-notification=\"data\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-notification\">&#043; some data</button>\n<button data-notification=\"icon\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-notification\">&#043; an icon</button>\n<button data-notification=\"sound\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-notification\">&#043; a sound</button>\n</div>\n</div>\n";
   });
 
-this["GeotriggerEditor"]["Templates"]["form/actions/notification/sound"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["form/actions/notification/sound"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
@@ -98,7 +100,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["GeotriggerEditor"]["Templates"]["form/actions/notification/text"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["form/actions/notification/text"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
@@ -110,7 +112,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["GeotriggerEditor"]["Templates"]["form/actions/notification/url"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["form/actions/notification/url"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
@@ -122,7 +124,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["GeotriggerEditor"]["Templates"]["form/actions/trackingProfile"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["form/actions/trackingProfile"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, stack2, options, self=this, helperMissing=helpers.helperMissing;
@@ -141,7 +143,7 @@ function program1(depth0,data) {
   return buffer;
   });
 
-this["GeotriggerEditor"]["Templates"]["form/index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["form/index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, stack2, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
@@ -231,7 +233,7 @@ function program15(depth0,data) {
   return buffer;
   });
 
-this["GeotriggerEditor"]["Templates"]["item"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["item"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, stack2, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function";
@@ -264,7 +266,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["GeotriggerEditor"]["Templates"]["list"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["list"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
@@ -278,7 +280,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
-this["GeotriggerEditor"]["Templates"]["main"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["main"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   
@@ -287,7 +289,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return "<div id='gt-controls-region' class='gt-region'></div>\n<div id='gt-content'>\n<div id='gt-drawer-region' class='gt-region'></div>\n<div id='gt-map-region'></div>\n<div id='gt-notes-region' class='gt-region'></div>\n</div>\n";
   });
 
-this["GeotriggerEditor"]["Templates"]["notification"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Geotrigger"]["Editor"]["Templates"]["notification"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
@@ -426,7 +428,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     }
   });
 
-}(GeotriggerEditor, Handlebars, $));
+}(Geotrigger.Editor, Handlebars, $));
 
 (function($) {
   return $.fn.serializeObject = function() {
@@ -595,7 +597,7 @@ return function underscoreDeepExtend (obj) {
   _.mixin({deepExtend: underscoreDeepExtend(_)});
 })();
 
-GeotriggerEditor.module('API', function (API, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('API', function (API, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -604,7 +606,7 @@ GeotriggerEditor.module('API', function (API, App, Backbone, Marionette, $, _) {
 
   function createSession() {
     if (!App.config.session || !App.config.session.clientId || !App.config.session.clientSecret) {
-      throw new Error('GeotriggerEditor requires a `session` object with `clientId` and `clientSecret` properties');
+      throw new Error('Geotrigger.Editor requires a `session` object with `clientId` and `clientSecret` properties');
     }
 
     this.session = new Geotrigger.Session(App.config.session);
@@ -615,7 +617,7 @@ GeotriggerEditor.module('API', function (API, App, Backbone, Marionette, $, _) {
 });
 
 
-GeotriggerEditor.module('Config', function (Config, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Config', function (Config, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -697,7 +699,7 @@ GeotriggerEditor.module('Config', function (Config, App, Backbone, Marionette, $
 });
 
 
-GeotriggerEditor.module('util', function (util, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('util', function (util, App, Backbone, Marionette, $, _) {
 
   // Utility Functions
   // -----------------
@@ -754,7 +756,7 @@ GeotriggerEditor.module('util', function (util, App, Backbone, Marionette, $, _)
 });
 
 
-GeotriggerEditor.module('Map.Draw', function (Draw, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Map.Draw', function (Draw, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -883,7 +885,7 @@ GeotriggerEditor.module('Map.Draw', function (Draw, App, Backbone, Marionette, $
 });
 
 
-GeotriggerEditor.module('Editor', function (Editor, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Editor', function (Editor, App, Backbone, Marionette, $, _) {
 
   // Editor Router
   // ---------------
@@ -1153,7 +1155,7 @@ GeotriggerEditor.module('Editor', function (Editor, App, Backbone, Marionette, $
 });
 
 
-GeotriggerEditor.module('Map.Layers', function (Layers, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Map.Layers', function (Layers, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -1182,7 +1184,7 @@ GeotriggerEditor.module('Map.Layers', function (Layers, App, Backbone, Marionett
 });
 
 
-GeotriggerEditor.module('Map', function (Map, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Map', function (Map, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 
@@ -1340,7 +1342,7 @@ GeotriggerEditor.module('Map', function (Map, App, Backbone, Marionette, $, _) {
 });
 
 
-GeotriggerEditor.module('Models', function (Models, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Models', function (Models, App, Backbone, Marionette, $, _) {
 
   // Notification Model
   // ------------------
@@ -1364,7 +1366,7 @@ GeotriggerEditor.module('Models', function (Models, App, Backbone, Marionette, $
 });
 
 
-GeotriggerEditor.module('Models', function (Models, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Models', function (Models, App, Backbone, Marionette, $, _) {
 
   // Trigger Model
   // -------------
@@ -1516,7 +1518,7 @@ GeotriggerEditor.module('Models', function (Models, App, Backbone, Marionette, $
 });
 
 
-GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Controls View
   // -------------
@@ -1647,7 +1649,7 @@ GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, 
 });
 
 
-GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Trigger Form View
   // -----------------
@@ -2100,7 +2102,7 @@ GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, 
 });
 
 
-GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Trigger List Item View
   // ----------------------
@@ -2283,7 +2285,7 @@ GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, 
 });
 
 
-GeotriggerEditor.module('Layouts', function (Layouts, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Layouts', function (Layouts, App, Backbone, Marionette, $, _) {
 
   // Layout Drawer View
   // ------------------
@@ -2303,7 +2305,7 @@ GeotriggerEditor.module('Layouts', function (Layouts, App, Backbone, Marionette,
 });
 
 
-GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Shape View
   // ----------
@@ -2454,7 +2456,7 @@ GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, 
 });
 
 
-GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Notification View
   // -----------------

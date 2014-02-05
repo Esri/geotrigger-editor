@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $, _) {
 
   // Shape View
   // ----------

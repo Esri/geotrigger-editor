@@ -333,7 +333,7 @@
       $('.clear-session').on('click', function(e){
         e.preventDefault();
 
-        GeotriggerEditor.API.session.destroy();
+        Geotrigger.Editor.API.session.destroy();
         window.location.reload(true);
       }).show();
     }
@@ -349,7 +349,7 @@
         $('#gt-editor').show();
         $('#site-header').show();
 
-        GeotriggerEditor.start(config);
+        Geotrigger.Editor.start(config);
         bindClearSession();
       });
     }
@@ -379,7 +379,7 @@
         $('#gt-editor').show();
         $('#site-header').show();
 
-        GeotriggerEditor.start(config);
+        Geotrigger.Editor.start(config);
         bindClearSession();
       } else {
         bindForm();

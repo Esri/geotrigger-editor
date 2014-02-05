@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Config', function (Config, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Config', function (Config, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 

@@ -224,7 +224,7 @@ module.exports = function(grunt) {
     handlebars: {
       compile: {
         options: {
-          namespace: 'GeotriggerEditor.Templates',
+          namespace: 'Geotrigger.Editor.Templates',
           processContent: function(content, filepath) {
             content = content.replace(/^[\x20\t]+/mg, '').replace(/[\x20\t]+$/mg, '');
             content = content.replace(/^[\r\n]+/, '').replace(/[\r\n]*$/, '\n');

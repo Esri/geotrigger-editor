@@ -1,6 +1,7 @@
-this.GeotriggerEditor = new Backbone.Marionette.Application();
+this.Geotrigger = this.Geotrigger || {};
+this.Geotrigger.Editor = new Backbone.Marionette.Application();
 
-GeotriggerEditor.addInitializer(function (options) {
+Geotrigger.Editor.addInitializer(function (options) {
   this.Config.start(options);
   this.API.start();
   this.regions = new this.Layouts.Main();
