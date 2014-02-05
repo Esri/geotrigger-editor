@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Editor', function (Editor, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Editor', function (Editor, App, Backbone, Marionette, $, _) {
 
   // Editor Router
   // ---------------

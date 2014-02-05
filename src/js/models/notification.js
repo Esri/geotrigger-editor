@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Models', function (Models, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Models', function (Models, App, Backbone, Marionette, $, _) {
 
   // Notification Model
   // ------------------

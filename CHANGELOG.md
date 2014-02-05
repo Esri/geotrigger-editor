@@ -8,6 +8,9 @@
 * fix CSS rules leaking into global scope
 * fix incorrectly filled callback URL & tracking profile fields after update
 * add geocoder control for fast map traversal ([#195](https://github.com/Esri/geotrigger-editor/issues/195))
+* use compass `image-url` to allow easily generating URLs for different structures using grunt-compass and `httpImagesPath`
+* change image folder from `img/icons` to `img/geotrigger-editor` to avoid conflicts
+* move namespace to `Geotrigger.Editor`
 
 ## v0.1.3
 * fix CSS issue causing IDs not to display in title area on edit ([#186](https://github.com/Esri/geotrigger-editor/issues/186))

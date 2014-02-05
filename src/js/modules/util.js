@@ -1,4 +1,4 @@
-GeotriggerEditor.module('util', function (util, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('util', function (util, App, Backbone, Marionette, $, _) {
 
   // Utility Functions
   // -----------------

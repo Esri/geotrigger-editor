@@ -123,4 +123,4 @@
     }
   });
 
-}(GeotriggerEditor, Handlebars, $));
+}(Geotrigger.Editor, Handlebars, $));

@@ -1,4 +1,4 @@
-GeotriggerEditor.module('Map', function (Map, App, Backbone, Marionette, $, _) {
+Geotrigger.Editor.module('Map', function (Map, App, Backbone, Marionette, $, _) {
 
   this.startWithParent = false;
 

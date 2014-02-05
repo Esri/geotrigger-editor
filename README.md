@@ -57,12 +57,12 @@ The Geotrigger Editor is tested against the latest versions of Chrome, Firefox, 
 
 ### Starting the Editor
 
-The Editor is a [Backbone.Marionette](https://github.com/marionettejs/backbone.marionette) application namespaced as `GeotriggerEditor`. The only method you need to start the application is [`.start`](https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.application.md#starting-an-application).
+The Editor is a [Backbone.Marionette](https://github.com/marionettejs/backbone.marionette) application namespaced as `Geotrigger.Editor`. The only method you need to start the application is [`.start`](https://github.com/marionettejs/backbone.marionette/blob/master/docs/marionette.application.md#starting-an-application).
 
-### `GeotriggerEditor.start(options)`
+### `Geotrigger.Editor.start(options)`
 
 ```js
-GeotriggerEditor.start({
+Geotrigger.Editor.start({
   session: { // required
     clientId: 'XXXXXX', // required
     clientSecret: 'XXXXXX', // required
@@ -105,7 +105,7 @@ The Geotrigger Editor is a client-side only application that relies on [Cross Or
 On the client side, just be sure to start the editor with a path to the proxy, like so:
 
 ```js
-GeotriggerEditor.start({
+Geotrigger.Editor.start({
   session: { // required
     clientId: 'XXXXXX', // required
     clientSecret: 'XXXXXX', // required
