@@ -12,6 +12,7 @@
 * change image folder from `img/icons` to `img/geotrigger-editor` to avoid conflicts
 * move namespace to `Geotrigger.Editor` ([#185](https://github.com/Esri/geotrigger-editor/issues/185))
 * add support for `properties`, `rateLimit`, and `times` trigger parameters ([#192](https://github.com/Esri/geotrigger-editor/issues/192) & [#193](https://github.com/Esri/geotrigger-editor/issues/193))
+* fix for duplicate triggers appearing in list on trigger/create overwrite ([#189](https://github.com/Esri/geotrigger-editor/issues/189) & [#194](https://github.com/Esri/geotrigger-editor/issues/194))
 
 ## v0.1.3
 * fix CSS issue causing IDs not to display in title area on edit ([#186](https://github.com/Esri/geotrigger-editor/issues/186))
