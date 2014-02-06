@@ -487,15 +487,30 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
     },
 
     createOrUpdateTrigger: function (data) {
+      var model = App.collections.triggers.findWhere({
+        'triggerId': data.triggerId
+      });
+
+      var isNew = !this.model && !model;
+      var isOverwrite = !this.model && !!model;
+      var isUpdate = !!this.model;
+
+      var warning = 'A trigger with the ID "' + data.triggerId + '" already exists. Do you want to overwrite it?';
+
       // create new trigger
-      if (!this.model) {
-        App.vent.trigger('trigger:create', data);
+      if (isNew) {
+        return App.vent.trigger('trigger:create', data);
+      }
+
+      // overwrite existing trigger (trigger/create dedupe workaround)
+      if (isOverwrite && confirm(warning)) {
+        return App.vent.trigger('trigger:update', data);
       }
 
       // update existing trigger
-      else {
+      if (isUpdate) {
         data.triggerId = this.model.get('triggerId');
-        App.vent.trigger('trigger:update', data);
+        return App.vent.trigger('trigger:update', data);
       }
     },
 
