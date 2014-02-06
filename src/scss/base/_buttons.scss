@@ -62,11 +62,12 @@
   .gt-button-delete {
     @extend .gt-button;
     padding: 1em;
-    background-color: $light-gray;
+    background-color: lighten($dark-gray, 50%);
     border: 1px solid darken($light-gray, 10%);
     @include transition(background-color 200ms linear);
     &:hover {
-      background-color: darken($light-gray, 10%);
+      background-color: darken($red, 10%);
+      border: 1px solid darken($red, 20%);
     }
   }
 

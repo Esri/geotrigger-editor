@@ -14,8 +14,8 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
 
     events: {
       // form events
-      'click .gt-add-trigger-id': 'addTriggerId',
-      'click .gt-remove-trigger-id': 'removeTriggerId',
+      'click .gt-add-extra': 'addExtra',
+      'click .gt-remove-extra': 'removeExtra',
 
       'click .gt-add-action': 'addAction',
       'click .gt-remove-action': 'removeAction',
@@ -34,6 +34,7 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
 
     ui: {
       'actions': '.gt-actions',
+      'extras': '.gt-extras',
       'addAction': '.gt-add-action',
       'form': 'form',
       'deleteItem': '.gt-item-delete',
@@ -78,9 +79,10 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
       var data = this.serializeData();
       var actionsHtml = '';
       var noteHtml = '';
-      var prop;
+      var extrasHtml = '';
+      var prop, i;
 
-      // build actions:
+      // build actions
 
       function hasProp(obj, prop) {
         return obj.hasOwnProperty(prop) &&
@@ -105,18 +107,16 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
         }
       }
 
-      var hasCallbackURL = hasProp(currentActions, 'callbackUrl');
+      var actions = [
+        'callbackUrl',
+        'trackingProfile'
+      ];
 
-      if (hasCallbackURL) {
-        actionsHtml += App.Templates['form/actions/callbackUrl'](data);
-        this.ui.form.find('.gt-add-action[data-action="callbackUrl"]').hide();
-      }
-
-      var hasTrackingProfile = hasProp(currentActions, 'trackingProfile');
-
-      if (hasTrackingProfile) {
-        actionsHtml += App.Templates['form/actions/trackingProfile'](data);
-        this.ui.form.find('.gt-add-action[data-action="trackingProfile"]').hide();
+      for (i = 0; i < actions.length; i++) {
+        if (hasProp(currentActions, actions[i])) {
+          actionsHtml += App.Templates['form/actions/' + actions[i]](data);
+          this.ui.form.find('.gt-add-action[data-action="' + actions[i] + '"]').hide();
+        }
       }
 
       // insert actions form elements into their proper place
@@ -134,35 +134,31 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
           }
         }
       }
-    },
 
-    addTriggerId: function (e) {
-      // expects to be invoked by a DOM event by default
-      if (e && e.preventDefault) {
-        e.preventDefault();
+      // build extras
+
+      var hasProperties = hasProp(this.model.attributes, 'properties');
+
+      if (hasProperties) {
+        extrasHtml += App.Templates['form/extras/properties'](data);
+        this.ui.form.find('.gt-add-extra[data-extra="properties"]').hide();
       }
 
-      // hide add title button
-      $(e.target).addClass('gt-hide');
+      var isSet;
+      var extras = [
+        'rateLimit',
+        'times'
+      ];
 
-      // show title form element
-      this.$el.find('.gt-trigger-id').removeClass('gt-hide');
-    },
-
-    removeTriggerId: function (e) {
-      // expects to be invoked by a DOM event by default
-      if (e && e.preventDefault) {
-        e.preventDefault();
+      for (i = 0; i < extras.length; i++) {
+        isSet = hasProp(this.model.attributes, extras[i]) && parseInt(this.model.attributes[extras[i]], 10) !== 0;
+        if (isSet) {
+          extrasHtml += App.Templates['form/extras/' + extras[i]](data);
+          this.ui.form.find('.gt-add-extra[data-extra="' + extras[i] + '"]').hide();
+        }
       }
 
-      // hide title form element
-      $(e.target).closest('.gt-property').addClass('gt-hide');
-
-      // clear title value
-      this.ui.form.find('input[name="properties[title]"]').val('');
-
-      // show add title button
-      this.ui.form.find('.gt-add-trigger-id').removeClass('gt-hide');
+      this.ui.extras.html(extrasHtml);
     },
 
     addAction: function (e) {
@@ -264,6 +260,55 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
       this.ui.form.find('.gt-add-notification[data-notification="' + notification + '"]').show();
     },
 
+    addExtra: function (e) {
+      var $el, extra, extraHtml, noteHtml;
+
+      // expects to be invoked by a DOM event by default
+      if (typeof e === 'object' && e.preventDefault) {
+        e.preventDefault();
+        $el = $(e.target);
+        extra = $el.data('extra');
+      }
+
+      // support for addExtra being called internally with string param representing extra name
+      else if (typeof e === 'string') {
+        extra = e;
+        $el = this.ui.form.find(".gt-add-extra[data-extra='" + extra + "']");
+      }
+
+      // build html
+      extraHtml = App.Templates['form/extras/' + extra]({});
+
+      // add to DOM
+      this.ui.extras.append(extraHtml);
+
+      // hide extra button
+      $el.hide();
+    },
+
+    removeExtra: function (e) {
+      var $el, extra;
+
+      // expects to be invoked by a DOM event by default
+      if (typeof e === 'object' && e.preventDefault) {
+        e.preventDefault();
+        $el = $(e.target).closest('.gt-property');
+        extra = $el.data('extra');
+      }
+
+      // support for addExtra being called internally with string param representing extra name
+      else if (typeof e === 'string') {
+        extra = e;
+        $el = this.ui.form.find(".gt-property[data-extra='" + extra + "']");
+      }
+
+      // remove extra form element
+      $el.remove();
+
+      // show add extra button
+      this.ui.form.find('.gt-add-extra[data-extra="' + extra + '"]').show();
+    },
+
     parseShape: function () {
       var lat, lng, rad;
 
@@ -315,6 +360,10 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
       var i;
       var errors = [];
       var data = this.ui.form.serializeObject();
+
+      function isInteger (num) {
+        return !isNaN(num) && isFinite(num);
+      }
 
       // clean data
       data = App.util.removeEmptyStrings(data);
@@ -388,6 +437,41 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
       } else {
         // at least one action required
         errors.push('at least one action required');
+      }
+
+      // extras validation
+
+      // properties
+      if (!data.properties) {
+        data.properties = null;
+      } else {
+        try {
+          data.properties = JSON.parse(data.properties);
+        } catch (error) {
+          errors.push('properties must be valid JSON');
+        }
+      }
+
+      // rate limit
+      if (!data.rateLimit) {
+        data.rateLimit = 0;
+      } else {
+        data.rateLimit = parseInt(data.rateLimit, 10);
+
+        if (!isInteger(data.rateLimit)) {
+          errors.push('rate limit must be valid integer');
+        }
+      }
+
+      // times
+      if (!data.times) {
+        data.times = 0;
+      } else {
+        data.times = parseInt(data.times, 10);
+
+        if (!isInteger(data.times)) {
+          errors.push('times must be valid integer');
+        }
       }
 
       if (errors.length > 0) {

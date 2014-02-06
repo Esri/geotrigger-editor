@@ -21,11 +21,11 @@
 
     input[type="search"] {
       @include box-sizing(border-box);
-      background: url(../img/icons/search.png) no-repeat 4px center $white;
+      background: image-url('search.png') no-repeat 4px center $white;
       padding: 0.75em 0.66em 0.75em 32px;
 
       @include retina-display {
-        background: url(../img/icons/search@2x.png) no-repeat 4px center $white;
+        background: image-url('search@2x.png') no-repeat 4px center $white;
         background-size: 24px;
       }
     }

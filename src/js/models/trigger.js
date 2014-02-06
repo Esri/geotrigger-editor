@@ -77,10 +77,12 @@ Geotrigger.Editor.module('Models', function (Models, App, Backbone, Marionette, 
 
       case 'create':
         params = {
-          'properties': this.get('properties'),
+          'setTags': this.get('tags'),
           'condition': this.get('condition'),
           'action': this.get('action'),
-          'setTags': this.get('tags')
+          'properties': this.get('properties'),
+          'rateLimit': this.get('rateLimit'),
+          'times': this.get('times')
         };
         if (triggerId) {
           params.triggerId = triggerId;
@@ -90,11 +92,13 @@ Geotrigger.Editor.module('Models', function (Models, App, Backbone, Marionette, 
 
       case 'update':
         params = {
-          'properties': this.get('properties'),
           'triggerIds': triggerId,
+          'setTags': this.get('tags'),
           'condition': this.get('condition'),
           'action': this.get('action'),
-          'setTags': this.get('tags')
+          'properties': this.get('properties'),
+          'rateLimit': this.get('rateLimit'),
+          'times': this.get('times')
         };
         App.API.session.request('trigger/update', params, callback);
         break;

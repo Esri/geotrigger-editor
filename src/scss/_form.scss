@@ -3,7 +3,8 @@
   .gt-form-section {
     @include clearfix;
     margin-bottom: 1em;
-    &.gt-action-toggles {
+    &.gt-action-toggles,
+    &.gt-extra-toggles {
       margin-bottom: 0;
     }
   }
@@ -47,10 +48,11 @@
     margin: 0;
   }
 
-  .gt-trigger-id-wrapper {
+  .gt-extras {
     border-top: 1px solid #efefef;
-    margin: 0 0 1em;
-    padding: 1em 0 0;
+    .gt-property:first-child {
+      margin-top: 1em;
+    }
   }
 
   .gt-submit-wrapper {
@@ -113,9 +115,13 @@
       @include border-radius(3px 3px 0 0);
       background-color: $lighter-gray;
       .gt-remove-action,
-      .gt-remove-trigger-id {
+      .gt-remove-extra {
         cursor: pointer;
         float: right;
+      }
+      small {
+        font-size: .7em;
+        color: lighten($gray, 10%);
       }
     }
   }
