@@ -6,11 +6,12 @@
 * bump marionette to 1.4.1
 * remove marionette from `vendor` and `.gitmodules`
 * fix CSS rules leaking into global scope
-* fix incorrectly filled callback URL & tracking profile fields after update
+* fix bug where callback URL & tracking profile fields were incorrectly filled after trigger/update
 * add geocoder control for fast map traversal ([#195](https://github.com/Esri/geotrigger-editor/issues/195))
 * use compass `image-url` to allow easily generating URLs for different structures using grunt-compass and `httpImagesPath`
 * change image folder from `img/icons` to `img/geotrigger-editor` to avoid conflicts
-* move namespace to `Geotrigger.Editor`
+* move namespace to `Geotrigger.Editor` ([#185](https://github.com/Esri/geotrigger-editor/issues/185))
+* add support for `properties`, `rateLimit`, and `times` trigger parameters ([#192](https://github.com/Esri/geotrigger-editor/issues/192) & [#193](https://github.com/Esri/geotrigger-editor/issues/193))
 
 ## v0.1.3
 * fix CSS issue causing IDs not to display in title area on edit ([#186](https://github.com/Esri/geotrigger-editor/issues/186))

@@ -41,22 +41,17 @@
       <button data-action="trackingProfile" class="gt-button gt-button-light-gray gt-button-small gt-add-action">&#043; change the tracking profile</button>
     </section>
 
-    {{#unless triggerId}}
-    <section class="gt-form-section gt-trigger-id-wrapper">
-      <button class="gt-button gt-button-light-gray gt-button-small gt-add-trigger-id">&#043; custom trigger ID</button>
+    <section class="gt-form-section gt-extras"></section>
 
-      <div class='gt-trigger-id gt-property gt-hide'>
-        <div class="gt-property-header">
-          Trigger ID
-          <a class="gt-remove-trigger-id gt-delete-icon"></a>
-        </div>
+    <section class="gt-form-section gt-trigger-extra-toggles">
+      <button data-extra="properties" class="gt-button gt-button-light-gray gt-button-small gt-add-extra">&#043; properties</button>
+      <button data-extra="rateLimit" class="gt-button gt-button-light-gray gt-button-small gt-add-extra">&#043; rate limit</button>
+      <button data-extra="times" class="gt-button gt-button-light-gray gt-button-small gt-add-extra">&#043; times</button>
 
-        <div class="gt-property-item">
-          <input class='gt-input-fill' type='text' name='triggerId' placeholder='custom trigger ID' value='{{triggerId}}'>
-        </div>
-      </div>
+      {{#unless triggerId}}
+      <button data-extra="triggerId" class="gt-button gt-button-light-gray gt-button-small gt-add-extra">&#043; custom trigger ID</button>
+      {{/unless}}
     </section>
-    {{/unless}}
 
     <section class='gt-form-section gt-submit-wrapper'>
       {{#if triggerId}}
