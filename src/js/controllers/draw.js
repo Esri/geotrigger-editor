@@ -94,8 +94,35 @@ Geotrigger.Editor.module('Map.Draw', function (Draw, App, Backbone, Marionette, 
 
     editLayer: function (layer) {
       this.clear();
-      layer.editing.enable();
-      App.Map.Layers.edit.addLayer(layer);
+
+      var isMultiPolygon = (function(){
+        if (layer &&
+          layer.feature &&
+          layer.feature.geometry &&
+          layer.feature.geometry.type) {
+          return layer.feature.geometry.type === 'MultiPolygon';
+        } else {
+          return false;
+        }
+      })();
+
+      if (isMultiPolygon) {
+        window.layer = layer;
+        App.vent.trigger('notify', 'Editing multipolygon trigger boundaries is not yet supported');
+        return App.Map.Layers.edit.addLayer(layer);
+      }
+
+      if (layer.editing) {
+        layer.editing.enable();
+        return App.Map.Layers.edit.addLayer(layer);
+      }
+
+      App.vent.trigger('notify', {
+        type: 'error',
+        message: 'Unknown error while trying to enable editing'
+      });
+
+      console.error('LayerError', layer);
     },
 
     clear: function () {
