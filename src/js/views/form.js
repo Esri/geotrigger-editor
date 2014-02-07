@@ -345,6 +345,12 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
         sections.show();
       }
 
+      else if (layer instanceof L.MultiPolygon) {
+        geometry.val('multipolygon');
+        shape.text('a multipolygon');
+        sections.show();
+      }
+
       // hide all form sections besides condition if a shape hasn't been drawn yet
       else {
         sections.filter(':not(:first-child)').hide();
@@ -386,10 +392,10 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
         // get layer data
         var layer = App.request('draw:layer');
 
-        // layer is polygon
-        if (layer instanceof L.Polygon) {
+        // layer is polygon or multipolygon
+        if (layer instanceof L.Polygon || layer instanceof L.MultiPolygon) {
           data.condition.geo = {
-            'geojson': layer.toGeoJSON()
+            'geojson': layer.toGeoJSON().geometry
           };
         }
 
