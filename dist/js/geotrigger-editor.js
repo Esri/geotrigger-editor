@@ -1,4 +1,4 @@
-/*! geotrigger-editor - v0.1.3 - 2014-02-05
+/*! geotrigger-editor - v0.2.0 - 2014-02-11
 *   https://github.com/Esri/geotrigger-editor
 *   Copyright (c) 2014 Environmental Systems Research Institute, Inc.
 *   Apache 2.0 License */
@@ -143,6 +143,61 @@ function program1(depth0,data) {
   return buffer;
   });
 
+this["Geotrigger"]["Editor"]["Templates"]["form/extras/properties"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div data-extra=\"properties\" class=\"gt-property\">\n<div class=\"gt-property-header\">\nproperties <small>arbitrary JSON object saved with the trigger</small>\n<a class=\"gt-remove-extra gt-delete-icon\"></a>\n</div>\n\n<div class=\"gt-property-item\">\n<textarea class=\"gt-input\" name=\"properties\" placeholder='{ \"property\": \"value\" }'>";
+  options = {hash:{},data:data};
+  buffer += escapeExpression(((stack1 = helpers.stringify || (depth0 && depth0.stringify)),stack1 ? stack1.call(depth0, (depth0 && depth0.properties), options) : helperMissing.call(depth0, "stringify", (depth0 && depth0.properties), options)))
+    + "</textarea>\n</div>\n</div>\n";
+  return buffer;
+  });
+
+this["Geotrigger"]["Editor"]["Templates"]["form/extras/rateLimit"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div data-extra=\"rateLimit\" class=\"gt-property\">\n<div class=\"gt-property-header\">\nrate limit <small>minimum number of seconds between executions, per device</small>\n<a class=\"gt-remove-extra gt-delete-icon\"></a>\n</div>\n\n<div class=\"gt-property-item\">\n<input class=\"gt-input-fill\" type=\"text\" name=\"rateLimit\" placeholder=\"0\" value=\"";
+  if (stack1 = helpers.rateLimit) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.rateLimit); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n</div>\n</div>\n";
+  return buffer;
+  });
+
+this["Geotrigger"]["Editor"]["Templates"]["form/extras/times"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div data-extra=\"times\" class=\"gt-property\">\n<div class=\"gt-property-header\">\ntimes <small>maximum number of executions, per device</small>\n<a class=\"gt-remove-extra gt-delete-icon\"></a>\n</div>\n\n<div class=\"gt-property-item\">\n<input class=\"gt-input-fill\" type=\"text\" name=\"times\" placeholder=\"0\" value=\"";
+  if (stack1 = helpers.times) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.times); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n</div>\n</div>\n";
+  return buffer;
+  });
+
+this["Geotrigger"]["Editor"]["Templates"]["form/extras/triggerId"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div data-extra=\"triggerId\" class=\"gt-property\">\n<div class=\"gt-property-header\">\nTrigger ID\n<a class=\"gt-remove-extra gt-delete-icon\"></a>\n</div>\n\n<div class=\"gt-property-item\">\n<input class=\"gt-input-fill\" type=\"text\" name=\"triggerId\" placeholder=\"custom trigger ID\" value=\"";
+  if (stack1 = helpers.triggerId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
+  else { stack1 = (depth0 && depth0.triggerId); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
+  buffer += escapeExpression(stack1)
+    + "\">\n</div>\n</div>\n";
+  return buffer;
+  });
+
 this["Geotrigger"]["Editor"]["Templates"]["form/index"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
@@ -186,13 +241,8 @@ function program9(depth0,data) {
 
 function program11(depth0,data) {
   
-  var buffer = "", stack1;
-  buffer += "\n<section class=\"gt-form-section gt-trigger-id-wrapper\">\n<button class=\"gt-button gt-button-light-gray gt-button-small gt-add-trigger-id\">&#043; custom trigger ID</button>\n\n<div class='gt-trigger-id gt-property gt-hide'>\n<div class=\"gt-property-header\">\nTrigger ID\n<a class=\"gt-remove-trigger-id gt-delete-icon\"></a>\n</div>\n\n<div class=\"gt-property-item\">\n<input class='gt-input-fill' type='text' name='triggerId' placeholder='custom trigger ID' value='";
-  if (stack1 = helpers.triggerId) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
-  else { stack1 = (depth0 && depth0.triggerId); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
-  buffer += escapeExpression(stack1)
-    + "'>\n</div>\n</div>\n</section>\n";
-  return buffer;
+  
+  return "\n<button data-extra=\"triggerId\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-extra\">&#043; custom trigger ID</button>\n";
   }
 
 function program13(depth0,data) {
@@ -223,10 +273,10 @@ function program15(depth0,data) {
   buffer += "\n<input name=\"geometry-type\" type=\"hidden\" value=\"";
   options = {hash:{},data:data};
   buffer += escapeExpression(((stack1 = helpers.shape || (depth0 && depth0.shape)),stack1 ? stack1.call(depth0, (depth0 && depth0.condition), options) : helperMissing.call(depth0, "shape", (depth0 && depth0.condition), options)))
-    + "\">\n</div>\n</div>\n</section>\n\n<section class=\"gt-form-section gt-actions\"></section>\n\n<section class=\"gt-form-section gt-action-toggles\">\n<button data-action=\"notification\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; send a notification</button>\n<button data-action=\"callbackUrl\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; post to a callback URL</button>\n<button data-action=\"trackingProfile\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; change the tracking profile</button>\n</section>\n\n";
+    + "\">\n</div>\n</div>\n</section>\n\n<section class=\"gt-form-section gt-actions\"></section>\n\n<section class=\"gt-form-section gt-action-toggles\">\n<button data-action=\"notification\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; send a notification</button>\n<button data-action=\"callbackUrl\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; post to a callback URL</button>\n<button data-action=\"trackingProfile\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-action\">&#043; change the tracking profile</button>\n</section>\n\n<section class=\"gt-form-section gt-extras\"></section>\n\n<section class=\"gt-form-section gt-trigger-extra-toggles\">\n<button data-extra=\"properties\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-extra\">&#043; properties</button>\n<button data-extra=\"rateLimit\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-extra\">&#043; rate limit</button>\n<button data-extra=\"times\" class=\"gt-button gt-button-light-gray gt-button-small gt-add-extra\">&#043; times</button>\n\n";
   stack2 = helpers.unless.call(depth0, (depth0 && depth0.triggerId), {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
-  buffer += "\n\n<section class='gt-form-section gt-submit-wrapper'>\n";
+  buffer += "\n</section>\n\n<section class='gt-form-section gt-submit-wrapper'>\n";
   stack2 = helpers['if'].call(depth0, (depth0 && depth0.triggerId), {hash:{},inverse:self.program(15, program15, data),fn:self.program(13, program13, data),data:data});
   if(stack2 || stack2 === 0) { buffer += stack2; }
   buffer += "\n</section>\n</form>\n</div>\n";
@@ -852,8 +902,35 @@ Geotrigger.Editor.module('Map.Draw', function (Draw, App, Backbone, Marionette, 
 
     editLayer: function (layer) {
       this.clear();
-      layer.editing.enable();
-      App.Map.Layers.edit.addLayer(layer);
+
+      var isMultiPolygon = (function(){
+        if (layer &&
+          layer.feature &&
+          layer.feature.geometry &&
+          layer.feature.geometry.type) {
+          return layer.feature.geometry.type === 'MultiPolygon';
+        } else {
+          return false;
+        }
+      })();
+
+      if (isMultiPolygon) {
+        window.layer = layer;
+        App.vent.trigger('notify', 'Editing multipolygon trigger boundaries is not yet supported');
+        return App.Map.Layers.edit.addLayer(layer);
+      }
+
+      if (layer.editing) {
+        layer.editing.enable();
+        return App.Map.Layers.edit.addLayer(layer);
+      }
+
+      App.vent.trigger('notify', {
+        type: 'error',
+        message: 'Unknown error while trying to enable editing'
+      });
+
+      console.error('LayerError', layer);
     },
 
     clear: function () {
@@ -1445,10 +1522,12 @@ Geotrigger.Editor.module('Models', function (Models, App, Backbone, Marionette, 
 
       case 'create':
         params = {
-          'properties': this.get('properties'),
+          'setTags': this.get('tags'),
           'condition': this.get('condition'),
           'action': this.get('action'),
-          'setTags': this.get('tags')
+          'properties': this.get('properties'),
+          'rateLimit': this.get('rateLimit'),
+          'times': this.get('times')
         };
         if (triggerId) {
           params.triggerId = triggerId;
@@ -1458,11 +1537,13 @@ Geotrigger.Editor.module('Models', function (Models, App, Backbone, Marionette, 
 
       case 'update':
         params = {
-          'properties': this.get('properties'),
           'triggerIds': triggerId,
+          'setTags': this.get('tags'),
           'condition': this.get('condition'),
           'action': this.get('action'),
-          'setTags': this.get('tags')
+          'properties': this.get('properties'),
+          'rateLimit': this.get('rateLimit'),
+          'times': this.get('times')
         };
         App.API.session.request('trigger/update', params, callback);
         break;
@@ -1665,8 +1746,8 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
 
     events: {
       // form events
-      'click .gt-add-trigger-id': 'addTriggerId',
-      'click .gt-remove-trigger-id': 'removeTriggerId',
+      'click .gt-add-extra': 'addExtra',
+      'click .gt-remove-extra': 'removeExtra',
 
       'click .gt-add-action': 'addAction',
       'click .gt-remove-action': 'removeAction',
@@ -1685,6 +1766,7 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
 
     ui: {
       'actions': '.gt-actions',
+      'extras': '.gt-extras',
       'addAction': '.gt-add-action',
       'form': 'form',
       'deleteItem': '.gt-item-delete',
@@ -1729,9 +1811,10 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
       var data = this.serializeData();
       var actionsHtml = '';
       var noteHtml = '';
-      var prop;
+      var extrasHtml = '';
+      var prop, i;
 
-      // build actions:
+      // build actions
 
       function hasProp(obj, prop) {
         return obj.hasOwnProperty(prop) &&
@@ -1756,18 +1839,16 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
         }
       }
 
-      var hasCallbackURL = hasProp(currentActions, 'callbackUrl');
+      var actions = [
+        'callbackUrl',
+        'trackingProfile'
+      ];
 
-      if (hasCallbackURL) {
-        actionsHtml += App.Templates['form/actions/callbackUrl'](data);
-        this.ui.form.find('.gt-add-action[data-action="callbackUrl"]').hide();
-      }
-
-      var hasTrackingProfile = hasProp(currentActions, 'trackingProfile');
-
-      if (hasTrackingProfile) {
-        actionsHtml += App.Templates['form/actions/trackingProfile'](data);
-        this.ui.form.find('.gt-add-action[data-action="trackingProfile"]').hide();
+      for (i = 0; i < actions.length; i++) {
+        if (hasProp(currentActions, actions[i])) {
+          actionsHtml += App.Templates['form/actions/' + actions[i]](data);
+          this.ui.form.find('.gt-add-action[data-action="' + actions[i] + '"]').hide();
+        }
       }
 
       // insert actions form elements into their proper place
@@ -1785,35 +1866,31 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
           }
         }
       }
-    },
 
-    addTriggerId: function (e) {
-      // expects to be invoked by a DOM event by default
-      if (e && e.preventDefault) {
-        e.preventDefault();
+      // build extras
+
+      var hasProperties = hasProp(this.model.attributes, 'properties');
+
+      if (hasProperties) {
+        extrasHtml += App.Templates['form/extras/properties'](data);
+        this.ui.form.find('.gt-add-extra[data-extra="properties"]').hide();
       }
 
-      // hide add title button
-      $(e.target).addClass('gt-hide');
+      var isSet;
+      var extras = [
+        'rateLimit',
+        'times'
+      ];
 
-      // show title form element
-      this.$el.find('.gt-trigger-id').removeClass('gt-hide');
-    },
-
-    removeTriggerId: function (e) {
-      // expects to be invoked by a DOM event by default
-      if (e && e.preventDefault) {
-        e.preventDefault();
+      for (i = 0; i < extras.length; i++) {
+        isSet = hasProp(this.model.attributes, extras[i]) && parseInt(this.model.attributes[extras[i]], 10) !== 0;
+        if (isSet) {
+          extrasHtml += App.Templates['form/extras/' + extras[i]](data);
+          this.ui.form.find('.gt-add-extra[data-extra="' + extras[i] + '"]').hide();
+        }
       }
 
-      // hide title form element
-      $(e.target).closest('.gt-property').addClass('gt-hide');
-
-      // clear title value
-      this.ui.form.find('input[name="properties[title]"]').val('');
-
-      // show add title button
-      this.ui.form.find('.gt-add-trigger-id').removeClass('gt-hide');
+      this.ui.extras.html(extrasHtml);
     },
 
     addAction: function (e) {
@@ -1915,6 +1992,55 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
       this.ui.form.find('.gt-add-notification[data-notification="' + notification + '"]').show();
     },
 
+    addExtra: function (e) {
+      var $el, extra, extraHtml, noteHtml;
+
+      // expects to be invoked by a DOM event by default
+      if (typeof e === 'object' && e.preventDefault) {
+        e.preventDefault();
+        $el = $(e.target);
+        extra = $el.data('extra');
+      }
+
+      // support for addExtra being called internally with string param representing extra name
+      else if (typeof e === 'string') {
+        extra = e;
+        $el = this.ui.form.find(".gt-add-extra[data-extra='" + extra + "']");
+      }
+
+      // build html
+      extraHtml = App.Templates['form/extras/' + extra]({});
+
+      // add to DOM
+      this.ui.extras.append(extraHtml);
+
+      // hide extra button
+      $el.hide();
+    },
+
+    removeExtra: function (e) {
+      var $el, extra;
+
+      // expects to be invoked by a DOM event by default
+      if (typeof e === 'object' && e.preventDefault) {
+        e.preventDefault();
+        $el = $(e.target).closest('.gt-property');
+        extra = $el.data('extra');
+      }
+
+      // support for addExtra being called internally with string param representing extra name
+      else if (typeof e === 'string') {
+        extra = e;
+        $el = this.ui.form.find(".gt-property[data-extra='" + extra + "']");
+      }
+
+      // remove extra form element
+      $el.remove();
+
+      // show add extra button
+      this.ui.form.find('.gt-add-extra[data-extra="' + extra + '"]').show();
+    },
+
     parseShape: function () {
       var lat, lng, rad;
 
@@ -1951,6 +2077,12 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
         sections.show();
       }
 
+      else if (layer instanceof L.MultiPolygon) {
+        geometry.val('multipolygon');
+        shape.text('a multipolygon');
+        sections.show();
+      }
+
       // hide all form sections besides condition if a shape hasn't been drawn yet
       else {
         sections.filter(':not(:first-child)').hide();
@@ -1966,6 +2098,10 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
       var i;
       var errors = [];
       var data = this.ui.form.serializeObject();
+
+      function isInteger (num) {
+        return !isNaN(num) && isFinite(num);
+      }
 
       // clean data
       data = App.util.removeEmptyStrings(data);
@@ -1988,10 +2124,10 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
         // get layer data
         var layer = App.request('draw:layer');
 
-        // layer is polygon
-        if (layer instanceof L.Polygon) {
+        // layer is polygon or multipolygon
+        if (layer instanceof L.Polygon || layer instanceof L.MultiPolygon) {
           data.condition.geo = {
-            'geojson': layer.toGeoJSON()
+            'geojson': layer.toGeoJSON().geometry
           };
         }
 
@@ -2041,6 +2177,41 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
         errors.push('at least one action required');
       }
 
+      // extras validation
+
+      // properties
+      if (!data.properties) {
+        data.properties = null;
+      } else {
+        try {
+          data.properties = JSON.parse(data.properties);
+        } catch (error) {
+          errors.push('properties must be valid JSON');
+        }
+      }
+
+      // rate limit
+      if (!data.rateLimit) {
+        data.rateLimit = 0;
+      } else {
+        data.rateLimit = parseInt(data.rateLimit, 10);
+
+        if (!isInteger(data.rateLimit)) {
+          errors.push('rate limit must be valid integer');
+        }
+      }
+
+      // times
+      if (!data.times) {
+        data.times = 0;
+      } else {
+        data.times = parseInt(data.times, 10);
+
+        if (!isInteger(data.times)) {
+          errors.push('times must be valid integer');
+        }
+      }
+
       if (errors.length > 0) {
         for (i = errors.length - 1; i >= 0; i--) {
           App.vent.trigger('notify', {
@@ -2054,15 +2225,30 @@ Geotrigger.Editor.module('Views', function (Views, App, Backbone, Marionette, $,
     },
 
     createOrUpdateTrigger: function (data) {
+      var model = App.collections.triggers.findWhere({
+        'triggerId': data.triggerId
+      });
+
+      var isNew = !this.model && !model;
+      var isOverwrite = !this.model && !!model;
+      var isUpdate = !!this.model;
+
+      var warning = 'A trigger with the ID "' + data.triggerId + '" already exists. Do you want to overwrite it?';
+
       // create new trigger
-      if (!this.model) {
-        App.vent.trigger('trigger:create', data);
+      if (isNew) {
+        return App.vent.trigger('trigger:create', data);
+      }
+
+      // overwrite existing trigger (trigger/create dedupe workaround)
+      if (isOverwrite && confirm(warning)) {
+        return App.vent.trigger('trigger:update', data);
       }
 
       // update existing trigger
-      else {
+      if (isUpdate) {
         data.triggerId = this.model.get('triggerId');
-        App.vent.trigger('trigger:update', data);
+        return App.vent.trigger('trigger:update', data);
       }
     },
 

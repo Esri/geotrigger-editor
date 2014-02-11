@@ -41,14 +41,14 @@
 /* - - - - - - - - - Basic Typography - - - - - - - */
 .gt-region {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
-  color: #666666;
+  color: #3b3b3b;
   font-weight: 400;
   font-size: 14px;
 }
 .gt-region h1, .gt-region h2, .gt-region h3, .gt-region h4, .gt-region h5, .gt-region h6 {
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
   line-height: 1em;
-  color: #3b3b3b;
+  color: #2b2b2b;
   font-weight: 600;
   font-size: 22px;
 }
@@ -267,7 +267,7 @@
 }
 .gt-region .gt-button-delete, .gt-region .gt-button-clear {
   padding: 1em;
-  background-color: #dddddd;
+  background-color: #bbbbbb;
   border: 1px solid #c4c4c4;
   -webkit-transition: background-color 200ms linear;
   -moz-transition: background-color 200ms linear;
@@ -275,7 +275,8 @@
   transition: background-color 200ms linear;
 }
 .gt-region .gt-button-delete:hover, .gt-region .gt-button-clear:hover {
-  background-color: #c4c4c4;
+  background-color: #a9301a;
+  border: 1px solid #7d2413;
 }
 .gt-region .gt-button-clear {
   margin-top: 0px;
@@ -616,12 +617,12 @@
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  background: url(../img/icons/search.png) no-repeat 4px center white;
+  background: url('/img/geotrigger-editor/search.png') no-repeat 4px center white;
   padding: 0.75em 0.66em 0.75em 32px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   .gt-region .gt-search input[type="search"] {
-    background: url(../img/icons/search@2x.png) no-repeat 4px center white;
+    background: url('/img/geotrigger-editor/search@2x.png') no-repeat 4px center white;
     background-size: 24px;
   }
 }
@@ -979,7 +980,7 @@
   *zoom: 1;
   margin-bottom: 1em;
 }
-.gt-region .gt-form .gt-form-section.gt-action-toggles {
+.gt-region .gt-form .gt-form-section.gt-action-toggles, .gt-region .gt-form .gt-form-section.gt-extra-toggles {
   margin-bottom: 0;
 }
 .gt-region .gt-form input, .gt-region .gt-form select, .gt-region .gt-form textarea {
@@ -1013,10 +1014,11 @@
 .gt-region .gt-form textarea {
   margin: 0;
 }
-.gt-region .gt-form .gt-trigger-id-wrapper {
+.gt-region .gt-form .gt-extras {
   border-top: 1px solid #efefef;
-  margin: 0 0 1em;
-  padding: 1em 0 0;
+}
+.gt-region .gt-form .gt-extras .gt-property:first-child {
+  margin-top: 1em;
 }
 .gt-region .gt-form .gt-submit-wrapper {
   border-top: 1px solid #efefef;
@@ -1070,9 +1072,13 @@
   background-color: #efefef;
 }
 .gt-region .gt-form .gt-property .gt-property-header .gt-remove-action,
-.gt-region .gt-form .gt-property .gt-property-header .gt-remove-trigger-id {
+.gt-region .gt-form .gt-property .gt-property-header .gt-remove-extra {
   cursor: pointer;
   float: right;
+}
+.gt-region .gt-form .gt-property .gt-property-header small {
+  font-size: .7em;
+  color: gray;
 }
 .gt-region .gt-form .gt-notification-action {
   overflow: hidden;
