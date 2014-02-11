@@ -1,6 +1,6 @@
 # Geotrigger Editor Changelog
 
-## master
+## v0.2.0
 * bump leaflet to 0.7.1
 * bump handlebars to 1.3.0
 * bump marionette to 1.4.1
