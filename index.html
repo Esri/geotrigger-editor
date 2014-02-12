@@ -6,13 +6,12 @@
 
   <!-- css: dependencies -->
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600">
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.1/leaflet.css">
   <link rel="stylesheet" href="vendor/leaflet.draw.css">
-  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="vendor/esri-leaflet-geocoder/esri-leaflet-geocoder.css">
 
   <!-- css: legacy support -->
   <!--[if lte IE 8]>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.ie.min.css">
     <link rel="stylesheet" href="vendor/leaflet.draw.ie.css">
   <![endif]-->
 
@@ -26,6 +25,54 @@
   <![endif]-->
 
   <style>
+    /* - - - - - - - - - - Basic Reset - - - - - - - - - - */
+    html {
+      overflow-y: scroll;
+      font-size: 100%;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+    article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
+    audio[controls], canvas, video { display: inline-block; zoom: 1; }
+    a:hover, a:active { outline: 0; }
+    svg:not(:root) {
+        overflow: hidden;
+    }
+    a, abbr, acronym, address, b, big, cite, code, del, em, i, ins, kbd, mark, output, q,
+    samp, small, strike, strong, sub, sup, time, tt, var,
+    dfn, dl, dt, dd, ol, ul, li,
+    blockquote, h1, h2, h3, h4, h5, h6, p, pre,
+    applet, canvas, embed, figure, figcaption, iframe, img, object {
+      padding: 0;
+      margin: 0;
+      font: inherit;
+      font-size: 100%;
+      line-height: 1.0;
+      vertical-align: baseline;
+      background: transparent;
+      border: 0;
+    }
+
+    /* - - - - - - - - - Basic Typography - - - - - - - */
+    body {
+      font-family: "Open Sans", Arial, Helvetica, sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #666666;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: "Open Sans", Arial, Helvetica, sans-serif;
+      font-weight: 600;
+      font-size: 22px;
+      color: #3b3b3b;
+      line-height: 1em;
+    }
+    h5 {
+      font-size: 1.25em;
+      line-height: 1.5em;
+    }
+
     html {
       background: #9CA5AD; /* Old browsers */
       background: -moz-linear-gradient(top, #596a72 0%, #9ca5ad 100%); /* FF3.6+ */
@@ -151,6 +198,32 @@
     .hide {
       display: none !important;
     }
+    .engage-btn {
+      display: inline-block;
+      padding: 1em;
+      margin-top: 1em;
+      font-family: "Open Sans", Arial, Helvetica, sans-serif;
+      font-size: 0.85em;
+      color: white;
+      text-decoration: none;
+      background-color: #3b3b3b;
+      background-color: #1a9b81;
+      border: 1px solid #222222;
+      border: 1px solid #136f5d;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      border-radius: 3px;
+      cursor: pointer;
+      -webkit-transition: background-color 200ms linear;
+      -moz-transition: background-color 200ms linear;
+      -o-transition: background-color 200ms linear;
+      transition: background-color 200ms linear;
+      -ms-border-radius: 3px;
+      -o-border-radius: 3px;
+    }
+    .engage-btn:hover {
+      background-color: #136f5d;
+    }
   </style>
 </head>
 <body>
@@ -173,7 +246,7 @@
     <div class="engage hide">
       <input id="client-id" type="text" placeholder="Client ID">
       <input id="client-secret" type="text" placeholder="Client Secret">
-      <button class="gt-button gt-button-green">Engage</button>
+      <button class="engage-btn">Engage</button>
       <a class="what" href="https://developers.arcgis.com/en/geotrigger-service/guide/geotrigger-editor/">What's This?</a>
     </div>
 
@@ -199,14 +272,15 @@
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.runtime.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.6.4/leaflet.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/1.4.1-bundled/backbone.marionette.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.runtime.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.1/leaflet.js"></script>
 
   <!-- js: local dependencies -->
-  <script src="vendor/backbone.marionette.min.js"></script>
   <script src="vendor/leaflet.draw.js"></script>
   <script src="vendor/geotrigger.min.js"></script>
   <script src="vendor/esri-leaflet.js"></script>
+  <script src="vendor/esri-leaflet-geocoder/esri-leaflet-geocoder.js"></script>
 
   <!-- js: main -->
   <script src="dist/js/geotrigger-editor.min.js"></script>
@@ -214,33 +288,13 @@
   <!-- js: initializer -->
   <script>
   (function(){
-    var config = {
-      session: { // required
-        // clientId: 'XXXXXX', // required
-        // clientSecret: 'XXXXXX', // required
-        // proxy: '/path/to/proxy/' // optional, default false (required for IE8/9)
-      }
-      // the following are optional, defaults are in dist/js/modules/config.js
-      // map: {
-      //   center: [0, 0],
-      //   zoom: 2,
-      //   basemap: 'Streets', // default 'Streets'
-      //   basemaps: ['Gray','GrayLabels'], // overrides `basemap`
-      //   options: {
-      //     opacity: 0.7, // default 1
-      //     detectRetina: true // default false
-      //   }
-      // },
-      // fitOnLoad: false, // default true
-      // imagePath: '/images', // default '/images'
-      // sharedOptions: {},
-      // editOptions: {},
-      // highlightOptions: {}
-    };
+
+    var config = {};
+    config.session = {};
 
     function findLocalItems (query) {
       var results = [];
-      for (i in localStorage) {
+      for (var i in localStorage) {
         if (localStorage.hasOwnProperty(i)) {
           if (i.match(query) || (!query && typeof i === 'string')) {
             value = JSON.parse(localStorage.getItem(i));
@@ -255,7 +309,7 @@
       $('.clear-session').on('click', function(e){
         e.preventDefault();
 
-        GeotriggerEditor.API.session.destroy();
+        Geotrigger.Editor.API.session.destroy();
         window.location.reload(true);
       }).show();
     }
@@ -271,7 +325,7 @@
         $('#gt-editor').show();
         $('#site-header').show();
 
-        GeotriggerEditor.start(config);
+        Geotrigger.Editor.start(config);
         bindClearSession();
       });
     }
@@ -301,7 +355,7 @@
         $('#gt-editor').show();
         $('#site-header').show();
 
-        GeotriggerEditor.start(config);
+        Geotrigger.Editor.start(config);
         bindClearSession();
       } else {
         bindForm();
