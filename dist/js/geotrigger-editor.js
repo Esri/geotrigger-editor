@@ -1,4 +1,4 @@
-/*! geotrigger-editor - v0.2.0 - 2014-02-11
+/*! geotrigger-editor - v0.2.0 - 2014-02-17
 *   https://github.com/Esri/geotrigger-editor
 *   Copyright (c) 2014 Environmental Systems Research Institute, Inc.
 *   Apache 2.0 License */

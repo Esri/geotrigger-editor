@@ -1,5 +1,8 @@
 # Geotrigger Editor Changelog
 
+## master
+* Fix scrollbar css bug (`overflow: hidden` needs to be set on controls and notes regions)
+
 ## v0.2.0
 * bump leaflet to 0.7.1
 * bump handlebars to 1.3.0
