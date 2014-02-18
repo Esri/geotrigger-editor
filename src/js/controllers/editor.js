@@ -25,6 +25,17 @@ Geotrigger.Editor.module('Editor', function (Editor, App, Backbone, Marionette, 
 
   var Controller = function () {};
 
+  function compabilityCheck () {
+    if (('ontouchstart' in window) ||
+         (navigator.maxTouchPoints > 0) ||
+         (navigator.msMaxTouchPoints > 0)) {
+      App.vent.trigger('notify', {
+        type: 'error',
+        message: 'Drawing and editing shapes is not currently supported for this browser.'
+      });
+    }
+  }
+
   _.extend(Controller.prototype, {
 
     // initialization
@@ -42,6 +53,8 @@ Geotrigger.Editor.module('Editor', function (Editor, App, Backbone, Marionette, 
         reset: true,
         success: function (model, response, options) {
           App.vent.trigger('notify:clear');
+
+          compabilityCheck();
 
           // don't start history until triggers have been fetched
           Backbone.history.start();
