@@ -8,13 +8,15 @@ module.exports = function(grunt) {
       dev: {
         options: {
           port: 8080,
-          base: '.'
+          base: '.',
+          hostname: '*'
         }
       },
       test: {
         options: {
           port: 8081,
-          base: '.'
+          base: '.',
+          hostname: '*'
         }
       }
     },

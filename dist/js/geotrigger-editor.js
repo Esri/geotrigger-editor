@@ -1,4 +1,4 @@
-/*! geotrigger-editor - v0.2.0 - 2014-02-11
+/*! geotrigger-editor - v0.2.1-beta - 2014-02-18
 *   https://github.com/Esri/geotrigger-editor
 *   Copyright (c) 2014 Environmental Systems Research Institute, Inc.
 *   Apache 2.0 License */
@@ -597,8 +597,9 @@ if (typeof String.prototype.trim !== 'function') {
 
 
 ( // Module boilerplate to support browser globals, node.js and AMD.
-  (typeof module !== "undefined" && function (m) { module.exports = m(); }) ||
-  (typeof define === "function" && function (m) { define('underscoreDeepExtend', m); }) ||
+  // node.js and AMD disabled for now
+  // (typeof module !== "undefined" && function (m) { module.exports = m(); }) ||
+  // (typeof define === "function" && function (m) { define('underscoreDeepExtend', m); }) ||
   (function (m) { window['underscoreDeepExtend'] = m(); })
 )(function () { return function(_) {
 
@@ -989,6 +990,17 @@ Geotrigger.Editor.module('Editor', function (Editor, App, Backbone, Marionette, 
 
   var Controller = function () {};
 
+  function compabilityCheck () {
+    if (('ontouchstart' in window) ||
+         (navigator.maxTouchPoints > 0) ||
+         (navigator.msMaxTouchPoints > 0)) {
+      App.vent.trigger('notify', {
+        type: 'error',
+        message: 'Drawing and editing shapes is not currently supported for this browser.'
+      });
+    }
+  }
+
   _.extend(Controller.prototype, {
 
     // initialization
@@ -1006,6 +1018,8 @@ Geotrigger.Editor.module('Editor', function (Editor, App, Backbone, Marionette, 
         reset: true,
         success: function (model, response, options) {
           App.vent.trigger('notify:clear');
+
+          compabilityCheck();
 
           // don't start history until triggers have been fetched
           Backbone.history.start();

@@ -4,7 +4,6 @@
 
 /* - - - - - - - - - - Basic Reset - - - - - - - - - - */
 .gt-region {
-  overflow-y: scroll;
   font-size: 100%;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
@@ -367,6 +366,7 @@
   background: #333333;
   border-right: 1px solid #2b2b2b;
   width: 70px;
+  overflow: hidden;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -1124,11 +1124,12 @@
   margin: 0;
   pointer-events: none;
   width: 60%;
-  z-index: 2;
+  overflow: hidden;
   position: absolute;
   left: 0;
   top: 0;
   right: 0;
+  z-index: 2;
 }
 
 .gt-active #gt-notes-region {
