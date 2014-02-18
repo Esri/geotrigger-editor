@@ -3,6 +3,7 @@
 ## master
 * Fix IE scrollbar CSS bug
 * Add warning notifying users of lack of support for touch-enabled browsers
+* Fix underscoreDeepExtend breaking in AMD environments
 
 ## v0.2.0
 * bump leaflet to 0.7.1
