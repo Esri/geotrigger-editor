@@ -1,7 +1,7 @@
 # Geotrigger Editor Changelog
 
 ## master
-* Fix scrollbar css bug (`overflow: hidden` needs to be set on controls and notes regions)
+* Fix IE scrollbar CSS bug
 
 ## v0.2.0
 * bump leaflet to 0.7.1
