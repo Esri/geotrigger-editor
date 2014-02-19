@@ -1,6 +1,8 @@
 # Geotrigger Editor
 
-A client-side web application for creating and editing Geotrigger rules.
+The Geotrigger Editor is a client-side web application for creating and editing Geotrigger rules.
+
+This is the open source version of the Geotrigger Editor available for Esri customers on the ArcGIS for Developers site. Read more about the editor [here](https://developers.arcgis.com/geotrigger-service/guide/geotrigger-editor/), and find out more about the Esri Geotrigger Service [here](https://developers.arcgis.com/en/features/geotrigger-service/).
 
 ## Features
 
@@ -182,7 +184,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+> http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
