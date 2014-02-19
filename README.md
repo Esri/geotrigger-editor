@@ -1,6 +1,8 @@
 # Geotrigger Editor
 
-A client-side web application for creating and editing Geotrigger rules.
+The Geotrigger Editor is a client-side web application for creating and editing Geotrigger rules.
+
+This is the open source version of the Geotrigger Editor available for Esri customers on the ArcGIS for Developers site. Read more about the editor [here](https://developers.arcgis.com/geotrigger-service/guide/geotrigger-editor/), and find out more about the Esri Geotrigger Service [here](https://developers.arcgis.com/en/features/geotrigger-service/).
 
 ## Features
 
@@ -13,13 +15,12 @@ A client-side web application for creating and editing Geotrigger rules.
 
 ### Installation
 
-**Basics**:
+The `dist` folder contains all the files you need to include the Geotrigger Editor in your project.
 
-* The `dist` folder contains all the files you need to include the Geotrigger Editor in your project.
 * The built JavaScript and CSS files are available in both expanded and minified versions in `dist/js` and `dist/css` respectively.
-* All icon images used by the Editor are in `dist/img`.
+* All images used by the Editor are in `dist/img`.
 * The files in `examples/default` show the easiest way to get the editor running in a browser.
-* If you need to support IE 8/9, you're going to need a server-side [proxy](#proxy). The files in `examples/proxy` show a quick way to do this using node.js.
+* If you need to support IE 8/9, you're going to need a server-side [proxy](#proxy) to communicate with ArcGIS Online and the Geotrigger server. The files in `examples/proxy` show a quick way to do this using node.js.
 
 **Dependencies**:
 
@@ -31,12 +32,12 @@ The Geotrigger Editor has some external dependencies:
 * Backbone.Marionette [1.4.1-bundled](https://github.com/marionettejs/backbone.marionette/releases/tag/v1.4.1) (CDN: [cdnjs](http://cdnjs.com/libraries/backbone.marionette/))
 * Handlebars [1.3.0](https://github.com/wycats/handlebars.js/releases/tag/v1.3.0) (runtime only) (CDN: [cdnjs](http://cdnjs.com/libraries/handlebars.js/))
 * Leaflet [0.7.1](https://github.com/Leaflet/Leaflet/releases/tag/v0.7.1) (CDN: [leaflet](http://leafletjs.com/download.html), [cdnjs](http://cdnjs.com/libraries/leaflet/))
-* Leaflet.draw [0.2.2](https://github.com/Leaflet/Leaflet.draw/releases/tag/0.2.2)
+* Leaflet.draw [0.2.3](https://github.com/Leaflet/Leaflet.draw/releases/tag/0.2.3)
 * Geotrigger.js [0.1.5](https://github.com/Esri/geotrigger-js)
 * Esri-Leaflet [0.0.1-beta.3](https://github.com/Esri/esri-leaflet/tree/v0.0.1-beta.3)
 * Esri-Leaflet Geocoder [0.0.1-alpha.2](https://github.com/Esri/esri-leaflet-geocoder/releases/tag/v0.0.1-alpha.2)
 
-We recommend loading dependencies from a CDN when possible. All dependencies are hosted on CDNs with the exception of Leaflet.draw, Geotrigger.js, Esri-Leaflet, and Esri-Leaflet Geocoder, which you'll need to host yourself.
+We recommend loading dependencies from a CDN when possible. All dependencies are hosted on CDNs with the exception of Geotrigger.js, Esri-Leaflet, and Esri-Leaflet Geocoder, which you'll need to host yourself.
 
 If you plan to support legacy browsers (IE 8), you'll also need [html5shiv](https://github.com/aFarkas/html5shiv) and [json2](https://github.com/douglascrockford/JSON-js), which can be included with a conditional comment like so:
 
@@ -183,7 +184,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-   http://www.apache.org/licenses/LICENSE-2.0
+> http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
