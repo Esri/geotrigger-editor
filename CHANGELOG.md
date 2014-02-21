@@ -5,6 +5,7 @@
 * Add warning notifying users of lack of support for touch-enabled browsers
 * Fix underscoreDeepExtend breaking in AMD environments
 * bump leaflet.draw to 0.2.3
+* bump geotrigger-js to 1.0.0
 
 ## v0.2.0
 * bump leaflet to 0.7.1
