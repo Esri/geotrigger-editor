@@ -6,7 +6,7 @@
 * Fix underscoreDeepExtend breaking in AMD environments
 * bump leaflet.draw to 0.2.3
 * bump geotrigger-js to 1.0.0
-* bump esri-leaflet-geocoder to 0.0.1-beta.2
+* bump esri-leaflet-geocoder to 0.0.1-beta.3
 
 ## v0.2.0
 * bump leaflet to 0.7.1
