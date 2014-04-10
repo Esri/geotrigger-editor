@@ -1,12 +1,13 @@
 # Geotrigger Editor Changelog
 
-## master
+## v0.2.1
 * Fix IE scrollbar CSS bug
 * Add warning notifying users of lack of support for touch-enabled browsers
 * Fix underscoreDeepExtend breaking in AMD environments
 * bump leaflet.draw to 0.2.3
 * bump geotrigger-js to 1.0.0
 * bump esri-leaflet-geocoder to 0.0.1-beta.3
+* Add basemap switcher ([#160](https://github.com/Esri/geotrigger-editor/issues/160))
 
 ## v0.2.0
 * bump leaflet to 0.7.1

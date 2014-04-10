@@ -15,7 +15,13 @@ Geotrigger.Editor.module('Map', function (Map, App, Backbone, Marionette, $, _) 
         L.esri.get = L.esri.RequestHandlers.JSONP;
       }
 
-      App.map = this.map = L.map(options.el).setView(App.config.map.center, App.config.map.zoom);
+      var basemap = this._getDefaultBasemap();
+
+      App.map = this.map = L.map(options.el, {
+        center: App.config.map.center,
+        zoom: App.config.map.zoom,
+        layers: [basemap]
+      });
 
       this.map.zoomControl.setPosition('topright');
 
@@ -25,20 +31,31 @@ Geotrigger.Editor.module('Map', function (Map, App, Backbone, Marionette, $, _) 
         }).addTo(App.map);
       }
 
-      // allow multiple basemaps
-      if (App.util.isArray(App.config.map.basemaps)) {
-        for (var i = 0; i < App.config.map.basemaps.length; i++) {
-          L.esri.basemapLayer(App.config.map.basemaps[i], App.config.map.options).addTo(App.map);
-        }
-      }
-
-      // default to one basemap
-      else {
-        L.esri.basemapLayer(App.config.map.basemap, App.config.map.options).addTo(App.map);
-      }
+      L.control.layers(this.basemaps).addTo(App.map);
 
       this.Layers.start();
       this._eventBindings();
+    },
+
+    _getDefaultBasemap: function() {
+      this._setupBasemaps();
+
+      if (App.config.map.basemap && this.basemaps.hasOwnProperty(App.config.map.basemap)) {
+        return this.basemaps[App.config.map.basemap];
+      }
+
+      // allow default basemap to be an array of esri basemap layers
+      if (App.util.isArray(App.config.map.basemaps)) {
+        var group = L.layerGroup();
+        for (var i = 0; i < App.config.map.basemaps.length; i++) {
+          group.addLayer(App.config.map.basemaps[i], App.config.map.options);
+        }
+        return group;
+      }
+
+      else {
+        return L.esri.basemapLayer(App.config.map.basemap, App.config.map.options);
+      }
     },
 
     _eventBindings: function () {
@@ -55,6 +72,41 @@ Geotrigger.Editor.module('Map', function (Map, App, Backbone, Marionette, $, _) 
           paddingTopLeft: [drawerWidth, 0]
         });
       }, this));
+    },
+
+    _setupBasemaps: function() {
+      var streets = L.esri.basemapLayer('Streets', App.config.map.options);
+      var topo = L.esri.basemapLayer('Topographic', App.config.map.options);
+      var oceans = L.esri.basemapLayer('Oceans', App.config.map.options);
+      var natgeo = L.esri.basemapLayer('NationalGeographic', App.config.map.options);
+
+      var gray = L.layerGroup([
+        L.esri.basemapLayer('Gray', App.config.map.options),
+        L.esri.basemapLayer('GrayLabels', App.config.map.options)
+      ]);
+      var darkgray = L.layerGroup([
+        L.esri.basemapLayer('DarkGray', App.config.map.options),
+        L.esri.basemapLayer('DarkGrayLabels', App.config.map.options)
+      ]);
+      var imagery = L.layerGroup([
+        L.esri.basemapLayer('Imagery', App.config.map.options),
+        L.esri.basemapLayer('ImageryLabels', App.config.map.options)
+      ]);
+      var shadedrelief = L.layerGroup([
+        L.esri.basemapLayer('ShadedRelief', App.config.map.options),
+        L.esri.basemapLayer('ShadedReliefLabels', App.config.map.options)
+      ]);
+
+      this.basemaps = {
+        'Streets': streets,
+        'Topographic': topo,
+        'Oceans': oceans,
+        'NationalGeographic': natgeo,
+        'Gray': gray,
+        'DarkGray': darkgray,
+        'Imagery': imagery,
+        'ShadedRelief': shadedrelief
+      };
     },
 
     getDrawerWidth: function () {
