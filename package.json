@@ -31,8 +31,9 @@
     "request": "~2.27.0",
     "grunt-rename": "~0.1.3",
     "grunt-jsbeautifier": "~0.2.6",
-    "esri-leaflet": "1.0.0",
-    "esri-leaflet-geocoder": "1.0.2"
+    "esri-leaflet": "~1.0.1",
+    "esri-leaflet-geocoder": "~1.0.2",
+    "geotrigger-js": "~1.0.1"
 
   },
   "author": "Esri Portland R&D Center <portland@esri.com>",

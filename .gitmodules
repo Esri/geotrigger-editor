@@ -1,9 +1,3 @@
 [submodule "vendor/Leaflet.draw"]
 	path = vendor/Leaflet.draw
 	url = git@github.com:Leaflet/Leaflet.draw.git
-[submodule "vendor/esri-leaflet"]
-	path = vendor/esri-leaflet
-	url = git@github.com:Esri/esri-leaflet.git
-[submodule "vendor/geotrigger-js"]
-	path = vendor/geotrigger-js
-	url = git@github.com:Esri/geotrigger-js.git

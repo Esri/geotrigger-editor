@@ -724,7 +724,7 @@ Geotrigger.Editor.module('Config', function (Config, App, Backbone, Marionette, 
     session: {},
 
     map: {
-      basemap: 'Streets',
+      basemap: 'Topographic',
       center: [0, 0],
       zoom: 2,
       options: {}
