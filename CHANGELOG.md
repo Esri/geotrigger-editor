@@ -1,5 +1,10 @@
 # Geotrigger Editor Changelog
 
+## v0.2.2
+* bump leaflet to 0.7.7
+* bump esri-leaflet to 1.0.0
+* bump esri-leaflet-geocoder to 1.0.0
+
 ## v0.2.1
 * Fix IE scrollbar CSS bug
 * Add warning notifying users of lack of support for touch-enabled browsers

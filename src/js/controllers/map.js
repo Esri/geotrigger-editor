@@ -25,13 +25,13 @@ Geotrigger.Editor.module('Map', function (Map, App, Backbone, Marionette, $, _) 
 
       this.map.zoomControl.setPosition('topright');
 
-      if (L.esri && L.esri.Controls && L.esri.Controls.Geosearch) {
-        var searchControl = new L.esri.Controls.Geosearch({
+      L.control.layers(this.basemaps).addTo(App.map);
+
+      if (L.esri && L.esri.Geocoding.Controls && L.esri.Geocoding.Controls.Geosearch) {
+        var searchControl = new L.esri.Geocoding.Controls.Geosearch({
           position: 'topright'
         }).addTo(App.map);
       }
-
-      L.control.layers(this.basemaps).addTo(App.map);
 
       this.Layers.start();
       this._eventBindings();

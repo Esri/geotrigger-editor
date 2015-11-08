@@ -30,7 +30,10 @@
     "grunt-contrib-handlebars": "~0.6.0",
     "request": "~2.27.0",
     "grunt-rename": "~0.1.3",
-    "grunt-jsbeautifier": "~0.2.6"
+    "grunt-jsbeautifier": "~0.2.6",
+    "esri-leaflet": "1.0.0",
+    "esri-leaflet-geocoder": "1.0.2"
+
   },
   "author": "Esri Portland R&D Center <portland@esri.com>",
   "contributors": [
@@ -55,5 +58,5 @@
       "email": "code@legitimatesounding.com"
     }
   ],
-  "license": "Apache 2.0"
+  "license": "Apache-2.0"
 }
