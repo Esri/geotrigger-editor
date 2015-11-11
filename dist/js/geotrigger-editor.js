@@ -1,6 +1,6 @@
-/*! geotrigger-editor - v0.2.1 - 2014-04-10
+/*! geotrigger-editor - v0.2.2 - 2015-11-11
 *   https://github.com/Esri/geotrigger-editor
-*   Copyright (c) 2014 Environmental Systems Research Institute, Inc.
+*   Copyright (c) 2015 Environmental Systems Research Institute, Inc.
 *   Apache 2.0 License */
 
 !(function () {
@@ -724,7 +724,7 @@ Geotrigger.Editor.module('Config', function (Config, App, Backbone, Marionette, 
     session: {},
 
     map: {
-      basemap: 'Streets',
+      basemap: 'Topographic',
       center: [0, 0],
       zoom: 2,
       options: {}
@@ -1302,13 +1302,13 @@ Geotrigger.Editor.module('Map', function (Map, App, Backbone, Marionette, $, _) 
 
       this.map.zoomControl.setPosition('topright');
 
-      if (L.esri && L.esri.Controls && L.esri.Controls.Geosearch) {
-        var searchControl = new L.esri.Controls.Geosearch({
+      L.control.layers(this.basemaps).addTo(App.map);
+
+      if (L.esri && L.esri.Geocoding.Controls && L.esri.Geocoding.Controls.Geosearch) {
+        var searchControl = new L.esri.Geocoding.Controls.Geosearch({
           position: 'topright'
         }).addTo(App.map);
       }
-
-      L.control.layers(this.basemaps).addTo(App.map);
 
       this.Layers.start();
       this._eventBindings();

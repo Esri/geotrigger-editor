@@ -1,5 +1,17 @@
 # Geotrigger Editor Changelog
 
+## v0.2.2
+* bump `leaflet` to `0.7.7` and move to CDN
+* bump `esri-leaflet` to `1.0.1` and move to CDN
+* bump `esri-leaflet-geocoder` to `1.0.2` and move to CDN
+* move `Leaflet.draw` to CDN
+* changed basemap to [Esri World Topographic](http://www.arcgis.com/home/item.html?id=30e5fe3149c34df1ba922e6f5bbf808f)
+* moved geosearch control below the basemap widget
+* corrected relative path links to images in geotrigger-editor.css
+* bumped `grunt-contrib-uglify` version to `~0.10.0` to resolve a bug compiling the built source
+* corrected relative path links to images
+* admitted that our current proxy sample still needs work
+
 ## v0.2.1
 * Fix IE scrollbar CSS bug
 * Add warning notifying users of lack of support for touch-enabled browsers

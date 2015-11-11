@@ -31,13 +31,13 @@ The Geotrigger Editor has some external dependencies:
 * Backbone [1.1.0](https://github.com/jashkenas/backbone/releases/tag/1.1.0) (CDN: [cdnjs](http://cdnjs.com/libraries/backbone.js/))
 * Backbone.Marionette [1.4.1-bundled](https://github.com/marionettejs/backbone.marionette/releases/tag/v1.4.1) (CDN: [cdnjs](http://cdnjs.com/libraries/backbone.marionette/))
 * Handlebars [1.3.0](https://github.com/wycats/handlebars.js/releases/tag/v1.3.0) (runtime only) (CDN: [cdnjs](http://cdnjs.com/libraries/handlebars.js/))
-* Leaflet [0.7.1](https://github.com/Leaflet/Leaflet/releases/tag/v0.7.1) (CDN: [leaflet](http://leafletjs.com/download.html), [cdnjs](http://cdnjs.com/libraries/leaflet/))
+* Leaflet [0.7.7](https://github.com/Leaflet/Leaflet/releases/tag/v0.7.7) (CDN: [leaflet](http://leafletjs.com/download.html), [cdnjs](http://cdnjs.com/libraries/leaflet/))
 * Leaflet.draw [0.2.3](https://github.com/Leaflet/Leaflet.draw/releases/tag/0.2.3)
 * Geotrigger.js [1.0.0](https://github.com/Esri/geotrigger-js)
-* Esri-Leaflet [0.0.1-beta.3](https://github.com/Esri/esri-leaflet/tree/v0.0.1-beta.3)
-* Esri-Leaflet Geocoder [0.0.1-beta.3](https://github.com/Esri/esri-leaflet-geocoder)
+* Esri-Leaflet [1.0.1](https://github.com/Esri/esri-leaflet/releases/tag/v1.0.1) (CDN: [jsdelivr](http://www.jsdelivr.com/projects/leaflet.esri))
+* Esri-Leaflet Geocoder [1.0.2](https://github.com/Esri/esri-leaflet-geocoder/releases/tag/v1.0.2) (CDN: [jsdelivr](http://www.jsdelivr.com/projects/leaflet.esri.geocoder))
 
-We recommend loading dependencies from a CDN when possible. All dependencies are hosted on CDNs with the exception of Geotrigger.js, Esri-Leaflet, and Esri-Leaflet Geocoder, which you'll need to host yourself.
+We recommend loading dependencies from a CDN when possible. All dependencies are hosted on CDNs with the exception of Geotrigger.js, which you'll need to host yourself.
 
 If you plan to support legacy browsers (IE 8), you'll also need [html5shiv](https://github.com/aFarkas/html5shiv) and [json2](https://github.com/douglascrockford/JSON-js), which can be included with a conditional comment like so:
 
@@ -48,7 +48,7 @@ If you plan to support legacy browsers (IE 8), you'll also need [html5shiv](http
 <![endif]-->
 ```
 
-You can take a look at `examples/default` for an example of how to easily include all the necessary files.
+You can take a look at `examples/default` to see how to easily include all the necessary files.
 
 **Browser Support**:
 
@@ -133,14 +133,14 @@ To run the development environment, you will need the following:
 
 To install `node` on your system follow [these instructions](https://github.com/joyent/node/wiki/Installation#installing-without-building).
 
-*Note: if you're a mac developer I recommend simply using homebrew to `brew install node`.*
+*Note: if you're a mac developer we recommend using homebrew to `brew install node`.*
 
 Once Node.js is installed, you can install the Grunt command line interface by running `npm install -g grunt-cli`. This will install the grunt-cli package locally ([reference](https://npmjs.org/doc/install.html)).
 
 #### Local Setup
 
 1. Clone the repository and `cd` into the `geotrigger-editor` directory.
-1. Run `npm install`, `git submodule init`, and `git submodule update` to install dependencies.
+1. Run `npm install` to lay down the  project's dependencies.
 
 #### Working locally
 
@@ -178,7 +178,7 @@ Esri welcomes contributions from anyone and everyone. Please see our [guidelines
 
 ## Licensing
 
-Copyright 2013 Esri
+Copyright 2015 Esri
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
