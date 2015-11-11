@@ -78,7 +78,7 @@ module.exports = function(grunt) {
           sassDir: 'src/scss',
           cssDir: 'dist/css',
           imagesDir: 'dist/img/geotrigger-editor',
-          httpImagesPath: '/img/geotrigger-editor',
+          httpImagesPath: '../img/geotrigger-editor',
           environment: 'production',
           raw: 'asset_cache_buster :none\n'
         }
@@ -88,7 +88,7 @@ module.exports = function(grunt) {
           sassDir: 'src/scss',
           cssDir: 'dist/css',
           imagesDir: 'dist/img/geotrigger-editor',
-          httpImagesPath: '/img/geotrigger-editor',
+          httpImagesPath: '../img/geotrigger-editor',
           noLineComments: true,
           raw: 'asset_cache_buster :none\n'
         }

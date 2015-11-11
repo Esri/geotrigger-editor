@@ -1,3 +1,0 @@
-[submodule "vendor/Leaflet.draw"]
-	path = vendor/Leaflet.draw
-	url = git@github.com:Leaflet/Leaflet.draw.git

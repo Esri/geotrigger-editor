@@ -284,7 +284,7 @@
 }
 
 .gt-region .gt-edit-icon, .gt-region .gt-delete-icon {
-  background: url('/img/geotrigger-editor/settings.png') no-repeat center center transparent;
+  background: url('../img/geotrigger-editor/settings.png') no-repeat center center transparent;
   background-size: 16px;
   display: inline-block;
   height: 16px;
@@ -297,19 +297,19 @@
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   .gt-region .gt-edit-icon, .gt-region .gt-delete-icon {
-    background-image: url('/img/geotrigger-editor/settings@2x.png');
+    background-image: url('../img/geotrigger-editor/settings@2x.png');
   }
 }
 .gt-region .gt-edit-icon:hover, .gt-region .gt-delete-icon:hover {
   opacity: 1;
 }
 .gt-region .gt-delete-icon {
-  background-image: url('/img/geotrigger-editor/trash.png');
+  background-image: url('../img/geotrigger-editor/trash.png');
   margin-left: 6px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   .gt-region .gt-delete-icon {
-    background-image: url('/img/geotrigger-editor/trash@2x.png');
+    background-image: url('../img/geotrigger-editor/trash@2x.png');
   }
 }
 
@@ -388,29 +388,29 @@
   transition: opacity 200ms linear;
 }
 #gt-controls-region .gt-tool.gt-tool-list {
-  background-image: url('/img/geotrigger-editor/list.png');
+  background-image: url('../img/geotrigger-editor/list.png');
 }
 #gt-controls-region .gt-tool.gt-tool-create {
-  background-image: url('/img/geotrigger-editor/create.png');
+  background-image: url('../img/geotrigger-editor/create.png');
 }
 #gt-controls-region .gt-tool.gt-tool-polygon {
-  background-image: url('/img/geotrigger-editor/polygon.png');
+  background-image: url('../img/geotrigger-editor/polygon.png');
 }
 #gt-controls-region .gt-tool.gt-tool-radius {
-  background-image: url('/img/geotrigger-editor/radius.png');
+  background-image: url('../img/geotrigger-editor/radius.png');
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   #gt-controls-region .gt-tool.gt-tool-list {
-    background-image: url('/img/geotrigger-editor/list@2x.png');
+    background-image: url('../img/geotrigger-editor/list@2x.png');
   }
   #gt-controls-region .gt-tool.gt-tool-create {
-    background-image: url('/img/geotrigger-editor/create@2x.png');
+    background-image: url('../img/geotrigger-editor/create@2x.png');
   }
   #gt-controls-region .gt-tool.gt-tool-polygon {
-    background-image: url('/img/geotrigger-editor/polygon@2x.png');
+    background-image: url('../img/geotrigger-editor/polygon@2x.png');
   }
   #gt-controls-region .gt-tool.gt-tool-radius {
-    background-image: url('/img/geotrigger-editor/radius@2x.png');
+    background-image: url('../img/geotrigger-editor/radius@2x.png');
   }
 }
 #gt-controls-region .gt-tool:before {
@@ -527,7 +527,7 @@
   transition: background-color 100ms linear;
 }
 .gt-region .gt-panel-top-bar-button.gt-close-drawer {
-  background-image: url('/img/geotrigger-editor/x.png');
+  background-image: url('../img/geotrigger-editor/x.png');
   border-left: 1px solid #efefef;
   position: absolute;
   top: 0;
@@ -535,17 +535,17 @@
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   .gt-region .gt-panel-top-bar-button.gt-close-drawer {
-    background-image: url('/img/geotrigger-editor/x@2x.png');
+    background-image: url('../img/geotrigger-editor/x@2x.png');
   }
 }
 .gt-region .gt-panel-top-bar-button.gt-back-to-list {
-  background-image: url('/img/geotrigger-editor/left-arrow.png');
+  background-image: url('../img/geotrigger-editor/left-arrow.png');
   border-right: 1px solid #efefef;
   float: left;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   .gt-region .gt-panel-top-bar-button.gt-back-to-list {
-    background-image: url('/img/geotrigger-editor/left-arrow@2x.png');
+    background-image: url('../img/geotrigger-editor/left-arrow@2x.png');
   }
 }
 .gt-region .gt-panel-content {
@@ -611,17 +611,17 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  background: url('/img/geotrigger-editor/search.png') no-repeat 4px center #ffffff;
+  background: url('../img/geotrigger-editor/search.png') no-repeat 4px center #ffffff;
   padding: 0.75em 0.66em 0.75em 32px;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   .gt-region .gt-search input[type="search"] {
-    background: url('/img/geotrigger-editor/search@2x.png') no-repeat 4px center #ffffff;
+    background: url('../img/geotrigger-editor/search@2x.png') no-repeat 4px center #ffffff;
     background-size: 24px;
   }
 }
 .gt-region .gt-search .gt-icon-clear {
-  background: url('/img/geotrigger-editor/delete.png') no-repeat center center transparent;
+  background: url('../img/geotrigger-editor/delete.png') no-repeat center center transparent;
   background-size: 16px;
   display: none;
   height: 16px;
@@ -633,7 +633,7 @@
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   .gt-region .gt-search .gt-icon-clear {
-    background-image: url('/img/geotrigger-editor/delete@2x.png');
+    background-image: url('../img/geotrigger-editor/delete@2x.png');
   }
 }
 .gt-region .gt-result-link {
@@ -682,34 +682,34 @@
   width: 48px;
 }
 .gt-region .gt-result .gt-icon-enter.gt-icon-polygon, .gt-region .gt-result .gt-icon-polygon.gt-icon-exit {
-  background-image: url('/img/geotrigger-editor/enter-polygon.png');
+  background-image: url('../img/geotrigger-editor/enter-polygon.png');
 }
 .gt-region .gt-result .gt-icon-enter.gt-icon-radius, .gt-region .gt-result .gt-icon-radius.gt-icon-exit {
-  background-image: url('/img/geotrigger-editor/enter-radius.png');
+  background-image: url('../img/geotrigger-editor/enter-radius.png');
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   .gt-region .gt-result .gt-icon-enter, .gt-region .gt-result .gt-icon-exit {
-    background-image: url('/img/geotrigger-editor/enter-polygon@2x.png');
+    background-image: url('../img/geotrigger-editor/enter-polygon@2x.png');
   }
   .gt-region .gt-result .gt-icon-enter.gt-icon-polygon, .gt-region .gt-result .gt-icon-polygon.gt-icon-exit {
-    background-image: url('/img/geotrigger-editor/enter-polygon@2x.png');
+    background-image: url('../img/geotrigger-editor/enter-polygon@2x.png');
   }
   .gt-region .gt-result .gt-icon-enter.gt-icon-radius, .gt-region .gt-result .gt-icon-radius.gt-icon-exit {
-    background-image: url('/img/geotrigger-editor/enter-radius@2x.png');
+    background-image: url('../img/geotrigger-editor/enter-radius@2x.png');
   }
 }
 .gt-region .gt-result .gt-icon-exit.gt-icon-polygon {
-  background-image: url('/img/geotrigger-editor/exit-polygon.png');
+  background-image: url('../img/geotrigger-editor/exit-polygon.png');
 }
 .gt-region .gt-result .gt-icon-exit.gt-icon-radius {
-  background-image: url('/img/geotrigger-editor/exit-radius.png');
+  background-image: url('../img/geotrigger-editor/exit-radius.png');
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   .gt-region .gt-result .gt-icon-exit.gt-icon-polygon {
-    background-image: url('/img/geotrigger-editor/exit-polygon@2x.png');
+    background-image: url('../img/geotrigger-editor/exit-polygon@2x.png');
   }
   .gt-region .gt-result .gt-icon-exit.gt-icon-radius {
-    background-image: url('/img/geotrigger-editor/exit-radius@2x.png');
+    background-image: url('../img/geotrigger-editor/exit-radius@2x.png');
   }
 }
 .gt-region .gt-result .gt-item-toolbar {
@@ -945,25 +945,25 @@
   margin-top: -20px;
 }
 .gt-region .gt-tool-description .gt-icon-polygon {
-  background: url('/img/geotrigger-editor/polygon-dark.png') no-repeat center center;
+  background: url('../img/geotrigger-editor/polygon-dark.png') no-repeat center center;
 }
 .gt-region .gt-tool-description .gt-icon-radius {
-  background: url('/img/geotrigger-editor/radius-dark.png') no-repeat center center;
+  background: url('../img/geotrigger-editor/radius-dark.png') no-repeat center center;
 }
 .gt-region .gt-tool-description .gt-icon-create {
-  background: url('/img/geotrigger-editor/create-dark.png') no-repeat center center;
+  background: url('../img/geotrigger-editor/create-dark.png') no-repeat center center;
 }
 @media screen and (-webkit-min-device-pixel-ratio: 1.5), screen and (min-device-pixel-ratio: 1.5) {
   .gt-region .gt-tool-description .gt-icon-polygon {
-    background: url('/img/geotrigger-editor/polygon-dark@2x.png') no-repeat center center;
+    background: url('../img/geotrigger-editor/polygon-dark@2x.png') no-repeat center center;
     background-size: 24px;
   }
   .gt-region .gt-tool-description .gt-icon-radius {
-    background: url('/img/geotrigger-editor/radius-dark@2x.png') no-repeat center center;
+    background: url('../img/geotrigger-editor/radius-dark@2x.png') no-repeat center center;
     background-size: 24px;
   }
   .gt-region .gt-tool-description .gt-icon-create {
-    background: url('/img/geotrigger-editor/create-dark@2x.png') no-repeat center center;
+    background: url('../img/geotrigger-editor/create-dark@2x.png') no-repeat center center;
     background-size: 24px;
   }
 }

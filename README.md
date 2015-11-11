@@ -140,7 +140,7 @@ Once Node.js is installed, you can install the Grunt command line interface by r
 #### Local Setup
 
 1. Clone the repository and `cd` into the `geotrigger-editor` directory.
-1. Run `npm install`, `git submodule init`, and `git submodule update` to install dependencies.
+1. Run `npm install` to lay down the  project's dependencies.
 
 #### Working locally
 
