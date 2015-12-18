@@ -15,7 +15,7 @@ This is the open source version of the Geotrigger Editor available for Esri cust
 
 ### Installation
 
-The `dist` folder contains all the files you need to include the Geotrigger Editor in your project.
+Tagged releases include a `dist` folder which contains all the files you need to include the Geotrigger Editor in your project.
 
 * The built JavaScript and CSS files are available in both expanded and minified versions in `dist/js` and `dist/css` respectively.
 * All images used by the Editor are in `dist/img`.
@@ -140,11 +140,12 @@ Once Node.js is installed, you can install the Grunt command line interface by r
 #### Local Setup
 
 1. Clone the repository and `cd` into the `geotrigger-editor` directory.
-1. Run `npm install` to lay down the  project's dependencies.
+2. Run `npm install` to lay down the  project's dependencies.
+3. Run `grunt` to compile the source code and spin up a local server which watches the source code for changes.
 
 #### Working locally
 
-You'll need an HTTP server to serve files from the root of the repository. The `grunt dev` task takes care of building all source files to temporary files ignored by git (`src/js/geotrigger-editor.js` and `src/css/geotrigger-editor.css`), watching local files for changes, and running a local server for you at http://localhost:8080 (see the `Grunt Tasks` section for more information).
+You'll need an HTTP server to serve files from the root of the repository. The `grunt dev` task takes care of building all source files to the `dist` folder (`dist/js/geotrigger-editor.js` and `dist/css/geotrigger-editor.css`), watching local files for changes, and running a local server for you at http://localhost:8080 (see the `Grunt Tasks` section for more information).
 
 #### Testing locally (todo)
 

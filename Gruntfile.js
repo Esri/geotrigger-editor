@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     connect: {
-      dev: {
+      dist: {
         options: {
           port: 8080,
           base: '.',
@@ -60,10 +60,10 @@ module.exports = function(grunt) {
         ],
         tasks: [
           'jshint',
-          'clean:dev',
-          'compass:dev',
+          'clean:dist',
+          'compass:dist',
           'handlebars',
-          'concat:dev'
+          'concat:dist'
         ]
         // options: {
         //   nospawn: true
@@ -91,14 +91,6 @@ module.exports = function(grunt) {
           httpImagesPath: '../img/geotrigger-editor',
           noLineComments: true,
           raw: 'asset_cache_buster :none\n'
-        }
-      },
-      // Development
-      dev: {
-        options: {
-          sassDir: 'src/scss',
-          cssDir: 'tmp',
-          imagesDir: 'src/img'
         }
       }
     },
@@ -141,21 +133,6 @@ module.exports = function(grunt) {
         '*   Apache 2.0 License */\n\n',
         // define a string to put between each file in the concatenated output
         separator: '\n\n'
-      },
-      dev: {
-        files: {
-          'tmp/geotrigger-editor.js': [
-            'src/js/header.js',
-            'src/js/app.js',
-            'tmp/templates.js',
-            'src/js/lib/*.js',
-            'src/js/modules/*.js',
-            'src/js/controllers/*.js',
-            'src/js/models/*.js',
-            'src/js/views/*.js',
-            'src/js/footer.js'
-          ]
-        }
       },
       dist: {
         files: {
@@ -213,12 +190,6 @@ module.exports = function(grunt) {
       img: {
         src: [
           'dist/img/'
-        ]
-      },
-      dev: {
-        src: [
-          'tmp/geotrigger-editor.css',
-          'tmp/geotrigger-editor.js'
         ]
       }
     },
@@ -364,11 +335,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('dev', [
     'jshint',
-    'clean:dev',
-    'compass:dev',
+    'clean:dist',
+    'compass:dist',
     'handlebars',
-    'concat:dev',
-    'connect:dev',
+    'concat:dist',
+    'build_img',
+    'connect:dist',
     'watch'
   ]);
 
@@ -379,6 +351,7 @@ module.exports = function(grunt) {
     'compass:dist',
     'handlebars',
     'concat:dist',
+    'build_img',
     'uglify:dist'
   ]);
 
