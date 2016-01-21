@@ -22,7 +22,7 @@ function proxy (req, res) {
 
   var test = {
     proxy: /^\/proxy\/(.+)$/,
-    hosts: /^https?:\/\/(geotrigger\.)?arcgis\.com\//
+    hosts: /^https?:\/\/((geotrigger|www)\.)?arcgis\.com\//
   };
 
   var matchProxy = url.match(test.proxy);

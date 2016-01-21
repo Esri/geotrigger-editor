@@ -131,11 +131,7 @@ To run the development environment, you will need the following:
 1. [Grunt](http://gruntjs.com/)
 1. [Ruby](https://www.ruby-lang.org/en/downloads/) and [Compass](http://compass-style.org/install/) (to compile SASS)
 
-To install `node` on your system follow [these instructions](https://github.com/joyent/node/wiki/Installation#installing-without-building).
-
-*Note: if you're a mac developer we recommend using homebrew to `brew install node`.*
-
-Once Node.js is installed, you can install the Grunt command line interface by running `npm install -g grunt-cli`. This will install the grunt-cli package locally ([reference](https://npmjs.org/doc/install.html)).
+Once [Node.js](https://nodejs.org/en/download/) is installed, you can install the Grunt command line interface by running `npm install -g grunt-cli`. This will install the grunt-cli package locally ([reference](https://npmjs.org/doc/install.html)).
 
 #### Local Setup
 

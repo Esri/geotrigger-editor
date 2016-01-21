@@ -8,11 +8,9 @@ Geotrigger.Editor.module('Map', function (Map, App, Backbone, Marionette, $, _) 
   _.extend(Map, {
 
     _setup: function (options) {
-      // L.Icon.Default.imagePath = App.config.imagePath;
-
       // force L.esri to use JSONP if proxy is set
       if (App.config.session.proxy) {
-        L.esri.get = L.esri.RequestHandlers.JSONP;
+        L.esri.get = L.esri.Request.get.JSONP;
       }
 
       var basemap = this._getDefaultBasemap();
