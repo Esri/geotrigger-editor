@@ -75,7 +75,7 @@ Geotrigger.Editor.module('Map.Draw', function (Draw, App, Backbone, Marionette, 
       }
 
       if (triggerArea < 2500) {
-        App.vent.trigger('notify', 'we recommend triggers have an area greater than 50sq/m');
+        App.vent.trigger('notify', 'we recommend triggers have an area greater than 50m&#178;');
 
         window.setTimeout(function () {
           App.vent.trigger('notify:clear');
