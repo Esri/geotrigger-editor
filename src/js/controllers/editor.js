@@ -53,18 +53,25 @@ Geotrigger.Editor.module('Editor', function (Editor, App, Backbone, Marionette, 
         reset: true,
         success: function (model, response, options) {
           App.vent.trigger('notify:clear');
-
-          compabilityCheck();
-
-          // don't start history until triggers have been fetched
-          Backbone.history.start();
-
-          if (response && response.length === 0) {
-            App.router.navigate('list', {
-              trigger: true
+          if (!response) {
+            App.vent.trigger('notify', {
+             type: 'error',
+              message: 'Unable to start session.'
             });
-          } else if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
-            App.execute('map:fit');
+          }
+          else {
+            compabilityCheck();
+
+            // don't start history until triggers have been fetched
+            Backbone.history.start();
+
+            if (response && response.length === 0) {
+              App.router.navigate('list', {
+                trigger: true
+              });
+            } else if (App.config.fitOnLoad && !Backbone.history.fragment.match('edit')) {
+              App.execute('map:fit');
+            }
           }
         }
       });
