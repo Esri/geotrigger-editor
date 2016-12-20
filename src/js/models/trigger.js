@@ -137,7 +137,6 @@ Geotrigger.Editor.module('Models', function (Models, App, Backbone, Marionette, 
         } else {
           this.set(this.parse(response));
         }
-
         if (options && options.success) {
           options.success(this, this.parse(response), options);
         }
@@ -147,7 +146,10 @@ Geotrigger.Editor.module('Models', function (Models, App, Backbone, Marionette, 
     },
 
     parse: function (response) {
-      return response.triggers;
+      if (response) {
+        return response.triggers;
+      }
+      // return response.triggers;
     }
   });
 
