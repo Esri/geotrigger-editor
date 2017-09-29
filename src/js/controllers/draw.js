@@ -55,7 +55,33 @@ Geotrigger.Editor.module('Map.Draw', function (Draw, App, Backbone, Marionette, 
     broadcastLayer: function (e) {
       var type = e.layerType;
       var layer = e.layer;
+      var triggerArea;
 
+      if (type == 'circle') {
+        var origin = layer.getLatLng(); //center of drawn circle
+        var radius = layer.getRadius(); //radius of drawn circle
+        var projection = L.CRS.EPSG4326;
+        var polys = App.util.createGeodesicPolygon(origin, radius, 60, 0, projection); //these are the points that make up the circle
+        var polygon = []; // store the geometry
+        for (var i = 0; i < polys.length; i++) {
+            var geometry = [polys[i].lat, polys[i].lng];
+            polygon.push(geometry);
+        }
+        triggerArea = turf.area(L.polygon(polygon).toGeoJSON());
+      }
+
+      else {
+        triggerArea = turf.area(e.layer.toGeoJSON());
+      }
+
+      if (triggerArea < 2500) {
+        App.vent.trigger('notify', 'we recommend triggers have an area greater than 50m&#178;');
+
+        window.setTimeout(function () {
+          App.vent.trigger('notify:clear');
+        }, 5000);
+
+      }
       App.vent.trigger('draw:new', layer);
     },
 
