@@ -4,15 +4,19 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.2] - 2016-1-21
+
 * bump `leaflet` to `0.7.7` and move to CDN
-* bump `esri-leaflet` to `1.0.1` and move to CDN
-* bump `esri-leaflet-geocoder` to `1.0.2` and move to CDN
+* bump `esri-leaflet` to [`1.0.1`](https://github.com/Esri/esri-leaflet/releases/tag/v1.0.1) and move to CDN
+* bump `esri-leaflet-geocoder` to [`1.0.2`](https://github.com/Esri/esri-leaflet-geocoder/releases/tag/v1.0.2) and move to CDN
+* bump `geotrigger-js` to [`1.0.4`](https://github.com/Esri/geotrigger-js/releases/tag/v1.0.4) and move to CDN
 * move `Leaflet.draw` to CDN
 * changed basemap to [Esri World Topographic](http://www.arcgis.com/home/item.html?id=30e5fe3149c34df1ba922e6f5bbf808f)
 * moved geosearch control below the basemap widget
 * corrected relative path links to images in geotrigger-editor.css
 * bumped `grunt-contrib-uglify` version to `~0.10.0` to resolve a bug compiling the built source
 * corrected relative path links to images
+* stopped tracking the `dist` directory and got rid of the `tmp` directory entirely
 * admitted that our current proxy sample still needs work
 
 ## [0.2.1] - 2014-4-10
@@ -71,6 +75,7 @@ This is the first public release of the Geotrigger Editor for the ArcGIS Geotrig
 Currently the Geotrigger Editor is in development and should be thought of as a beta or preview.
 
 [Unreleased]: https://github.com/Esri/geotrigger-editor/compare/v0.2.1...HEAD
+[0.2.2]: https://github.com/Esri/geotrigger-editor/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/Esri/geotrigger-editor/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/Esri/geotrigger-editor/compare/v0.1.3...v0.2.0
 [0.1.3]: https://github.com/Esri/geotrigger-editor/compare/v0.1.2...v0.1.3
